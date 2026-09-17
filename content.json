@@ -1,0 +1,80 @@
+{
+  "name": "Josh",
+  "bio": "I’m a mechanical engineering student at Washington State University. My interest in engines started with fixing lawn mowers. I liked figuring out what was wrong and getting them running again. Then I got my Toyota pickup, which gave me a bigger project and a lot more to learn.",
+  "personal": "Working on my truck pushed that interest further and helped lead me toward mechanical engineering. I enjoy hands-on work, from designing and making parts to figuring out how everything fits together. Outside of engineering, I’m into boxing, the gym, and snowboarding.",
+  "projects": [
+    {
+      "slug": "toyota-engine-swap",
+      "title": "Toyota engine swap",
+      "category": "Automotive · Mechanical & electrical",
+      "year": "Ongoing",
+      "coverText": "A new heart.\nAn old Toyota.",
+      "theme": "dark",
+      "thumbnail": "",
+      "previewVideo": "",
+      "video": "",
+      "summary": "Bringing a 1999 4Runner powertrain into a 1989 Toyota pickup.",
+      "description": "This project brings together the engine, wiring harness, and ECU from a 1999 Toyota 4Runner in a 1989 Toyota pickup. It’s a hands-on lesson in how mechanical and electrical systems have to work together.",
+      "details": [
+        {
+          "title": "The work",
+          "text": "The work spans engine rebuilding, wiring integration, and adapting the supporting systems to the truck. It has meant working through individual interfaces as well as keeping the complete vehicle in mind."
+        },
+        {
+          "title": "What interests me",
+          "text": "A swap makes you look beyond any one component. Mounting, plumbing, wiring, and serviceability all affect whether the final system works."
+        }
+      ],
+      "photos": []
+    },
+    {
+      "slug": "intake-housing",
+      "title": "Intake & air filter housing",
+      "category": "Fabrication · CAD & 3D printing",
+      "year": "Project",
+      "coverText": "Design it.\nMake it fit.",
+      "theme": "silver",
+      "thumbnail": "",
+      "previewVideo": "",
+      "video": "",
+      "summary": "A fabricated intake box and a redesigned, 3D-printed air filter housing.",
+      "description": "I TIG welded an aluminum intake box and redesigned and 3D printed an air filter housing while working within competition restrictions.",
+      "details": [
+        {
+          "title": "Design within constraints",
+          "text": "This project combined CAD, additive manufacturing, and aluminum fabrication. The design had to account for how the components would fit together while staying within the competition restrictions."
+        },
+        {
+          "title": "Validation",
+          "text": "The revised housing was not dyno tested, so I don’t claim a measured performance gain. It represents design and fabrication work, with performance testing as a separate step."
+        }
+      ],
+      "photos": []
+    },
+    {
+      "slug": "carbon-snowboard",
+      "title": "Carbon snowboard",
+      "category": "Composites · Personal design project",
+      "year": "In development",
+      "coverText": "Built for\nthe next turn.",
+      "theme": "blue",
+      "thumbnail": "",
+      "previewVideo": "",
+      "video": "",
+      "summary": "Exploring a snowboard design around carving, quick turns, and stability.",
+      "description": "A personal project exploring snowboard geometry and carbon-fiber construction. I’m interested in how the shape and construction change the way a board feels on snow.",
+      "details": [
+        {
+          "title": "The design question",
+          "text": "How can a board feel stable during a carve while remaining quick to turn? I’m thinking through those tradeoffs alongside switch riding and mixed terrain."
+        },
+        {
+          "title": "Current stage",
+          "text": "This project is in the design and exploration stage. Geometry, construction, and testing are still being developed."
+        }
+      ],
+      "photos": []
+    }
+  ],
+  "portrait": ""
+}
