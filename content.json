@@ -4,17 +4,11 @@
   "personal": "Working on my truck pushed that interest further and helped lead me toward mechanical engineering. I enjoy hands-on work, from designing and making parts to figuring out how everything fits together. Outside of engineering, I’m into boxing, the gym, and snowboarding.",
   "projects": [
     {
-      "slug": "toyota-engine-swap",
       "title": "Toyota engine swap",
-      "category": "Automotive · Mechanical & electrical",
-      "year": "Ongoing",
-      "coverText": "A new heart.\nAn old Toyota.",
-      "theme": "dark",
-      "thumbnail": "",
-      "previewVideo": "",
-      "video": "",
+      "slug": "toyota-engine-swap",
       "summary": "Bringing a 1999 4Runner powertrain into a 1989 Toyota pickup.",
       "description": "This project brings together the engine, wiring harness, and ECU from a 1999 Toyota 4Runner in a 1989 Toyota pickup. It’s a hands-on lesson in how mechanical and electrical systems have to work together.",
+      "year": "Ongoing",
       "details": [
         {
           "title": "The work",
@@ -25,20 +19,16 @@
           "text": "A swap makes you look beyond any one component. Mounting, plumbing, wiring, and serviceability all affect whether the final system works."
         }
       ],
-      "photos": []
+      "coverText": "A new heart.\nAn old Toyota.",
+      "theme": "dark",
+      "category": "Automotive · Mechanical & electrical"
     },
     {
-      "slug": "camera-mount",
       "title": "Camera Mount",
-      "category": "CAD & 3D printing",
-      "year": "Project",
-      "coverText": "Camera mount",
-      "theme": "silver",
-      "thumbnail": "",
-      "previewVideo": "",
-      "video": "",
+      "slug": "camera-mount",
       "summary": "A fabricated intake box and a redesigned, 3D-printed air filter housing.",
       "description": "I TIG welded an aluminum intake box and redesigned and 3D printed an air filter housing while working within competition restrictions.",
+      "year": "Project",
       "details": [
         {
           "title": "Design within constraints",
@@ -49,20 +39,16 @@
           "text": "The revised housing was not dyno tested, so I don’t claim a measured performance gain. It represents design and fabrication work, with performance testing as a separate step."
         }
       ],
-      "photos": []
+      "coverText": "Camera mount",
+      "theme": "silver",
+      "category": "CAD & 3D printing"
     },
     {
-      "slug": "carbon-snowboard",
       "title": "Carbon snowboard",
-      "category": "Composites · Personal design project",
-      "year": "In development",
-      "coverText": "Built for\nthe next turn.",
-      "theme": "blue",
-      "thumbnail": "",
-      "previewVideo": "",
-      "video": "",
+      "slug": "carbon-snowboard",
       "summary": "Exploring a snowboard design around carving, quick turns, and stability.",
       "description": "A personal project exploring snowboard geometry and carbon-fiber construction. I’m interested in how the shape and construction change the way a board feels on snow.",
+      "year": "In development",
       "details": [
         {
           "title": "The design question",
@@ -73,8 +59,9 @@
           "text": "This project is in the design and exploration stage. Geometry, construction, and testing are still being developed."
         }
       ],
-      "photos": []
+      "coverText": "Built for\nthe next turn.",
+      "theme": "blue",
+      "category": "Composites · Personal design project"
     }
-  ],
-  "portrait": ""
+  ]
 }
