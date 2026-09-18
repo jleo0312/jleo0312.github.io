@@ -6,62 +6,71 @@
     {
       "title": "Toyota engine swap",
       "slug": "toyota-engine-swap",
-      "summary": "Bringing a 1999 4Runner powertrain into a 1989 Toyota pickup.",
-      "description": "This project brings together the engine, wiring harness, and ECU from a 1999 Toyota 4Runner in a 1989 Toyota pickup. It’s a hands-on lesson in how mechanical and electrical systems have to work together.",
+      "summary": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
+      "description": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
       "year": "Ongoing",
-      "details": [
-        {
-          "title": "The work",
-          "text": "The work spans engine rebuilding, wiring integration, and adapting the supporting systems to the truck. It has meant working through individual interfaces as well as keeping the complete vehicle in mind."
-        },
-        {
-          "title": "What interests me",
-          "text": "A swap makes you look beyond any one component. Mounting, plumbing, wiring, and serviceability all affect whether the final system works."
-        }
-      ],
       "coverText": "A new heart.\nAn old Toyota.",
       "theme": "dark",
-      "category": "Automotive · Mechanical & electrical"
+      "category": "Automotive · Mechanical & electrical",
+      "thumbnail": "/truck-thumbnail.jpg",
+      "previewVideo": "",
+      "video": "",
+      "photos": [],
+      "thumbnailMotion": "hover"
     },
     {
       "title": "Camera Mount",
       "slug": "camera-mount",
-      "summary": "A fabricated intake box and a redesigned, 3D-printed air filter housing.",
-      "description": "I TIG welded an aluminum intake box and redesigned and 3D printed an air filter housing while working within competition restrictions.",
+      "summary": "A custom camera mount.",
+      "description": "A custom camera mount.",
       "year": "Project",
-      "details": [
-        {
-          "title": "Design within constraints",
-          "text": "This project combined CAD, additive manufacturing, and aluminum fabrication. The design had to account for how the components would fit together while staying within the competition restrictions."
-        },
-        {
-          "title": "Validation",
-          "text": "The revised housing was not dyno tested, so I don’t claim a measured performance gain. It represents design and fabrication work, with performance testing as a separate step."
-        }
-      ],
       "coverText": "Camera mount",
       "theme": "silver",
-      "category": "CAD & 3D printing"
+      "category": "CAD & 3D printing",
+      "thumbnail": "/camera-mount-poster.jpg",
+      "previewVideo": "/camera-mount-preview.mp4",
+      "video": "",
+      "photos": [],
+      "thumbnailMotion": "loop",
+      "thumbnailFit": "contain"
     },
     {
       "title": "Carbon snowboard",
       "slug": "carbon-snowboard",
-      "summary": "Exploring a snowboard design around carving, quick turns, and stability.",
-      "description": "A personal project exploring snowboard geometry and carbon-fiber construction. I’m interested in how the shape and construction change the way a board feels on snow.",
+      "summary": "Designing a carbon-fiber snowboard around carving, quick turns, and stability.",
+      "description": "Designing a carbon-fiber snowboard around carving, quick turns, and stability.",
       "year": "In development",
-      "details": [
-        {
-          "title": "The design question",
-          "text": "How can a board feel stable during a carve while remaining quick to turn? I’m thinking through those tradeoffs alongside switch riding and mixed terrain."
-        },
-        {
-          "title": "Current stage",
-          "text": "This project is in the design and exploration stage. Geometry, construction, and testing are still being developed."
-        }
-      ],
       "coverText": "Built for\nthe next turn.",
       "theme": "blue",
-      "category": "Composites · Personal design project"
+      "category": "Composites · Personal design project",
+      "thumbnail": "",
+      "previewVideo": "",
+      "video": "",
+      "photos": [],
+      "thumbnailMotion": "hover"
+    }
+  ],
+  "portrait": "",
+  "heroPhoto": "",
+  "homepageGalleryDemo": true,
+  "hobbies": [
+    {
+      "photo": "",
+      "title": "",
+      "text": "",
+      "alt": ""
+    },
+    {
+      "photo": "",
+      "title": "",
+      "text": "",
+      "alt": ""
+    },
+    {
+      "photo": "",
+      "title": "",
+      "text": "",
+      "alt": ""
     }
   ]
 }

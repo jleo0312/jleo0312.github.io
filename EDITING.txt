@@ -1,0 +1,38 @@
+PORTFOLIO UPDATE
+
+INSTALL THIS UPDATE
+1. Extract the ZIP using Extract All.
+2. Open https://github.com/jleo0312/jleo0312.github.io/upload/main
+3. Upload all the extracted files together, next to the existing index.html and content.json. Do not upload the ZIP itself or a containing folder.
+4. Click Commit changes. Wait for GitHub Pages to finish publishing, then refresh the website.
+5. Refresh https://app.pagescms.org and open jleo0312.github.io > main > Edit portfolio.
+If you have not connected Pages CMS yet, sign in with GitHub and authorize it for only this repository.
+
+EDIT PHOTOS AND TEXT
+In Projects, expand the project you want.
+Brief project description: one short paragraph under its title.
+Photo + text sections: add an item, upload its Photo, and type in Text beside the photo. Optional heading can stay empty. Reorder the items to change their order on the page.
+Each photo appears beside its text on larger screens. On phones, the photo comes first and its text appears underneath.
+When a project has no photo sections, its thumbnail is shown below the description. Adding photo sections replaces that fallback image.
+Main video is optional.
+
+EDIT HOBBIES
+Expand Hobbies. There are three entries, each with a photo, optional title and short paragraph. Blank photo and paragraph placeholders remain until you fill them in.
+
+HOMEPAGE GALLERY
+Show nine blank carousel demo entries is switched on initially. The demo has three groups of three blank thumbnails; each group is displayed for three seconds before sliding.
+Turn that switch off to show your actual projects in the carousel. Add or reorder those through Projects.
+The real Gallery page keeps your actual projects, including the truck photo and the camera-mount animation.
+The carousel pauses while hovered, while its controls have keyboard focus, when off screen or when the browser tab is hidden. Play/Pause and arrows are available. Automatic motion is disabled when a visitor has requested reduced motion.
+
+THUMBNAILS
+The truck uses the supplied photo.
+The camera mount uses the supplied clip as a silent, looping MP4 thumbnail, with a still picture as fallback. It looks animated like a GIF and uses a smaller file.
+Thumbnail animation can be Loop automatically, Play on hover or Still picture.
+
+SAVE
+Click Save in Pages CMS to publish content changes. No code editing is needed. Website layout upgrades still require uploading the supplied update files.
+The website does not include editor controls for visitors.
+
+NEW PROJECTS
+Add a project in the Projects list. Give it a unique Project address, using lowercase letters, numbers and dashes. Links use /?project=your-address, so new projects do not require creating folders.

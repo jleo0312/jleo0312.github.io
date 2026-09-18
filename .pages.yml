@@ -24,6 +24,35 @@ content:
   - name: personal
     label: 'About me: second paragraph'
     type: text
+  - name: hobbies
+    label: Hobbies
+    type: object
+    list:
+      min: 3
+      max: 3
+      collapsible:
+        collapsed: true
+        summary: Hobby {index}
+    description: Three photos with a short paragraph underneath each, below About
+      me.
+    fields:
+    - name: photo
+      label: Hobby photo
+      type: image
+    - name: title
+      label: Optional title
+      type: string
+    - name: text
+      label: Short paragraph
+      type: text
+    - name: alt
+      label: Image description (accessibility)
+      type: string
+  - name: homepageGalleryDemo
+    label: Show nine blank carousel demo entries
+    type: boolean
+    description: 'On: nine blank slots in groups of three. Off: show your real projects.
+      Each group stays for three seconds before sliding.'
   - name: projects
     label: Projects
     type: object
@@ -31,7 +60,8 @@ content:
       collapsible:
         collapsed: true
         summary: '{title}'
-    description: Add or remove projects here. The first three appear on the homepage.
+    description: Add, edit, remove and reorder projects. Each page has a brief description,
+      then photo + text sections.
     fields:
     - name: title
       label: Project title
@@ -47,53 +77,59 @@ content:
     - name: thumbnail
       label: Gallery thumbnail
       type: image
-    - name: summary
-      label: Short introduction
-      type: text
     - name: description
-      label: Overview
+      label: Brief project description
       type: text
-    - name: year
-      label: Year or status
-      type: string
+      description: One short paragraph below the project title.
     - name: video
       label: Main video (MP4)
       type: file
     - name: previewVideo
-      label: Hover preview (short MP4)
+      label: Animated thumbnail video (MP4)
       type: file
+    - name: thumbnailMotion
+      label: Thumbnail animation
+      type: select
+      options:
+        values:
+        - label: Loop automatically
+          name: loop
+        - label: Play on hover
+          name: hover
+        - label: Still picture
+          name: still
+    - name: thumbnailFit
+      label: Thumbnail picture fit
+      type: select
+      options:
+        values:
+        - label: Fill the thumbnail
+          name: cover
+        - label: Show the whole picture
+          name: contain
     - name: photos
-      label: Project photos
+      label: Photo + text sections
       type: object
       list:
         collapsible:
           collapsed: true
-          summary: '{caption}'
+          summary: Photo {index}
       fields:
       - name: src
         label: Photo
         type: image
         required: true
-      - name: caption
-        label: Caption
-        type: text
-      - name: alt
-        label: Image description
-        type: string
-    - name: details
-      label: Extra description sections
-      type: object
-      list:
-        collapsible:
-          collapsed: true
-          summary: '{title}'
-      fields:
       - name: title
-        label: Section heading
+        label: Optional heading
         type: string
       - name: text
-        label: Section text
+        label: Text beside the photo
         type: text
+      - name: alt
+        label: Image description (accessibility)
+        type: string
+      description: Add an item, upload its photo, and type the paragraph beside it.
+        Reorder the items to change their order on the page.
     - name: coverText
       label: Cover text if no thumbnail
       type: text
@@ -105,6 +141,3 @@ content:
         - dark
         - silver
         - blue
-    - name: category
-      label: Project detail label
-      type: string
