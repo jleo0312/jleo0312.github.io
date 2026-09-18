@@ -2,75 +2,43 @@
   "name": "Josh",
   "bio": "I’m a mechanical engineering student at Washington State University. My interest in engines started with fixing lawn mowers. I liked figuring out what was wrong and getting them running again. Then I got my Toyota pickup, which gave me a bigger project and a lot more to learn.",
   "personal": "Working on my truck pushed that interest further and helped lead me toward mechanical engineering. I enjoy hands-on work, from designing and making parts to figuring out how everything fits together. Outside of engineering, I’m into boxing, the gym, and snowboarding.",
+  "hobbies": [
+    {
+      "title": "Snowboarding",
+      "text": "There's nothing that hits like being on the mountains on a fresh snowy day does. When I'm snowboarding, I feel free and truly in my element. "
+    },
+    {},
+    {}
+  ],
+  "homepageGalleryDemo": true,
   "projects": [
     {
       "title": "Toyota engine swap",
       "slug": "toyota-engine-swap",
-      "summary": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
-      "description": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
-      "year": "Ongoing",
-      "coverText": "A new heart.\nAn old Toyota.",
-      "theme": "dark",
-      "category": "Automotive · Mechanical & electrical",
       "thumbnail": "/truck-thumbnail.jpg",
-      "previewVideo": "",
-      "video": "",
-      "photos": [],
-      "thumbnailMotion": "hover"
+      "description": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
+      "thumbnailMotion": "hover",
+      "coverText": "A new heart.\nAn old Toyota.",
+      "theme": "dark"
     },
     {
       "title": "Camera Mount",
       "slug": "camera-mount",
-      "summary": "A custom camera mount.",
-      "description": "A custom camera mount.",
-      "year": "Project",
-      "coverText": "Camera mount",
-      "theme": "silver",
-      "category": "CAD & 3D printing",
       "thumbnail": "/camera-mount-poster.jpg",
+      "description": "A custom camera mount.",
       "previewVideo": "/camera-mount-preview.mp4",
-      "video": "",
-      "photos": [],
       "thumbnailMotion": "loop",
-      "thumbnailFit": "contain"
+      "thumbnailFit": "contain",
+      "coverText": "Camera mount",
+      "theme": "silver"
     },
     {
       "title": "Carbon snowboard",
       "slug": "carbon-snowboard",
-      "summary": "Designing a carbon-fiber snowboard around carving, quick turns, and stability.",
       "description": "Designing a carbon-fiber snowboard around carving, quick turns, and stability.",
-      "year": "In development",
+      "thumbnailMotion": "hover",
       "coverText": "Built for\nthe next turn.",
-      "theme": "blue",
-      "category": "Composites · Personal design project",
-      "thumbnail": "",
-      "previewVideo": "",
-      "video": "",
-      "photos": [],
-      "thumbnailMotion": "hover"
-    }
-  ],
-  "portrait": "",
-  "heroPhoto": "",
-  "homepageGalleryDemo": true,
-  "hobbies": [
-    {
-      "photo": "",
-      "title": "",
-      "text": "",
-      "alt": ""
-    },
-    {
-      "photo": "",
-      "title": "",
-      "text": "",
-      "alt": ""
-    },
-    {
-      "photo": "",
-      "title": "",
-      "text": "",
-      "alt": ""
+      "theme": "blue"
     }
   ]
 }
