@@ -146,12 +146,23 @@ function highlightProjects(data) {
     .slice(0, 9);
 }
 
+function carouselGroups(projects) {
+  if (!projects.length) return [];
+  const perSlide = Math.min(3, projects.length);
+  return Array.from({ length: Math.ceil(projects.length / 3) }, (_, group) =>
+    Array.from({ length: perSlide }, (_, item) => {
+      const index = (group * 3 + item) % projects.length;
+      return { project: projects[index], index };
+    })
+  );
+}
+
 function renderCarousel(data) {
   const projects = highlightProjects(data);
   if (!projects.length) return '';
-  const groups = [];
-  for (let i = 0; i < projects.length; i += 3) groups.push(projects.slice(i, i + 3).map((project, j) => card(project, i + j)).join(''));
-  return `<section class="wrap selected"><div class="section-heading">${textElement('h2', '', settings.home.highlightsTitle)}${settings.home.galleryLink ? `<a class="text-link" href="${galleryURL}">${esc(settings.home.galleryLink)}</a>` : ''}</div><div class="project-carousel" role="region" aria-roledescription="carousel" aria-label="Project highlights" data-groups="${groups.length}"><div class="carousel-viewport"><div class="carousel-track">${groups.map((group, i) => `<div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${groups.length}" ${i ? 'inert aria-hidden="true"' : 'aria-hidden="false"'}>${group}</div>`).join('')}${groups.length > 1 ? `<div class="carousel-slide carousel-clone" inert aria-hidden="true">${groups[0]}</div>` : ''}</div></div>${groups.length > 1 ? `<div class="carousel-controls"><div class="carousel-dots">${groups.map((_, i) => `<button type="button" class="carousel-dot" data-page="${i}" aria-label="Show group ${i + 1}" aria-current="${i === 0}"></button>`).join('')}</div><div class="carousel-actions">${settings.carousel.showCount ? `<span class="carousel-status" aria-live="off">1 / ${groups.length}</span>` : ''}<button type="button" class="carousel-arrow" data-direction="-1" aria-label="Previous three projects">${esc(settings.carousel.previous)}</button><button type="button" class="carousel-arrow" data-direction="1" aria-label="Next three projects">${esc(settings.carousel.next)}</button><button type="button" class="carousel-pause" aria-label="Pause gallery slideshow">${esc(settings.carousel.pause)}</button></div></div>` : ''}</div></section>`;
+  // Wrap the final group back to the beginning instead of leaving empty columns.
+  const groups = carouselGroups(projects).map(group => group.map(({ project, index }) => card(project, index)).join(''));
+  return `<section class="wrap selected"><div class="section-heading">${textElement('h2', '', settings.home.highlightsTitle)}${settings.home.galleryLink ? `<a class="text-link" href="${galleryURL}">${esc(settings.home.galleryLink)}</a>` : ''}</div><div class="project-carousel" style="--cards-per-slide:${Math.min(3, projects.length)}" role="region" aria-roledescription="carousel" aria-label="Project highlights" data-groups="${groups.length}"><div class="carousel-viewport"><div class="carousel-track">${groups.map((group, i) => `<div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${groups.length}" ${i ? 'inert aria-hidden="true"' : 'aria-hidden="false"'}>${group}</div>`).join('')}${groups.length > 1 ? `<div class="carousel-slide carousel-clone" inert aria-hidden="true">${groups[0]}</div>` : ''}</div></div>${groups.length > 1 ? `<div class="carousel-controls"><div class="carousel-dots">${groups.map((_, i) => `<button type="button" class="carousel-dot" data-page="${i}" aria-label="Show group ${i + 1}" aria-current="${i === 0}"></button>`).join('')}</div><div class="carousel-actions">${settings.carousel.showCount ? `<span class="carousel-status" aria-live="off">1 / ${groups.length}</span>` : ''}<button type="button" class="carousel-arrow" data-direction="-1" aria-label="Previous three projects">${esc(settings.carousel.previous)}</button><button type="button" class="carousel-arrow" data-direction="1" aria-label="Next three projects">${esc(settings.carousel.next)}</button><button type="button" class="carousel-pause" aria-label="Pause gallery slideshow">${esc(settings.carousel.pause)}</button></div></div>` : ''}</div></section>`;
 }
 
 function renderHobbies(data) {
