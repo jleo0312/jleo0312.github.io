@@ -1,0 +1,58 @@
+PORTFOLIO UPDATE — INSTALL ONCE
+
+1. Extract this ZIP on your computer.
+2. Open https://github.com/jleo0312/jleo0312.github.io/upload/main
+3. Upload every file inside the extracted folder, including .pages.yml.
+4. Click Commit changes. Wait for the Pages deployment to finish.
+5. Open https://app.pagescms.org and refresh it. Select your repository and main.
+6. Refresh your portfolio with Ctrl + Shift + R after deployment.
+
+This is an update for your existing site. Keep all existing files and media.
+Your content.json is deliberately not included, so uploading this update preserves
+your latest bio, photos, hobby descriptions and projects.
+
+WHERE TO EDIT
+
+Site headings & labels:
+- Site name, browser tab and icon: top-left name, browser titles and favicon upload.
+- Homepage: both headline lines, small intro line, button and destination,
+  About Me heading, Hobbies heading, highlights heading and View gallery label.
+- Gallery page: Ideas. Made real., introduction, All projects label and count switch.
+- Navigation labels: the About and Gallery links.
+- Project pages and cards: back links, bottom text/button, text-cover labels and numbers.
+- Homepage highlight slideshow: chosen-project/demo mode, timing and button labels.
+- Footer: both footer lines.
+
+Edit portfolio:
+- Homepage photo and About-me photo: upload or replace pictures.
+- Text under the About-me photo: write a caption or paragraph. The picture fills
+  the space above the caption alongside your main bio, and stacks naturally on phones.
+- About me: edit your existing bio and optional additional text.
+- Hobby photos and text: the three hobby cards.
+- Gallery projects and homepage highlights: add/edit projects, descriptions,
+  thumbnails, videos and photo + text sections.
+
+CHOOSE YOUR HIGHLIGHTS
+
+Open Edit portfolio → Gallery projects and homepage highlights.
+Open each project you want to feature and select a Homepage highlight position.
+Use a different number from 1 to 9 for each chosen project. Lower numbers appear
+first. Off keeps a project only in the full gallery. A maximum of nine is shown.
+With nine selected projects, the homepage shows three groups of three.
+Until you set any positions, your first nine gallery projects appear automatically.
+If fewer than nine projects are chosen, the slideshow shows those projects only.
+Changing a selected project's thumbnail automatically changes its highlight too.
+You can change the slideshow timing under Site headings & labels.
+
+SAVING
+
+Save each editor page you change. Saving commits to the main branch and then
+GitHub Pages publishes the change. If a saved change is not visible yet, check
+the repository's Actions tab for the deployment, then refresh the site.
+
+VALIDATION
+
+Checked JavaScript syntax, editor-field coverage, current-content preservation,
+custom headings/caption/icon behavior, highlight order/limit, carousel timing,
+loop reset, responsive offset calculations and page loading/error handling.
+A live browser visual preview was not completed because browser access was denied.

@@ -108,3 +108,68 @@ button:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
   .project-end{gap:14px}
   .project-end .pill{white-space:normal;text-align:center}
 }
+
+/* Keep each slide inside its own width, including pictures and long project names. */
+.project-card,.project-link,.card-heading,.hobby-card{min-width:0}
+.project-link{display:block}
+.project-card h3{overflow-wrap:anywhere}
+.thumbnail{width:100%;isolation:isolate}
+.thumbnail>img,.thumbnail>.type-cover,.thumbnail>video{position:absolute;inset:0;width:100%;height:100%}
+.thumbnail>img{display:block}
+.type-cover{min-width:0;overflow:hidden}
+.cover-type{overflow-wrap:anywhere}
+.project-carousel{--carousel-gap:25px;min-width:0;width:100%}
+.carousel-viewport{width:100%;overflow:hidden;padding:0;margin:0}
+.carousel-track{position:relative;display:flex;width:100%;gap:var(--carousel-gap);transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+.carousel-slide{flex:0 0 100%;width:100%;min-width:0;overflow:hidden;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--carousel-gap)}
+.carousel-slide .project-link:focus-visible{outline-offset:-3px}
+.carousel-arrow{width:auto;min-width:38px;padding:0 12px;overflow-wrap:anywhere}
+.carousel-actions,.carousel-controls{flex-wrap:wrap}
+.carousel-pause{font-size:14px}
+.carousel-status{font-size:14px}
+
+/* The photo and its caption share the full height of the About column. */
+.about-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:64px;align-items:stretch}
+.about-portrait-column{display:flex;flex-direction:column;min-width:0}
+.about-portrait-column h2{margin-bottom:24px}
+.portrait-box{position:relative;width:100%;max-width:none;aspect-ratio:auto;min-height:320px;flex:1;margin:0}
+.portrait-box img,.portrait-placeholder{position:absolute;inset:0;width:100%;height:100%}
+.about-grid .portrait-caption{font-size:16px;line-height:1.65;color:#515155;margin:16px 0 0;overflow-wrap:anywhere}
+.about-copy{min-width:0}
+.about-copy p{overflow-wrap:anywhere}
+.about-copy p:last-child{margin-bottom:0}
+
+/* Edited headings and labels can be longer than the initial text. */
+h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
+.eyebrow{font-size:14px}
+.pill{white-space:normal;text-align:center;overflow-wrap:anywhere}
+.section-heading{align-items:flex-start}
+.section-heading .text-link{max-width:40%;white-space:normal;text-align:right;overflow-wrap:anywhere;flex-shrink:0}
+.nav{gap:24px}
+.nav-links{min-width:0;gap:24px}
+.nav-links a{font-size:14px}
+.footer-inner{font-size:14px;line-height:1.5}
+.footer-inner>span{min-width:0}
+@media(max-width:850px){
+  .project-carousel{--carousel-gap:18px}
+  .about-grid{gap:36px}
+  .portrait-box{min-height:300px}
+}
+@media(max-width:650px){
+  .project-carousel{--carousel-gap:10px}
+  .about-grid{grid-template-columns:1fr;gap:28px}
+  .about-portrait-column{display:block}
+  .portrait-box{aspect-ratio:4/5;min-height:0;max-width:none;width:100%;flex:none;margin:0}
+  .about-grid .portrait-caption{margin-top:14px}
+  .carousel-slide .card-heading h3{font-size:14px}
+  .carousel-slide .card-index{display:none}
+  .carousel-slide .cover-type{font-size:clamp(14px,3.8vw,22px)}
+  .carousel-slide .cover-label{display:none}
+  .eyebrow{font-size:14px;letter-spacing:.6px}
+  .nav{gap:16px}
+  .nav-links{gap:16px}
+  .site-header{height:auto;min-height:66px}
+  .nav{min-height:66px}
+  .nav-links a{padding:18px 0}
+  .section-heading h2{max-width:65%}
+}

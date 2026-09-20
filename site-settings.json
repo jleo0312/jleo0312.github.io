@@ -1,0 +1,61 @@
+{
+  "identity": {
+    "brand": "Josh.",
+    "homeTitle": "Josh — Mechanical Engineering",
+    "galleryTitle": "Projects — Josh",
+    "description": "Josh’s mechanical engineering portfolio. Automotive builds, fabrication, and composites projects at Washington State University.",
+    "siteIcon": ""
+  },
+  "navigation": {
+    "about": "About me",
+    "gallery": "Gallery",
+    "skip": "Skip to content"
+  },
+  "home": {
+    "eyebrow": "MECHANICAL ENGINEERING · WASHINGTON STATE UNIVERSITY",
+    "headline": "Hi, I’m Josh.",
+    "subheadline": "I like to build things.",
+    "button": "Explore my projects ↗",
+    "buttonLink": "/?view=gallery",
+    "aboutTitle": "A little about me.",
+    "hobbiesTitle": "Hobbies",
+    "highlightsTitle": "Things I’ve been working on.",
+    "galleryLink": "View gallery ↗"
+  },
+  "gallery": {
+    "eyebrow": "THE PROJECT GALLERY",
+    "headline": "Ideas. Made real.",
+    "subtitle": "A collection of builds, experiments, and work in progress.",
+    "allProjects": "All projects",
+    "showCount": true
+  },
+  "project": {
+    "back": "← All projects",
+    "endText": "Keep exploring.",
+    "galleryButton": "Back to the gallery ↗",
+    "coverLabel": "PROJECT",
+    "coverMark": "↗",
+    "showNumbers": true,
+    "videoFallback": "Your browser cannot play this video.",
+    "downloadVideo": "Download the video"
+  },
+  "carousel": {
+    "source": "selected",
+    "seconds": 2.5,
+    "pause": "Pause",
+    "play": "Play",
+    "previous": "←",
+    "next": "→",
+    "showCount": true
+  },
+  "footer": {
+    "left": "Josh · Mechanical Engineering",
+    "right": "Washington State University · Pullman, WA"
+  },
+  "messages": {
+    "notFound": "Nothing here yet.",
+    "backToProjects": "Back to projects ↗",
+    "loadError": "Couldn’t load the portfolio.",
+    "retry": "Please refresh to try again."
+  }
+}
