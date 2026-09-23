@@ -1,58 +1,39 @@
-PORTFOLIO UPDATE — INSTALL ONCE
+PORTFOLIO UPDATE — 23 SEPTEMBER 2026
 
-1. Extract this ZIP on your computer.
-2. Open https://github.com/jleo0312/jleo0312.github.io/upload/main
-3. Upload every file inside the extracted folder, including .pages.yml.
-4. Click Commit changes. Wait for the Pages deployment to finish.
-5. Open https://app.pagescms.org and refresh it. Select your repository and main.
-6. Refresh your portfolio with Ctrl + Shift + R after deployment.
+The website files were updated previously, but the repository still had the older editor configuration. Complete both steps below so the new controls appear.
 
-This is an update for your existing site. Keep all existing files and media.
-Your content.json is deliberately not included, so uploading this update preserves
-your latest bio, photos, hobby descriptions and projects.
+1. UPDATE THE WEBSITE
+Open https://github.com/jleo0312/jleo0312.github.io
+On branch main, choose Add file → Upload files.
+Upload app.js, style.css and index.html from this extracted ZIP into the main repository folder, then commit the changes.
 
-WHERE TO EDIT
+2. UPDATE THE EDITOR
+Open EDITOR-CONFIG.txt from this ZIP in a text editor.
+Press Ctrl+A, then Ctrl+C to copy all of it.
+Open this GitHub editing page:
+https://github.com/jleo0312/jleo0312.github.io/edit/main/.pages.yml
+Click inside the code, press Ctrl+A, then Ctrl+V to replace the entire editor configuration, and commit the change.
+Keep the filename exactly .pages.yml.
+The .pages.yml file included in this ZIP contains the same configuration if you prefer to upload that file directly.
 
-Site headings & labels:
-- Site name, browser tab and icon: top-left name, browser titles and favicon upload.
-- Homepage: both headline lines, small intro line, button and destination,
-  About Me heading, Hobbies heading, highlights heading and View gallery label.
-- Gallery page: Ideas. Made real., introduction, All projects label and count switch.
-- Navigation labels: the About and Gallery links.
-- Project pages and cards: back links, bottom text/button, text-cover labels and numbers.
-- Homepage highlight slideshow: chosen-project/demo mode, timing and button labels.
-- Footer: both footer lines.
+3. REOPEN YOUR EDITOR
+Reopen the editor for jleo0312/jleo0312.github.io on branch main.
+You should now see “Website settings & icon” alongside “Edit portfolio”.
+After GitHub finishes publishing, refresh the website with Ctrl+F5.
 
-Edit portfolio:
-- Homepage photo and About-me photo: upload or replace pictures.
-- Text under the About-me photo: write a caption or paragraph. The picture fills
-  the space above the caption alongside your main bio, and stacks naturally on phones.
-- About me: edit your existing bio and optional additional text.
-- Hobby photos and text: the three hobby cards.
-- Gallery projects and homepage highlights: add/edit projects, descriptions,
-  thumbnails, videos and photo + text sections.
+WHERE TO EDIT THINGS
+• Caption: Edit portfolio → Photo caption.
+  Your existing “About me: second paragraph” text is already used here.
+  The main bio stays beside the photo. On desktop, the photo expands to fill the space above the caption and the bottoms of the two text areas align. On phones they stack.
+• Gallery: Edit portfolio → Projects → open a project → Show in gallery.
+  Turn it off to remove that project from both the gallery and homepage highlights. A direct link to its project page still works.
+• Homepage highlights: in the same project, turn Feature on homepage on or off. Choose up to nine. Set Homepage highlight order to 1–9 for a specific order. If you check more than nine, the first nine in that order appear.
+  Existing projects remain visible and featured by default. With fewer than nine selected, the last group repeats selected projects to fill its three spaces.
+• Website icon: Website settings & icon → Website icon & browser tab → Website icon (browser tab).
+  Upload a square PNG or SVG, then save. Open a fresh browser tab if the old tab still shows its cached icon.
+• Headings: Website settings & icon → Homepage or Gallery page.
+  This includes “A little about me”, “Hobbies”, “Ideas. Made real.” and the other headings and labels.
 
-CHOOSE YOUR HIGHLIGHTS
+This update keeps your current photos, writing, project data and saved website settings. It contains no replacement content.json or site-settings.json.
 
-Open Edit portfolio → Gallery projects and homepage highlights.
-Open each project you want to feature and select a Homepage highlight position.
-Use a different number from 1 to 9 for each chosen project. Lower numbers appear
-first. Off keeps a project only in the full gallery. A maximum of nine is shown.
-With nine selected projects, the homepage shows three groups of three.
-Until you set any positions, your first nine gallery projects appear automatically.
-If fewer than nine projects are chosen, the slideshow shows those projects only.
-Changing a selected project's thumbnail automatically changes its highlight too.
-You can change the slideshow timing under Site headings & labels.
-
-SAVING
-
-Save each editor page you change. Saving commits to the main branch and then
-GitHub Pages publishes the change. If a saved change is not visible yet, check
-the repository's Actions tab for the deployment, then refresh the site.
-
-VALIDATION
-
-Checked JavaScript syntax, editor-field coverage, current-content preservation,
-custom headings/caption/icon behavior, highlight order/limit, carousel timing,
-loop reset, responsive offset calculations and page loading/error handling.
-A live browser visual preview was not completed because browser access was denied.
+If the editor still says “About me: second paragraph”, check the saved .pages.yml on GitHub. Its first line should read “# Portfolio editor update: 2026-09-23”. Then reopen the editor on the same main branch.

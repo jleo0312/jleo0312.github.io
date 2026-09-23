@@ -132,10 +132,11 @@ button:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
 .about-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:64px;align-items:stretch}
 .about-portrait-column{display:flex;flex-direction:column;min-width:0}
 .about-portrait-column h2{margin-bottom:24px}
-.portrait-box{position:relative;width:100%;max-width:none;aspect-ratio:auto;min-height:320px;flex:1;margin:0}
+.portrait-figure{display:flex;flex-direction:column;flex:1;min-height:0;margin:0}
+.portrait-box{position:relative;width:100%;max-width:none;aspect-ratio:auto;min-height:160px;flex:1;margin:0}
 .portrait-box img,.portrait-placeholder{position:absolute;inset:0;width:100%;height:100%}
-.about-grid .portrait-caption{font-size:16px;line-height:1.65;color:#515155;margin:16px 0 0;overflow-wrap:anywhere}
-.about-copy{min-width:0}
+.about-grid .portrait-caption{flex:none;font-size:16px;line-height:1.65;color:#515155;margin:16px 0 0;overflow-wrap:anywhere}
+.about-copy{display:flex;flex-direction:column;justify-content:flex-end;min-width:0}
 .about-copy p{overflow-wrap:anywhere}
 .about-copy p:last-child{margin-bottom:0}
 
@@ -153,12 +154,12 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
 @media(max-width:850px){
   .project-carousel{--carousel-gap:18px}
   .about-grid{gap:36px}
-  .portrait-box{min-height:300px}
 }
 @media(max-width:650px){
   .project-carousel{--carousel-gap:10px}
   .about-grid{grid-template-columns:1fr;gap:28px}
   .about-portrait-column{display:block}
+  .portrait-figure,.about-copy{display:block}
   .portrait-box{aspect-ratio:4/5;min-height:0;max-width:none;width:100%;flex:none;margin:0}
   .about-grid .portrait-caption{margin-top:14px}
   .carousel-slide .card-heading h3{font-size:14px}

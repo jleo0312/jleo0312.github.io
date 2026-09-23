@@ -136,13 +136,26 @@ function card(project, index) {
   return `<article class="project-card" data-project="${esc(project.slug)}"><a class="project-link" href="/?project=${encodeURIComponent(project.slug)}"><div class="thumbnail" data-fit="${project.thumbnailFit === 'contain' ? 'contain' : 'cover'}">${cover(project)}${preview}</div><div class="card-heading"><h3>${esc(project.title)}</h3>${number}</div></a></article>`;
 }
 
+function galleryProjects(data) {
+  // Existing projects stay visible until their gallery switch is turned off.
+  return data.projects.filter(project => project.showInGallery !== false);
+}
+
+function highlightPosition(value) {
+  const position = Number(value);
+  return Number.isInteger(position) && position >= 1 && position <= 9 ? position : 10;
+}
+
 function highlightProjects(data) {
   if (settings.carousel.source === 'demo') return Array.from({ length: 9 }, () => ({ demo: true }));
-  const explicitlyConfigured = data.projects.some(project => project.homepageHighlight != null && project.homepageHighlight !== '');
-  if (!explicitlyConfigured) return data.projects.slice(0, 9);
-  return data.projects
-    .filter(project => Number.isInteger(Number(project.homepageHighlight)) && Number(project.homepageHighlight) >= 1 && Number(project.homepageHighlight) <= 9)
-    .sort((a, b) => Number(a.homepageHighlight) - Number(b.homepageHighlight))
+  const legacySelection = data.projects.some(project => project.homepageHighlight != null && project.homepageHighlight !== '');
+  return galleryProjects(data)
+    .filter(project => {
+      if (typeof project.featuredOnHomepage === 'boolean') return project.featuredOnHomepage;
+      // Preserve choices made with the earlier position dropdown until switches are saved.
+      return !legacySelection || highlightPosition(project.homepageHighlight) <= 9;
+    })
+    .sort((a, b) => highlightPosition(a.homepageOrder ?? a.homepageHighlight) - highlightPosition(b.homepageOrder ?? b.homepageHighlight))
     .slice(0, 9);
 }
 
@@ -173,12 +186,16 @@ function renderHobbies(data) {
 function renderHome(data) {
   document.title = settings.identity.homeTitle;
   const headline = [settings.home.headline ? paragraphs(settings.home.headline) : '', settings.home.subheadline ? `<span>${paragraphs(settings.home.subheadline)}</span>` : ''].filter(Boolean).join('<br>');
-  return `<section class="intro wrap hero-with-photo"><div class="hero-copy">${textElement('p', 'eyebrow', settings.home.eyebrow)}${headline ? `<h1>${headline}</h1>` : ''}${settings.home.button ? `<div class="intro-bottom"><a class="pill" href="${safe(settings.home.buttonLink) || galleryURL}">${esc(settings.home.button)}</a></div>` : ''}</div><div class="hero-photo">${safe(data.heroPhoto) ? `<img src="${safe(data.heroPhoto)}" alt="${esc(data.heroPhotoAlt || `Portrait of ${data.name}`)}">` : '<span role="img" aria-label="Space for a photo"></span>'}</div></section><section class="about-section"><div class="wrap about-grid"><div class="about-portrait-column">${textElement('h2', '', settings.home.aboutTitle)}<div class="portrait-box">${safe(data.portrait) ? `<img src="${safe(data.portrait)}" alt="${esc(data.portraitAlt || `Portrait of ${data.name}`)}" loading="lazy">` : '<span class="portrait-placeholder" role="img" aria-label="Space for a portrait"></span>'}</div>${textElement('p', 'portrait-caption', data.portraitCaption)}</div><div class="about-copy">${textElement('p', '', data.bio)}${textElement('p', '', data.personal)}</div></div></section>${renderHobbies(data)}${renderCarousel(data)}`;
+  // Reuse the editor's existing second-paragraph value as the photo caption.
+  // An intentionally cleared caption stays empty, even if an older caption key remains.
+  const caption = data.personal ?? data.portraitCaption ?? '';
+  return `<section class="intro wrap hero-with-photo"><div class="hero-copy">${textElement('p', 'eyebrow', settings.home.eyebrow)}${headline ? `<h1>${headline}</h1>` : ''}${settings.home.button ? `<div class="intro-bottom"><a class="pill" href="${safe(settings.home.buttonLink) || galleryURL}">${esc(settings.home.button)}</a></div>` : ''}</div><div class="hero-photo">${safe(data.heroPhoto) ? `<img src="${safe(data.heroPhoto)}" alt="${esc(data.heroPhotoAlt || `Portrait of ${data.name}`)}">` : '<span role="img" aria-label="Space for a photo"></span>'}</div></section><section class="about-section"><div class="wrap about-grid"><div class="about-portrait-column">${textElement('h2', '', settings.home.aboutTitle)}<figure class="portrait-figure"><div class="portrait-box">${safe(data.portrait) ? `<img src="${safe(data.portrait)}" alt="${esc(data.portraitAlt || `Portrait of ${data.name}`)}" loading="lazy">` : '<span class="portrait-placeholder" role="img" aria-label="Space for a portrait"></span>'}</div>${textElement('figcaption', 'portrait-caption', caption)}</figure></div><div class="about-copy">${textElement('p', '', data.bio)}</div></div></section>${renderHobbies(data)}${renderCarousel(data)}`;
 }
 
 function renderGallery(data) {
   document.title = settings.identity.galleryTitle;
-  return `<section class="wrap gallery">${textElement('p', 'eyebrow', settings.gallery.eyebrow)}${textElement('h1', '', settings.gallery.headline)}${textElement('p', 'page-subtitle', settings.gallery.subtitle)}<div class="gallery-meta">${textElement('span', '', settings.gallery.allProjects)}${settings.gallery.showCount ? `<span>${String(data.projects.length).padStart(2, '0')}</span>` : ''}</div><div class="project-grid">${data.projects.map(card).join('')}</div></section>`;
+  const projects = galleryProjects(data);
+  return `<section class="wrap gallery">${textElement('p', 'eyebrow', settings.gallery.eyebrow)}${textElement('h1', '', settings.gallery.headline)}${textElement('p', 'page-subtitle', settings.gallery.subtitle)}<div class="gallery-meta">${textElement('span', '', settings.gallery.allProjects)}${settings.gallery.showCount ? `<span>${String(projects.length).padStart(2, '0')}</span>` : ''}</div><div class="project-grid">${projects.map(card).join('')}</div></section>`;
 }
 
 function photoSection(photo, index, project) {

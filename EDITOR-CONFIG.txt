@@ -1,0 +1,387 @@
+# Portfolio editor update: 2026-09-23
+media:
+  input: media
+  output: /media
+content:
+- name: site-settings
+  label: Website settings & icon
+  type: file
+  path: site-settings.json
+  format: json
+  fields:
+  - name: identity
+    label: Website icon & browser tab
+    type: object
+    fields:
+    - name: siteIcon
+      label: Website icon (browser tab)
+      type: image
+      options:
+        extensions:
+        - png
+        - ico
+        - svg
+        - jpg
+        - jpeg
+        - webp
+      description: Upload a square image to replace the icon beside your website title in the browser
+        tab. PNG or SVG works well. Leave empty to use the default J icon.
+    - name: brand
+      label: Name in the top left
+      type: string
+    - name: homeTitle
+      label: Homepage browser tab title
+      type: string
+    - name: galleryTitle
+      label: Gallery browser tab title
+      type: string
+    - name: description
+      label: Search description
+      type: text
+  - name: navigation
+    label: Navigation labels
+    type: object
+    fields:
+    - name: about
+      label: About page link
+      type: string
+    - name: gallery
+      label: Gallery link
+      type: string
+    - name: skip
+      label: Skip-to-content link
+      type: string
+  - name: home
+    label: Homepage
+    type: object
+    fields:
+    - name: eyebrow
+      label: Small line above the headline
+      type: string
+    - name: headline
+      label: Main headline — first line
+      type: text
+    - name: subheadline
+      label: Main headline — second line
+      type: text
+    - name: button
+      label: Main button text
+      type: string
+    - name: buttonLink
+      label: Main button destination
+      type: string
+      description: Use /?view=gallery for your gallery, or paste a full web address.
+    - name: aboutTitle
+      label: About Me section heading
+      type: string
+    - name: hobbiesTitle
+      label: Hobbies section heading
+      type: string
+    - name: highlightsTitle
+      label: Homepage highlights heading
+      type: string
+    - name: galleryLink
+      label: View gallery link text
+      type: string
+  - name: gallery
+    label: Gallery page
+    type: object
+    fields:
+    - name: eyebrow
+      label: Small line above the gallery title
+      type: string
+    - name: headline
+      label: Gallery title — Ideas. Made real.
+      type: text
+    - name: subtitle
+      label: Gallery description
+      type: text
+    - name: allProjects
+      label: Project list label
+      type: string
+    - name: showCount
+      label: Show project count
+      type: boolean
+  - name: project
+    label: Project pages and cards
+    type: object
+    fields:
+    - name: back
+      label: Back link above a project
+      type: string
+    - name: endText
+      label: Text at the bottom of a project
+      type: string
+    - name: galleryButton
+      label: Bottom gallery button text
+      type: string
+    - name: coverLabel
+      label: Small label on text-only thumbnails
+      type: string
+    - name: coverMark
+      label: Corner symbol on text-only thumbnails
+      type: string
+    - name: showNumbers
+      label: Show project numbers
+      type: boolean
+    - name: videoFallback
+      label: Video error text
+      type: string
+    - name: downloadVideo
+      label: Video download link text
+      type: string
+  - name: carousel
+    label: Homepage highlight slideshow
+    type: object
+    fields:
+    - name: source
+      label: What the slideshow displays
+      type: select
+      options:
+        values:
+        - name: selected
+          label: My selected gallery projects
+        - name: demo
+          label: Nine blank demonstration cards
+      description: Choose your projects in Edit portfolio → Projects → Feature on homepage. Turn this
+        on for up to nine projects and set their Homepage highlight order.
+    - name: seconds
+      label: Seconds between slide changes
+      type: number
+      options:
+        min: 1
+        max: 30
+      description: 2.5 means the slideshow advances every 2.5 seconds.
+    - name: pause
+      label: Pause button text
+      type: string
+    - name: play
+      label: Play button text
+      type: string
+    - name: previous
+      label: Previous button text or symbol
+      type: string
+    - name: next
+      label: Next button text or symbol
+      type: string
+    - name: showCount
+      label: Show slide count
+      type: boolean
+  - name: footer
+    label: Footer
+    type: object
+    fields:
+    - name: left
+      label: Left footer text
+      type: text
+    - name: right
+      label: Right footer text
+      type: text
+  - name: messages
+    label: Other page messages
+    type: object
+    fields:
+    - name: notFound
+      label: Missing page heading
+      type: text
+    - name: backToProjects
+      label: Missing page button
+      type: string
+    - name: loadError
+      label: Loading error heading
+      type: text
+    - name: retry
+      label: Loading error instructions
+      type: text
+- name: portfolio
+  label: Edit portfolio
+  type: file
+  path: content.json
+  format: json
+  fields:
+  - name: name
+    label: Your name
+    type: string
+    required: true
+  - name: heroPhoto
+    label: Homepage photo
+    type: image
+  - name: heroPhotoAlt
+    label: Homepage photo description
+    type: string
+  - name: portrait
+    label: About-me photo
+    type: image
+  - name: personal
+    label: Photo caption
+    type: text
+    description: 'This text appears directly below your About-me photo. It used to be called About me:
+      second paragraph. On desktop, the photo adjusts so the caption ends level with the main About Me
+      text.'
+  - name: portraitAlt
+    label: About-me photo description
+    type: string
+  - name: bio
+    label: About me — main text
+    type: text
+    description: The main text beside your photo. Write as many paragraphs as you like; leave a blank
+      line between them. Use Photo caption for text underneath the photo.
+  - name: hobbies
+    label: Hobby photos and text
+    type: object
+    list:
+      min: 3
+      max: 3
+      collapsible:
+        collapsed: true
+        summary: Hobby {index}
+    description: The three portrait photo cards below About Me. Rename the section under Website settings
+      & icon → Homepage.
+    fields:
+    - name: photo
+      label: Hobby photo
+      type: image
+    - name: title
+      label: Optional title
+      type: string
+    - name: text
+      label: Short paragraph
+      type: text
+    - name: alt
+      label: Image description (accessibility)
+      type: string
+  - name: projects
+    label: Projects
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: '{title}'
+    description: Open a project to control where it appears. Keep Show in gallery on for visible projects.
+      Choose up to nine with Feature on homepage, then set their highlight order.
+    fields:
+    - name: title
+      label: Project title
+      type: string
+      required: true
+    - name: showInGallery
+      label: Show in gallery
+      type: boolean
+      default: true
+      description: Turn on to include this project in the gallery. Turning it off also removes it from
+        homepage highlights; its direct project link still works.
+    - name: featuredOnHomepage
+      label: Feature on homepage
+      type: boolean
+      default: true
+      description: Turn on for projects you want in the homepage highlights. Choose up to nine. Show in
+        gallery must also be on. Turn off for gallery-only projects.
+    - name: homepageOrder
+      label: Homepage highlight order
+      type: select
+      default: auto
+      description: Use positions 1–9 to order your chosen highlights. Positions 1–3, 4–6 and 7–9 form
+        the three groups. Unnumbered projects follow in gallery order. If more than nine are checked,
+        only the first nine in this order appear.
+      options:
+        values:
+        - name: auto
+          label: Use gallery order
+        - name: '1'
+          label: '1'
+        - name: '2'
+          label: '2'
+        - name: '3'
+          label: '3'
+        - name: '4'
+          label: '4'
+        - name: '5'
+          label: '5'
+        - name: '6'
+          label: '6'
+        - name: '7'
+          label: '7'
+        - name: '8'
+          label: '8'
+        - name: '9'
+          label: '9'
+    - name: slug
+      label: Project address
+      type: string
+      required: true
+      pattern: ^[a-z0-9-]+$
+      description: Choose a unique short name, such as engine-swap. Use lowercase letters, numbers and
+        dashes.
+    - name: thumbnail
+      label: Gallery thumbnail
+      type: image
+    - name: thumbnailAlt
+      label: Thumbnail image description
+      type: string
+    - name: description
+      label: Brief project description
+      type: text
+      description: One short paragraph below the project title.
+    - name: video
+      label: Main video (MP4)
+      type: file
+    - name: previewVideo
+      label: Animated thumbnail video (MP4)
+      type: file
+    - name: thumbnailMotion
+      label: Thumbnail animation
+      type: select
+      options:
+        values:
+        - label: Loop automatically
+          name: loop
+        - label: Play on hover
+          name: hover
+        - label: Still picture
+          name: still
+    - name: thumbnailFit
+      label: Thumbnail picture fit
+      type: select
+      options:
+        values:
+        - label: Fill the thumbnail
+          name: cover
+        - label: Show the whole picture
+          name: contain
+    - name: photos
+      label: Photo + text sections
+      type: object
+      list:
+        collapsible:
+          collapsed: true
+          summary: Photo {index}
+      fields:
+      - name: src
+        label: Photo
+        type: image
+        required: true
+      - name: title
+        label: Optional heading
+        type: string
+      - name: text
+        label: Text beside the photo
+        type: text
+      - name: alt
+        label: Image description (accessibility)
+        type: string
+      description: Add an item, upload its photo, and type the paragraph beside it. Reorder the items
+        to change their order on the page.
+    - name: coverText
+      label: Cover text if no thumbnail
+      type: text
+    - name: theme
+      label: Cover color
+      type: select
+      options:
+        values:
+        - dark
+        - silver
+        - blue
+settings:
+  content:
+    merge: true
