@@ -47,11 +47,6 @@
       "thumbnailMotion": "hover",
       "coverText": "Built for\nthe next turn.",
       "theme": "blue"
-    },
-    {
-      "title": "test",
-      "slug": "test",
-      "description": "test"
     }
   ]
 }
