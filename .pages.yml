@@ -1,3 +1,4 @@
+# Portfolio editor update: 2026-09-24 — all controls in Edit portfolio
 media:
   input: media
   output: /media
@@ -8,6 +9,243 @@ content:
   path: content.json
   format: json
   fields:
+  - name: siteIcon
+    label: Website icon — upload your browser-tab image
+    type: image
+    options:
+      extensions:
+      - png
+      - ico
+      - svg
+      - jpg
+      - jpeg
+      - webp
+    description: Upload a square PNG, SVG or ICO to replace the globe/default icon beside the website title
+      in your browser tab. Save here, then open your website in a fresh tab to see it.
+    default: ''
+  - name: website
+    label: All website text
+    type: object
+    description: Edit the text shown throughout your website here, including the gallery introduction, footer,
+      headings, navigation and buttons. Leave a text field blank to hide that text. Your About Me writing,
+      hobbies and individual projects are below.
+    fields:
+    - name: gallery
+      label: Gallery page text
+      type: object
+      fields:
+      - name: eyebrow
+        label: Small heading — THE PROJECT GALLERY
+        type: string
+        default: THE PROJECT GALLERY
+      - name: headline
+        label: Main heading — Ideas. Made real.
+        type: text
+        default: Ideas. Made real.
+      - name: subtitle
+        label: Description beneath the heading
+        type: text
+        default: A collection of builds, experiments, and work in progress.
+      - name: allProjects
+        label: Project list label — All projects
+        type: string
+        default: All projects
+      - name: showCount
+        label: Show project count
+        type: boolean
+        default: true
+    - name: footer
+      label: Footer — bottom of every page
+      type: object
+      fields:
+      - name: left
+        label: Left footer text — Josh · Mechanical Engineering
+        type: text
+        default: Josh · Mechanical Engineering
+        description: Change this text, or clear it to hide this side of the footer.
+      - name: right
+        label: Right footer text — Washington State University · Pullman, WA
+        type: text
+        default: Washington State University · Pullman, WA
+        description: Change this text, or clear it to hide this side of the footer.
+    - name: home
+      label: Homepage headings and buttons
+      type: object
+      fields:
+      - name: eyebrow
+        label: Small line above the headline
+        type: string
+        default: MECHANICAL ENGINEERING · WASHINGTON STATE UNIVERSITY
+      - name: headline
+        label: Main headline — first line
+        type: text
+        default: Hi, I’m Josh.
+      - name: subheadline
+        label: Main headline — second line
+        type: text
+        default: I like to build things.
+      - name: button
+        label: Main button text
+        type: string
+        default: Explore my projects ↗
+      - name: buttonLink
+        label: Main button destination
+        type: string
+        description: Use /?view=gallery for your gallery, or paste a full web address.
+        default: /?view=gallery
+      - name: aboutTitle
+        label: About Me section heading
+        type: string
+        default: A little about me.
+      - name: hobbiesTitle
+        label: Hobbies section heading
+        type: string
+        default: Hobbies
+      - name: highlightsTitle
+        label: Homepage highlights heading
+        type: string
+        default: Things I’ve been working on.
+      - name: galleryLink
+        label: View gallery link text
+        type: string
+        default: View gallery ↗
+    - name: identity
+      label: Website name and browser-tab titles
+      type: object
+      fields:
+      - name: brand
+        label: Name in the top left
+        type: string
+        default: Josh.
+      - name: homeTitle
+        label: Homepage browser tab title
+        type: string
+        default: Josh — Mechanical Engineering
+      - name: galleryTitle
+        label: Gallery browser tab title
+        type: string
+        default: Projects — Josh
+      - name: description
+        label: Search description
+        type: text
+        default: Josh’s mechanical engineering portfolio. Automotive builds, fabrication, and composites projects
+          at Washington State University.
+    - name: navigation
+      label: Navigation links
+      type: object
+      fields:
+      - name: about
+        label: About page link
+        type: string
+        default: About me
+      - name: gallery
+        label: Gallery link
+        type: string
+        default: Gallery
+      - name: skip
+        label: Skip-to-content link
+        type: string
+        default: Skip to content
+    - name: project
+      label: Project page links and card labels
+      type: object
+      fields:
+      - name: back
+        label: Back link above a project
+        type: string
+        default: ← All projects
+      - name: endText
+        label: Text at the bottom of a project
+        type: string
+        default: Keep exploring.
+      - name: galleryButton
+        label: Bottom gallery button text
+        type: string
+        default: Back to the gallery ↗
+      - name: coverLabel
+        label: Small label on text-only thumbnails
+        type: string
+        default: PROJECT
+      - name: coverMark
+        label: Corner symbol on text-only thumbnails
+        type: string
+        default: ↗
+      - name: showNumbers
+        label: Show project numbers
+        type: boolean
+        default: true
+      - name: videoFallback
+        label: Video error text
+        type: string
+        default: Your browser cannot play this video.
+      - name: downloadVideo
+        label: Video download link text
+        type: string
+        default: Download the video
+    - name: carousel
+      label: Homepage slideshow labels and settings
+      type: object
+      fields:
+      - name: source
+        label: What the slideshow displays
+        type: select
+        options:
+          values:
+          - name: selected
+            label: My selected gallery projects
+          - name: demo
+            label: Nine blank demonstration cards
+        description: Choose your projects below under Projects → Feature on homepage. Turn it on for up to
+          nine projects and set their Homepage highlight order.
+        default: selected
+      - name: seconds
+        label: Seconds between slide changes
+        type: number
+        options:
+          min: 1
+          max: 30
+        description: 2.5 means the slideshow advances every 2.5 seconds.
+        default: 2.5
+      - name: pause
+        label: Pause button text
+        type: string
+        default: Pause
+      - name: play
+        label: Play button text
+        type: string
+        default: Play
+      - name: previous
+        label: Previous button text or symbol
+        type: string
+        default: ←
+      - name: next
+        label: Next button text or symbol
+        type: string
+        default: →
+      - name: showCount
+        label: Show slide count
+        type: boolean
+        default: true
+    - name: messages
+      label: Other page messages
+      type: object
+      fields:
+      - name: notFound
+        label: Missing page heading
+        type: text
+        default: Nothing here yet.
+      - name: backToProjects
+        label: Missing page button
+        type: string
+        default: Back to projects ↗
+      - name: loadError
+        label: Loading error heading
+        type: text
+        default: Couldn’t load the portfolio.
+      - name: retry
+        label: Loading error instructions
+        type: text
+        default: Please refresh to try again.
   - name: name
     label: Your name
     type: string
@@ -15,17 +253,27 @@ content:
   - name: heroPhoto
     label: Homepage photo
     type: image
+  - name: heroPhotoAlt
+    label: Homepage photo description
+    type: string
   - name: portrait
     label: About-me photo
     type: image
-  - name: bio
-    label: 'About me: first paragraph'
-    type: text
   - name: personal
-    label: 'About me: second paragraph'
+    label: Photo caption
     type: text
+    description: 'This text appears directly below your About-me photo. It used to be called About me: second
+      paragraph. On desktop, the photo adjusts so the caption ends level with the main About Me text.'
+  - name: portraitAlt
+    label: About-me photo description
+    type: string
+  - name: bio
+    label: About me — main text
+    type: text
+    description: The main text beside your photo. Write as many paragraphs as you like; leave a blank line
+      between them. Use Photo caption for text underneath the photo.
   - name: hobbies
-    label: Hobbies
+    label: Hobby photos and text
     type: object
     list:
       min: 3
@@ -33,8 +281,8 @@ content:
       collapsible:
         collapsed: true
         summary: Hobby {index}
-    description: Three photos with a short paragraph underneath each, below About
-      me.
+    description: The three portrait photo cards below About Me. Rename the section above under All website
+      text → Homepage headings and buttons.
     fields:
     - name: photo
       label: Hobby photo
@@ -48,11 +296,6 @@ content:
     - name: alt
       label: Image description (accessibility)
       type: string
-  - name: homepageGalleryDemo
-    label: Show nine blank carousel demo entries
-    type: boolean
-    description: 'On: nine blank slots in groups of three. Off: show your real projects.
-      Each group stays for three seconds before sliding.'
   - name: projects
     label: Projects
     type: object
@@ -60,23 +303,66 @@ content:
       collapsible:
         collapsed: true
         summary: '{title}'
-    description: Add, edit, remove and reorder projects. Each page has a brief description,
-      then photo + text sections.
+    description: Open a project to control where it appears. Keep Show in gallery on for visible projects.
+      Choose up to nine with Feature on homepage, then set their highlight order.
     fields:
     - name: title
       label: Project title
       type: string
       required: true
+    - name: showInGallery
+      label: Show in gallery
+      type: boolean
+      default: true
+      description: Turn on to include this project in the gallery. Turning it off also removes it from homepage
+        highlights; its direct project link still works.
+    - name: featuredOnHomepage
+      label: Feature on homepage
+      type: boolean
+      default: true
+      description: Turn on for projects you want in the homepage highlights. Choose up to nine. Show in gallery
+        must also be on. Turn off for gallery-only projects.
+    - name: homepageOrder
+      label: Homepage highlight order
+      type: select
+      default: auto
+      description: Use positions 1–9 to order your chosen highlights. Positions 1–3, 4–6 and 7–9 form the three
+        groups. Unnumbered projects follow in gallery order. If more than nine are checked, only the first
+        nine in this order appear.
+      options:
+        values:
+        - name: auto
+          label: Use gallery order
+        - name: '1'
+          label: '1'
+        - name: '2'
+          label: '2'
+        - name: '3'
+          label: '3'
+        - name: '4'
+          label: '4'
+        - name: '5'
+          label: '5'
+        - name: '6'
+          label: '6'
+        - name: '7'
+          label: '7'
+        - name: '8'
+          label: '8'
+        - name: '9'
+          label: '9'
     - name: slug
       label: Project address
       type: string
       required: true
       pattern: ^[a-z0-9-]+$
-      description: Choose a unique short name, such as engine-swap. Use lowercase
-        letters, numbers and dashes.
+      description: Choose a unique short name, such as engine-swap. Use lowercase letters, numbers and dashes.
     - name: thumbnail
       label: Gallery thumbnail
       type: image
+    - name: thumbnailAlt
+      label: Thumbnail image description
+      type: string
     - name: description
       label: Brief project description
       type: text
@@ -128,8 +414,8 @@ content:
       - name: alt
         label: Image description (accessibility)
         type: string
-      description: Add an item, upload its photo, and type the paragraph beside it.
-        Reorder the items to change their order on the page.
+      description: Add an item, upload its photo, and type the paragraph beside it. Reorder the items to change
+        their order on the page.
     - name: coverText
       label: Cover text if no thumbnail
       type: text
@@ -141,3 +427,6 @@ content:
         - dark
         - silver
         - blue
+settings:
+  content:
+    merge: true
