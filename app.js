@@ -80,9 +80,13 @@ const list = value => Array.isArray(value) ? value : [];
 const textElement = (tag, className, value) => value ? `<${tag}${className ? ` class="${className}"` : ''}>${paragraphs(value)}</${tag}>` : '';
 let settings;
 
-function mergeSettings(saved = {}) {
+function mergeSettings(saved = {}, edited = {}) {
+  const sectionValues = (source, section) => {
+    const value = source?.[section];
+    return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+  };
   return Object.fromEntries(Object.entries(DEFAULT_SETTINGS).map(([section, defaults]) => [
-    section, { ...defaults, ...(saved[section] && typeof saved[section] === 'object' ? saved[section] : {}) }
+    section, { ...defaults, ...sectionValues(saved, section), ...sectionValues(edited, section) }
   ]));
 }
 
@@ -111,16 +115,14 @@ function renderShell() {
   document.querySelector('footer').hidden = !settings.footer.left && !settings.footer.right;
   const meta = document.querySelector('meta[name="description"]');
   if (meta) meta.content = settings.identity.description;
-  const iconURL = safeURL(settings.identity.siteIcon);
-  if (iconURL) {
-    let icon = document.querySelector('link[rel="icon"]');
-    if (!icon) { icon = document.createElement('link'); icon.rel = 'icon'; document.head.append(icon); }
-    icon.removeAttribute('type');
-    // Refresh an image even when the editor replaces an icon with the same filename.
-    const url = new URL(iconURL);
-    if (url.origin === location.origin) url.searchParams.set('icon', String(Date.now()));
-    icon.href = url.href;
-  }
+  const iconURL = safeURL(settings.identity.siteIcon) || safeURL('/favicon.svg');
+  let icon = document.querySelector('link[rel="icon"]');
+  if (!icon) { icon = document.createElement('link'); icon.rel = 'icon'; document.head.append(icon); }
+  icon.removeAttribute('type');
+  // Clearing the upload restores the default; replacing the same filename refreshes it.
+  const url = new URL(iconURL);
+  if (url.origin === location.origin) url.searchParams.set('icon', String(Date.now()));
+  icon.href = url.href;
 }
 
 function cover(project) {
@@ -341,7 +343,11 @@ async function boot() {
   const [contentResult, settingsResult] = await Promise.allSettled([
     fetchJSON('/content.json'), fetchJSON('/site-settings.json')
   ]);
-  settings = mergeSettings(settingsResult.status === 'fulfilled' ? settingsResult.value : {});
+  const data = contentResult.status === 'fulfilled' ? contentResult.value : {};
+  // New edits live together with the portfolio. Existing site-settings.json values
+  // remain the fallback until the corresponding controls are saved in the editor.
+  settings = mergeSettings(settingsResult.status === 'fulfilled' ? settingsResult.value : {}, data.website);
+  if (Object.hasOwn(data, 'siteIcon')) settings.identity.siteIcon = data.siteIcon;
   renderShell();
   if (contentResult.status !== 'fulfilled') {
     document.title = settings.identity.homeTitle;
@@ -349,7 +355,6 @@ async function boot() {
     app.removeAttribute('aria-busy');
     return;
   }
-  const data = contentResult.value;
   data.projects = list(data.projects).filter(project => project && project.slug).map(normalizeProject);
   data.name = data.name || settings.identity.brand;
   const query = new URLSearchParams(location.search);
