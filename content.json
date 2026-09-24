@@ -22,6 +22,9 @@
   "projects": [
     {
       "title": "1989 Toyota Pickup",
+      "showInGallery": true,
+      "featuredOnHomepage": true,
+      "homepageOrder": "auto",
       "slug": "toyota-engine-swap",
       "thumbnail": "/truck-thumbnail.jpg",
       "description": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
@@ -31,6 +34,9 @@
     },
     {
       "title": "Camera Mount",
+      "showInGallery": true,
+      "featuredOnHomepage": true,
+      "homepageOrder": "auto",
       "slug": "camera-mount",
       "thumbnail": "/camera-mount-poster.jpg",
       "description": "A custom camera mount.",
@@ -42,11 +48,74 @@
     },
     {
       "title": "Carbon snowboard",
+      "showInGallery": true,
+      "featuredOnHomepage": true,
+      "homepageOrder": "auto",
       "slug": "carbon-snowboard",
       "description": "Designing a carbon-fiber snowboard around carving, quick turns, and stability.",
       "thumbnailMotion": "hover",
       "coverText": "Built for\nthe next turn.",
       "theme": "blue"
     }
-  ]
+  ],
+  "website": {
+    "gallery": {
+      "eyebrow": "PROJECT GALLERY",
+      "headline": "Bringing my ideas to life.",
+      "subtitle": "A collection of projects, prototypes, and ongoing work.",
+      "allProjects": "All projects",
+      "showCount": true
+    },
+    "footer": {
+      "left": "Josh · Mechanical Engineering",
+      "right": "Washington State University · Pullman, WA"
+    },
+    "home": {
+      "eyebrow": "MECHANICAL ENGINEERING · WASHINGTON STATE UNIVERSITY",
+      "headline": "Hi, I’m Josh.",
+      "subheadline": "I like to build things.",
+      "button": "Explore my projects ↗",
+      "buttonLink": "/?view=gallery",
+      "aboutTitle": "A little about me.",
+      "hobbiesTitle": "Hobbies",
+      "highlightsTitle": "Things I’ve been working on.",
+      "galleryLink": "View gallery ↗"
+    },
+    "identity": {
+      "brand": "Josh.",
+      "homeTitle": "Josh — Mechanical Engineering",
+      "galleryTitle": "Projects — Josh",
+      "description": "Josh’s mechanical engineering portfolio. Automotive builds, fabrication, and composites projects at Washington State University."
+    },
+    "navigation": {
+      "about": "About me",
+      "gallery": "Gallery",
+      "skip": "Skip to content"
+    },
+    "project": {
+      "back": "← All projects",
+      "endText": "Keep exploring.",
+      "galleryButton": "Back to the gallery ↗",
+      "coverLabel": "PROJECT",
+      "coverMark": "↗",
+      "showNumbers": true,
+      "videoFallback": "Your browser cannot play this video.",
+      "downloadVideo": "Download the video"
+    },
+    "carousel": {
+      "source": "selected",
+      "seconds": 2,
+      "pause": "Pause",
+      "play": "Play",
+      "previous": "←",
+      "next": "→",
+      "showCount": true
+    },
+    "messages": {
+      "notFound": "Nothing here yet.",
+      "backToProjects": "Back to projects ↗",
+      "loadError": "Couldn’t load the portfolio.",
+      "retry": "Please refresh to try again."
+    }
+  }
 }
