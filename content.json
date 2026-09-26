@@ -1,7 +1,7 @@
 {
   "name": "Josh",
   "portrait": "/media/IMG_4075_web-1.jpg",
-  "bio": "I’ve always had a habit of wanting to see what was underneath the surface. As a kid, that meant opening up toys, electronics, or anything mechanical I could get my hands on just to see how the pieces worked together. I also loved building things, whether it was with Legos, cardboard, or whatever materials I could find.\n\nBefore I got my first job, I started picking up free, non-running lawn mowers from Facebook Marketplace, fixing them, and selling them to make some side cash. Not long after that, I got my first 3D printer, which gave me a whole new way to design and make things myself. During high school, my dad got a welder, and I started learning how to fabricate things out of metal, including projects like a custom strut bar. I later spent two summers working as a mechanic at a local shop, where I gained more hands on experience troubleshooting and repairing vehicles.\n\nI’m now a mechanical engineering student at Washington State University, where I’ve become familiar with CAD and enjoy using it to bring my ideas to life. I also manage a composite manufacturing studio sponsored by Janicki Industries, which has given me the opportunity to dive deep into the world of composite manufacturing. Studying engineering has allowed me to keep building on the same curiosity and love for designing and making things that has been with me from the start.",
+  "bio": "I’ve always wanted to see what was underneath the surface. As a kid, that meant opening up toys, electronics, or anything mechanical I could get my hands on just to see how the pieces worked together. I also loved building things, whether it was with Legos, cardboard, or whatever materials I could find.\n\nBefore I got my first job, I started picking up free, non-running lawn mowers from Facebook Marketplace, fixing them, and selling them to make some side cash. Not long after that, I got my first 3D printer, which gave me a whole new way to design and make things myself. During high school, my dad got a welder, and I started learning how to fabricate things out of metal, including projects like a custom strut bar. I later spent two summers working as a mechanic at a local shop, where I gained more hands on experience troubleshooting and repairing vehicles.\n\nI’m now a mechanical engineering student at Washington State University, where I’ve become familiar with CAD and enjoy using it to bring my ideas to life. I also manage a composite manufacturing studio sponsored by Janicki Industries, which has given me the opportunity to dive deep into the world of composite manufacturing. Studying engineering has allowed me to keep building on the same curiosity and love for designing and making things that has been with me from the start.",
   "personal": "Me (left) with Adam Schultz, my boss at Schultz & Sons Automotive, during the summer of 2025.\n",
   "hobbies": [
     {
@@ -32,7 +32,19 @@
       "description": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
       "thumbnailMotion": "hover",
       "coverText": "A new heart.\nAn old Toyota.",
-      "theme": "dark"
+      "theme": "dark",
+      "photos": [
+        {
+          "src": "/truck-thumbnail.jpg",
+          "alt": "1989 Toyota Pickup",
+          "id": "photo-0-2ldb36"
+        },
+        {
+          "src": "/truck-engine-swap-work.png",
+          "alt": "Working on the Toyota pickup with an engine hoist.",
+          "id": "photo-1-18isty0"
+        }
+      ]
     },
     {
       "title": "Camera Mount",
@@ -74,17 +86,17 @@
     },
     "home": {
       "eyebrow": "MECHANICAL ENGINEERING · WASHINGTON STATE UNIVERSITY",
-      "headline": "Hi, I’m Josh.",
-      "subheadline": "I like to build things.",
+      "headline": "Hi, I’m Josh",
+      "subheadline": "I like to build things",
       "button": "Explore my projects ↗",
       "buttonLink": "/?view=gallery",
-      "aboutTitle": "A little about me.",
+      "aboutTitle": "A little about me",
       "hobbiesTitle": "Hobbies",
-      "highlightsTitle": "Things I’ve been working on.",
+      "highlightsTitle": "Things I’ve been working on",
       "galleryLink": "View gallery ↗"
     },
     "identity": {
-      "brand": "Josh.",
+      "brand": "Josh Leonard\njoshua.ray.leonard2007@gmail.com",
       "homeTitle": "Josh — Mechanical Engineering",
       "galleryTitle": "Projects — Josh",
       "description": "My mechanical engineering portfolio. Automotive builds, fabrication, and composites projects at Washington State University."
@@ -120,5 +132,43 @@
       "retry": "Please refresh to try again."
     }
   },
-  "heroPhoto": "/media/2026-06-08_16-31-42_173.jpeg"
+  "heroPhoto": "/media/2026-06-08_16-31-42_173.jpeg",
+  "visualEditorVersion": 1,
+  "pageLayouts": {
+    "home": {
+      "sections": [
+        {
+          "id": "original-hero",
+          "type": "hero",
+          "visible": true
+        },
+        {
+          "id": "original-about",
+          "type": "about",
+          "visible": true
+        },
+        {
+          "id": "original-hobbies",
+          "type": "hobbies",
+          "visible": true
+        },
+        {
+          "id": "original-highlights",
+          "type": "highlights",
+          "visible": true
+        }
+      ],
+      "useSections": true
+    }
+  },
+  "heroImage": {
+    "enabled": true,
+    "aspect": "tall"
+  },
+  "portraitAlt": "",
+  "portraitImage": {
+    "enabled": true,
+    "captionAlignment": "left",
+    "captionPosition": "below"
+  }
 }
