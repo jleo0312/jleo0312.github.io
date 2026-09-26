@@ -1,12 +1,29 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Portfolio editor</title><link rel="stylesheet" href="/editor/editor.css?v=1"><script src="/builder-model.js?v=builder-20260925-1" defer></script><script src="/app.js?v=builder-20260925-1" defer></script><script src="/editor/editor.js?v=1" defer></script></head>
-<body><header class="toolbar"><a href="/" target="_blank" class="editor-brand">Portfolio editor <span>↗</span></a><div class="toolbar-actions"><button id="undo" title="Undo (Ctrl+Z)">↶ Undo</button><button id="redo" title="Redo (Ctrl+Shift+Z)">↷ Redo</button><button id="site-settings">Website settings</button><button id="download">Download changes</button><button id="publish" class="primary">Publish</button></div></header>
-<div class="status-bar"><span id="status" role="status" aria-live="polite">Loading your portfolio…</span><button id="connection">Connect GitHub</button><a href="https://app.pagescms.org/" target="_blank" rel="noopener">Open Pages CMS ↗</a></div>
-<main class="workspace"><aside class="outline"><label class="field">Page<select id="page-select" aria-label="Page to edit"></select></label><div class="button-row"><button id="new-page">+ New page</button><button id="new-project">+ New project</button></div><button id="page-settings" class="wide">Page settings</button><div class="panel-heading"><h2>Sections</h2><span>Drag to reorder</span></div><div id="sections"></div><div class="add-section"><select id="section-type" aria-label="New section type"><option value="photoText">Photo and text</option><option value="text">Text</option><option value="heading">Heading</option><option value="video">Video / GIF</option><option value="spacer">Spacer</option></select><button id="add-section" class="primary wide">+ Add Section</button></div></aside>
-<section class="preview-pane" aria-label="Live page preview"><div class="preview-toolbar"><div class="devices" role="group" aria-label="Preview device"><button data-device="1200" aria-pressed="true">Desktop</button><button data-device="768" aria-pressed="false">Tablet</button><button data-device="390" aria-pressed="false">Mobile</button></div><span id="preview-size">1200 px</span><a id="open-page" href="/" target="_blank">Open page ↗</a></div><p class="preview-hint">Click a section or photo to edit it. Drag the blue image handle to resize.</p><div id="preview-shell"><iframe id="preview" title="Live portfolio preview" src="/?editorPreview=1"></iframe></div></section>
-<aside class="inspector"><div id="inspector"><h2>Your page, your layout</h2><p>Choose a section to change its text, photos and layout.</p></div></aside></main>
-<dialog id="connect-dialog"><form id="connect-form"><h2>Connect GitHub</h2><p>Save your changes directly to <strong>jleo0312/jleo0312.github.io</strong>.</p><p>Create a fine-grained token for this repository with <strong>Contents: read and write</strong>. Your token stays in this tab’s memory.</p><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create a GitHub token ↗</a><label class="field">GitHub token<input id="token" type="password" autocomplete="off" spellcheck="false" required></label><p id="connect-error" role="alert"></p><div class="button-row"><button type="button" data-close="connect-dialog">Cancel</button><button type="submit" class="primary">Connect</button></div></form></dialog>
-<dialog id="new-dialog"><form id="new-form"><h2 id="new-title">New page</h2><label class="field">Title<input id="new-name" required maxlength="160"></label><label class="field">Page address<input id="new-slug" required pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="my-new-page"></label><p id="new-error" role="alert"></p><div class="button-row"><button type="button" data-close="new-dialog">Cancel</button><button class="primary" type="submit">Create</button></div></form></dialog>
-<dialog id="media-dialog"><div class="dialog-heading"><h2>Choose existing media</h2><button data-close="media-dialog">Close</button></div><div id="media-grid"></div></dialog>
-<dialog id="draft-dialog"><h2>Continue your saved draft?</h2><p>A draft from your previous visit is saved in this browser.</p><div class="button-row"><button id="discard-draft">Use latest website</button><button id="restore-draft" class="primary">Restore draft</button></div></dialog>
-<input id="file-upload" type="file" hidden><input id="import-content" type="file" accept="application/json,.json" hidden>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Josh’s engineering portfolio.">
+  <title>Josh — Engineering portfolio</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css?v=builder-20260925-1">
+  <link rel="stylesheet" href="/builder.css?v=builder-20260925-1">
+  <script src="/builder-model.js?v=homepage-repair-20260926" defer></script>
+  <script src="/app.js?v=builder-20260925-1" defer></script>
+</head>
+<body>
+  <a class="skip" href="#app">Skip to content</a>
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main navigation">
+      <a class="brand" href="/"></a>
+      <div class="nav-links">
+        <a data-nav="about" href="/"></a>
+        <a data-nav="gallery" href="/?view=gallery"></a>
+      </div>
+    </nav>
+  </header>
+  <main id="app" tabindex="-1" aria-busy="true"></main>
+  <noscript><p>This portfolio needs JavaScript to display its content.</p></noscript>
+  <footer><div class="wrap footer-inner"><span></span><span></span></div></footer>
+</body>
+</html>

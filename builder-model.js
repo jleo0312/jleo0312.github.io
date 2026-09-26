@@ -15,11 +15,15 @@
         truck.photos = Array.isArray(truck.photos) ? truck.photos : [];
         // Keep the cover that the original project page displayed as its only photo.
         if (!truck.photos.length && !truck.video && truck.thumbnail) truck.photos.push({src:truck.thumbnail, alt:truck.title});
-        if (!truck.photos.some(p => p.src === '/media/truck-engine-swap-work.png')) truck.photos.push({src:'/media/truck-engine-swap-work.png',alt:'Working on the Toyota pickup with an engine hoist.'});
+        if (!truck.photos.some(p => ['/truck-engine-swap-work.png','/media/truck-engine-swap-work.png'].includes(p.src))) truck.photos.push({src:'/truck-engine-swap-work.png',alt:'Working on the Toyota pickup with an engine hoist.'});
       }
       data.visualEditorVersion = 1;
     }
-    data.projects.forEach(project => (Array.isArray(project.photos) ? project.photos : []).forEach((photo,i) => { photo.id ||= 'photo-' + i + '-' + hash(photo.src); }));
+    data.projects.forEach(project => (Array.isArray(project.photos) ? project.photos : []).forEach((photo,i) => {
+      // The installation stores this supplied photo beside the homepage. Keep older drafts working.
+      if (photo.src === '/media/truck-engine-swap-work.png') photo.src = '/truck-engine-swap-work.png';
+      photo.id ||= 'photo-' + i + '-' + hash(photo.src);
+    }));
     for(const target of [...Object.values(data.pageLayouts||{}),...data.projects,...(data.pages||[])]) {
       if(Array.isArray(target.sections))target.sections.forEach((section,i)=>{section.id ||= 'saved-section-'+i+'-'+hash(JSON.stringify(section));section.type ||= 'photoText';});
     }
