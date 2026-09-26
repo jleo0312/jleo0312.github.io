@@ -1,4 +1,4 @@
-# Portfolio editor update: 2026-09-24 — all controls in Edit portfolio
+# Portfolio editor update: 2026-09-25 — visual page builder
 media:
   input: media
   output: /media
@@ -9,6 +9,13 @@ content:
   path: content.json
   format: json
   fields:
+  - name: visualEditorLink
+    label: Visual page editor
+    type: string
+    default: https://jleo0312.github.io/editor/
+    readonly: true
+    description: Open this address for live preview, Add Section, move, duplicate and visual photo controls. The
+      fields below remain available.
   - name: siteIcon
     label: Website icon — upload your browser-tab image
     type: image
@@ -20,15 +27,15 @@ content:
       - jpg
       - jpeg
       - webp
-    description: Upload a square PNG, SVG or ICO to replace the globe/default icon beside the website title
-      in your browser tab. Save here, then open your website in a fresh tab to see it.
+    description: Upload a square PNG, SVG or ICO to replace the globe/default icon beside the website title in
+      your browser tab. Save here, then open your website in a fresh tab to see it.
     default: ''
   - name: website
     label: All website text
     type: object
     description: Edit the text shown throughout your website here, including the gallery introduction, footer,
-      headings, navigation and buttons. Leave a text field blank to hide that text. Your About Me writing,
-      hobbies and individual projects are below.
+      headings, navigation and buttons. Leave a text field blank to hide that text. Your About Me writing, hobbies
+      and individual projects are below.
     fields:
     - name: gallery
       label: Gallery page text
@@ -182,6 +189,14 @@ content:
         label: Video download link text
         type: string
         default: Download the video
+      - name: previewPlay
+        label: Thumbnail play button text
+        type: string
+        default: Play preview
+      - name: previewPause
+        label: Thumbnail pause button text
+        type: string
+        default: Pause preview
     - name: carousel
       label: Homepage slideshow labels and settings
       type: object
@@ -195,8 +210,8 @@ content:
             label: My selected gallery projects
           - name: demo
             label: Nine blank demonstration cards
-        description: Choose your projects below under Projects → Feature on homepage. Turn it on for up to
-          nine projects and set their Homepage highlight order.
+        description: Choose your projects below under Projects → Feature on homepage. Turn it on for up to nine
+          projects and set their Homepage highlight order.
         default: selected
       - name: seconds
         label: Seconds between slide changes
@@ -253,12 +268,18 @@ content:
   - name: heroPhoto
     label: Homepage photo
     type: image
+  - name: heroImage
+    label: Homepage photo controls
+    component: imageControls
   - name: heroPhotoAlt
     label: Homepage photo description
     type: string
   - name: portrait
     label: About-me photo
     type: image
+  - name: portraitImage
+    label: About-me photo controls
+    component: captionedImageLayout
   - name: personal
     label: Photo caption
     type: text
@@ -270,8 +291,13 @@ content:
   - name: bio
     label: About me — main text
     type: text
-    description: The main text beside your photo. Write as many paragraphs as you like; leave a blank line
-      between them. Use Photo caption for text underneath the photo.
+    description: The main text beside your photo. Write as many paragraphs as you like; leave a blank line between
+      them. Use Photo caption for text underneath the photo.
+  - name: hobbiesIntro
+    label: Text under Hobbies
+    type: text
+    default: ''
+    description: Appears below the Hobbies heading and above the three photos.
   - name: hobbies
     label: Hobby photos and text
     type: object
@@ -281,8 +307,8 @@ content:
       collapsible:
         collapsed: true
         summary: Hobby {index}
-    description: The three portrait photo cards below About Me. Rename the section above under All website
-      text → Homepage headings and buttons.
+    description: The three portrait photo cards below About Me. Rename the section above under All website text
+      → Homepage headings and buttons.
     fields:
     - name: photo
       label: Hobby photo
@@ -296,6 +322,9 @@ content:
     - name: alt
       label: Image description (accessibility)
       type: string
+    - name: imageStyle
+      label: Photo controls and caption
+      component: imageControls
   - name: projects
     label: Projects
     type: object
@@ -303,8 +332,8 @@ content:
       collapsible:
         collapsed: true
         summary: '{title}'
-    description: Open a project to control where it appears. Keep Show in gallery on for visible projects.
-      Choose up to nine with Feature on homepage, then set their highlight order.
+    description: Open a project to control where it appears. Keep Show in gallery on for visible projects. Choose
+      up to nine with Feature on homepage, then set their highlight order.
     fields:
     - name: title
       label: Project title
@@ -326,9 +355,8 @@ content:
       label: Homepage highlight order
       type: select
       default: auto
-      description: Use positions 1–9 to order your chosen highlights. Positions 1–3, 4–6 and 7–9 form the three
-        groups. Unnumbered projects follow in gallery order. If more than nine are checked, only the first
-        nine in this order appear.
+      description: Choose up to nine highlighted projects. Desktop shows three at a time; mobile shows one at
+        a time.
       options:
         values:
         - name: auto
@@ -414,6 +442,20 @@ content:
       - name: alt
         label: Image description (accessibility)
         type: string
+      - name: id
+        label: Photo ID
+        type: string
+        hidden: true
+      - name: shortCaption
+        label: Short caption under photo
+        type: text
+      - name: showCaption
+        label: Show caption
+        type: boolean
+        default: true
+      - name: imageStyle
+        label: Photo controls
+        component: imageLayout
       description: Add an item, upload its photo, and type the paragraph beside it. Reorder the items to change
         their order on the page.
     - name: coverText
@@ -427,6 +469,481 @@ content:
         - dark
         - silver
         - blue
+    - name: thumbnailStyle
+      label: Thumbnail controls and caption
+      component: imageControls
+    - name: videoStyle
+      label: Main video size and caption
+      component: imageControls
+    - name: useSections
+      label: Use custom section layout
+      type: boolean
+      default: false
+      description: The visual editor manages this switch. Turn on to allow an intentionally empty page; turn off
+        with an empty section list to restore the original layout.
+    - name: sections
+      label: Sections — add / move / duplicate / delete
+      component: sections
+  - name: pageLayouts
+    label: Homepage, About and Gallery sections
+    type: object
+    fields:
+    - name: home
+      label: Homepage
+      type: object
+      fields:
+      - name: useSections
+        label: Use custom section layout
+        type: boolean
+        default: false
+        description: The visual editor manages this switch. Turn on to allow an intentionally empty page; turn
+          off with an empty section list to restore the original layout.
+      - name: sections
+        label: Sections — add / move / duplicate / delete
+        component: sections
+    - name: about
+      label: About page
+      type: object
+      fields:
+      - name: useSections
+        label: Use custom section layout
+        type: boolean
+        default: false
+        description: The visual editor manages this switch. Turn on to allow an intentionally empty page; turn
+          off with an empty section list to restore the original layout.
+      - name: sections
+        label: Sections — add / move / duplicate / delete
+        component: sections
+    - name: gallery
+      label: Gallery
+      type: object
+      fields:
+      - name: useSections
+        label: Use custom section layout
+        type: boolean
+        default: false
+        description: The visual editor manages this switch. Turn on to allow an intentionally empty page; turn
+          off with an empty section list to restore the original layout.
+      - name: sections
+        label: Sections — add / move / duplicate / delete
+        component: sections
+  - name: pages
+    label: Extra pages
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: '{title}'
+    fields:
+    - name: title
+      label: Page title
+      type: string
+    - name: slug
+      label: Page address
+      type: string
+      pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+    - name: showInNavigation
+      label: Show in navigation
+      type: boolean
+      default: false
+    - name: useSections
+      label: Use custom section layout
+      type: boolean
+      default: false
+      description: The visual editor manages this switch. Turn on to allow an intentionally empty page; turn off
+        with an empty section list to restore the original layout.
+    - name: sections
+      label: Sections — add / move / duplicate / delete
+      component: sections
+  - name: visualEditorVersion
+    label: Visual editor version
+    type: number
+    hidden: true
 settings:
   content:
     merge: true
+components:
+  imageLayout:
+    type: object
+    fields:
+    - &id001
+      name: enabled
+      label: Use custom image controls
+      type: boolean
+      default: false
+    - &id002
+      name: size
+      label: Image size
+      type: select
+      options:
+        values:
+        - name: small
+          label: Small
+        - name: medium
+          label: Medium
+        - name: large
+          label: Large
+        - name: full
+          label: Full width
+    - &id003
+      name: width
+      label: Image width (%)
+      type: number
+      options:
+        min: 10
+        max: 100
+    - &id004
+      name: height
+      label: Image height (0 = automatic)
+      type: number
+      options:
+        min: 0
+        max: 1200
+    - &id005
+      name: aspect
+      label: Aspect ratio
+      type: select
+      options:
+        values:
+        - name: auto
+          label: Original proportions
+        - name: square
+          label: Square
+        - name: portrait
+          label: Portrait 4:5
+        - name: tall
+          label: Portrait 3:4
+        - name: landscape
+          label: Landscape 4:3
+        - name: wide
+          label: Wide 16:9
+    - &id006
+      name: align
+      label: Image alignment
+      type: select
+      options:
+        values:
+        - name: left
+          label: Left
+        - name: center
+          label: Center
+        - name: right
+          label: Right
+    - &id007
+      name: position
+      label: Placement beside nearby text
+      type: select
+      options:
+        values:
+        - name: left
+          label: Photo left / text right
+        - name: right
+          label: Photo right / text left
+        - name: above
+          label: Photo above text
+        - name: below
+          label: Photo below text
+    - &id008
+      name: fit
+      label: Photo crop / fit
+      type: select
+      options:
+        values:
+        - name: contain
+          label: Show whole photo
+        - name: cover
+          label: Fill and crop
+    - &id009
+      name: focalX
+      label: 'Crop focus: horizontal'
+      type: number
+      options:
+        min: 0
+        max: 100
+    - &id010
+      name: focalY
+      label: 'Crop focus: vertical'
+      type: number
+      options:
+        min: 0
+        max: 100
+    - &id011
+      name: margin
+      label: Space around photo
+      type: number
+      options:
+        min: 0
+        max: 120
+    - &id012
+      name: padding
+      label: Padding inside photo frame
+      type: number
+      options:
+        min: 0
+        max: 80
+    - &id013
+      name: captionPosition
+      label: Caption position
+      type: select
+      options:
+        values:
+        - name: below
+          label: Below photo
+        - name: above
+          label: Above photo
+    - &id014
+      name: captionAlignment
+      label: Caption alignment
+      type: select
+      options:
+        values:
+        - name: left
+          label: Left
+        - name: center
+          label: Center
+        - name: right
+          label: Right
+  captionedImageLayout:
+    type: object
+    fields:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    - *id011
+    - *id012
+    - &id015
+      name: showCaption
+      label: Show caption
+      type: boolean
+      default: true
+    - *id013
+    - *id014
+  imageControls:
+    type: object
+    fields:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    - *id011
+    - *id012
+    - name: caption
+      label: Image caption
+      type: text
+    - *id015
+    - *id013
+    - *id014
+    description: Turn on custom image controls to override the original sizing. The visual editor provides sliders
+      and drag handles for these same settings.
+  sections:
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: '{type} — {heading}'
+    fields:
+    - name: id
+      label: Section ID
+      type: string
+      hidden: true
+    - name: type
+      label: Section type
+      type: select
+      options:
+        values:
+        - name: photoText
+          label: Photo and text
+        - name: text
+          label: Text
+        - name: heading
+          label: Heading
+        - name: video
+          label: Video / GIF
+        - name: spacer
+          label: Spacer
+        - name: hero
+          label: Homepage introduction
+        - name: about
+          label: About me
+        - name: hobbies
+          label: Hobbies
+        - name: highlights
+          label: Project highlights
+        - name: galleryIntro
+          label: Gallery introduction
+        - name: galleryGrid
+          label: Gallery projects
+        - name: projectIntro
+          label: Project introduction
+        - name: projectVideo
+          label: Project video
+        - name: projectPhoto
+          label: Existing project photo
+        - name: projectThumbnail
+          label: Project cover photo
+        - name: projectEnd
+          label: Project footer
+      default: photoText
+    - name: visible
+      label: Show this section
+      type: boolean
+      default: true
+    - name: heading
+      label: Heading
+      type: string
+    - name: headingLevel
+      label: Heading size
+      type: select
+      options:
+        values:
+        - name: h1
+          label: Large
+        - name: h2
+          label: Section heading
+        - name: h3
+          label: Small
+    - name: image
+      label: Photo
+      type: image
+    - name: alt
+      label: Image description
+      type: string
+    - name: text
+      label: Main text
+      type: text
+    - name: caption
+      label: Short caption under photo
+      type: text
+    - name: showCaption
+      label: Show caption
+      type: boolean
+      default: true
+    - name: imagePosition
+      label: Image position
+      type: select
+      options:
+        values:
+        - name: left
+          label: Photo left / text right
+        - name: right
+          label: Photo right / text left
+        - name: above
+          label: Photo above text
+        - name: below
+          label: Photo below text
+    - name: imageWidth
+      label: Photo column size
+      type: number
+      options:
+        min: 10
+        max: 90
+    - name: textWidth
+      label: Text column size
+      type: number
+      options:
+        min: 10
+        max: 90
+    - name: alignment
+      label: Vertical alignment
+      type: select
+      options:
+        values:
+        - name: start
+          label: Top
+        - name: center
+          label: Center
+        - name: end
+          label: Bottom
+    - name: textAlign
+      label: Text alignment
+      type: select
+      options:
+        values:
+        - name: left
+          label: Left
+        - name: center
+          label: Center
+        - name: right
+          label: Right
+    - name: textSize
+      label: Text size
+      type: select
+      options:
+        values:
+        - name: small
+          label: Small
+        - name: normal
+          label: Medium
+        - name: large
+          label: Large
+    - name: contentWidth
+      label: Content width
+      type: select
+      options:
+        values:
+        - name: default
+          label: Default
+        - name: narrow
+          label: Narrow
+        - name: wide
+          label: Wide
+        - name: full
+          label: Full width
+    - name: gap
+      label: Gap between photo and text
+      type: number
+      options:
+        min: 0
+        max: 100
+    - name: spacingTop
+      label: Space above section
+      type: number
+      options:
+        min: 0
+        max: 200
+    - name: spacingBottom
+      label: Space below section
+      type: number
+      options:
+        min: 0
+        max: 200
+    - name: imageStyle
+      label: Photo controls
+      component: imageLayout
+    - name: video
+      label: Video file
+      type: file
+    - name: poster
+      label: Video poster
+      type: image
+    - name: loop
+      label: Loop video
+      type: boolean
+    - name: muted
+      label: Mute video
+      type: boolean
+    - name: height
+      label: Spacer height
+      type: number
+      options:
+        min: 0
+        max: 200
+    - name: sourceId
+      label: Existing photo ID
+      type: string
+      hidden: true
+    description: Add, reorder, duplicate or remove sections. For live preview and drag controls, use https://jleo0312.github.io/editor/.
+      Leave this list empty to keep the original page layout, unless Use custom section layout is on.
