@@ -44,7 +44,37 @@
           "alt": "Working on the Toyota pickup with an engine hoist.",
           "id": "photo-1-18isty0"
         }
-      ]
+      ],
+      "sections": [
+        {
+          "id": "original-projectIntro",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "original-projectVideo",
+          "type": "projectVideo",
+          "visible": true
+        },
+        {
+          "visible": true,
+          "id": "legacy-photo-0-2ldb36",
+          "type": "projectPhoto",
+          "sourceId": "photo-0-2ldb36"
+        },
+        {
+          "visible": true,
+          "id": "legacy-photo-1-18isty0",
+          "type": "projectPhoto",
+          "sourceId": "photo-1-18isty0"
+        },
+        {
+          "id": "original-projectEnd",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ],
+      "useSections": true
     },
     {
       "title": "Camera Mount",
@@ -159,11 +189,42 @@
         }
       ],
       "useSections": true
+    },
+    "gallery": {
+      "sections": [
+        {
+          "id": "original-galleryIntro",
+          "type": "galleryIntro",
+          "visible": true
+        },
+        {
+          "id": "original-galleryGrid",
+          "type": "galleryGrid",
+          "visible": true
+        }
+      ],
+      "useSections": true
+    },
+    "about": {
+      "sections": [
+        {
+          "id": "original-about",
+          "type": "about",
+          "visible": true
+        },
+        {
+          "id": "original-hobbies",
+          "type": "hobbies",
+          "visible": true
+        }
+      ],
+      "useSections": true
     }
   },
   "heroImage": {
     "enabled": true,
-    "aspect": "tall"
+    "aspect": "tall",
+    "focalX": 50
   },
   "portraitAlt": "",
   "portraitImage": {
