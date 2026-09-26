@@ -86,11 +86,11 @@
     },
     "home": {
       "eyebrow": "MECHANICAL ENGINEERING · WASHINGTON STATE UNIVERSITY",
-      "headline": "Hi, I’m Josh",
-      "subheadline": "I like to build things",
+      "headline": "Hi, I’m Josh.",
+      "subheadline": "I like to build things.",
       "button": "Explore my projects ↗",
       "buttonLink": "/?view=gallery",
-      "aboutTitle": "A little about me",
+      "aboutTitle": "A little about me.",
       "hobbiesTitle": "Hobbies",
       "highlightsTitle": "Things I’ve been working on",
       "galleryLink": "View gallery ↗"
