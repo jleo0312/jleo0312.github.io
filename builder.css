@@ -1,0 +1,110 @@
+/* Extensions preserve the original portfolio styles until an override is chosen. */
+.image-frame{position:relative;min-width:0;margin:0}
+.image-box{position:relative;overflow:hidden}
+.image-box>img{display:block;width:100%;height:100%;object-fit:cover;border-radius:0}
+.image-placeholder{display:block;width:100%;height:100%;min-height:160px;background:#f0f0f3}
+.hero-frame{width:100%;max-width:320px;justify-self:end}
+.hero-frame .hero-photo{width:100%;max-width:none}
+.portrait-figure.image-frame{display:flex;flex-direction:column;flex:1}
+.portrait-figure .portrait-box{flex:1}
+.hobby-photo{aspect-ratio:4/5}
+.hobby-photo>img{position:absolute;inset:0}
+.image-frame.image-custom{width:var(--image-width,100%);max-width:100%;margin-top:var(--image-margin,0);margin-bottom:var(--image-margin,0);padding:var(--image-padding,0);flex:none}
+.image-align-left.image-custom{margin-right:auto;margin-left:0;justify-self:start}
+.image-align-center.image-custom{margin-left:auto;margin-right:auto;justify-self:center}
+.image-align-right.image-custom{margin-left:auto;margin-right:0;justify-self:end}
+.image-custom .image-box{width:100%;max-width:none;height:var(--image-height,auto);aspect-ratio:var(--image-ratio,auto);flex:none;min-height:0;border-radius:14px}
+.image-custom .image-box>img{position:static;width:100%;height:100%;object-fit:var(--image-fit,contain);object-position:var(--image-x,50%) var(--image-y,50%)}
+.image-custom .image-placeholder{aspect-ratio:4/3}
+.image-caption{font-size:14px;line-height:1.6;color:var(--muted);text-align:var(--caption-align,left);margin:12px 0 0;overflow-wrap:anywhere}
+.image-custom figcaption{text-align:var(--caption-align,left)}
+.caption-above figcaption{margin:0 0 12px}
+.hobbies-intro{font-size:18px;line-height:1.7;color:#515155;max-width:780px;margin:0 0 28px;overflow-wrap:anywhere}
+.hobby-position-below{display:flex;flex-direction:column}
+.hobby-position-below .image-frame{order:2;margin-top:18px}
+.hobby-position-left,.hobby-position-right{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.hobby-position-right .image-frame{order:2}
+.hobby-position-left h3,.hobby-position-right h3{margin-top:0}
+.project-card{position:relative}
+.preview{pointer-events:none}
+.preview-play{position:absolute;top:12px;right:12px;z-index:2;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;max-width:calc(100% - 24px);padding:9px 13px;border:1px solid #ffffff55;border-radius:24px;background:#202125eb;color:white;font-size:14px;line-height:1.3;overflow-wrap:anywhere}
+.preview-play[hidden]{display:none}
+.preview-play:focus-visible{outline-offset:-4px}
+.thumbnail.thumbnail-custom{width:var(--image-width,100%);height:var(--image-height,auto);aspect-ratio:var(--image-ratio,4/3);padding:var(--image-padding,0);margin-top:var(--image-margin,0);margin-bottom:var(--image-margin,0)}
+.thumbnail-custom[data-align=center]{margin-left:auto;margin-right:auto}
+.thumbnail-custom[data-align=right]{margin-left:auto}
+.thumbnail-custom>img,.thumbnail-custom>video{object-fit:var(--image-fit,cover)!important;object-position:var(--image-x,50%) var(--image-y,50%);padding:var(--image-padding,0)}
+.thumbnail-custom[style*="--image-ratio:auto"]{aspect-ratio:4/3}
+.builder-section{min-width:0;position:relative;max-width:100%;overflow-wrap:anywhere}
+.section-width-narrow>.wrap{max-width:850px}
+.section-width-wide>.wrap{max-width:1440px}
+.section-width-full>.wrap{max-width:none}
+.detail>.section-width-narrow{max-width:800px;margin-left:auto;margin-right:auto}
+.content-section{padding-top:24px;padding-bottom:24px}
+.section-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:var(--content-gap,46px);min-width:0}
+.section-row{grid-template-columns:var(--photo-columns,minmax(0,1.3fr) minmax(0,1fr))}
+/* Column sizes are assigned as percentages by the renderer for broad CSS support. */
+.section-row.layout-right .photo-pane{order:2}
+.section-row.layout-above,.section-row.layout-below,.section-row.photo-only{display:flex;flex-direction:column}
+.section-row.layout-above>*,.section-row.layout-below>*,.section-row.photo-only>*{width:100%;min-width:0}
+.section-row.layout-below .photo-pane{order:2}
+.photo-only .photo-pane{max-width:900px;margin:auto}
+.photo-pane,.section-copy{min-width:0}
+.section-copy h2,.text-section h2{margin-bottom:15px}
+.section-copy p,.text-section p,.content-section>p:not(.image-caption){font-size:var(--text-size,18px);line-height:1.7;color:#515155;margin:0;white-space:normal}
+.content-section .image-box{background:#f5f5f7;border-radius:14px}
+.section-projectPhoto+.section-projectPhoto{margin-top:0}
+.structured-gallery{padding-left:0;padding-right:0}
+.section-video h2{margin-bottom:18px}
+.section-video .image-caption{margin-bottom:18px}
+.section-video .section-video{width:100%;display:block;max-height:700px;border-radius:14px;background:#171719}
+.video-placeholder{min-height:220px;background:#f0f0f3;display:grid;place-items:center;border-radius:14px;color:var(--muted)}
+.builder-layout .hero-with-photo,.builder-layout .about-grid{gap:var(--section-gap,48px);grid-template-columns:var(--layout-columns,1fr 1fr)}
+.builder-position-left .hero-frame{order:0}.builder-position-left .hero-copy{order:1}
+.builder-position-right .about-portrait-column{order:2}
+.builder-position-above .hero-with-photo,.builder-position-below .hero-with-photo,.builder-position-above .about-grid,.builder-position-below .about-grid{grid-template-columns:1fr!important}
+.builder-position-above .hero-frame{order:0}.builder-position-above .hero-copy{order:1}
+.builder-position-below .about-portrait-column{order:2}
+.builder-position-above .hero-frame,.builder-position-below .hero-frame{max-width:none;justify-self:center}
+.builder-position-above .portrait-box,.builder-position-below .portrait-box{flex:none;aspect-ratio:4/5}
+.nav-links{flex-wrap:wrap}
+@media(max-width:850px){.hero-frame{max-width:280px}.section-row{gap:min(var(--content-gap,46px),28px)}}
+@media(max-width:650px){
+ .hero-frame{width:100%;max-width:none;justify-self:stretch}.hero-photo{max-width:none!important}.hero-frame:not(.image-custom) .hero-photo.has-photo{aspect-ratio:auto}.hero-frame:not(.image-custom) .hero-photo.has-photo img{height:auto;object-fit:contain}
+ .hobbies-intro{font-size:17px}.carousel-slide .thumbnail{border-radius:13px}.carousel-slide .card-heading{margin-top:16px;gap:10px}.carousel-slide .card-heading h3{font-size:19px}.carousel-slide .type-cover{padding:28px}.carousel-slide .cover-type{font-size:clamp(28px,8vw,42px);letter-spacing:-1px}.carousel-slide .cover-label{display:block;font-size:11px}
+ .carousel-controls{flex-direction:column;gap:8px}.carousel-dots{max-width:100%;justify-content:center;flex-wrap:wrap}.carousel-dot{min-height:44px;min-width:28px;padding:8px 6px}.carousel-actions{justify-content:center;gap:8px}.carousel-arrow,.carousel-pause{min-height:44px;min-width:44px}
+ .section-row{display:flex;flex-direction:column;gap:min(var(--content-gap,46px),24px)}.section-row>*{width:100%;min-width:0}.section-row.layout-right .photo-pane{order:0}.section-row.layout-below .photo-pane{order:2}
+ .image-custom .image-box{max-height:80vh}.content-section{padding-top:20px;padding-bottom:20px}.section-copy p,.text-section p{font-size:min(var(--text-size,18px),20px)}
+ .builder-layout .hero-with-photo,.builder-layout .about-grid{grid-template-columns:1fr!important;gap:28px}.builder-layout .hero-frame,.builder-layout .about-portrait-column{order:0}.builder-position-below .hero-frame,.builder-position-below .about-portrait-column{order:2}
+}
+.editing-preview .builder-section{cursor:pointer}
+.editing-preview .builder-section:hover{outline:1px dashed #3984d4;outline-offset:-1px}
+.editing-preview .selected-section{outline:2px solid #1670c7;outline-offset:-2px}
+.image-resize-handle{display:none;position:absolute;right:0;bottom:0;width:22px;height:22px;border:2px solid white;border-radius:5px;background:#1670c7;z-index:8;cursor:ew-resize;touch-action:none}
+.selected-section .image-resize-handle{display:block}
+
+.content-section .image-frame:not(.image-custom) .image-box>img{max-height:620px;object-fit:contain}
+.detail>.section-width-full{width:var(--viewport-width,100%);max-width:none;margin-left:50%;transform:translateX(-50%);padding-left:24px;padding-right:24px}
+.builder-section[style*="--section-text-size"] .about-copy p,.builder-section[style*="--section-text-size"] .hobby-copy p,.builder-section[style*="--section-text-size"] .page-subtitle{font-size:var(--section-text-size)}
+
+.section-hobbies+.section-highlights .selected{padding-top:34px}
+.detail>.section-projectPhoto>.content-section,.detail>.section-projectThumbnail>.content-section{padding-top:0;padding-bottom:0}
+.detail>.section-projectPhoto+.section-projectPhoto{margin-top:48px}
+@media(max-width:650px){.detail>.section-projectPhoto+.section-projectPhoto{margin-top:34px}}
+
+.video-frame{position:relative;margin:0}
+.video-frame .section-video{width:100%;display:block;max-height:700px;background:#171719;border-radius:14px}
+.video-custom{width:var(--image-width,100%);max-width:100%;padding:var(--image-padding,0);margin-top:var(--image-margin,0);margin-bottom:var(--image-margin,0)}
+.video-custom.image-align-left{margin-right:auto}.video-custom.image-align-center{margin-left:auto;margin-right:auto}.video-custom.image-align-right{margin-left:auto}
+.video-custom video{height:var(--image-height,auto);aspect-ratio:var(--image-ratio,auto);object-fit:var(--image-fit,contain);object-position:var(--image-x,50%) var(--image-y,50%)}
+@media(max-width:650px){.video-frame video{max-height:80vh}}
+
+.thumbnail-group{min-width:0}
+.thumbnail-layout-left,.thumbnail-layout-right{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:18px}
+.thumbnail-layout-right .thumbnail-group{order:2}
+.thumbnail-layout-below{display:flex;flex-direction:column;gap:12px}
+.thumbnail-layout-below .thumbnail-group{order:2}
+.thumbnail-layout-left .card-heading,.thumbnail-layout-right .card-heading,.thumbnail-layout-below .card-heading{margin-top:0}
+.video-frame:has(figcaption) video{margin-bottom:0}
+.video-frame>figcaption:first-child{margin:0 0 12px}
+@media(max-width:650px){.thumbnail-layout-left,.thumbnail-layout-right{display:block}.thumbnail-layout-left .card-heading,.thumbnail-layout-right .card-heading{margin-top:16px}}
