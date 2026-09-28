@@ -1,0 +1,156 @@
+:root{
+  --bg:#0f100f;
+  --panel:#171916;
+  --panel-2:#1f221d;
+  --text:#f5f4ee;
+  --muted:#b5b8ae;
+  --line:rgba(255,255,255,.12);
+  --accent:#d7ff45;
+  --accent-2:#f2ffb4;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f3f2ec;
+  color:#151612;
+}
+a{color:inherit}
+img{display:block;max-width:100%}
+button,input,textarea{font:inherit}
+.site-header{
+  position:fixed;inset:0 0 auto 0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px max(24px,calc((100vw - var(--max))/2));
+  color:#fff;
+  background:linear-gradient(to bottom,rgba(10,11,9,.88),rgba(10,11,9,.35),transparent);
+}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-mark{
+  display:grid;place-items:center;
+  min-width:58px;height:42px;padding:0 10px;border:1px solid rgba(255,255,255,.35);
+  font-weight:900;letter-spacing:.08em;background:rgba(255,255,255,.07);backdrop-filter:blur(8px)
+}
+.brand-copy{display:flex;flex-direction:column;line-height:1}
+.brand-copy strong{font-size:.95rem;letter-spacing:.12em}
+.brand-copy small{font-size:.62rem;letter-spacing:.15em;color:#d5d7d0;margin-top:5px}
+.site-nav{display:flex;align-items:center;gap:24px}
+.site-nav a{text-decoration:none;font-size:.92rem;color:#eceee7}
+.nav-cta{padding:11px 16px;border:1px solid rgba(255,255,255,.55)}
+.menu-button{display:none;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45);padding:9px 12px}
+.hero{position:relative;min-height:760px;display:flex;align-items:flex-end;background:#111;color:#fff;overflow:hidden}
+.hero-photo{position:absolute;inset:0;background:url("../truck-engine-swap-work.png") center 48%/cover no-repeat;transform:scale(1.02)}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,6,5,.92) 0%,rgba(5,6,5,.70) 42%,rgba(5,6,5,.18) 72%),linear-gradient(0deg,rgba(5,6,5,.92),transparent 38%)}
+.hero-inner{position:relative;z-index:2;width:min(var(--max),calc(100% - 48px));margin:0 auto;padding:170px 0 54px}
+.eyebrow,.section-kicker{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:800}
+.eyebrow{color:var(--accent)}
+.hero h1{font-size:clamp(4.8rem,10vw,9rem);line-height:.82;letter-spacing:-.065em;margin:18px 0 26px;max-width:900px}
+.hero h1 span{color:var(--accent)}
+.hero-copy{max-width:660px;font-size:1.18rem;line-height:1.65;color:#dfe2d8}
+.hero-actions{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 20px;text-decoration:none;border:1px solid transparent;font-weight:800;letter-spacing:.02em;cursor:pointer}
+.primary{background:var(--accent);color:#0f100d}
+.secondary{border-color:rgba(255,255,255,.38);color:#fff;background:rgba(0,0,0,.18)}
+.full{width:100%}
+.hero-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:720px;margin-top:52px;border-top:1px solid rgba(255,255,255,.18);padding-top:22px}
+.hero-strip div{display:flex;flex-direction:column;gap:4px}
+.hero-strip strong{font-size:1.05rem}
+.hero-strip span{color:#aeb2a8;font-size:.83rem}
+.section{width:min(var(--max),calc(100% - 48px));margin:0 auto;padding:110px 0}
+.section-kicker{color:#6d735f;margin-bottom:16px}
+.intro-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:72px;align-items:start}
+h2{font-size:clamp(2.3rem,5vw,4.8rem);line-height:.96;letter-spacing:-.045em;margin:0}
+.lead{font-size:1.3rem;line-height:1.55;color:#2d302a}
+p{line-height:1.7}
+.section-heading{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end;margin-bottom:34px}
+.section-heading>p{color:#666a61;max-width:520px;justify-self:end;margin:0}
+.services-section{padding-top:36px}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.service-card{position:relative;min-height:280px;padding:28px;border:1px solid #d7d9cf;background:#fff}
+.service-card.featured{background:#171916;color:#fff;border-color:#171916}
+.service-number{font-size:.72rem;letter-spacing:.14em;color:#7d8374}
+.service-card h3{font-size:1.5rem;margin:58px 0 12px}
+.service-card p{color:#676b62}
+.service-card.featured p{color:#c7cabf}
+.tag{position:absolute;right:22px;top:22px;background:var(--accent);color:#151612;font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em;padding:7px 9px}
+.fine-print{font-size:.84rem;color:#767b70;margin-top:16px}
+.vehicles{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:stretch}
+.vehicle-copy p{max-width:620px;color:#60645b}
+.vehicle-list{list-style:none;padding:0;margin:34px 0 0;border-top:1px solid #cfd2c8}
+.vehicle-list li{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:17px 0;border-bottom:1px solid #cfd2c8}
+.vehicle-list span{font-weight:800;font-size:1.05rem}
+.vehicle-list small{color:#72766e}
+.engine-panel{background:#161815;color:#fff;padding:34px;display:flex;flex-direction:column;justify-content:space-between;min-height:520px}
+.engine-label{font-size:.7rem;letter-spacing:.16em;color:#a4aa9c}
+.engine-code{font-size:clamp(5rem,11vw,9rem);font-weight:900;line-height:.74;letter-spacing:-.07em;color:var(--accent)}
+.engine-specs{border-top:1px solid rgba(255,255,255,.16);padding-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.engine-specs div{display:flex;flex-direction:column;gap:6px}
+.engine-specs span{font-size:.72rem;color:#8e9488}
+.engine-specs strong{font-size:.95rem}
+.pricing{padding-top:30px}
+.pricing-card{background:#11130f;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:70px;padding:56px}
+.section-kicker.light{color:#adb5a0}
+.pricing-card h2{color:var(--accent);font-size:clamp(4rem,9vw,7rem)}
+.pricing-card h2 span{font-size:1.1rem;color:#c6cabf;letter-spacing:0;margin-left:8px}
+.pricing-card p{color:#c8ccc0;max-width:520px}
+.pricing-details{display:grid;align-content:center}
+.pricing-details div{padding:19px 0;border-bottom:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:6px}
+.pricing-details strong{font-size:1rem}
+.pricing-details span{color:#aeb3a7;font-size:.91rem;line-height:1.55}
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:76px;align-items:center}
+.about-photo img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.about-copy p{color:#60645c}
+.about-points{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.about-points span{font-size:.76rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;border:1px solid #cbd0c4;padding:10px 12px}
+.request{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;padding-top:50px}
+.request-copy p{color:#666b61;max-width:530px}
+.service-form{background:#fff;padding:30px;border:1px solid #d8dbd2}
+.service-form label{display:flex;flex-direction:column;gap:8px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px}
+input,textarea{width:100%;border:1px solid #cfd3c9;background:#f8f8f4;padding:14px;color:#171914;outline:none}
+input:focus,textarea:focus{border-color:#8b925f;box-shadow:0 0 0 3px rgba(215,255,69,.25)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-status{font-size:.9rem;color:#596050;margin:14px 0 0;white-space:pre-wrap}
+.faq{padding-top:48px}
+.faq>h2{margin-bottom:28px}
+.faq-list{border-top:1px solid #cfd2c8}
+details{border-bottom:1px solid #cfd2c8;padding:19px 0}
+summary{font-weight:800;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px}
+summary::after{content:"+";font-size:1.3rem}
+details[open] summary::after{content:"–"}
+details p{max-width:760px;color:#676b63;margin:14px 0 0}
+.closing{background:#161815;color:#fff;padding:70px max(24px,calc((100vw - var(--max))/2));display:flex;align-items:end;justify-content:space-between;gap:30px}
+.closing h2{max-width:800px}
+.site-footer{background:#0f100f;color:#9ea398;display:flex;justify-content:space-between;gap:30px;padding:30px max(24px,calc((100vw - var(--max))/2));font-size:.8rem}
+.site-footer div{display:flex;flex-direction:column;gap:5px}
+.site-footer strong{color:#fff}
+@media(max-width:900px){
+  .site-header{padding:15px 20px;background:rgba(10,11,9,.88);backdrop-filter:blur(10px)}
+  .menu-button{display:block}
+  .site-nav{display:none;position:absolute;top:72px;left:16px;right:16px;background:#171916;border:1px solid rgba(255,255,255,.12);padding:16px;flex-direction:column;align-items:stretch;gap:0}
+  .site-nav.open{display:flex}
+  .site-nav a{padding:13px 10px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav-cta{border:0!important;background:var(--accent);color:#111!important;margin-top:8px;text-align:center}
+  .hero{min-height:720px}
+  .hero-inner{width:min(100% - 34px,var(--max));padding-top:130px}
+  .hero h1{font-size:clamp(4.2rem,18vw,7rem)}
+  .hero-strip{grid-template-columns:1fr;gap:14px}
+  .section{width:min(100% - 34px,var(--max));padding:80px 0}
+  .intro-grid,.section-heading,.vehicles,.pricing-card,.about,.request{grid-template-columns:1fr}
+  .intro-grid,.section-heading,.vehicles,.pricing-card,.about,.request{gap:36px}
+  .section-heading>p{justify-self:start}
+  .service-grid{grid-template-columns:1fr 1fr}
+  .pricing-card{padding:34px}
+  .closing{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:620px){
+  .brand-copy small{display:none}
+  .service-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .hero-copy{font-size:1rem}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .button{width:100%}
+  .engine-specs{grid-template-columns:1fr;gap:18px}
+  .site-footer{flex-direction:column}
+}
