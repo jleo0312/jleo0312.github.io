@@ -25,7 +25,7 @@
       photo.id ||= 'photo-' + i + '-' + hash(photo.src);
     }));
     for(const target of [...Object.values(data.pageLayouts||{}),...data.projects,...(data.pages||[])]) {
-      if(Array.isArray(target.sections))target.sections.forEach((section,i)=>{section.id ||= 'saved-section-'+i+'-'+hash(JSON.stringify(section));section.type ||= 'photoText';});
+      if(Array.isArray(target.sections))target.sections.forEach((section,i)=>{section.id ||= 'saved-section-'+i+'-'+hash(JSON.stringify(section));section.type ||= 'photoText';if(Array.isArray(section.textBoxes))section.textBoxes.forEach((box,j)=>{box.id ||= 'text-'+j+'-'+hash(box.text||'');});});
     }
     return data;
   }
@@ -73,7 +73,12 @@
   function makeSection(type='photoText') { return {id:id(),type,visible:true,...(type==='photoText'?{image:'',heading:'',text:'',caption:'',showCaption:true,imagePosition:'left',imageWidth:56,textWidth:44}:type==='heading'?{heading:'New heading'}:type==='text'?{text:''}:type==='video'?{video:'',caption:'',showCaption:true}:{})}; }
   function photoSource(data,key,section) {const project=pageInfo(data,key)?.project; return project?.photos?.find(p=>p.id===section.sourceId);}
   function deleteSection(data,key,index) {const values=sections(data,key,true),section=values[index];if(!section)return;const project=pageInfo(data,key)?.project;if(section.type==='projectPhoto'&&project)project.photos=project.photos.filter(p=>p.id!==section.sourceId);values.splice(index,1);}
-  function duplicateSection(data,key,index) {const values=sections(data,key,true),section=clone(values[index]);section.id=id();if(section.type==='projectPhoto'){const photo=clone(photoSource(data,key,section));photo.id=id();pageInfo(data,key).project.photos.push(photo);section.sourceId=photo.id;}values.splice(index+1,0,section);return section;}
+  function duplicateSection(data,key,index) {
+    const values=sections(data,key,true),section=clone(values[index]),oldId=section.id,replacements=new Map();section.id=id();replacements.set(oldId,section.id);
+    if(section.type==='projectPhoto'){const source=photoSource(data,key,section);if(source){const photo=clone(source);photo.id=id();replacements.set(source.id,photo.id);pageInfo(data,key).project.photos.push(photo);section.sourceId=photo.id;}}
+    for(const element of section.elements||[]){element.id=element.id.split('/').map(part=>replacements.get(part)||part).join('/');if(element.targetSection===oldId)element.targetSection=section.id;}
+    values.splice(index+1,0,section);return section;
+  }
   function reorder(data,key,from,to) {const values=sections(data,key,true);if(from<0||to<0||from>=values.length||to>=values.length)return;const [value]=values.splice(from,1);values.splice(to,0,value);}
   function validate(data) {
     if(!data || typeof data!=='object' || !Array.isArray(data.projects))throw new Error('Choose a portfolio content file.');

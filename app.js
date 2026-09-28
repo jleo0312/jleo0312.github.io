@@ -138,8 +138,8 @@ function card(project, index) {
   const gifPreview = project.thumbnailMotion !== 'still' && !reducedMotion.matches && /\.gif(?:[?#]|$)/i.test(project.previewVideo || '') && media(project.previewVideo);
   const preview = media(project.previewVideo) && !gifPreview && !/\.gif(?:[?#]|$)/i.test(project.previewVideo || '') && project.thumbnailMotion !== 'still'
     ? `<video class="preview" data-motion="${project.thumbnailMotion === 'loop' ? 'loop' : 'hover'}" muted loop playsinline preload="none" src="${media(project.previewVideo)}" aria-hidden="true" tabindex="-1"></video>` : '';
-  const previewButton = preview ? `<button type="button" class="preview-play" hidden aria-label="${esc(settings.project.previewPlay)}" aria-pressed="false">▶ ${esc(settings.project.previewPlay)}</button>` : '';
-  return `<article class="project-card" data-project="${esc(project.slug)}"><a class="project-link" href="/?project=${encodeURIComponent(project.slug)}"><div class="thumbnail" data-fit="${project.thumbnailFit === 'contain' ? 'contain' : 'cover'}">${gifPreview ? `<img src="${media(project.previewVideo)}" alt="${esc(project.thumbnailAlt || project.title)}" loading="lazy">` : cover(project)}${preview}</div><div class="card-heading"><h3>${esc(project.title)}</h3>${number}</div></a>${previewButton}</article>`;
+
+  return `<article class="project-card" data-project="${esc(project.slug)}"><a class="project-link" href="/?project=${encodeURIComponent(project.slug)}"><div class="thumbnail" data-fit="${project.thumbnailFit === 'contain' ? 'contain' : 'cover'}">${gifPreview ? `<img src="${media(project.previewVideo)}" alt="${esc(project.thumbnailAlt || project.title)}" loading="lazy">` : cover(project)}${preview}</div><div class="card-heading"><h3>${esc(project.title)}</h3>${number}</div></a></article>`;
 }
 
 function galleryProjects(data) {
@@ -186,31 +186,23 @@ function renderCarousel(data) {
 
 function bindPreviews() {
   const controller=new AbortController(),options={signal:controller.signal};
-  const items=[...document.querySelectorAll('.project-card')].map(card=>({card,link:card.querySelector('.project-link'),video:card.querySelector('video.preview'),button:card.querySelector('.preview-play'),visible:false,hovered:false,manual:null,blocked:false,pending:false,timer:null})).filter(item=>item.video&&item.button);
-  const wants=item=>item.visible&&!item.card.closest('[inert]')&&!document.hidden&&(item.manual===true||(item.manual!==false&&!reducedMotion.matches&&!editorPreview&&(touchScreen.matches||item.video.dataset.motion==='loop'||item.hovered)));
-  function button(item){const playing=!item.video.paused,key=playing?'previewPause':'previewPlay',text=settings.project[key];item.button.hidden=!(touchScreen.matches||item.blocked||reducedMotion.matches||item.manual!==null);item.button.innerHTML=`<span aria-hidden="true">${playing?'Ⅱ':'▶'}</span>${textElement('span','',text)}`;item.button.setAttribute('aria-label',`${text||DEFAULT_SETTINGS.project[key]}: ${item.link.querySelector('h3').textContent}`);item.button.setAttribute('aria-pressed',String(playing));}
+  const items=[...document.querySelectorAll('.project-card')].map(card=>({card,link:card.querySelector('.project-link'),video:card.querySelector('video.preview'),visible:false,pending:false,blocked:false})).filter(item=>item.video);
+  const wants=item=>item.visible&&!item.card.closest('[inert]')&&!document.hidden&&!reducedMotion.matches&&!editorPreview;
   function update(item){
-    if(!wants(item)){item.video.pause();item.link.classList.remove('playing');}
-    else if(!item.pending&&item.video.paused&&(!item.blocked||item.manual===true)){
-      item.pending=true;item.video.muted=true;item.video.defaultMuted=true;item.video.playsInline=true;
-      Promise.resolve(item.video.play()).then(()=>{item.pending=false;if(controller.signal.aborted||!wants(item)){item.video.pause();return;}item.blocked=false;item.link.classList.add('playing');button(item);}).catch(()=>{item.pending=false;if(controller.signal.aborted)return;item.blocked=true;item.link.classList.remove('playing');button(item);});
-    }
-    button(item);
+    if(!wants(item)){item.video.pause();item.link.classList.remove('playing');return;}
+    if(item.pending||!item.video.paused||item.blocked)return;
+    item.pending=true;item.video.muted=true;item.video.defaultMuted=true;item.video.playsInline=true;
+    Promise.resolve(item.video.play()).then(()=>{item.pending=false;if(controller.signal.aborted||!wants(item)){item.video.pause();return;}item.blocked=false;item.link.classList.add('playing');}).catch(()=>{item.pending=false;if(controller.signal.aborted)return;item.blocked=true;item.link.classList.remove('playing');});
   }
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{const item=items.find(i=>i.video===entry.target);if(item){item.visible=entry.isIntersecting&&entry.intersectionRatio>=.15;update(item);}}),{threshold:.15});
-  items.forEach(item=>{
-    const start=()=>{clearTimeout(item.timer);item.timer=setTimeout(()=>{item.hovered=true;update(item);},200);};
-    item.link.addEventListener('mouseenter',()=>{if(!touchScreen.matches)start();},options);
-    item.link.addEventListener('mouseleave',()=>{clearTimeout(item.timer);item.hovered=false;update(item);},options);
-    item.link.addEventListener('focus',start,options);item.link.addEventListener('blur',()=>{clearTimeout(item.timer);item.hovered=false;update(item);},options);
-    item.video.addEventListener('pause',()=>{item.link.classList.remove('playing');button(item);},options);
-    item.button.addEventListener('click',()=>{item.manual=item.video.paused;item.blocked=false;update(item);item.card.dispatchEvent(new CustomEvent('previewinteraction',{bubbles:true}));},options);
-    button(item);observer.observe(item.video);
-  });
-  document.addEventListener('visibilitychange',()=>items.forEach(update),options);
-  reducedMotion.addEventListener('change',()=>items.forEach(i=>{i.manual=null;update(i);}),options);
-  touchScreen.addEventListener('change',()=>items.forEach(update),options);
-  activeCleanups.push(()=>{controller.abort();observer.disconnect();items.forEach(i=>{clearTimeout(i.timer);i.video.pause();});});
+  items.forEach(item=>{item.video.addEventListener('pause',()=>item.link.classList.remove('playing'),options);observer.observe(item.video);});
+  // Some mobile browsers defer muted playback until the first user interaction.
+  const retry=()=>items.forEach(item=>{item.blocked=false;update(item);});
+  document.addEventListener('pointerdown',retry,{...options,passive:true});
+  document.addEventListener('keydown',retry,options);
+  document.addEventListener('visibilitychange',retry,options);
+  reducedMotion.addEventListener('change',retry,options);
+  activeCleanups.push(()=>{controller.abort();observer.disconnect();items.forEach(i=>i.video.pause());});
 }
 
 function bindCarousel(carousel) {
@@ -454,7 +446,9 @@ function displayPortfolio(input,key) {
   document.querySelectorAll('[data-custom-nav]').forEach(n=>n.remove());
   const nav=document.querySelector('.nav-links');
   for(const page of data.pages||[])if(page.showInNavigation){const link=document.createElement('a');link.dataset.customNav=page.slug;link.href='/?page='+encodeURIComponent(page.slug);link.textContent=page.title;nav.append(link);}
-  app.removeAttribute('aria-busy');applyThumbnailControls(data);bindPreviews();
+  app.removeAttribute('aria-busy');applyThumbnailControls(data);
+  if(info&&window.PortfolioObjects){const objects=window.PortfolioObjects.mount({data,key,settings,model:Model,editing:editorPreview});activeCleanups.push(()=>objects.destroy());}
+  bindPreviews();
   document.querySelectorAll('.project-carousel').forEach(bindCarousel);
   if(editorPreview)decoratePreview();
 }
@@ -504,12 +498,12 @@ if(app&&editorPreview) {
     if(event.data.action==='render'){
       const y=event.data.key===currentPageKey?window.scrollY:0;
       previewAssets=event.data.assets||{};displayPortfolio(event.data.data,event.data.key);
-      if(window.PortfolioCanvas)window.PortfolioCanvas.select(event.data.selected,event.data.imagePath||'');
+      if(window.PortfolioCanvas)window.PortfolioCanvas.select(event.data.selected,event.data.imagePath||'',event.data.textPath||'');
       else if(event.data.selected)document.querySelector(`[data-section-id="${CSS.escape(event.data.selected)}"]`)?.classList.add('selected-section');
       window.scrollTo(0,y);
     }
     if(event.data.action==='select'){
-      if(window.PortfolioCanvas)window.PortfolioCanvas.select(event.data.id,event.data.imagePath||'');
+      if(window.PortfolioCanvas)window.PortfolioCanvas.select(event.data.id,event.data.imagePath||'',event.data.textPath||'');
       else{document.querySelectorAll('.selected-section').forEach(n=>n.classList.remove('selected-section'));document.querySelector(`[data-section-id="${CSS.escape(event.data.id)}"]`)?.classList.add('selected-section');}
     }
   });

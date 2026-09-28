@@ -37,3 +37,14 @@
 .canvas-drop-before:before,.canvas-drop-after:after{content:'';position:absolute;left:0;right:0;height:5px;background:#1670c7;z-index:20;pointer-events:none}
 .canvas-drop-before:before{top:0}.canvas-drop-after:after{bottom:0}
 @media(max-width:650px){.canvas-toolbar{font-size:11px;gap:3px}.canvas-toolbar button,.canvas-toolbar select{padding:6px;min-height:32px}.canvas-width input{width:70px}.canvas-resize{width:20px;height:20px}.canvas-toolbar-label{display:none}}
+/* A selected object moves; only an explicit text-edit action places a caret. */
+.direct-editing-preview [data-edit-path][contenteditable=false]{cursor:grab;user-select:none;touch-action:none}
+.direct-editing-preview [data-edit-path][contenteditable=true]{cursor:text;user-select:text;touch-action:auto;outline:2px solid #2277cb;outline-offset:5px}
+.direct-editing-preview .canvas-picked{outline:2px solid #1670c7;outline-offset:1px}
+.direct-editing-preview .canvas-dragging .canvas-picked,.canvas-dragging .canvas-picked{pointer-events:none}
+.canvas-move-edge{position:absolute;pointer-events:auto;touch-action:none;padding:0;border:0;background:transparent;cursor:grab;z-index:-1}
+.canvas-move-edge.edge-top{left:8px;right:8px;top:-5px;height:10px}
+.canvas-move-edge.edge-bottom{left:8px;right:8px;bottom:-5px;height:10px}
+.canvas-move-edge.edge-left{left:-5px;top:8px;bottom:8px;width:10px}
+.canvas-move-edge.edge-right{right:-5px;top:8px;bottom:8px;width:10px}
+.canvas-toolbar-note{flex-basis:100%;padding:3px 5px;color:#596875;font-size:12px}

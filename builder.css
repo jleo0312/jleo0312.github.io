@@ -1,4 +1,12 @@
 /* Extensions preserve the original portfolio styles until an override is chosen. */
+/* Text has identical line-break behavior in the editor and on the website. */
+.portfolio-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.canvas-hero-first{color:inherit}
+.site-header{height:auto;min-height:76px}
+.site-header .nav{min-height:76px;gap:24px;padding-top:12px;padding-bottom:12px}
+.brand{min-width:0;line-height:1.3}
+.nav-links{min-height:50px;flex-shrink:0}
+@media(max-width:650px){.site-header,.site-header .nav{min-height:66px}.site-header .nav{flex-wrap:wrap;gap:8px 20px}.nav-links{min-height:36px}.brand{max-width:100%}}
 .image-frame{position:relative;min-width:0;margin:0}
 .image-box{position:relative;overflow:hidden}
 .image-box>img{display:block;width:100%;height:100%;object-fit:cover;border-radius:0}
@@ -108,3 +116,16 @@
 .video-frame:has(figcaption) video{margin-bottom:0}
 .video-frame>figcaption:first-child{margin:0 0 12px}
 @media(max-width:650px){.thumbnail-layout-left,.thumbnail-layout-right{display:block}.thumbnail-layout-left .card-heading,.thumbnail-layout-right .card-heading{margin-top:16px}}
+.free-text-layer{position:relative;padding-top:16px;padding-bottom:16px}
+.free-text-box{max-width:100%;margin:0 0 16px;font-size:18px;line-height:1.7;color:inherit;overflow-wrap:anywhere}
+.free-text-box:empty{display:none}
+.direct-editing-preview .free-text-box:empty{display:block;min-height:30px}
+
+@media(min-width:651px){
+ .portfolio-positioned{position:relative!important;display:block;width:var(--object-width)!important;max-width:none!important;min-width:0;min-height:var(--object-height,0);transform:translate(var(--object-x,0px),var(--object-y,0px))!important;z-index:var(--object-layer,1);text-align:var(--object-align,inherit)}
+ .portfolio-positioned[data-object-kind=text]{flex:none}
+ h1>.portfolio-positioned{display:inline-block}
+ .portfolio-positioned>.image-box,.portfolio-positioned.video-frame>video{flex:none;max-width:none;height:var(--object-media-height,var(--image-height,auto))}
+ .portfolio-positioned>.image-box>img{width:100%;height:100%;object-fit:var(--image-fit,cover)}
+ .portfolio-positioned.thumbnail{height:var(--object-media-height,var(--image-height,auto))}
+}
