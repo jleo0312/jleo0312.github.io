@@ -37,7 +37,7 @@ button,input,textarea,select{font:inherit}
 .section{width:min(var(--max),calc(100% - 48px));margin:0 auto;padding:92px 0;border-bottom:1px solid var(--line)}
 .focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
 h2{font-size:clamp(2.2rem,4vw,3.8rem);line-height:1.02;letter-spacing:-.04em;margin:0;font-weight:740}
-.focus-grid p,.about-copy p,.comparison p,.page-intro>p{line-height:1.7;color:var(--muted);margin:0}
+.focus-grid p,.about-copy p,.pricing-context p,.page-intro>p{line-height:1.7;color:var(--muted);margin:0}
 .vehicle-row{display:grid;grid-template-columns:repeat(4,1fr);margin-top:54px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .vehicle-row span{padding:17px 12px;border-right:1px solid var(--line);font-size:.9rem}
 .vehicle-row span:last-child{border-right:0}
@@ -48,7 +48,7 @@ h2{font-size:clamp(2.2rem,4vw,3.8rem);line-height:1.02;letter-spacing:-.04em;mar
 .service-row>div:first-child{display:flex;flex-direction:column;gap:5px}
 .service-row strong{font-size:1.2rem}
 .service-row span{font-size:.85rem;color:var(--muted)}
-.service-price{font-size:1.22rem;font-weight:720;white-space:nowrap}
+.service-cta{font-size:.87rem;font-weight:650;color:#5f5b53;white-space:nowrap}
 .price-note{font-size:.8rem;color:#777970;line-height:1.6;margin:16px 0 0}
 
 .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -70,24 +70,27 @@ h2{font-size:clamp(2.2rem,4vw,3.8rem);line-height:1.02;letter-spacing:-.04em;mar
 .page-intro{width:min(var(--max),calc(100% - 48px));margin:0 auto;padding:110px 0 72px;border-bottom:1px solid var(--line)}
 .page-intro h1{max-width:900px}
 .page-intro>p:last-child{max-width:720px;margin-top:24px;font-size:1.06rem}
-.rate-strip{width:min(var(--max),calc(100% - 48px));margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
-.rate-strip>div{padding:28px 20px 28px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:5px}
-.rate-strip>div:not(:first-child){padding-left:28px}
-.rate-strip>div:last-child{border-right:0}
-.rate-strip span,.rate-strip small{font-size:.8rem;color:var(--muted)}
-.rate-strip strong{font-size:1.8rem}
+
+.value-strip{width:min(var(--max),calc(100% - 48px));margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.value-strip>div{padding:24px 22px 24px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+.value-strip>div:not(:first-child){padding-left:24px}
+.value-strip>div:last-child{border-right:0}
+.value-strip span,.value-strip small{font-size:.77rem;color:var(--muted)}
+.value-strip strong{font-size:1.35rem}
+
+.pricing-context{display:grid;grid-template-columns:1fr 1fr;gap:70px;background:var(--tan-soft);padding-left:34px;padding-right:34px}
+.pricing-context .muted{font-size:.88rem;margin-top:12px}
 
 .pricing-section{padding-top:42px}
 .price-item{display:grid;grid-template-columns:1.2fr .8fr;gap:70px;padding:48px 0;border-bottom:1px solid var(--line)}
 .price-item:last-child{border-bottom:0}
 .price-copy p:last-child{color:var(--muted);line-height:1.7;max-width:650px}
-.price-amount{justify-self:end;align-self:center;text-align:right;display:flex;flex-direction:column}
-.price-amount span,.price-amount small{color:var(--muted);font-size:.8rem}
-.price-amount strong{font-size:3rem;letter-spacing:-.04em}
+.package-card{justify-self:end;align-self:center;min-width:270px;background:#fbfaf7;border:1px solid #ddd7cc;padding:22px 24px;display:flex;flex-direction:column;align-items:flex-start}
+.package-label,.package-includes{color:var(--muted);font-size:.77rem}
+.package-card strong{font-size:2.25rem;letter-spacing:-.035em;margin:4px 0}
+.package-link{margin-top:16px;text-decoration:none;font-weight:650;font-size:.84rem;border-bottom:1px solid #8b877f;padding-bottom:2px}
 .mini-prices{align-self:center;border-top:1px solid var(--line)}
 .mini-prices div{display:flex;justify-content:space-between;gap:30px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.9rem}
-.comparison{display:grid;grid-template-columns:1fr 1fr;gap:70px;background:var(--tan-soft);padding-left:34px;padding-right:34px}
-.comparison .muted{font-size:.88rem}
 .notes h2{margin-bottom:34px}
 .notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
 .notes-grid p{margin:0;color:var(--muted);line-height:1.65}
@@ -117,17 +120,18 @@ input:focus,textarea:focus,select:focus{border-color:#8e806b;box-shadow:0 0 0 2p
   .hero-copy{padding:62px 0 34px}
   .hero-image{padding:0 0 28px}
   .hero-image img{min-height:0;max-height:560px}
-  .section,.page-intro,.rate-strip{width:min(var(--max),calc(100% - 34px))}
-  .focus-grid,.about,.price-item,.comparison{grid-template-columns:1fr;gap:34px}
+  .section,.page-intro,.value-strip{width:min(var(--max),calc(100% - 34px))}
+  .focus-grid,.about,.price-item,.pricing-context{grid-template-columns:1fr;gap:34px}
   .vehicle-row{grid-template-columns:1fr 1fr}
   .vehicle-row span:nth-child(2){border-right:0}
   .vehicle-row span:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .work-grid{grid-template-columns:1fr 1fr}
-  .rate-strip{grid-template-columns:1fr}
-  .rate-strip>div,.rate-strip>div:not(:first-child){padding:18px 0;border-right:0;border-bottom:1px solid var(--line)}
-  .rate-strip>div:last-child{border-bottom:0}
-  .price-amount{justify-self:start;text-align:left}
-  .comparison{padding-left:22px;padding-right:22px}
+  .value-strip{grid-template-columns:1fr 1fr}
+  .value-strip>div,.value-strip>div:not(:first-child){padding:18px 12px;border-bottom:1px solid var(--line)}
+  .value-strip>div:nth-child(2){border-right:0}
+  .value-strip>div:nth-child(n+3){border-bottom:0}
+  .package-card{justify-self:start}
+  .pricing-context{padding-left:22px;padding-right:22px}
   .notes-grid{grid-template-columns:1fr}
 }
 @media(max-width:620px){
@@ -141,6 +145,9 @@ input:focus,textarea:focus,select:focus{border-color:#8e806b;box-shadow:0 0 0 2p
   .vehicle-row{grid-template-columns:1fr}
   .vehicle-row span{border-right:0;border-bottom:1px solid var(--line)}
   .vehicle-row span:last-child{border-bottom:0}
+  .value-strip{grid-template-columns:1fr}
+  .value-strip>div,.value-strip>div:not(:first-child){border-right:0;border-bottom:1px solid var(--line);padding:16px 0}
+  .value-strip>div:last-child{border-bottom:0}
   .request-band{align-items:flex-start;flex-direction:column}
   .site-footer{align-items:flex-start;flex-direction:column;padding-top:24px;padding-bottom:24px}
   .form-grid.two,.form-grid.three{grid-template-columns:1fr}
