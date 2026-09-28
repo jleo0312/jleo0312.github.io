@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Request Service | Leonard Automotive</title>
+  <meta name="description" content="Request mobile 5VZ-FE service from Leonard Automotive.">
+  <meta name="theme-color" content="#f4f0e8">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="wordmark" href="index.html">LEONARD AUTOMOTIVE</a>
+  <button class="menu-button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+  <nav id="site-nav" class="site-nav">
+    <a href="services.html">Services & Pricing</a>
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a class="nav-button active" href="request.html">Request Service</a>
+  </nav>
+</header>
+
+<main>
+  <section class="page-intro request-intro">
+    <p class="eyebrow">REQUEST SERVICE</p>
+    <h1>Tell me what your 5VZ-FE needs.</h1>
+    <p>Send the vehicle information and the work you want done. I’ll use that to confirm whether I can take the job and what the total will be.</p>
+  </section>
+
+  <section class="form-wrap section">
+    <form id="service-form" class="service-form">
+      <div class="form-grid two">
+        <label>Name<input name="name" autocomplete="name" required></label>
+        <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
+      </div>
+      <div class="form-grid three">
+        <label>Year<input name="year" inputmode="numeric" placeholder="2001" required></label>
+        <label>Model<input name="model" placeholder="4Runner" required></label>
+        <label>Mileage<input name="mileage" inputmode="numeric" placeholder="185,000"></label>
+      </div>
+      <label>Service needed
+        <select name="service" required>
+          <option value="">Choose a service</option>
+          <option>Timing belt + water pump</option>
+          <option>Valve cover gasket service</option>
+          <option>Basic maintenance</option>
+          <option>Other 5VZ-FE work</option>
+        </select>
+      </label>
+      <label>Vehicle location<input name="location" placeholder="City / area" required></label>
+      <label>Anything else?
+        <textarea name="notes" rows="6" placeholder="Add details about the job, current parts, recent work, or anything else I should know."></textarea>
+      </label>
+      <button class="button dark submit-button" type="submit">Create Service Request</button>
+      <p class="form-help">For this first version, submitting opens a pre-filled email so you can review the request before sending it.</p>
+      <p id="form-status" class="form-status" role="status"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <span>LEONARD AUTOMOTIVE</span>
+  <span>Independent mobile service • Toyota 5VZ-FE</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
