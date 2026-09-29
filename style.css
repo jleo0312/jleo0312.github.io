@@ -174,3 +174,21 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   .nav-links a{padding:18px 0}
   .section-heading h2{max-width:65%}
 }
+
+
+/* Truck build story: paired media and stacked caption sections. */
+.media-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
+.paired-media-item{min-width:0}
+.paired-media-item figure{margin:0}
+.paired-media-item img,.paired-media-item video{display:block;width:100%;height:auto;border-radius:14px}
+.paired-media-item .video-frame{margin:0}
+.paired-video{width:100%;background:#171719}
+.pair-caption{font-size:18px;line-height:1.7;color:#515155;margin:18px 0 0;max-width:900px}
+.section-row.layout-above{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:18px!important}
+.section-row.layout-above .photo-pane{width:100%}
+.section-row.layout-above .section-copy{width:100%;max-width:900px}
+.section-row.layout-above .section-copy p{margin:0;font-size:18px;line-height:1.7;color:#515155}
+@media(max-width:650px){
+  .media-pair{grid-template-columns:1fr;gap:16px}
+  .pair-caption,.section-row.layout-above .section-copy p{font-size:16px}
+}
