@@ -183,8 +183,7 @@
           "id": "truck-turnover-video",
           "type": "video",
           "visible": true,
-          "video": "/media/truck-clean-engine-turnover.mp4",
-          "poster": "/media/truck-pistons.jpg",
+          "video": "/media/truck-clean-engine-turnover-480.gif",
           "caption": "After cleaning everything up, I turned the engine over to make sure everything moved smoothly.",
           "showCaption": true
         },
