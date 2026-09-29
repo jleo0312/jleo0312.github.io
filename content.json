@@ -100,6 +100,44 @@
       "thumbnailMotion": "hover",
       "coverText": "Built for\nthe next turn.",
       "theme": "blue"
+    },
+    {
+      "title": "Waste Oil Powered Furnace",
+      "showInGallery": true,
+      "featuredOnHomepage": true,
+      "homepageOrder": "auto",
+      "slug": "waste-oil-powered-furnace",
+      "thumbnail": "/media/waste-oil-furnace-thumbnail.jpg",
+      "thumbnailAlt": "Waste oil powered furnace",
+      "description": "A waste-oil-powered furnace project.",
+      "previewVideo": "/media/waste-oil-furnace-preview.mp4",
+      "thumbnailMotion": "loop",
+      "video": "/media/waste-oil-furnace-test.mp4",
+      "videoStyle": {
+        "enabled": true,
+        "width": 60,
+        "align": "center",
+        "fit": "contain"
+      },
+      "photos": [],
+      "sections": [
+        {
+          "id": "intro-waste-oil-furnace",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "video-waste-oil-furnace",
+          "type": "projectVideo",
+          "visible": true
+        },
+        {
+          "id": "end-waste-oil-furnace",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ],
+      "useSections": true
     }
   ],
   "website": {
