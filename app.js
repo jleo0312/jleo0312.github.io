@@ -383,7 +383,8 @@ function renderMediaPair(section,ctx,sectionPath) {
     if(item.type==='video'){
       return `<div class="paired-media-item paired-video-item">${renderVideo(item.src,item.poster,item.imageStyle||{},itemPath,'paired-video')}</div>`;
     }
-    return `<div class="paired-media-item">${photoFrame(item.src,item.alt||ctx.info.title,item.imageStyle||{},{fit:'cover',path:itemPath})}</div>`;
+    const gifClass=/\.gif(?:[?#]|$)/i.test(item.src||'')?' paired-gif-item':'';
+    return `<div class="paired-media-item${gifClass}">${photoFrame(item.src,item.alt||ctx.info.title,item.imageStyle||{},{fit:'cover',path:itemPath})}</div>`;
   }).join('');
   return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="media-pair media-count-${items.length}">${mediaItems}</div>${textElement('p','pair-caption',section.text)}</section>`;
 }
