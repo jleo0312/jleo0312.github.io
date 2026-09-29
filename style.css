@@ -192,3 +192,20 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   .media-pair{grid-template-columns:1fr;gap:16px}
   .pair-caption,.section-row.layout-above .section-copy p{font-size:16px}
 }
+
+
+/* Video + text project split */
+.video-text-row{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:28px;align-items:center}
+.video-text-row.video-right .video-text-media-wrap{order:2}
+.video-text-row.video-right .video-text-copy{order:1}
+.video-text-media-wrap{min-width:0}
+.video-text-media-wrap .video-frame{margin:0}
+.video-text-media{display:block;width:100%;height:auto;max-height:620px;border-radius:16px;background:#171719}
+.video-text-copy{background:#f3f1ec;border-radius:16px;padding:32px;display:flex;align-items:center;min-height:100%}
+.video-text-copy p{margin:0;font-size:20px;line-height:1.65;color:#3f3f43}
+@media(max-width:700px){
+  .video-text-row{grid-template-columns:1fr;gap:16px}
+  .video-text-row.video-right .video-text-media-wrap,.video-text-row.video-right .video-text-copy{order:initial}
+  .video-text-copy{padding:24px}
+  .video-text-copy p{font-size:17px}
+}
