@@ -7,17 +7,29 @@
     {
       "photo": "/media/whister.jpg",
       "title": "Snowboarding",
-      "text": "There's nothing else that feels like being on the mountains on a fresh snowy day. When I'm snowboarding, I feel free. Everything else fades away, and the only thing that matters is being outside and riding fast."
+      "text": "There's nothing else that feels like being on the mountains on a fresh snowy day. When I'm snowboarding, I feel free. Everything else fades away, and the only thing that matters is being outside and riding fast.",
+      "imageStyle": {
+        "enabled": false,
+        "showCaption": true
+      }
     },
     {
       "photo": "/media/unnamed (2).jpg",
       "title": "Backpacking",
-      "text": "Packing a backpack with everything I need for a few days and heading into the mountains is something I really enjoy. I like being able to get away for a while, explore new places, and camp wherever I end up."
+      "text": "Packing a backpack with everything I need for a few days and heading into the mountains is something I really enjoy. I like being able to get away for a while, explore new places, and camp wherever I end up.",
+      "imageStyle": {
+        "enabled": false,
+        "showCaption": true
+      }
     },
     {
       "photo": "/media/unnamed.jpg",
       "title": "Fishing",
-      "text": "Fishing is something I enjoy because it gives me a reason to spend time outside and slow things down for a bit. I like finding new spots, being out by the water, and the adrenaline of feeling a fish hit the line."
+      "text": "Fishing is something I enjoy because it gives me a reason to spend time outside and slow things down for a bit. I like finding new spots, being out by the water, and the adrenaline of feeling a fish hit the line.",
+      "imageStyle": {
+        "enabled": false,
+        "showCaption": true
+      }
     }
   ],
   "homepageGalleryDemo": true,
@@ -31,50 +43,96 @@
       "thumbnail": "/truck-thumbnail.jpg",
       "description": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
       "thumbnailMotion": "hover",
-      "coverText": "A new heart.\nAn old Toyota.",
-      "theme": "dark",
       "photos": [
         {
           "src": "/truck-thumbnail.jpg",
           "alt": "1989 Toyota Pickup",
-          "id": "photo-0-2ldb36"
+          "id": "photo-0-2ldb36",
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          }
         },
         {
           "src": "/truck-engine-swap-work.png",
           "alt": "Working on the Toyota pickup with an engine hoist.",
-          "id": "photo-1-18isty0"
+          "id": "photo-1-18isty0",
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          }
         }
       ],
+      "coverText": "A new heart.\nAn old Toyota.",
+      "theme": "dark",
+      "thumbnailStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "videoStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "useSections": true,
       "sections": [
         {
           "id": "original-projectIntro",
           "type": "projectIntro",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         },
         {
           "id": "original-projectVideo",
           "type": "projectVideo",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         },
         {
-          "visible": true,
           "id": "legacy-photo-0-2ldb36",
           "type": "projectPhoto",
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false,
           "sourceId": "photo-0-2ldb36"
         },
         {
-          "visible": true,
           "id": "legacy-photo-1-18isty0",
           "type": "projectPhoto",
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false,
           "sourceId": "photo-1-18isty0"
         },
         {
           "id": "original-projectEnd",
           "type": "projectEnd",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         }
-      ],
-      "useSections": true
+      ]
     },
     {
       "title": "Camera Mount",
@@ -88,7 +146,16 @@
       "thumbnailMotion": "loop",
       "thumbnailFit": "contain",
       "coverText": "Camera mount",
-      "theme": "silver"
+      "theme": "silver",
+      "thumbnailStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "videoStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "useSections": false
     },
     {
       "title": "Carbon snowboard",
@@ -99,10 +166,19 @@
       "description": "Designing a carbon-fiber snowboard around carving, quick turns, and stability.",
       "thumbnailMotion": "hover",
       "coverText": "Built for\nthe next turn.",
-      "theme": "blue"
+      "theme": "blue",
+      "thumbnailStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "videoStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "useSections": false
     },
     {
-      "title": "Waste Oil Powered Furnace",
+      "title": "Waste Vegetable Oil Powered Furnace",
       "showInGallery": true,
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
@@ -110,34 +186,56 @@
       "thumbnail": "/media/waste-oil-furnace-thumbnail.jpg",
       "thumbnailAlt": "Waste oil powered furnace",
       "description": "A waste-oil-powered furnace project.",
+      "video": "/media/testing flame.mp4",
       "previewVideo": "/media/furnace-1080p60-under25mb.mp4",
       "thumbnailMotion": "loop",
-      "video": "/media/testing flame.mp4",
+      "thumbnailStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
       "videoStyle": {
         "enabled": true,
         "width": 60,
         "align": "center",
-        "fit": "contain"
+        "fit": "contain",
+        "showCaption": true
       },
-      "photos": [],
+      "useSections": true,
       "sections": [
         {
           "id": "intro-waste-oil-furnace",
           "type": "projectIntro",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         },
         {
           "id": "video-waste-oil-furnace",
           "type": "projectVideo",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         },
         {
           "id": "end-waste-oil-furnace",
           "type": "projectEnd",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         }
-      ],
-      "useSections": true
+      ]
     }
   ],
   "website": {
@@ -182,7 +280,9 @@
       "coverMark": "↗",
       "showNumbers": true,
       "videoFallback": "Your browser cannot play this video.",
-      "downloadVideo": "Download the video"
+      "downloadVideo": "Download the video",
+      "previewPlay": "Play preview",
+      "previewPause": "Pause preview"
     },
     "carousel": {
       "source": "selected",
@@ -208,22 +308,46 @@
         {
           "id": "original-hero",
           "type": "hero",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         },
         {
           "id": "original-about",
           "type": "about",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         },
         {
           "id": "original-hobbies",
           "type": "hobbies",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         },
         {
           "id": "original-highlights",
           "type": "highlights",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         }
       ],
       "useSections": true
@@ -233,12 +357,24 @@
         {
           "id": "original-galleryIntro",
           "type": "galleryIntro",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         },
         {
           "id": "original-galleryGrid",
           "type": "galleryGrid",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         }
       ],
       "useSections": true
@@ -248,12 +384,24 @@
         {
           "id": "original-about",
           "type": "about",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         },
         {
           "id": "original-hobbies",
           "type": "hobbies",
-          "visible": true
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
         }
       ],
       "useSections": true
@@ -262,12 +410,14 @@
   "heroImage": {
     "enabled": true,
     "aspect": "tall",
-    "focalX": 50
+    "focalX": 50,
+    "showCaption": true
   },
-  "portraitAlt": "",
   "portraitImage": {
     "enabled": true,
     "captionAlignment": "left",
-    "captionPosition": "below"
-  }
+    "captionPosition": "below",
+    "showCaption": true
+  },
+  "visualEditorLink": "https://jleo0312.github.io/editor/"
 }
