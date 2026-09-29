@@ -226,9 +226,10 @@
           "visible": true,
           "items": [
             {
-              "type": "image",
-              "src": "/media/coaster-stippling-hq.gif?v=4",
-              "alt": "Stippling resin into the chopped carbon fiber."
+              "type": "video",
+              "src": "/media/coaster-stippling-loop.mp4?v=1",
+              "alt": "Stippling resin into the chopped carbon fiber.",
+              "gifLike": true
             },
             {
               "type": "image",
