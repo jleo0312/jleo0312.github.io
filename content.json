@@ -43,71 +43,7 @@
       "thumbnail": "/truck-thumbnail.jpg",
       "description": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
       "thumbnailMotion": "hover",
-      "photos": [
-        {
-          "src": "/media/truck-day-i-got-it.jpg",
-          "alt": "The day I got my 1989 Toyota pickup.",
-          "id": "truck-day-i-got-it",
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          }
-        },
-        {
-          "src": "/media/truck-dogs.jpg",
-          "alt": "My dogs sitting in the bed of my Toyota pickup.",
-          "id": "truck-dogs",
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          }
-        },
-        {
-          "src": "/media/truck-oil-placeholder.jpg",
-          "alt": "Blank placeholder for the oil discovery.",
-          "id": "truck-oil-placeholder",
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          }
-        },
-        {
-          "src": "/media/truck-headgasket-night.jpg",
-          "alt": "Working on the Toyota pickup at night during the head gasket repair.",
-          "id": "truck-headgasket-night",
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          }
-        },
-        {
-          "src": "/media/truck-headgasket-day.jpg",
-          "alt": "Working on the Toyota pickup during the day during the head gasket repair.",
-          "id": "truck-headgasket-day",
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          }
-        },
-        {
-          "src": "/media/truck-pistons.jpg",
-          "alt": "Top of the 3VZ-E pistons showing heavy carbon buildup.",
-          "id": "truck-pistons",
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          }
-        },
-        {
-          "src": "/truck-engine-swap-work.png",
-          "alt": "Later engine swap work on the Toyota pickup.",
-          "id": "truck-engine-swap-work",
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          }
-        }
-      ],
+      "photos": [],
       "coverText": "A new heart.\nAn old Toyota.",
       "theme": "dark",
       "thumbnailStyle": {
