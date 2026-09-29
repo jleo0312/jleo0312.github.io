@@ -3,7 +3,7 @@
   'use strict';
   const clone = value => JSON.parse(JSON.stringify(value));
   const id = () => 'section-' + (root.crypto?.randomUUID?.() || Date.now().toString(36) + Math.random().toString(36).slice(2));
-  const types = { hero:'Homepage introduction', about:'About me', hobbies:'Hobbies', highlights:'Project highlights', galleryIntro:'Gallery introduction', galleryGrid:'Project gallery', projectIntro:'Project introduction', projectVideo:'Project video', projectPhoto:'Project photo', projectThumbnail:'Project cover photo', projectEnd:'Project footer', photoText:'Photo and text', text:'Text', heading:'Heading', video:'Video / GIF', videoText:'Video + text', spacer:'Spacer' };
+  const types = { hero:'Homepage introduction', about:'About me', hobbies:'Hobbies', highlights:'Project highlights', galleryIntro:'Gallery introduction', galleryGrid:'Project gallery', projectIntro:'Project introduction', projectVideo:'Project video', projectPhoto:'Project photo', projectThumbnail:'Project cover photo', projectEnd:'Project footer', photoText:'Photo and text', text:'Text', heading:'Heading', video:'Video / GIF', videoText:'Video + text', mediaPair:'Media row', spacer:'Spacer' };
   const numeric = (value, fallback, min, max) => value != null && value !== '' && Number.isFinite(Number(value)) ? Math.max(min, Math.min(max, Number(value))) : fallback;
   const hash = text => [...String(text)].reduce((n,c)=>((n*31+c.charCodeAt(0))>>>0),0).toString(36);
   function upgrade(input) {
