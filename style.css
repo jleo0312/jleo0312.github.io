@@ -234,3 +234,30 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
     min-width:0!important;
   }
 }
+
+
+/* Two- and three-column project story rows. */
+.media-pair.media-count-2{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.media-pair.media-count-3{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.media-placeholder{aspect-ratio:3/4;background:#000;border-radius:14px;min-height:160px}
+.media-count-3 .paired-media-item img,
+.media-count-3 .paired-media-item video,
+.media-count-3 .media-placeholder{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover}
+@media(max-width:700px){
+  .builder-section.section-mediaPair .media-pair.media-count-2{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  .builder-section.section-mediaPair .media-pair.media-count-3{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:6px!important;
+  }
+  .builder-section.section-mediaPair .media-count-2 .paired-media-item,
+  .builder-section.section-mediaPair .media-count-3 .paired-media-item{
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+  }
+}
