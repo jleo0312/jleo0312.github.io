@@ -189,7 +189,7 @@
         "showCaption": true
       },
       "useSections": true,
-      "thumbnail": "/media/coaster-thumbnail.svg",
+      "thumbnail": "/media/coaster-thumbnail.svg?v=2",
       "photos": [],
       "sections": [
         {
@@ -204,17 +204,17 @@
           "items": [
             {
               "type": "image",
-              "src": "/media/coaster-molds.svg",
+              "src": "/media/coaster-molds.svg?v=2",
               "alt": "Prepared coaster molds."
             },
             {
               "type": "image",
-              "src": "/media/coaster-resin.svg",
+              "src": "/media/coaster-resin.svg?v=2",
               "alt": "Resin applied to the coaster mold."
             },
             {
               "type": "image",
-              "src": "/media/coaster-fibers-added.svg",
+              "src": "/media/coaster-fibers-added.svg?v=2",
               "alt": "Chopped carbon fiber added to the mold."
             }
           ],
@@ -227,12 +227,12 @@
           "items": [
             {
               "type": "image",
-              "src": "/media/coaster-stippling.svg",
+              "src": "/media/coaster-stippling.svg?v=2",
               "alt": "Stippling resin into the chopped carbon fiber."
             },
             {
               "type": "image",
-              "src": "/media/coaster-saturated.svg",
+              "src": "/media/coaster-saturated.svg?v=2",
               "alt": "Carbon fiber saturated with resin in the mold."
             },
             {
@@ -249,17 +249,17 @@
           "items": [
             {
               "type": "image",
-              "src": "/media/coaster-cured-parts.svg",
+              "src": "/media/coaster-cured-parts.svg?v=2",
               "alt": "Cured forged-carbon coasters after demolding."
             },
             {
               "type": "image",
-              "src": "/media/coaster-closeup.svg",
+              "src": "/media/coaster-closeup.svg?v=2",
               "alt": "Close-up of a cured WSU Cougar coaster."
             },
             {
               "type": "image",
-              "src": "/media/coaster-uv-light.svg",
+              "src": "/media/coaster-uv-light.svg?v=2",
               "alt": "Finished coaster under inspection light."
             }
           ],
