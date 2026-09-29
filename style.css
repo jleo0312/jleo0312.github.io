@@ -285,3 +285,21 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   image-rendering:auto;
   transform:none!important;
 }
+
+
+/* High-quality video used as a GIF-like loop in project media rows. */
+.media-count-3 .paired-giflike-item{
+  background:#111;
+  border-radius:14px;
+  overflow:hidden;
+}
+.media-count-3 .paired-giflike-video{
+  display:block;
+  width:100%!important;
+  height:100%!important;
+  aspect-ratio:3/4;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#111;
+  border-radius:14px;
+}
