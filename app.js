@@ -373,18 +373,20 @@ function renderPhotoText(section,ctx,path,legacyPhoto) {
 }
 
 function renderMediaPair(section,ctx,sectionPath) {
-  const items=list(section.items).slice(0,2);
+  const items=list(section.items).slice(0,3);
   if(!items.length)return '';
   const mediaItems=items.map((item,i)=>{
     const itemPath=`${sectionPath}.items.${i}.imageStyle`;
+    if(item.type==='blank'){
+      return `<div class="paired-media-item media-placeholder" role="img" aria-label="${esc(item.alt||'Placeholder image')}"></div>`;
+    }
     if(item.type==='video'){
       return `<div class="paired-media-item paired-video-item">${renderVideo(item.src,item.poster,item.imageStyle||{},itemPath,'paired-video')}</div>`;
     }
     return `<div class="paired-media-item">${photoFrame(item.src,item.alt||ctx.info.title,item.imageStyle||{},{fit:'cover',path:itemPath})}</div>`;
   }).join('');
-  return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="media-pair">${mediaItems}</div>${textElement('p','pair-caption',section.text)}</section>`;
+  return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="media-pair media-count-${items.length}">${mediaItems}</div>${textElement('p','pair-caption',section.text)}</section>`;
 }
-
 
 function renderVideoText(section,ctx,sectionPath) {
   const video=renderVideo(section.video,section.poster||'',section.imageStyle||{},`${sectionPath}.imageStyle`,'video-text-media');
