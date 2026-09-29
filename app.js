@@ -385,6 +385,14 @@ function renderMediaPair(section,ctx,sectionPath) {
   return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="media-pair">${mediaItems}</div>${textElement('p','pair-caption',section.text)}</section>`;
 }
 
+
+function renderVideoText(section,ctx,sectionPath) {
+  const video=renderVideo(section.video,section.poster||'',section.imageStyle||{},`${sectionPath}.imageStyle`,'video-text-media');
+  const copy=textElement('p','',section.text);
+  const position=section.videoPosition==='right'?'right':'left';
+  return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="video-text-row video-${position}"><div class="video-text-media-wrap">${video}</div><div class="video-text-copy">${copy}</div></div></section>`;
+}
+
 function renderSection(section,ctx,index) {
   if(section.visible===false)return '';
   const {data,info}=ctx;
@@ -407,6 +415,7 @@ function renderSection(section,ctx,index) {
     case 'photoText':html=renderPhotoText(section,ctx,`${sectionPath}.imageStyle`);break;
     case 'mediaPair':html=renderMediaPair(section,ctx,sectionPath);break;
     case 'text':case 'heading':html=`<section class="content-section text-section ${info.kind==='project'?'':'wrap'}" style="text-align:${choice(section.textAlign,['left','center','right'],'left')};--text-size:${{small:16,normal:18,large:22}[section.textSize]||18}px">${textElement(choice(section.headingLevel,['h1','h2','h3'],'h2'),'',section.heading)}${textElement('p','',section.text)}</section>`;break;
+    case 'videoText':html=renderVideoText(section,ctx,sectionPath);break;
     case 'video':html=`<section class="content-section ${info.kind==='project'?'':'wrap'}">${textElement('h2','',section.heading)}${renderVideo(section.video,section.poster,{...section.imageStyle,caption:section.caption,showCaption:section.showCaption,loop:section.loop,muted:section.muted},`${sectionPath}.imageStyle`)}${textElement('p','',section.text)}</section>`;break;
     case 'spacer':html=`<div style="height:${number(section.height,40,0,200)}px"></div>`;break;
   }
