@@ -62,22 +62,22 @@
           "visible": true
         },
         {
-          "id": "truck-day-i-got-it-section",
-          "type": "photoText",
+          "id": "truck-first-two-pair",
+          "type": "mediaPair",
           "visible": true,
-          "image": "/media/truck-day-i-got-it.jpg",
-          "alt": "The day I got my 1989 Toyota pickup.",
-          "imagePosition": "above",
-          "text": "The day that I got my truck. I drove to Oregon to get it, and the drive back was truly an experience."
-        },
-        {
-          "id": "truck-dogs-section",
-          "type": "photoText",
-          "visible": true,
-          "image": "/media/truck-dogs.jpg",
-          "alt": "My dogs sitting in the bed of my Toyota pickup.",
-          "imagePosition": "above",
-          "text": "I took a picture of my dogs in my truck, just like how my dad did when he got his truck."
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/truck-day-i-got-it.jpg",
+              "alt": "The day I got my 1989 Toyota pickup."
+            },
+            {
+              "type": "image",
+              "src": "/media/truck-dogs.jpg",
+              "alt": "My dogs sitting in the bed of my Toyota pickup."
+            }
+          ],
+          "text": "The day that I got my truck. I drove to Oregon to get it, and the drive back was truly an experience. I also took a picture of my dogs in my truck, just like how my dad did when he got his truck."
         },
         {
           "id": "truck-oil-section",
