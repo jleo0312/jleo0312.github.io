@@ -209,3 +209,28 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   .video-text-copy{padding:24px}
   .video-text-copy p{font-size:17px}
 }
+
+
+/* Force paired project media to remain two-up on phones. */
+@media(max-width:700px){
+  .builder-section.section-mediaPair .media-pair{
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:flex-start!important;
+    gap:8px!important;
+    width:100%!important;
+  }
+  .builder-section.section-mediaPair .paired-media-item{
+    flex:1 1 0!important;
+    width:0!important;
+    min-width:0!important;
+    max-width:none!important;
+  }
+  .builder-section.section-mediaPair .paired-media-item figure,
+  .builder-section.section-mediaPair .paired-media-item img,
+  .builder-section.section-mediaPair .paired-media-item video{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+}
