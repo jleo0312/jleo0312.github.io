@@ -171,14 +171,14 @@
       "useSections": false
     },
     {
-      "title": "Carbon snowboard",
+      "title": "Carbon Fiber Coaster",
       "showInGallery": true,
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
-      "slug": "carbon-snowboard",
-      "description": "Designing a carbon-fiber snowboard around carving, quick turns, and stability.",
+      "slug": "carbon-fiber-coaster",
+      "description": "Designing and molding a carbon fiber coaster with a recessed logo.",
       "thumbnailMotion": "hover",
-      "coverText": "Built for\nthe next turn.",
+      "coverText": "Carbon fiber.\nMade by hand.",
       "theme": "blue",
       "thumbnailStyle": {
         "enabled": false,
