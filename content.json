@@ -126,11 +126,11 @@
         },
         {
           "id": "truck-first-start",
-          "type": "video",
+          "type": "videoText",
           "visible": true,
           "video": "/media/first start.mp4",
-          "caption": "First start.",
-          "showCaption": true
+          "videoPosition": "left",
+          "text": "Finally, I turned the key and heard the beautiful sound of my engine that I rebuilt, running."
         },
         {
           "id": "truck-later-work",
