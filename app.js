@@ -371,6 +371,20 @@ function renderPhotoText(section,ctx,path,legacyPhoto) {
   const only=!text&&!heading;
   return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="section-row layout-${position} ${only?'photo-only':''}" style="--photo-columns:${position==='right'?`minmax(0,${number(section.textWidth,44,10,90)}fr) minmax(0,${number(section.imageWidth,56,10,90)}fr)`:`minmax(0,${number(section.imageWidth,56,10,90)}fr) minmax(0,${number(section.textWidth,44,10,90)}fr)`};--content-gap:${number(section.gap,46,0,100)}px;--text-size:${{small:16,normal:18,large:22}[section.textSize]||18}px;align-items:${choice(section.alignment,['start','center','end'],'center')}"><div class="photo-pane">${photoFrame(src,photo.alt||heading||ctx.info.title,style,{fit:'contain',path})}</div>${only?'':`<div class="section-copy" style="text-align:${choice(section.textAlign,['left','center','right'],'left')}">${textElement('h2','',heading)}${textElement('p','',text)}</div>`}</div></section>`;
 }
+
+function renderMediaPair(section,ctx,sectionPath) {
+  const items=list(section.items).slice(0,2);
+  if(!items.length)return '';
+  const mediaItems=items.map((item,i)=>{
+    const itemPath=`${sectionPath}.items.${i}.imageStyle`;
+    if(item.type==='video'){
+      return `<div class="paired-media-item paired-video-item">${renderVideo(item.src,item.poster,item.imageStyle||{},itemPath,'paired-video')}</div>`;
+    }
+    return `<div class="paired-media-item">${photoFrame(item.src,item.alt||ctx.info.title,item.imageStyle||{},{fit:'cover',path:itemPath})}</div>`;
+  }).join('');
+  return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="media-pair">${mediaItems}</div>${textElement('p','pair-caption',section.text)}</section>`;
+}
+
 function renderSection(section,ctx,index) {
   if(section.visible===false)return '';
   const {data,info}=ctx;
@@ -391,6 +405,7 @@ function renderSection(section,ctx,index) {
     case 'projectThumbnail':if(project)html=renderPhotoText({...section,image:project.thumbnail,alt:project.thumbnailAlt||project.title,imageStyle:project.thumbnailStyle,showCaption:project.thumbnailStyle?.showCaption},ctx,`projects.${data.projects.indexOf(project)}.thumbnailStyle`);break;
     case 'projectEnd':html=`<div class="project-end">${textElement('span','',settings.project.endText)}${settings.project.galleryButton?`<a class="pill" href="${galleryURL}">${esc(settings.project.galleryButton)}</a>`:''}</div>`;break;
     case 'photoText':html=renderPhotoText(section,ctx,`${sectionPath}.imageStyle`);break;
+    case 'mediaPair':html=renderMediaPair(section,ctx,sectionPath);break;
     case 'text':case 'heading':html=`<section class="content-section text-section ${info.kind==='project'?'':'wrap'}" style="text-align:${choice(section.textAlign,['left','center','right'],'left')};--text-size:${{small:16,normal:18,large:22}[section.textSize]||18}px">${textElement(choice(section.headingLevel,['h1','h2','h3'],'h2'),'',section.heading)}${textElement('p','',section.text)}</section>`;break;
     case 'video':html=`<section class="content-section ${info.kind==='project'?'':'wrap'}">${textElement('h2','',section.heading)}${renderVideo(section.video,section.poster,{...section.imageStyle,caption:section.caption,showCaption:section.showCaption,loop:section.loop,muted:section.muted},`${sectionPath}.imageStyle`)}${textElement('p','',section.text)}</section>`;break;
     case 'spacer':html=`<div style="height:${number(section.height,40,0,200)}px"></div>`;break;
