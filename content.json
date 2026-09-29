@@ -159,16 +159,16 @@
           "items": [
             {
               "type": "image",
-              "src": "/media/truck-headgasket-night.jpg",
-              "alt": "Working on the truck at night during the head gasket repair."
+              "src": "/media/truck-headgasket-day.jpg",
+              "alt": "Working on the truck during the day during the head gasket repair."
             },
             {
               "type": "image",
-              "src": "/media/truck-headgasket-day.jpg",
-              "alt": "Working on the truck during the day during the head gasket repair."
+              "src": "/media/truck-headgasket-night.jpg",
+              "alt": "Working on the truck at night during the head gasket repair."
             }
           ],
-          "text": "I worked on the truck day and night doing the head gasket. At that point, this was the most complicated thing I had ever done in my life."
+          "text": "I worked day and night on the head gasket. At that point, this was the most complicated thing I had ever done in my life."
         },
         {
           "id": "truck-pistons-section",
