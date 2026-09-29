@@ -263,13 +263,25 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
 }
 
 
-/* Keep portrait GIFs crisp in 3-up project rows instead of enlarging/cropping them. */
+/* Keep portrait GIFs crisp in 3-up project rows.
+   Preserve the GIF's natural proportions and avoid unnecessary browser stretching. */
 .media-count-3 .paired-gif-item .image-box{
   background:#111;
   border-radius:14px;
   overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .media-count-3 .paired-gif-item img{
   object-fit:contain!important;
+  object-position:center!important;
   background:#111;
+  width:auto!important;
+  max-width:100%!important;
+  height:100%!important;
+  max-height:100%!important;
+  margin:auto;
+  image-rendering:auto;
+  transform:none!important;
 }
