@@ -128,7 +128,7 @@
           "id": "truck-first-start",
           "type": "video",
           "visible": true,
-          "video": "/media/truck-first-start.mp4",
+          "video": "/media/first start.mp4",
           "caption": "First start.",
           "showCaption": true
         },
