@@ -176,9 +176,9 @@
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
       "slug": "carbon-fiber-coaster",
-      "description": "Designing and molding a carbon fiber coaster with a recessed logo.",
+      "description": "For training in the Janicki Industries-sponsored Composites Studio, we make forged-carbon WSU Cougar coasters.",
       "thumbnailMotion": "hover",
-      "coverText": "Carbon fiber.\nMade by hand.",
+      "coverText": "Forged carbon.\nWSU Cougar coaster.",
       "theme": "blue",
       "thumbnailStyle": {
         "enabled": false,
@@ -188,7 +188,89 @@
         "enabled": false,
         "showCaption": true
       },
-      "useSections": false
+      "useSections": true,
+      "thumbnail": "/media/coaster-thumbnail.jpg",
+      "photos": [],
+      "sections": [
+        {
+          "id": "coaster-intro",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "coaster-row-1",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/coaster-molds.jpg",
+              "alt": "Prepared coaster molds."
+            },
+            {
+              "type": "image",
+              "src": "/media/coaster-resin.jpg",
+              "alt": "Resin applied to the coaster mold."
+            },
+            {
+              "type": "image",
+              "src": "/media/coaster-fibers-added.jpg",
+              "alt": "Chopped carbon fiber added to the mold."
+            }
+          ],
+          "text": "First, you prepare the molds by cleaning them and applying mold release to the surfaces. Then you wet the surface with resin and add a small layer of chopped carbon fiber."
+        },
+        {
+          "id": "coaster-row-2",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/coaster-stippling.gif",
+              "alt": "Stippling resin into the chopped carbon fiber."
+            },
+            {
+              "type": "image",
+              "src": "/media/coaster-saturated.jpg",
+              "alt": "Carbon fiber saturated with resin in the mold."
+            },
+            {
+              "type": "blank",
+              "alt": "Compressing the mold with bolts and clamps."
+            }
+          ],
+          "text": "Then, with a paintbrush, you slowly saturate the fibers by stippling until they are fully wet out. Repeat until all of the measured carbon fiber is used. Then you compress the mold using bolts and clamps."
+        },
+        {
+          "id": "coaster-row-3",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/coaster-cured-parts.jpg",
+              "alt": "Cured forged-carbon coasters after demolding."
+            },
+            {
+              "type": "image",
+              "src": "/media/coaster-closeup.jpg",
+              "alt": "Close-up of a cured WSU Cougar coaster."
+            },
+            {
+              "type": "image",
+              "src": "/media/coaster-uv-light.jpg",
+              "alt": "Finished coaster under inspection light."
+            }
+          ],
+          "text": "I let them cure according to the resin manufacturer’s instructions, then get them out (easier said than done). You can see the coasters aren’t perfect. There are visible voids, and the logo is primarily resin where the fibers weren’t able to fit and bridging occurred."
+        },
+        {
+          "id": "coaster-end",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ]
     },
     {
       "title": "Waste Vegetable Oil Powered Furnace",
