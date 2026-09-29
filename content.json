@@ -45,9 +45,54 @@
       "thumbnailMotion": "hover",
       "photos": [
         {
-          "src": "/truck-thumbnail.jpg",
-          "alt": "1989 Toyota Pickup",
-          "id": "photo-0-2ldb36",
+          "src": "/media/truck-day-i-got-it.jpg",
+          "alt": "The day I got my 1989 Toyota pickup.",
+          "id": "truck-day-i-got-it",
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          }
+        },
+        {
+          "src": "/media/truck-dogs.jpg",
+          "alt": "My dogs sitting in the bed of my Toyota pickup.",
+          "id": "truck-dogs",
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          }
+        },
+        {
+          "src": "/media/truck-oil-placeholder.jpg",
+          "alt": "Blank placeholder for the oil discovery.",
+          "id": "truck-oil-placeholder",
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          }
+        },
+        {
+          "src": "/media/truck-headgasket-night.jpg",
+          "alt": "Working on the Toyota pickup at night during the head gasket repair.",
+          "id": "truck-headgasket-night",
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          }
+        },
+        {
+          "src": "/media/truck-headgasket-day.jpg",
+          "alt": "Working on the Toyota pickup during the day during the head gasket repair.",
+          "id": "truck-headgasket-day",
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          }
+        },
+        {
+          "src": "/media/truck-pistons.jpg",
+          "alt": "Top of the 3VZ-E pistons showing heavy carbon buildup.",
+          "id": "truck-pistons",
           "showCaption": true,
           "imageStyle": {
             "enabled": false
@@ -55,8 +100,8 @@
         },
         {
           "src": "/truck-engine-swap-work.png",
-          "alt": "Working on the Toyota pickup with an engine hoist.",
-          "id": "photo-1-18isty0",
+          "alt": "Later engine swap work on the Toyota pickup.",
+          "id": "truck-engine-swap-work",
           "showCaption": true,
           "imageStyle": {
             "enabled": false
@@ -76,61 +121,85 @@
       "useSections": true,
       "sections": [
         {
-          "id": "original-projectIntro",
+          "id": "truck-project-intro",
           "type": "projectIntro",
-          "visible": true,
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          },
-          "loop": false,
-          "muted": false
+          "visible": true
         },
         {
-          "id": "original-projectVideo",
-          "type": "projectVideo",
+          "id": "truck-day-i-got-it-section",
+          "type": "photoText",
           "visible": true,
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          },
-          "loop": false,
-          "muted": false
+          "image": "/media/truck-day-i-got-it.jpg",
+          "alt": "The day I got my 1989 Toyota pickup.",
+          "imagePosition": "above",
+          "text": "The day that I got my truck. I drove to Oregon to get it, and the drive back was truly an experience."
         },
         {
-          "id": "legacy-photo-0-2ldb36",
-          "type": "projectPhoto",
+          "id": "truck-dogs-section",
+          "type": "photoText",
           "visible": true,
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          },
-          "loop": false,
-          "muted": false,
-          "sourceId": "photo-0-2ldb36"
+          "image": "/media/truck-dogs.jpg",
+          "alt": "My dogs sitting in the bed of my Toyota pickup.",
+          "imagePosition": "above",
+          "text": "I took a picture of my dogs in my truck, just like how my dad did when he got his truck."
         },
         {
-          "id": "legacy-photo-1-18isty0",
-          "type": "projectPhoto",
+          "id": "truck-oil-section",
+          "type": "photoText",
           "visible": true,
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          },
-          "loop": false,
-          "muted": false,
-          "sourceId": "photo-1-18isty0"
+          "image": "/media/truck-oil-placeholder.jpg",
+          "alt": "Blank placeholder for the oil discovery.",
+          "imagePosition": "above",
+          "text": "I changed the oil and found coolant mixed in with it, which pointed to a blown head gasket. I was pretty pissed when I realized the seller had screwed me over."
         },
         {
-          "id": "original-projectEnd",
+          "id": "truck-headgasket-pair",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/truck-headgasket-night.jpg",
+              "alt": "Working on the truck at night during the head gasket repair."
+            },
+            {
+              "type": "image",
+              "src": "/media/truck-headgasket-day.jpg",
+              "alt": "Working on the truck during the day during the head gasket repair."
+            }
+          ],
+          "text": "I worked on the truck day and night doing the head gasket. At that point, this was the most complicated thing I had ever done in my life."
+        },
+        {
+          "id": "truck-pistons-section",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/truck-pistons.jpg",
+          "alt": "Top of the pistons showing heavy carbon buildup.",
+          "imagePosition": "above",
+          "text": "The tops of the pistons had tons of carbon buildup, so I cleaned them up."
+        },
+        {
+          "id": "truck-turnover-video",
+          "type": "video",
+          "visible": true,
+          "video": "/media/truck-clean-engine-turnover.mp4",
+          "poster": "/media/truck-pistons.jpg",
+          "caption": "After cleaning everything up, I turned the engine over to make sure everything moved smoothly.",
+          "showCaption": true
+        },
+        {
+          "id": "truck-later-work",
+          "type": "photoText",
+          "visible": true,
+          "image": "/truck-engine-swap-work.png",
+          "alt": "Later engine swap work on the Toyota pickup.",
+          "imagePosition": "above"
+        },
+        {
+          "id": "truck-project-end",
           "type": "projectEnd",
-          "visible": true,
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          },
-          "loop": false,
-          "muted": false
+          "visible": true
         }
       ]
     },
