@@ -112,7 +112,7 @@
       "description": "A waste-oil-powered furnace project.",
       "previewVideo": "/media/furnace-1080p60-under25mb.mp4",
       "thumbnailMotion": "loop",
-      "video": "/media/waste-oil-furnace-test.mp4",
+      "video": "/media/testing flame.mp4",
       "videoStyle": {
         "enabled": true,
         "width": 60,
