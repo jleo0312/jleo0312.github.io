@@ -171,21 +171,22 @@
           "text": "I worked day and night on the head gasket. At that point, this was the most complicated thing I had ever done in my life."
         },
         {
-          "id": "truck-pistons-section",
-          "type": "photoText",
+          "id": "truck-pistons-gif-pair",
+          "type": "mediaPair",
           "visible": true,
-          "image": "/media/truck-pistons.jpg",
-          "alt": "Top of the pistons showing heavy carbon buildup.",
-          "imagePosition": "above",
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/truck-pistons.jpg",
+              "alt": "Top of the pistons showing heavy carbon buildup."
+            },
+            {
+              "type": "image",
+              "src": "/media/truck-clean-engine-turnover-480.gif",
+              "alt": "Turning the cleaned engine over."
+            }
+          ],
           "text": "The tops of the pistons had tons of carbon buildup, so I cleaned them up."
-        },
-        {
-          "id": "truck-turnover-video",
-          "type": "video",
-          "visible": true,
-          "video": "/media/truck-clean-engine-turnover-480.gif",
-          "caption": "After cleaning everything up, I turned the engine over to make sure everything moved smoothly.",
-          "showCaption": true
         },
         {
           "id": "truck-later-work",
