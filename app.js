@@ -381,6 +381,9 @@ function renderMediaPair(section,ctx,sectionPath) {
       return `<div class="paired-media-item media-placeholder" role="img" aria-label="${esc(item.alt||'Placeholder image')}"></div>`;
     }
     if(item.type==='video'){
+      if(item.gifLike===true){
+        return `<div class="paired-media-item paired-giflike-item"><video class="paired-giflike-video" autoplay loop muted playsinline preload="auto" aria-label="${esc(item.alt||ctx.info.title||'Animated project media')}" src="${media(item.src)}"></video></div>`;
+      }
       return `<div class="paired-media-item paired-video-item">${renderVideo(item.src,item.poster,item.imageStyle||{},itemPath,'paired-video')}</div>`;
     }
     const gifClass=/\.gif(?:[?#]|$)/i.test(item.src||'')?' paired-gif-item':'';
