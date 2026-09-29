@@ -125,6 +125,14 @@
           "text": "The tops of the pistons had tons of carbon buildup, so I cleaned them up."
         },
         {
+          "id": "truck-first-start",
+          "type": "video",
+          "visible": true,
+          "video": "/media/truck-first-start.mp4",
+          "caption": "First start.",
+          "showCaption": true
+        },
+        {
           "id": "truck-later-work",
           "type": "photoText",
           "visible": true,
