@@ -349,7 +349,8 @@
             {
               "type": "video",
               "src": "/media/testing flame.mp4",
-              "alt": "Testing the siphon-style atomizer."
+              "alt": "Testing the siphon-style atomizer.",
+              "poster": "/media/waste-oil-furnace-thumbnail.jpg"
             },
             {
               "type": "blank",
