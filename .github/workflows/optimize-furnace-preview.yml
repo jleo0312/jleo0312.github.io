@@ -52,3 +52,5 @@ jobs:
           git add "media/furnace-gallery-preview.mp4" content.json
           git commit -m "Optimize furnace gallery preview"
           git push
+
+# trigger optimization
