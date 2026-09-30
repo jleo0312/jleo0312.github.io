@@ -61,20 +61,18 @@
           <select id="jobProcess">
             <option value="">Select process</option>
             <option>Wet layup</option>
-            <option>Vacuum bagging</option>
             <option>Resin infusion</option>
             <option>Forged carbon</option>
             <option>Prepreg</option>
-            <option>Compression molding</option>
             <option>Tooling / mold making</option>
             <option>Other</option>
           </select>
         </div>
-        <div class="field">
+        <div class="field" id="targetResinField" hidden>
           <label for="targetResin">Target resin (g)</label>
           <input id="targetResin" type="number" min="0" step="0.1" placeholder="—" />
         </div>
-        <div class="field">
+        <div class="field" id="actualResinField" hidden>
           <label for="actualResin">Actual resin used (g)</label>
           <input id="actualResin" type="number" min="0" step="0.1" placeholder="—" />
         </div>
