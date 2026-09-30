@@ -347,8 +347,9 @@
           "visible": true,
           "items": [
             {
-              "type": "blank",
-              "alt": "Video placeholder for the siphon-style atomizer."
+              "type": "video",
+              "src": "/media/testing flame.mp4",
+              "alt": "Testing the siphon-style atomizer."
             },
             {
               "type": "blank",
