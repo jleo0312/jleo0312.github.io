@@ -117,9 +117,10 @@
               "alt": "Top of the pistons showing heavy carbon buildup."
             },
             {
-              "type": "image",
-              "src": "/media/truck-clean-engine-turnover-480.gif",
-              "alt": "Turning the cleaned engine over."
+              "type": "video",
+              "src": "/media/truck-clean-engine-turnover.mp4",
+              "alt": "Turning the cleaned engine over.",
+              "gifLike": true
             }
           ],
           "text": "The tops of the pistons had tons of carbon buildup, so I cleaned them up."
