@@ -334,6 +334,14 @@
           ]
         },
         {
+          "id": "furnace-siphon-transition",
+          "type": "text",
+          "visible": true,
+          "text": "The blower melted, so I switched to a siphon-style atomizer, which is commonly used in waste oil heaters.",
+          "textAlign": "left",
+          "textSize": "normal"
+        },
+        {
           "id": "furnace-siphon-atomizer-videos",
           "type": "mediaPair",
           "visible": true,
@@ -346,8 +354,7 @@
               "type": "blank",
               "alt": "Video placeholder for the siphon-style atomizer."
             }
-          ],
-          "text": "The blower melted, so I switched to a siphon-style atomizer, which is commonly used in waste oil heaters."
+          ]
         },
         {
           "id": "end-waste-oil-furnace",
