@@ -282,9 +282,9 @@
       "thumbnail": "/media/waste-oil-furnace-thumbnail.jpg",
       "thumbnailAlt": "Waste oil powered furnace",
       "description": "A waste-oil-powered furnace project.",
-      "video": "/media/testing flame.mp4",
-      "previewVideo": "/media/furnace-1080p60-under25mb.mp4",
-      "thumbnailMotion": "loop",
+      "video": "/media/furnace-1080p60-under25mb.mp4",
+      "previewVideo": "/media/testing flame.mp4",
+      "thumbnailMotion": "hover",
       "thumbnailStyle": {
         "enabled": false,
         "showCaption": true
@@ -310,15 +310,22 @@
           "muted": false
         },
         {
-          "id": "video-waste-oil-furnace",
-          "type": "projectVideo",
+          "id": "first-design-waste-oil-furnace",
+          "type": "mediaPair",
           "visible": true,
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          },
-          "loop": false,
-          "muted": false
+          "items": [
+            {
+              "type": "video",
+              "src": "/media/furnace-1080p60-under25mb.mp4",
+              "alt": "First waste vegetable oil furnace design."
+            },
+            {
+              "type": "video",
+              "src": "/media/testing flame.mp4",
+              "alt": "Testing the waste oil burner nozzle."
+            }
+          ],
+          "text": "I wanted to make my own billet aluminum stock by melting aluminum cans. My first design used a propane tank with a tube cut and welded into the tank at a tangent angle, an air mattress inflator for airflow, and a fire extinguisher cut in half to use as a crucible."
         },
         {
           "id": "end-waste-oil-furnace",
