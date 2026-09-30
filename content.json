@@ -285,7 +285,7 @@
       "description": "",
       "video": "/media/testing flame.mp4",
       "previewVideo": "/media/furnace-1080p60-under25mb.mp4",
-      "thumbnailMotion": "loop",
+      "thumbnailMotion": "hover",
       "thumbnailStyle": {
         "enabled": false,
         "showCaption": true
