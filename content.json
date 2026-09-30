@@ -310,22 +310,44 @@
           "muted": false
         },
         {
-          "id": "first-design-waste-oil-furnace",
+          "id": "furnace-first-design-photo-text",
+          "type": "photoText",
+          "visible": true,
+          "image": "",
+          "alt": "Photo placeholder for the first furnace design.",
+          "imagePosition": "left",
+          "text": "I wanted to make my own billet aluminum stock by melting aluminum cans. My first design used a propane tank with a tube cut and welded into the tank at a tangent angle, an air mattress inflator for airflow, and a fire extinguisher cut in half to use as a crucible."
+        },
+        {
+          "id": "furnace-first-design-videos",
           "type": "mediaPair",
           "visible": true,
           "items": [
             {
-              "type": "video",
-              "src": "/media/furnace-1080p60-under25mb.mp4",
-              "alt": "First waste vegetable oil furnace design."
+              "type": "blank",
+              "alt": "Video placeholder for the first furnace design."
             },
             {
-              "type": "video",
-              "src": "/media/testing flame.mp4",
-              "alt": "Testing the waste oil burner nozzle."
+              "type": "blank",
+              "alt": "Video placeholder for the first furnace design."
+            }
+          ]
+        },
+        {
+          "id": "furnace-siphon-atomizer-videos",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "blank",
+              "alt": "Video placeholder for the siphon-style atomizer."
+            },
+            {
+              "type": "blank",
+              "alt": "Video placeholder for the siphon-style atomizer."
             }
           ],
-          "text": "I wanted to make my own billet aluminum stock by melting aluminum cans. My first design used a propane tank with a tube cut and welded into the tank at a tangent angle, an air mattress inflator for airflow, and a fire extinguisher cut in half to use as a crucible."
+          "text": "The blower melted, so I switched to a siphon-style atomizer, which is commonly used in waste oil heaters."
         },
         {
           "id": "end-waste-oil-furnace",
