@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f4f3ef" />
+  <title>Composite Studio Log</title>
+  <meta name="description" content="A simple manufacturing log for composite jobs." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">COMPOSITE STUDIO</p>
+      <h1>Job Log</h1>
+      <p class="subhead">Document what happened, what worked, and what to change next time.</p>
+    </div>
+    <button id="newJobBtn" class="primary">+ New job</button>
+  </header>
+
+  <main class="shell">
+    <section class="toolbar" aria-label="Log controls">
+      <div class="toolbar-left">
+        <span id="jobCount">0 jobs</span>
+        <span class="dot">•</span>
+        <span>9 per page</span>
+      </div>
+      <div class="toolbar-right">
+        <button id="exportBtn" class="quiet">Export backup</button>
+        <label class="quiet file-label" for="importInput">Import backup</label>
+        <input id="importInput" type="file" accept="application/json" hidden />
+      </div>
+    </section>
+
+    <section id="jobGrid" class="job-grid" aria-live="polite"></section>
+
+    <nav class="pager" aria-label="Job pages">
+      <button id="prevPage" class="quiet">← Previous</button>
+      <span id="pageLabel">Page 1 of 1</span>
+      <button id="nextPage" class="quiet">Next →</button>
+    </nav>
+  </main>
+
+  <dialog id="jobDialog" class="job-dialog">
+    <form method="dialog" class="dialog-head">
+      <div>
+        <p class="eyebrow">JOB RECORD</p>
+        <input id="jobTitle" class="title-input" type="text" placeholder="Part / project name" maxlength="100" />
+      </div>
+      <button class="icon-btn" aria-label="Close">×</button>
+    </form>
+
+    <div class="dialog-body">
+      <section class="details-card">
+        <div class="field">
+          <label for="jobDate">Date</label>
+          <input id="jobDate" type="date" />
+        </div>
+        <div class="field">
+          <label for="jobProcess">Process</label>
+          <select id="jobProcess">
+            <option value="">Select process</option>
+            <option>Wet layup</option>
+            <option>Vacuum bagging</option>
+            <option>Resin infusion</option>
+            <option>Forged carbon</option>
+            <option>Prepreg</option>
+            <option>Compression molding</option>
+            <option>Tooling / mold making</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="targetResin">Target resin (g)</label>
+          <input id="targetResin" type="number" min="0" step="0.1" placeholder="—" />
+        </div>
+        <div class="field">
+          <label for="actualResin">Actual resin used (g)</label>
+          <input id="actualResin" type="number" min="0" step="0.1" placeholder="—" />
+        </div>
+        <div id="resinResult" class="resin-result" hidden></div>
+      </section>
+
+      <div class="block-toolbar">
+        <div>
+          <h2>Job notes</h2>
+          <p>Add only what is useful. Photos and notes stay in the order you add them.</p>
+        </div>
+        <div class="block-actions">
+          <label class="secondary file-label" for="photoInput">+ Photo</label>
+          <input id="photoInput" type="file" accept="image/*" multiple hidden />
+          <button id="addTextBtn" class="secondary" type="button">+ Text box</button>
+        </div>
+      </div>
+
+      <section id="blocks" class="blocks"></section>
+
+      <section id="emptyBlocks" class="empty-state">
+        <p>No notes yet.</p>
+        <span>Add a photo of the layup, cure, defect, finished part, or a quick note about what happened.</span>
+      </section>
+
+      <footer class="dialog-footer">
+        <button id="deleteJobBtn" class="danger" type="button">Delete job</button>
+        <span id="saveStatus">Saved automatically</span>
+      </footer>
+    </div>
+  </dialog>
+
+  <template id="jobCardTemplate">
+    <article class="job-card" tabindex="0">
+      <div class="card-image"></div>
+      <div class="card-body">
+        <div class="card-date"></div>
+        <h3 class="card-title"></h3>
+        <div class="card-meta"></div>
+      </div>
+    </article>
+  </template>
+
+  <template id="textBlockTemplate">
+    <article class="note-block text-block">
+      <div class="block-top">
+        <span class="block-kind">TEXT</span>
+        <button class="remove-block" type="button">Remove</button>
+      </div>
+      <input class="block-heading" type="text" placeholder="Heading (optional)" maxlength="120" />
+      <textarea class="block-text" rows="5" placeholder="What happened? What went well? What should change next time?"></textarea>
+    </article>
+  </template>
+
+  <template id="photoBlockTemplate">
+    <figure class="note-block photo-block">
+      <div class="block-top">
+        <span class="block-kind">PHOTO</span>
+        <button class="remove-block" type="button">Remove</button>
+      </div>
+      <img class="block-photo" alt="" />
+      <input class="photo-caption" type="text" placeholder="Caption (optional)" maxlength="180" />
+    </figure>
+  </template>
+
+  <script src="./app.js"></script>
+</body>
+</html>
