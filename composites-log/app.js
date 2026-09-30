@@ -6,6 +6,8 @@ let jobs = [];
 let activeJobId = null;
 let page = 1;
 
+const RESIN_MEASURED_PROCESSES = new Set(["Wet layup", "Resin infusion", "Forged carbon"]);
+
 const $ = (sel) => document.querySelector(sel);
 const jobGrid = $("#jobGrid");
 const dialog = $("#jobDialog");
@@ -78,7 +80,12 @@ function formatDate(value) {
   }).format(new Date(y, m - 1, d));
 }
 
+function processUsesMeasuredResin(process) {
+  return RESIN_MEASURED_PROCESSES.has(process);
+}
+
 function resinDelta(job) {
+  if (!processUsesMeasuredResin(job.process)) return null;
   const target = Number(job.targetResin);
   const actual = Number(job.actualResin);
   if (!(target > 0) || !(actual >= 0)) return null;
@@ -162,6 +169,21 @@ function getActiveJob() {
   return jobs.find(j => j.id === activeJobId);
 }
 
+function normalizeLegacyProcess(job) {
+  if (job.process === "Compression molding") job.process = "Forged carbon";
+  if (job.process === "Vacuum bagging") job.process = "";
+}
+
+function updateResinVisibility(job) {
+  const show = processUsesMeasuredResin(job?.process);
+  $("#targetResinField").hidden = !show;
+  $("#actualResinField").hidden = !show;
+  if (!show) {
+    $("#resinResult").hidden = true;
+    $("#resinResult").innerHTML = "";
+  }
+}
+
 async function createJob() {
   const job = {
     id: uid(),
@@ -184,12 +206,14 @@ function openJob(id) {
   activeJobId = id;
   const job = getActiveJob();
   if (!job) return;
+  normalizeLegacyProcess(job);
 
   $("#jobTitle").value = job.title || "";
   $("#jobDate").value = job.date || "";
   $("#jobProcess").value = job.process || "";
   $("#targetResin").value = job.targetResin ?? "";
   $("#actualResin").value = job.actualResin ?? "";
+  updateResinVisibility(job);
   renderResinResult(job);
   renderBlocks(job);
   dialog.showModal();
@@ -204,6 +228,7 @@ function updateJobFromFields() {
   job.title = $("#jobTitle").value;
   job.date = $("#jobDate").value;
   job.process = $("#jobProcess").value;
+  updateResinVisibility(job);
   job.targetResin = $("#targetResin").value;
   job.actualResin = $("#actualResin").value;
   job.updatedAt = Date.now();
@@ -448,6 +473,15 @@ dialog.addEventListener("close", () => {
   try {
     db = await openDB();
     jobs = await idbGetAll();
+    let migrated = false;
+    for (const job of jobs) {
+      const before = job.process;
+      normalizeLegacyProcess(job);
+      if (job.process !== before) {
+        migrated = true;
+        await idbPut(job);
+      }
+    }
     renderGrid();
   } catch (err) {
     console.error(err);
