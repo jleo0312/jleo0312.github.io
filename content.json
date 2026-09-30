@@ -282,9 +282,9 @@
       "thumbnail": "/media/waste-oil-furnace-thumbnail.jpg",
       "thumbnailAlt": "Waste oil powered furnace",
       "description": "",
-      "video": "/media/furnace-1080p60-under25mb.mp4",
-      "previewVideo": "/media/testing flame.mp4",
-      "thumbnailMotion": "hover",
+      "video": "/media/testing flame.mp4",
+      "previewVideo": "/media/furnace-1080p60-under25mb.mp4",
+      "thumbnailMotion": "loop",
       "thumbnailStyle": {
         "enabled": false,
         "showCaption": true
