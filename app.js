@@ -136,8 +136,10 @@ function card(project, index) {
   const number = settings.project.showNumbers ? `<span class="card-index">${String(index + 1).padStart(2, '0')}</span>` : '';
   if (project.demo) return `<article class="project-card demo-card" aria-label="Empty gallery slot ${index + 1}"><div class="thumbnail demo-thumbnail demo-tone-${Math.floor(index / 3)}"></div><div class="card-heading"><span class="demo-title" aria-hidden="true"></span>${number}</div></article>`;
   const gifPreview = project.thumbnailMotion !== 'still' && !reducedMotion.matches && /\.gif(?:[?#]|$)/i.test(project.previewVideo || '') && media(project.previewVideo);
-  const preview = media(project.previewVideo) && !gifPreview && !/\.gif(?:[?#]|$)/i.test(project.previewVideo || '') && project.thumbnailMotion !== 'still'
-    ? `<video class="preview" data-motion="${project.thumbnailMotion === 'loop' ? 'loop' : 'hover'}" muted loop playsinline preload="none" src="${media(project.previewVideo)}" aria-hidden="true" tabindex="-1"></video>` : '';
+  const previewURL = media(project.previewVideo);
+  const previewMotion = project.thumbnailMotion === 'loop' ? 'loop' : 'hover';
+  const preview = previewURL && !gifPreview && !/\.gif(?:[?#]|$)/i.test(project.previewVideo || '') && project.thumbnailMotion !== 'still'
+    ? `<video class="preview" data-motion="${previewMotion}" muted loop playsinline preload="none" ${previewMotion === 'hover' ? `data-src="${previewURL}"` : `src="${previewURL}"`} aria-hidden="true" tabindex="-1"></video>` : '';
 
   return `<article class="project-card" data-project="${esc(project.slug)}"><a class="project-link" href="/?project=${encodeURIComponent(project.slug)}"><div class="thumbnail" data-fit="${project.thumbnailFit === 'contain' ? 'contain' : 'cover'}">${gifPreview ? `<img src="${media(project.previewVideo)}" alt="${esc(project.thumbnailAlt || project.title)}" loading="lazy">` : cover(project)}${preview}</div><div class="card-heading"><h3>${esc(project.title)}</h3>${number}</div></a></article>`;
 }
@@ -186,16 +188,35 @@ function renderCarousel(data) {
 
 function bindPreviews() {
   const controller=new AbortController(),options={signal:controller.signal};
-  const items=[...document.querySelectorAll('.project-card')].map(card=>({card,link:card.querySelector('.project-link'),video:card.querySelector('video.preview'),visible:false,pending:false,blocked:false})).filter(item=>item.video);
-  const wants=item=>item.visible&&!item.card.closest('[inert]')&&!document.hidden&&!reducedMotion.matches&&!editorPreview;
+  const items=[...document.querySelectorAll('.project-card')].map(card=>{
+    const video=card.querySelector('video.preview');
+    return {card,link:card.querySelector('.project-link'),video,motion:video?.dataset.motion||'loop',visible:false,pending:false,blocked:false,engaged:false};
+  }).filter(item=>item.video);
+  const wants=item=>item.visible&&!item.card.closest('[inert]')&&!document.hidden&&!reducedMotion.matches&&!editorPreview&&(item.motion==='loop'||item.engaged);
+  function ensureSource(item){
+    if(!item.video.getAttribute('src')&&item.video.dataset.src){
+      item.video.src=item.video.dataset.src;
+      item.video.load();
+    }
+  }
   function update(item){
     if(!wants(item)){item.video.pause();item.link.classList.remove('playing');return;}
+    ensureSource(item);
     if(item.pending||!item.video.paused||item.blocked)return;
     item.pending=true;item.video.muted=true;item.video.defaultMuted=true;item.video.playsInline=true;
     Promise.resolve(item.video.play()).then(()=>{item.pending=false;if(controller.signal.aborted||!wants(item)){item.video.pause();return;}item.blocked=false;item.link.classList.add('playing');}).catch(()=>{item.pending=false;if(controller.signal.aborted)return;item.blocked=true;item.link.classList.remove('playing');});
   }
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{const item=items.find(i=>i.video===entry.target);if(item){item.visible=entry.isIntersecting&&entry.intersectionRatio>=.15;update(item);}}),{threshold:.15});
-  items.forEach(item=>{item.video.addEventListener('pause',()=>item.link.classList.remove('playing'),options);observer.observe(item.video);});
+  items.forEach(item=>{
+    item.video.addEventListener('pause',()=>item.link.classList.remove('playing'),options);
+    if(item.motion==='hover'){
+      item.link.addEventListener('mouseenter',()=>{item.engaged=true;item.blocked=false;update(item);},options);
+      item.link.addEventListener('mouseleave',()=>{item.engaged=false;update(item);},options);
+      item.link.addEventListener('focusin',()=>{item.engaged=true;item.blocked=false;update(item);},options);
+      item.link.addEventListener('focusout',()=>{item.engaged=false;update(item);},options);
+    }
+    observer.observe(item.video);
+  });
   // Some mobile browsers defer muted playback until the first user interaction.
   const retry=()=>items.forEach(item=>{item.blocked=false;update(item);});
   document.addEventListener('pointerdown',retry,{...options,passive:true});
