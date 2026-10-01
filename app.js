@@ -195,6 +195,8 @@ function bindPreviews() {
   const wants=item=>item.visible&&!item.card.closest('[inert]')&&!document.hidden&&!reducedMotion.matches&&!editorPreview&&(item.motion==='loop'||item.engaged);
   function ensureSource(item){
     if(!item.video.getAttribute('src')&&item.video.dataset.src){
+      // Hover previews stay light offscreen, then buffer shortly before the card reaches the viewport.
+      item.video.preload='auto';
       item.video.src=item.video.dataset.src;
       item.video.load();
     }
@@ -206,6 +208,17 @@ function bindPreviews() {
     item.pending=true;item.video.muted=true;item.video.defaultMuted=true;item.video.playsInline=true;
     Promise.resolve(item.video.play()).then(()=>{item.pending=false;if(controller.signal.aborted||!wants(item)){item.video.pause();return;}item.blocked=false;item.link.classList.add('playing');}).catch(()=>{item.pending=false;if(controller.signal.aborted)return;item.blocked=true;item.link.classList.remove('playing');});
   }
+
+  // Buffer hover previews only when they are near the viewport. Playback is still hover/focus only.
+  const preloadObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    const item=items.find(i=>i.video===entry.target);
+    if(item&&item.motion==='hover'){
+      ensureSource(item);
+      preloadObserver.unobserve(item.video);
+    }
+  }),{rootMargin:'600px 250px',threshold:0});
+
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{const item=items.find(i=>i.video===entry.target);if(item){item.visible=entry.isIntersecting&&entry.intersectionRatio>=.15;update(item);}}),{threshold:.15});
   items.forEach(item=>{
     item.video.addEventListener('pause',()=>item.link.classList.remove('playing'),options);
@@ -214,6 +227,7 @@ function bindPreviews() {
       item.link.addEventListener('mouseleave',()=>{item.engaged=false;update(item);},options);
       item.link.addEventListener('focusin',()=>{item.engaged=true;item.blocked=false;update(item);},options);
       item.link.addEventListener('focusout',()=>{item.engaged=false;update(item);},options);
+      preloadObserver.observe(item.video);
     }
     observer.observe(item.video);
   });
@@ -223,7 +237,7 @@ function bindPreviews() {
   document.addEventListener('keydown',retry,options);
   document.addEventListener('visibilitychange',retry,options);
   reducedMotion.addEventListener('change',retry,options);
-  activeCleanups.push(()=>{controller.abort();observer.disconnect();items.forEach(i=>i.video.pause());});
+  activeCleanups.push(()=>{controller.abort();observer.disconnect();preloadObserver.disconnect();items.forEach(i=>i.video.pause());});
 }
 
 function bindCarousel(carousel) {
