@@ -169,7 +169,65 @@
         "enabled": false,
         "showCaption": true
       },
-      "useSections": false
+      "useSections": true,
+      "sections": [
+        {
+          "id": "camera-mount-intro",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "camera-mount-sketch",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/camera-mount-design-sketch.webp",
+          "alt": "Original hand-drawn design sketch for the camera mount.",
+          "imagePosition": "left",
+          "text": "My original design sketch for the camera mount."
+        },
+        {
+          "id": "camera-mount-pla",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/camera-mount-pla-prototype.webp",
+          "alt": "The first PLA camera mount prototype and a failed printed component.",
+          "imagePosition": "above",
+          "text": "My first prototype quickly failed because it was printed in PLA, which proved too brittle for this load."
+        },
+        {
+          "id": "camera-mount-petg",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/camera-mount-petg-orientation.webp",
+          "alt": "PETG camera mount parts showing the revised print orientation.",
+          "imagePosition": "above",
+          "text": "I bought PETG and reprinted the parts. However, that version also failed because the print orientation left the part weak across the layer lines. I reprinted it again with the layers better aligned with the load path."
+        },
+        {
+          "id": "camera-mount-cad-assembly",
+          "type": "videoText",
+          "visible": true,
+          "video": "/media/camera-mount-assembly-loop.mp4",
+          "videoPosition": "right",
+          "gifLike": true,
+          "alt": "Looping CAD assembly of the camera mount.",
+          "text": "I learned how to build CAD assemblies and created one for the camera mount."
+        },
+        {
+          "id": "camera-mount-final",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/camera-mount-final-prototype.webp",
+          "alt": "Newest camera mount prototype holding a flywheel and mounted to a camera.",
+          "imagePosition": "above",
+          "text": "The newest prototype is strong enough to hold a flywheel. I also added GoPro-style knobs to make it easier to tighten and adjust."
+        },
+        {
+          "id": "camera-mount-end",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ]
     },
     {
       "title": "Carbon Fiber Coaster",

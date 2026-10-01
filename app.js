@@ -429,7 +429,9 @@ function renderMediaPair(section,ctx,sectionPath) {
 }
 
 function renderVideoText(section,ctx,sectionPath) {
-  const video=renderVideo(section.video,section.poster||'',section.imageStyle||{},`${sectionPath}.imageStyle`,'video-text-media');
+  const video=section.gifLike===true
+    ? (media(section.video)?`<video class="video-text-media" autoplay loop muted playsinline preload="auto" aria-label="${esc(section.alt||ctx.info.title||'Animated project media')}" src="${media(section.video)}"></video>`:'')
+    : renderVideo(section.video,section.poster||'',section.imageStyle||{},`${sectionPath}.imageStyle`,'video-text-media');
   const copy=textElement('p','',section.text);
   const position=section.videoPosition==='right'?'right':'left';
   return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="video-text-row video-${position}"><div class="video-text-media-wrap">${video}</div><div class="video-text-copy">${copy}</div></div></section>`;
