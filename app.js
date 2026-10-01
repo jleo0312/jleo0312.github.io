@@ -391,7 +391,8 @@ function renderVideo(src,poster,style={},path='',className='section-video') {
   if(/\.gif(?:[?#]|$)/i.test(src))return photoFrame(src,'Animated project image',style,{fit:'contain',path});
   const custom=style.enabled!==false&&Object.keys(style).some(key=>['width','height','aspect','align','fit','margin','padding'].includes(key));
   const caption=style.caption&&style.showCaption!==false?textElement('figcaption','image-caption',style.caption):'';
-  return `<figure class="video-frame ${custom?'video-custom':''} image-align-${choice(style.align,['left','center','right'],'center')}" data-image-style="${esc(path)}" style="${imageCSS(style,'contain')}">${style.captionPosition==='above'?caption:''}<video class="${className}" controls playsinline preload="metadata" ${style.loop?'loop':''} ${style.muted?'muted':''} ${media(poster)?`poster="${media(poster)}"`:''} src="${media(src)}">${esc(settings.project.videoFallback)} <a href="${media(src)}">${esc(settings.project.downloadVideo)}</a></video>${style.captionPosition!=='above'?caption:''}</figure>`;
+  const preload=media(poster)?'metadata':'auto';
+  return `<figure class="video-frame ${custom?'video-custom':''} image-align-${choice(style.align,['left','center','right'],'center')}" data-image-style="${esc(path)}" style="${imageCSS(style,'contain')}">${style.captionPosition==='above'?caption:''}<video class="${className}" controls playsinline preload="${preload}" ${style.loop?'loop':''} ${style.muted?'muted':''} ${media(poster)?`poster="${media(poster)}"`:''} src="${media(src)}">${esc(settings.project.videoFallback)} <a href="${media(src)}">${esc(settings.project.downloadVideo)}</a></video>${style.captionPosition!=='above'?caption:''}</figure>`;
 }
 function projectVideo(project,data) {
   return renderVideo(project.video,project.thumbnail,project.videoStyle||{},`projects.${data.projects.indexOf(project)}.videoStyle`,'main-video');
