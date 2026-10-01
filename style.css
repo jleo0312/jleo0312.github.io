@@ -305,7 +305,8 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
 }
 
 
-/* Consistent rounded grey text panels across project story sections. */
+/* Consistent rounded grey text panels across project story sections.
+   Center the PANEL itself, while keeping the text left-aligned. */
 .builder-section .section-copy,
 .builder-section .pair-caption,
 .builder-section.section-text .text-section,
@@ -313,13 +314,21 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   background:#f3f1ec;
   border-radius:16px;
   padding:32px;
-  text-align:center!important;
+  width:100%;
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left!important;
+}
+.builder-section .pair-caption{
+  margin-top:18px;
 }
 .builder-section .section-copy p,
 .builder-section .pair-caption,
 .builder-section.section-text .text-section p,
 .builder-section.section-video > .content-section > p{
   color:#3f3f43;
+  text-align:left!important;
 }
 @media(max-width:700px){
   .builder-section .section-copy,
