@@ -201,7 +201,7 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
 .video-text-media-wrap{min-width:0}
 .video-text-media-wrap .video-frame{margin:0}
 .video-text-media{display:block;width:100%;height:auto;max-height:620px;border-radius:16px;background:#171719}
-.video-text-copy{background:#f3f1ec;border-radius:16px;padding:32px;display:flex;align-items:center;min-height:100%}
+.video-text-copy{background:#f3f1ec;border-radius:16px;padding:32px;display:flex;align-items:center;justify-content:center;min-height:100%;text-align:center}
 .video-text-copy p{margin:0;font-size:20px;line-height:1.65;color:#3f3f43}
 @media(max-width:700px){
   .video-text-row{grid-template-columns:1fr;gap:16px}
@@ -313,6 +313,7 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   background:#f3f1ec;
   border-radius:16px;
   padding:32px;
+  text-align:center;
 }
 .builder-section .section-copy p,
 .builder-section .pair-caption,
