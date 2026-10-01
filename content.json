@@ -1,7 +1,7 @@
 {
   "name": "Josh",
   "portrait": "/media/IMG_4075_web-1.jpg",
-  "bio": "I\u2019ve always wanted to see what was underneath the surface. As a kid, that meant opening up toys, electronics, or anything mechanical I could get my hands on just to see how the pieces worked together. I also loved building things, whether it was with Legos, cardboard, or whatever materials I could find.\n\nBefore I got my first job, I started picking up free, non-running lawn mowers from Facebook Marketplace, fixing them, and selling them to make some side cash. Not long after that, I got my first 3D printer, which gave me a whole new way to design and make things myself. During high school, my dad got a welder, and I started learning how to fabricate things out of metal, including projects like a custom strut bar. I later spent two summers working as a mechanic at a local shop, where I gained more hands on experience troubleshooting and repairing vehicles.\n\nI\u2019m now a mechanical engineering student at Washington State University, where I\u2019ve become familiar with CAD and enjoy using it to bring my ideas to life. I also manage a composite manufacturing studio sponsored by Janicki Industries, which has given me the opportunity to dive deep into the world of composite manufacturing. Studying engineering has allowed me to keep building on the same curiosity and love for designing and making things that has been with me from the start.",
+  "bio": "I’ve always wanted to see what was underneath the surface. As a kid, that meant opening up toys, electronics, or anything mechanical I could get my hands on just to see how the pieces worked together. I also loved building things, whether it was with Legos, cardboard, or whatever materials I could find.\n\nBefore I got my first job, I started picking up free, non-running lawn mowers from Facebook Marketplace, fixing them, and selling them to make some side cash. Not long after that, I got my first 3D printer, which gave me a whole new way to design and make things myself. During high school, my dad got a welder, and I started learning how to fabricate things out of metal, including projects like a custom strut bar. I later spent two summers working as a mechanic at a local shop, where I gained more hands on experience troubleshooting and repairing vehicles.\n\nI’m now a mechanical engineering student at Washington State University, where I’ve become familiar with CAD and enjoy using it to bring my ideas to life. I also manage a composite manufacturing studio sponsored by Janicki Industries, which has given me the opportunity to dive deep into the world of composite manufacturing. Studying engineering has allowed me to keep building on the same curiosity and love for designing and making things that has been with me from the start.",
   "personal": "Me (left) with Adam Schultz, my boss at Schultz & Sons Automotive, during the summer of 2026.\n",
   "hobbies": [
     {
@@ -371,7 +371,7 @@
               "alt": "Finished coaster under inspection light."
             }
           ],
-          "text": "I let them cure according to the resin manufacturer\u2019s instructions, then get them out (easier said than done). You can see the coasters aren\u2019t perfect. There are visible voids, and the logo is primarily resin where the fibers weren\u2019t able to fit and bridging occurred."
+          "text": "I let them cure according to the resin manufacturer’s instructions, then get them out (easier said than done). You can see the coasters aren’t perfect. There are visible voids, and the logo is primarily resin where the fibers weren’t able to fit and bridging occurred."
         },
         {
           "id": "coaster-end",
@@ -420,8 +420,8 @@
           "id": "furnace-first-design-photo-text",
           "type": "photoText",
           "visible": true,
-          "image": "",
-          "alt": "Photo placeholder for the first furnace design.",
+          "image": "/media/oil-burner-aluminum-ingots.webp",
+          "alt": "Aluminum ingots cast from recycled cans.",
           "imagePosition": "left",
           "text": "My goal was to cast aluminum stock from recycled cans for future machining projects. My first wood powered design used a propane tank with a tangential air inlet, an air mattress inflator for airflow, and a cut fire extinguisher as the crucible. I later upgraded it into a foundry capable of melting dozens of cans per minute."
         },
@@ -504,29 +504,29 @@
     "gallery": {
       "eyebrow": "PROJECT GALLERY",
       "headline": "Bringing my ideas to life.",
-      "subtitle": "A look at what I\u2019ve built and what I\u2019m working on.",
+      "subtitle": "A look at what I’ve built and what I’m working on.",
       "allProjects": "All projects",
       "showCount": true
     },
     "footer": {
-      "left": "Josh \u00b7 Mechanical Engineering",
-      "right": "Washington State University \u00b7 Pullman, WA"
+      "left": "Josh · Mechanical Engineering",
+      "right": "Washington State University · Pullman, WA"
     },
     "home": {
-      "eyebrow": "MECHANICAL ENGINEERING \u00b7 WASHINGTON STATE UNIVERSITY",
-      "headline": "Hi, I\u2019m Josh.",
+      "eyebrow": "MECHANICAL ENGINEERING · WASHINGTON STATE UNIVERSITY",
+      "headline": "Hi, I’m Josh.",
       "subheadline": "I like to build things.",
-      "button": "Explore my projects \u2197",
+      "button": "Explore my projects ↗",
       "buttonLink": "/?view=gallery",
       "aboutTitle": "A little about me.",
       "hobbiesTitle": "Hobbies",
-      "highlightsTitle": "Things I\u2019ve been working on",
-      "galleryLink": "View gallery \u2197"
+      "highlightsTitle": "Things I’ve been working on",
+      "galleryLink": "View gallery ↗"
     },
     "identity": {
       "brand": "Josh Leonard\njoshua.ray.leonard2007@gmail.com",
-      "homeTitle": "Josh \u2014 Mechanical Engineering",
-      "galleryTitle": "Projects \u2014 Josh",
+      "homeTitle": "Josh — Mechanical Engineering",
+      "galleryTitle": "Projects — Josh",
       "description": "My mechanical engineering portfolio. Automotive builds, fabrication, and composites projects at Washington State University."
     },
     "navigation": {
@@ -535,11 +535,11 @@
       "skip": "Skip to content"
     },
     "project": {
-      "back": "\u2190 All projects",
+      "back": "← All projects",
       "endText": "Keep exploring.",
-      "galleryButton": "Back to the gallery \u2197",
+      "galleryButton": "Back to the gallery ↗",
       "coverLabel": "PROJECT",
-      "coverMark": "\u2197",
+      "coverMark": "↗",
       "showNumbers": true,
       "videoFallback": "Your browser cannot play this video.",
       "downloadVideo": "Download the video",
@@ -551,14 +551,14 @@
       "seconds": 2,
       "pause": "Pause",
       "play": "Play",
-      "previous": "\u2190",
-      "next": "\u2192",
+      "previous": "←",
+      "next": "→",
       "showCount": true
     },
     "messages": {
       "notFound": "Nothing here yet.",
-      "backToProjects": "Back to projects \u2197",
-      "loadError": "Couldn\u2019t load the portfolio.",
+      "backToProjects": "Back to projects ↗",
+      "loadError": "Couldn’t load the portfolio.",
       "retry": "Please refresh to try again."
     }
   },
