@@ -83,8 +83,8 @@
           "id": "truck-oil-section",
           "type": "photoText",
           "visible": true,
-          "image": "/media/truck-oil-placeholder.jpg",
-          "alt": "Blank placeholder for the oil discovery.",
+          "image": "/media/truck-oil-coolant.webp",
+          "alt": "Coolant-contaminated oil drained from the Toyota pickup during an oil change.",
           "imagePosition": "above",
           "text": "I changed the oil and found coolant mixed in with it, which pointed to a blown head gasket. I was pretty pissed when I realized the seller had screwed me over."
         },
