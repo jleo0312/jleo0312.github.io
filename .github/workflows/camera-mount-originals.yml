@@ -1,0 +1,97 @@
+name: Restore original camera mount photos
+
+on:
+  push:
+    paths:
+      - "camera-mount-upload/READY"
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Decode original photos and update camera mount
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p media
+          base64 -d camera-mount-upload/IMG_3605.txt > media/camera-mount-design-sketch.jpg
+          base64 -d camera-mount-upload/IMG_3606.txt > media/camera-mount-pla-assembled.jpg
+          base64 -d camera-mount-upload/IMG_3607.txt > media/camera-mount-pla-failed-part.jpg
+          base64 -d camera-mount-upload/IMG_3615.txt > media/camera-mount-petg-failure.jpg
+          base64 -d camera-mount-upload/IMG_3624.txt > media/camera-mount-petg-reoriented.jpg
+          base64 -d camera-mount-upload/IMG_3633.txt > media/camera-mount-flywheel-test.jpg
+          base64 -d camera-mount-upload/final-camera.txt > media/camera-mount-final-camera.jpg
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("content.json")
+          data = json.loads(path.read_text())
+          project = next(p for p in data["projects"] if p.get("slug") == "camera-mount")
+          project["useSections"] = True
+          project["sections"] = [
+              {"id":"camera-mount-intro","type":"projectIntro","visible":True},
+              {
+                  "id":"camera-mount-sketch","type":"photoText","visible":True,
+                  "image":"/media/camera-mount-design-sketch.jpg",
+                  "alt":"Original hand-drawn design sketch for the camera mount.",
+                  "imagePosition":"left","imageStyle":{"fit":"contain"},
+                  "text":"My original design drawing for the camera mount."
+              },
+              {
+                  "id":"camera-mount-pla","type":"mediaPair","visible":True,
+                  "items":[
+                      {"type":"image","src":"/media/camera-mount-pla-assembled.jpg","alt":"First red PLA camera mount prototype.","imageStyle":{"fit":"contain"}},
+                      {"type":"image","src":"/media/camera-mount-pla-failed-part.jpg","alt":"Failed red PLA camera mount component.","imageStyle":{"fit":"contain"}}
+                  ],
+                  "text":"My first prototype quickly failed because it was printed from PLA, which proved too brittle for this load."
+              },
+              {
+                  "id":"camera-mount-petg","type":"mediaPair","visible":True,
+                  "items":[
+                      {"type":"image","src":"/media/camera-mount-petg-failure.jpg","alt":"PETG camera mount parts after failure.","imageStyle":{"fit":"contain"}},
+                      {"type":"image","src":"/media/camera-mount-petg-reoriented.jpg","alt":"PETG parts reprinted with a stronger layer orientation.","imageStyle":{"fit":"contain"}}
+                  ],
+                  "text":"I bought PETG and reprinted everything. However, the new version failed in a similar way because the load was acting across the layer lines, so I reprinted it with the layers better aligned with the load path."
+              },
+              {
+                  "id":"camera-mount-cad-assembly","type":"videoText","visible":True,
+                  "video":"/media/camera-mount-assembly-loop.mp4","videoPosition":"right",
+                  "gifLike":True,"alt":"Looping CAD assembly of the camera mount.",
+                  "text":"I learned how to make CAD assemblies and created one for the camera mount."
+              },
+              {
+                  "id":"camera-mount-final","type":"mediaPair","visible":True,
+                  "items":[
+                      {"type":"image","src":"/media/camera-mount-flywheel-test.jpg","alt":"Newest camera mount prototype holding a flywheel.","imageStyle":{"fit":"contain"}},
+                      {"type":"image","src":"/media/camera-mount-final-camera.jpg","alt":"Newest camera mount prototype attached to a camera with GoPro-style knobs.","imageStyle":{"fit":"contain"}}
+                  ],
+                  "text":"The newest prototype is capable of holding a flywheel. I also added GoPro-style knobs for easier tightening and adjustment."
+              },
+              {"id":"camera-mount-end","type":"projectEnd","visible":True}
+          ]
+          path.write_text(json.dumps(data, indent=2) + "\n")
+          PY
+
+          rm -rf camera-mount-upload
+
+      - name: Commit restored originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content.json media camera-mount-upload
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Use original camera mount photos at full quality"
+          git push
