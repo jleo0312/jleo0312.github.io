@@ -192,7 +192,7 @@ function bindPreviews() {
     const video=card.querySelector('video.preview');
     return {card,link:card.querySelector('.project-link'),video,motion:video?.dataset.motion||'loop',visible:false,pending:false,blocked:false,engaged:false};
   }).filter(item=>item.video);
-  const wants=item=>item.visible&&!item.card.closest('[inert]')&&!document.hidden&&!reducedMotion.matches&&!editorPreview&&(item.motion==='loop'||item.engaged);
+  const wants=item=>item.visible&&!item.card.closest('[inert]')&&!document.hidden&&!reducedMotion.matches&&!editorPreview&&(item.motion==='loop'||item.engaged||(touchScreen.matches&&item.motion==='hover'));
   function ensureSource(item){
     if(!item.video.getAttribute('src')&&item.video.dataset.src){
       // Hover previews stay light offscreen, then buffer shortly before the card reaches the viewport.
@@ -209,7 +209,7 @@ function bindPreviews() {
     Promise.resolve(item.video.play()).then(()=>{item.pending=false;if(controller.signal.aborted||!wants(item)){item.video.pause();return;}item.blocked=false;item.link.classList.add('playing');}).catch(()=>{item.pending=false;if(controller.signal.aborted)return;item.blocked=true;item.link.classList.remove('playing');});
   }
 
-  // Buffer hover previews only when they are near the viewport. Playback is still hover/focus only.
+  // Buffer hover previews only when they are near the viewport. On touch devices, visible hover previews autoplay like GIFs.
   const preloadObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
     if(!entry.isIntersecting)return;
     const item=items.find(i=>i.video===entry.target);
