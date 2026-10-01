@@ -371,6 +371,27 @@
           "muted": false
         }
       ]
+    },
+    {
+      "title": "Drone",
+      "showInGallery": true,
+      "featuredOnHomepage": true,
+      "homepageOrder": "auto",
+      "slug": "drone",
+      "thumbnail": "/media/drone-thumbnail.webp",
+      "description": "",
+      "thumbnailMotion": "hover",
+      "coverText": "Drone",
+      "theme": "blue",
+      "thumbnailStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "videoStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "useSections": false
     }
   ],
   "website": {
