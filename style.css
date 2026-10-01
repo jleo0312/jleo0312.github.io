@@ -338,3 +338,13 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
     padding:24px;
   }
 }
+
+
+/* Center rounded project text panels within their sections. */
+.builder-section .pair-caption,
+.builder-section .section-copy,
+.builder-section.section-text .text-section,
+.builder-section.section-video > .content-section > p{
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
