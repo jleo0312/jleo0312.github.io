@@ -36,7 +36,7 @@ button:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
 /* Each project is a short introduction followed by photo/text pairs. */
 .detail .back{margin-bottom:32px}
 .detail-heading{margin-bottom:38px}
-.project-description{max-width:780px}
+.project-description{max-width:none;width:100%}
 .photo-text-sections{display:grid;gap:48px}
 .photo-text-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:46px;align-items:center}
 .photo-text-row .photo-link{display:block;min-width:0;border-radius:14px;overflow:hidden;background:#f5f5f7}
