@@ -348,3 +348,20 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   margin-left:auto!important;
   margin-right:auto!important;
 }
+
+
+/* Match both media heights in the Toyota piston-cleanup row. */
+.builder-section[data-section-id="truck-pistons-gif-pair"] .media-pair{
+  align-items:stretch!important;
+}
+.builder-section[data-section-id="truck-pistons-gif-pair"] .paired-media-item,
+.builder-section[data-section-id="truck-pistons-gif-pair"] .image-frame,
+.builder-section[data-section-id="truck-pistons-gif-pair"] .image-box{
+  height:100%!important;
+}
+.builder-section[data-section-id="truck-pistons-gif-pair"] .paired-media-item img,
+.builder-section[data-section-id="truck-pistons-gif-pair"] .paired-media-item video{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+}
