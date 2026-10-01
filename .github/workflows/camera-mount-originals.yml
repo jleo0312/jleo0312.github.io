@@ -16,18 +16,32 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Decode original photos and update camera mount
+      - name: Restore original uploaded photos
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p media
-          base64 -d camera-mount-upload/IMG_3605.txt > media/camera-mount-design-sketch.jpg
-          base64 -d camera-mount-upload/IMG_3606.txt > media/camera-mount-pla-assembled.jpg
-          base64 -d camera-mount-upload/IMG_3607.txt > media/camera-mount-pla-failed-part.jpg
-          base64 -d camera-mount-upload/IMG_3615.txt > media/camera-mount-petg-failure.jpg
-          base64 -d camera-mount-upload/IMG_3624.txt > media/camera-mount-petg-reoriented.jpg
-          base64 -d camera-mount-upload/IMG_3633.txt > media/camera-mount-flywheel-test.jpg
-          base64 -d camera-mount-upload/final-camera.txt > media/camera-mount-final-camera.jpg
+
+          fetch_blob() {
+            sha="$1"
+            out="$2"
+            curl -fsSL \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/git/blobs/$sha" \
+              | jq -r '.content' | tr -d '\n' | base64 -d > "$out"
+          }
+
+          fetch_blob e76a7a7d20c6e7b5b499d19d02984909c2d3f0da media/camera-mount-design-sketch.jpg
+          fetch_blob 10bfa8920e4d922fa6eef53f886c7933a446eaf3 media/camera-mount-pla-assembled.jpg
+          fetch_blob a5f830dd83be4eaa4137b364d6747f8d374ac9af media/camera-mount-pla-failed-part.jpg
+          fetch_blob b31631a56230edd15d57be22e4888ff6200a3ddd media/camera-mount-petg-failure.jpg
+          fetch_blob 6d736877d7661c06c3ab1974fb402621420d2b2d media/camera-mount-petg-reoriented.jpg
+          fetch_blob 9d6e80b24b257909c0da409a0a0d393528940815 media/camera-mount-flywheel-test.jpg
+          fetch_blob 6468d40c3698fcd12400433f7dd06d4a31155b44 media/camera-mount-final-camera.jpg
 
           python - <<'PY'
           import json
@@ -81,7 +95,7 @@ jobs:
           path.write_text(json.dumps(data, indent=2) + "\n")
           PY
 
-          rm -rf camera-mount-upload
+          rm -f camera-mount-upload/READY
 
       - name: Commit restored originals
         shell: bash
