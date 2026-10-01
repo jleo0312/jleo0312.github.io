@@ -280,7 +280,7 @@
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
       "slug": "waste-oil-powered-furnace",
-      "thumbnail": "/media/waste-oil-furnace-thumbnail.jpg",
+      "thumbnail": "/media/waste-oil-furnace-thumbnail.webp",
       "thumbnailAlt": "Waste oil powered furnace",
       "description": "",
       "video": "/media/testing flame.mp4",
@@ -351,7 +351,7 @@
               "type": "video",
               "src": "/media/testing flame.mp4",
               "alt": "Testing the siphon-style atomizer.",
-              "poster": "/media/waste-oil-furnace-thumbnail.jpg"
+              "poster": "/media/waste-oil-furnace-thumbnail.webp"
             },
             {
               "type": "blank",
