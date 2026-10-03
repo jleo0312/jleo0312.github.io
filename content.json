@@ -455,13 +455,14 @@
           "items": [
             {
               "type": "video",
-              "src": "/media/testing flame.mp4",
-              "alt": "Testing the siphon-style atomizer.",
-              "poster": "/media/testing-flame-thumbnail-hq.webp"
+              "src": "/square nozzle.mp4",
+              "alt": "Testing the redesigned circular nozzle."
             },
             {
-              "type": "blank",
-              "alt": "Video placeholder for the siphon-style atomizer."
+              "type": "video",
+              "src": "/media/testing flame.mp4",
+              "alt": "Testing the siphon-feed atomizer.",
+              "poster": "/media/testing-flame-thumbnail-hq.webp"
             }
           ]
         },
