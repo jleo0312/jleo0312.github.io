@@ -365,3 +365,26 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   height:100%!important;
   object-fit:cover!important;
 }
+
+
+/* Furnace siphon/nozzle comparison: keep both portrait videos the same size. */
+.builder-section[data-section-id="furnace-siphon-atomizer-videos"] .media-pair{
+  align-items:stretch;
+}
+.builder-section[data-section-id="furnace-siphon-atomizer-videos"] .paired-media-item,
+.builder-section[data-section-id="furnace-siphon-atomizer-videos"] .video-frame{
+  height:100%;
+}
+.builder-section[data-section-id="furnace-siphon-atomizer-videos"] .video-frame{
+  aspect-ratio:9 / 16;
+  overflow:hidden;
+  border-radius:14px;
+  background:#171719;
+}
+.builder-section[data-section-id="furnace-siphon-atomizer-videos"] .paired-video{
+  width:100%;
+  height:100%;
+  aspect-ratio:9 / 16;
+  object-fit:cover;
+  border-radius:14px;
+}
