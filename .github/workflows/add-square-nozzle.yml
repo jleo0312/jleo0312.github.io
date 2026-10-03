@@ -1,0 +1,29 @@
+name: Add square nozzle video
+
+on:
+  push:
+    paths:
+      - ".tmp_square_nozzle/READY"
+
+permissions:
+  contents: write
+
+jobs:
+  add-video:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Rebuild uploaded video
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .tmp_square_nozzle/part_* | base64 -d > "media/square-nozzle.mp4"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "media/square-nozzle.mp4"
+          git rm -r .tmp_square_nozzle
+          git rm .github/workflows/add-square-nozzle.yml
+          git commit -m "Add square nozzle furnace video"
+          git push
