@@ -367,24 +367,34 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
 }
 
 
-/* Furnace siphon/nozzle comparison: keep both portrait videos the same size. */
+/* Furnace siphon/nozzle comparison: force identical preview/player dimensions. */
 .builder-section[data-section-id="furnace-siphon-atomizer-videos"] .media-pair{
-  align-items:stretch;
+  align-items:start!important;
 }
-.builder-section[data-section-id="furnace-siphon-atomizer-videos"] .paired-media-item,
-.builder-section[data-section-id="furnace-siphon-atomizer-videos"] .video-frame{
-  height:100%;
+.builder-section[data-section-id="furnace-siphon-atomizer-videos"] .paired-media-item{
+  min-width:0!important;
 }
 .builder-section[data-section-id="furnace-siphon-atomizer-videos"] .video-frame{
-  aspect-ratio:9 / 16;
-  overflow:hidden;
-  border-radius:14px;
-  background:#171719;
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:9 / 16!important;
+  overflow:hidden!important;
+  border-radius:14px!important;
+  background:#171719!important;
+  margin:0!important;
 }
 .builder-section[data-section-id="furnace-siphon-atomizer-videos"] .paired-video{
-  width:100%;
-  height:100%;
-  aspect-ratio:9 / 16;
-  object-fit:cover;
-  border-radius:14px;
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  border-radius:14px!important;
 }
