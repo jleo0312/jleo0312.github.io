@@ -1,0 +1,29 @@
+name: Replace furnace video
+
+on:
+  push:
+    paths:
+      - ".tmp_furnace_video/READY"
+
+permissions:
+  contents: write
+
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Rebuild uploaded video
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .tmp_furnace_video/part_* | base64 -d > "media/testing flame.mp4"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "media/testing flame.mp4"
+          git rm -r .tmp_furnace_video
+          git rm .github/workflows/replace-furnace-video.yml
+          git commit -m "Replace furnace video"
+          git push
