@@ -103,6 +103,7 @@ function mount({data,key,settings,model,send}){
    if(item){
     const hasPreview=!!read(data,item.videoSrcPath);
     toolbar.append(button('Photo / thumbnail','replace'),button(hasPreview?'Replace preview video':'Add preview video','preview-video'));
+    if(read(data,item.imageSrcPath)??item.fallbackImage)toolbar.append(button('Remove thumbnail','remove-thumbnail'));
     if(hasPreview){toolbar.append(button('Crop preview video','preview-crop'),button('Remove video','remove-video'));toolbar.append(selectControl('Video behavior','video-behavior',[...(item.primaryVideo?[['controls','Video player']]:[]),['hover','Play on hover'],['loop','Loop automatically'],['still','Picture only']],read(data,item.motionPath)||item.defaultMotion));}
     for(const [value,label]of [['left','Photo left'],['right','Photo right'],['above','Above text'],['below','Below text']])if(item.layoutPath)toolbar.append(button(label,'layout',value));
     toolbar.append(selectControl('Image proportions','aspect',[['auto','Original shape'],['square','Square'],['portrait','Portrait · 4:5'],['tall','Portrait · 3:4'],['landscape','Landscape'],['wide','Wide']],read(data,item.path+'.aspect')||'auto'));
@@ -203,6 +204,7 @@ function mount({data,key,settings,model,send}){
   else if(action==='replace'){input.accept=item.preview?'video/*,image/gif':'image/*,.heic,.heif';input.dataset.uploadPath=item.preview?item.videoSrcPath:item.imageSrcPath;input.value='';send({action:'upload-start'});input.click();}
   else if(action==='preview-video'){input.accept='video/*,image/gif';input.dataset.uploadPath=item.videoSrcPath;input.value='';send({action:'upload-start'});input.click();}
   else if(action==='remove-video')transaction('remove-video',{path:item.videoSrcPath});
+  else if(action==='remove-thumbnail')transaction('remove-thumbnail',{path:item.imageSrcPath});
   else if(action==='preview-crop'){const path=item.previewPath;if(images.has(path)){cropping=true;select(selectedId,path);send({action:'select',id:selectedId,imagePath:path,textPath:''});}}
   else if(action==='thumbnail-view'){const path=item.basePath;cropping=false;select(selectedId,path);send({action:'select',id:selectedId,imagePath:path,textPath:''});}
   else if(action==='layout'){if(picked&&objects.record(picked))objectChange(null);transaction('image-layout',{position:b.dataset.value});}
