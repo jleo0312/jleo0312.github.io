@@ -54,6 +54,8 @@ function collect({data,key,settings,model,editing=false}){
     const text=field(root,'.section-copy p',path+'.text','Click to write beside this photo',{parent:copy,optional:true});if(text&&photo?.text==null&&photo?.caption){text.textContent=photo.caption;text.dataset.empty='false';}
     break;
    }
+   case 'mediaPair':field(root,'.pair-caption',base+'.text','Media row text',{parent:root.querySelector('.content-section'),className:'pair-caption',optional:true});break;
+   case 'videoText':field(root,'.video-text-copy p',base+'.text','Video description',{parent:root.querySelector('.video-text-copy'),optional:true});break;
    case 'text':case 'heading':{
     const wrap=root.querySelector('.text-section');field(root,'h1,h2,h3',base+'.heading','Add a heading',{parent:wrap,tag:section.headingLevel||'h2',optional:true,prepend:true});if(section.type==='text')field(root,'.text-section > p',base+'.text','Click to write',{parent:wrap});break;
    }
