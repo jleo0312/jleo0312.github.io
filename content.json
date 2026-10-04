@@ -288,8 +288,11 @@
       "coverText": "Forged carbon.\nWSU Cougar coaster.",
       "theme": "blue",
       "thumbnailStyle": {
-        "enabled": false,
-        "showCaption": true
+        "enabled": true,
+        "showCaption": true,
+        "focalX": 47,
+        "focalY": 70,
+        "fit": "cover"
       },
       "videoStyle": {
         "enabled": false,
