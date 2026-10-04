@@ -49,8 +49,8 @@
       "thumbnailStyle": {
         "enabled": true,
         "showCaption": true,
-        "focalX": 51,
-        "focalY": 73,
+        "focalX": 52,
+        "focalY": 74,
         "fit": "cover"
       },
       "videoStyle": {
@@ -289,6 +289,28 @@
           "textWidth": 44
         },
         {
+          "id": "section-e759af6d-379c-44de-9f37-b7dd05509bf5",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/muu9rspo-ja3q3-engine-pulled.jpg",
+          "heading": "",
+          "text": "",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/sections/section-e759af6d-379c-44de-9f37-b7dd05509bf5/imageStyle",
+              "x": 8.677685950413224,
+              "y": 0,
+              "width": 42.51606978879706,
+              "height": 654.390625
+            }
+          ]
+        },
+        {
           "id": "truck-project-end",
           "type": "projectEnd",
           "visible": true
@@ -303,7 +325,7 @@
       "slug": "camera-mount",
       "thumbnail": "/media/muu8ai1b-9u43b-camera-mount-outside.jpg",
       "description": "I record the work I do on my truck to upload to YouTube. Before making this mount, my best option was stacking containers to get the camera to the right height. I designed a custom camera mount that attaches directly to my floodlight stand, giving me a much more stable and adjustable setup.",
-      "previewVideo": "/media/muu71xue-kz8ul-camera-mount.mov",
+      "previewVideo": "/media/muu9f707-cm9mr-camera-mount.mov",
       "thumbnailMotion": "hover",
       "thumbnailFit": "contain",
       "coverText": "Camera mount",
@@ -363,30 +385,6 @@
           "text": "My first prototype quickly failed because it was printed from PLA, which proved too brittle for this load."
         },
         {
-          "id": "camera-mount-final",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/camera-mount-flywheel-test.jpg",
-              "alt": "Newest camera mount prototype holding a flywheel.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            },
-            {
-              "type": "image",
-              "src": "/media/camera-mount-final-camera.jpg",
-              "alt": "Newest camera mount prototype attached to a camera with GoPro-style knobs.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            }
-          ],
-          "text": "The newest prototype is capable of holding a flywheel. I also added GoPro-style knobs for easier tightening and adjustment."
-        },
-        {
           "id": "camera-mount-petg",
           "type": "mediaPair",
           "visible": true,
@@ -409,6 +407,30 @@
             }
           ],
           "text": "I bought PETG and reprinted everything. However, the new version failed in a similar way because the load was acting across the layer lines, so I reprinted it with the layers better aligned with the load path."
+        },
+        {
+          "id": "camera-mount-final",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/camera-mount-flywheel-test.jpg",
+              "alt": "Newest camera mount prototype holding a flywheel.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/camera-mount-final-camera.jpg",
+              "alt": "Newest camera mount prototype attached to a camera with GoPro-style knobs.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            }
+          ],
+          "text": "The newest prototype is capable of holding a flywheel. I also added GoPro-style knobs for easier tightening and adjustment."
         },
         {
           "id": "camera-mount-cad-assembly",
