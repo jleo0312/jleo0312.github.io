@@ -803,21 +803,6 @@
           "text": "My goal was to recycle aluminum cans into ingots that I could later remelt and cast into machining stock for future projects. My first wood-powered design used a propane tank with a tangential air inlet, an air mattress inflator for airflow, and a cut fire extinguisher as the crucible. I later upgraded it into a foundry capable of melting dozens of cans per minute."
         },
         {
-          "id": "furnace-first-design-videos",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "blank",
-              "alt": "Video placeholder for the first furnace design."
-            },
-            {
-              "type": "blank",
-              "alt": "Video placeholder for the first furnace design."
-            }
-          ]
-        },
-        {
           "id": "furnace-siphon-transition",
           "type": "text",
           "visible": true,
@@ -826,45 +811,79 @@
           "textSize": "normal"
         },
         {
-          "id": "furnace-siphon-atomizer-videos",
+          "id": "furnace-first-design-videos",
           "type": "mediaPair",
           "visible": true,
           "items": [
             {
-              "type": "video",
-              "src": "/media/muud8bn3-78o6p-square-nozzle.mp4",
-              "alt": "Testing the redesigned circular nozzle.",
+              "type": "blank",
+              "alt": "Video placeholder for the first furnace design.",
+              "src": "",
               "imageStyle": {
                 "enabled": true,
-                "fit": "contain"
+                "previewVideo": "/media/muug33q5-j8cgk-gravity-fed.mov"
               }
             },
             {
-              "type": "video",
-              "src": "/media/muud8igr-tcl9x-gravity-fed.mov",
-              "alt": "Testing the siphon-feed atomizer.",
-              "poster": "/media/testing-flame-thumbnail-hq.webp",
+              "type": "blank",
+              "alt": "Video placeholder for the first furnace design.",
               "imageStyle": {
                 "enabled": true,
-                "fit": "cover"
+                "previewVideo": "/media/muug38qm-f3wfn-square-nozzle.mp4"
               }
             }
           ],
           "elements": [
             {
-              "id": "image:projects/waste-oil-powered-furnace/sections/furnace-siphon-atomizer-videos/items/1/imageStyle",
-              "x": 51.010101010101,
+              "id": "image:projects/waste-oil-powered-furnace/sections/furnace-first-design-videos/items/0/imageStyle",
+              "x": 0,
               "y": 2.203856749311295,
               "width": 48.98989898989899
             }
           ],
-          "text": ""
+          "text": "The initial fuel system was extremely simple, with no real plumbing. A container gravity-fed oil through a tube directly into the siphon nozzle inlet. The original burner also used a square inlet tube because it had been built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. However, after switching to the liquid-fuel torch, atomized oil began collecting on the walls of the square tube, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation."
         },
         {
-          "id": "section-20856c4d-1448-4bf5-8b8b-ef83cc8721de",
-          "type": "text",
+          "id": "section-4f21a1d2-e261-432e-8cff-87ae69583e41",
+          "type": "video",
           "visible": true,
-          "text": "The original design used a square inlet tube because it was built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. After switching to the liquid-fuel torch, atomized oil began collecting on the tube walls, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation.\n\nI fixed this by building a new torch assembly with a circular outlet tube."
+          "video": "/media/muug7cjd-rano9-torch-test.mp4",
+          "caption": "",
+          "showCaption": true,
+          "elements": [
+            {
+              "id": "image:projects/waste-oil-powered-furnace/sections/section-4f21a1d2-e261-432e-8cff-87ae69583e41/imageStyle",
+              "x": 8.539944903581267,
+              "y": 10.05940082644628,
+              "width": 35.53719008264463,
+              "height": 726.390625
+            },
+            {
+              "id": "text:projects/waste-oil-powered-furnace/sections/section-4f21a1d2-e261-432e-8cff-87ae69583e41/text",
+              "x": 54.315886134067945,
+              "y": 37.662850091827366,
+              "width": 38.01652892561984,
+              "height": 111.1875
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          },
+          "text": "I fixed this by building a new torch assembly, with a circular outlet tube.\n"
+        },
+        {
+          "id": "section-7db94714-92ec-47a3-8140-e2f9833724df",
+          "type": "photoText",
+          "visible": true,
+          "image": "",
+          "heading": "",
+          "text": "",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44
         },
         {
           "id": "section-d64225ea-6929-48ed-9960-330fe9de7542",
