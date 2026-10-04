@@ -189,7 +189,7 @@ function mount({data,key,settings,model,send}){
   if(action==='edit-text'){if(editing)stopText();else startText(picked.node);buildToolbar();}
   else if(action==='reset-position')objectChange(null);
   else if(action==='front'||action==='back')objectChange({layer:clamp((layoutValue()?.layer||1)+(action==='front'?1:-1),0,20)});
-  else if(action==='replace'){const video=item.srcPath.endsWith('.video')||item.frame.querySelector('video')||read(data,item.srcPath.replace(/\.src$/,'.type'))==='video';input.accept=video?'video/*,image/gif':'image/*';input.dataset.uploadPath=item.srcPath;input.value='';input.click();}
+  else if(action==='replace'){const video=!item.srcPath.endsWith('.thumbnail')&&(item.srcPath.endsWith('.video')||item.frame.querySelector('video')||read(data,item.srcPath.replace(/\.src$/,'.type'))==='video');input.accept=video?'video/*,image/gif':'image/*,.heic,.heif';input.dataset.uploadPath=item.srcPath;input.value='';input.click();}
   else if(action==='preview-video'){input.accept='video/*,image/gif';input.dataset.uploadPath=item.path.replace(/\.thumbnailStyle$/,'.previewVideo');input.value='';input.click();}
   else if(action==='layout'){if(picked&&objects.record(picked))objectChange(null);transaction('image-layout',{position:b.dataset.value});}
   else if(action==='fit')transaction('image-fit',{fit:read(data,item.path+'.fit')==='cover'?'contain':'cover'});
