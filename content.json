@@ -651,7 +651,7 @@
             },
             {
               "type": "video",
-              "src": "/media/testing flame.mp4",
+              "src": "/media/muuc2s0d-oe81t-torch-test.mp4",
               "alt": "Testing the siphon-feed atomizer.",
               "poster": "/media/testing-flame-thumbnail-hq.webp"
             }
@@ -661,13 +661,7 @@
           "id": "section-20856c4d-1448-4bf5-8b8b-ef83cc8721de",
           "type": "text",
           "visible": true,
-          "text": "The original design used a square inlet tube because it was built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. After switching to the liquid-fuel torch, however, atomized oil began collecting on the tube walls, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation."
-        },
-        {
-          "id": "section-031b55a6-0330-4318-92c8-263e7c6404b7",
-          "type": "text",
-          "visible": true,
-          "text": "I fixed this by building a new torch\n assembly with a circular outlet tube."
+          "text": "The original design used a square inlet tube because it was built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. After switching to the liquid-fuel torch, atomized oil began collecting on the tube walls, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation.\n\n\n\n\n\n\n\n\n\n\n\n\n\nI fixed this by building a new torch assembly with a circular outlet tube."
         },
         {
           "id": "end-waste-oil-furnace",
