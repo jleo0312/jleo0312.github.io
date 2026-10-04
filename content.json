@@ -80,7 +80,9 @@
               "alt": "My dogs sitting in the bed of my Toyota pickup."
             }
           ],
-          "text": "The day that I got my truck. I drove to Oregon to get it, and the drive back was truly an experience. I also took a picture of my dogs in my truck, just like how my dad did when he got his truck."
+          "text": "The day that I got my truck. I drove to Oregon to get it, and the drive back was truly an experience. I also took a picture of my dogs in my truck, just like how my dad did when he got his truck.",
+          "textBoxes": [],
+          "elements": []
         },
         {
           "id": "truck-oil-section",
@@ -88,8 +90,32 @@
           "visible": true,
           "image": "/media/truck-oil-coolant.webp",
           "alt": "Coolant-contaminated oil drained from the Toyota pickup during an oil change.",
-          "imagePosition": "above",
-          "text": "I changed the oil and found coolant mixed in with it, which pointed to a blown head gasket. I was pretty pissed when I realized the seller had screwed me over."
+          "imagePosition": "left",
+          "text": "I changed the oil and found coolant mixed in with it, which pointed to a blown head gasket. I was pretty pissed when I realized the seller had screwed me over.",
+          "imageStyle": {
+            "enabled": true,
+            "focalX": 50,
+            "focalY": 48,
+            "fit": "cover",
+            "aspect": "portrait",
+            "height": 0
+          },
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/sections/truck-oil-section/imageStyle",
+              "x": 7.109446740128559,
+              "y": 0,
+              "width": 40.59486914600551,
+              "height": 842.7761007430246
+            },
+            {
+              "id": "text:projects/toyota-engine-swap/sections/truck-oil-section/text",
+              "x": 60.79688934802571,
+              "y": 33.87855831037649,
+              "width": 36.2646349862259
+            }
+          ],
+          "heading": ""
         },
         {
           "id": "truck-headgasket-pair",
@@ -99,15 +125,39 @@
             {
               "type": "image",
               "src": "/media/truck-headgasket-day.jpg",
-              "alt": "Working on the truck during the day during the head gasket repair."
+              "alt": "Working on the truck during the day during the head gasket repair.",
+              "imageStyle": {
+                "enabled": true,
+                "fit": "cover"
+              }
             },
             {
               "type": "image",
               "src": "/media/truck-headgasket-night.jpg",
-              "alt": "Working on the truck at night during the head gasket repair."
+              "alt": "Working on the truck at night during the head gasket repair.",
+              "imageStyle": {
+                "enabled": true,
+                "fit": "cover"
+              }
             }
           ],
-          "text": "I worked day and night on the head gasket. At that point, this was the most complicated thing I had ever done in my life."
+          "text": "I worked day and night on the head gasket. At that point, this was the most complicated thing I had ever done in my life.",
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/sections/truck-headgasket-pair/items/0/imageStyle",
+              "x": 0,
+              "y": 0,
+              "width": 48.98989898989899,
+              "height": 696.296875
+            },
+            {
+              "id": "image:projects/toyota-engine-swap/sections/truck-headgasket-pair/items/1/imageStyle",
+              "x": 51.010101010101,
+              "y": 0,
+              "width": 48.98989898989899,
+              "height": 696.296875
+            }
+          ]
         },
         {
           "id": "truck-pistons-gif-pair",
@@ -117,7 +167,13 @@
             {
               "type": "image",
               "src": "/media/truck-pistons.jpg",
-              "alt": "Top of the pistons showing heavy carbon buildup."
+              "alt": "Top of the pistons showing heavy carbon buildup.",
+              "imageStyle": {
+                "enabled": true,
+                "fit": "cover",
+                "focalX": 55,
+                "focalY": 60
+              }
             },
             {
               "type": "video",
@@ -126,7 +182,16 @@
               "gifLike": true
             }
           ],
-          "text": "The tops of the pistons had tons of carbon buildup, so I cleaned them up."
+          "text": "The tops of the pistons had tons of carbon buildup, so I cleaned them up.",
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/sections/truck-pistons-gif-pair/items/0/imageStyle",
+              "x": 0,
+              "y": 2.203856749311295,
+              "width": 44.67401285583104,
+              "height": 864.8825562324274
+            }
+          ]
         },
         {
           "id": "truck-first-start",
@@ -134,7 +199,16 @@
           "visible": true,
           "video": "/media/first start.mp4",
           "videoPosition": "left",
-          "text": "Finally, I turned the key and heard the beautiful sound of my engine that I rebuilt, running."
+          "text": "Finally, I turned the key and heard the beautiful sound of my engine that I rebuilt, running.",
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/sections/truck-first-start/imageStyle",
+              "x": 9.274563820018365,
+              "y": 2.203856749311295,
+              "width": 37.64778466483012,
+              "height": 654.390625
+            }
+          ]
         },
         {
           "id": "truck-later-work",
