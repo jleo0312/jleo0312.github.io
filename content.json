@@ -821,7 +821,7 @@
               "src": "",
               "imageStyle": {
                 "enabled": true,
-                "previewVideo": "/media/muug33q5-j8cgk-gravity-fed.mov"
+                "previewVideo": ""
               }
             },
             {
@@ -841,7 +841,7 @@
               "width": 48.98989898989899
             }
           ],
-          "text": "The initial fuel system was extremely simple, with no real plumbing. A container gravity-fed oil through a tube directly into the siphon nozzle inlet. The original burner also used a square inlet tube because it had been built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. However, after switching to the liquid-fuel torch, atomized oil began collecting on the walls of the square tube, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation."
+          "text": "The initial fuel system was extremely simple, with no real plumbing. A container gravity-fed oil through a tube directly into the siphon nozzle inlet. The original burner used a square inlet tube because it had been built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. However, after switching to the liquid-fuel torch, atomized oil began collecting on the walls of the square tube, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation."
         },
         {
           "id": "section-4f21a1d2-e261-432e-8cff-87ae69583e41",
