@@ -461,6 +461,36 @@
           "text": "I began assembly by checking all my oil clearances with plastigage. You put a thin strip along the crankshaft journal, tighten the main cap onto the crankshaft, remove and check how much it squished down. All my clearances were within spec."
         },
         {
+          "id": "section-43d1d370-2987-48c5-bdb6-0957a435f21b",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muufs5q0-tzp79-4-stroke-gif.gif",
+              "alt": "",
+              "imageStyle": {
+                "fit": "contain",
+                "aspect": "square",
+                "enabled": true
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/muufsfh0-3i9o1-lapped-valve.jpeg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square",
+                "enabled": true,
+                "focalX": 46,
+                "focalY": 5
+              }
+            }
+          ],
+          "text": "An internal combustion engine uses valves to \"breathe.\" The engine does this by opening and closing intake and exhaust valves. They are the blue and red upside-down T shaped objects in the gif. \n\nI lapped my valves, meaning I reground the mating surface between the valve and head. This increases it's ability to contain pressure and therefore results in more efficient combustion."
+        },
+        {
           "id": "truck-project-end",
           "type": "projectEnd",
           "visible": true
