@@ -48,3 +48,16 @@
 .canvas-move-edge.edge-left{left:-5px;top:8px;bottom:8px;width:10px}
 .canvas-move-edge.edge-right{right:-5px;top:8px;bottom:8px;width:10px}
 .canvas-toolbar-note{flex-basis:100%;padding:3px 5px;color:#596875;font-size:12px}
+
+/* Smart guides: snap dragged objects to shared edges/centers and equal gaps. */
+.canvas-smart-guide,.canvas-gap-guide{position:fixed;z-index:2147483645;pointer-events:none;background:#d62976}
+.canvas-smart-guide-v{width:1px}
+.canvas-smart-guide-h{height:1px}
+.canvas-gap-guide-x{height:1px}
+.canvas-gap-guide-y{width:1px}
+.canvas-gap-guide-x:before,.canvas-gap-guide-x:after,.canvas-gap-guide-y:before,.canvas-gap-guide-y:after{content:'';position:absolute;background:#d62976}
+.canvas-gap-guide-x:before,.canvas-gap-guide-x:after{top:-3px;width:1px;height:7px}
+.canvas-gap-guide-x:before{left:0}.canvas-gap-guide-x:after{right:0}
+.canvas-gap-guide-y:before,.canvas-gap-guide-y:after{left:-3px;width:7px;height:1px}
+.canvas-gap-guide-y:before{top:0}.canvas-gap-guide-y:after{bottom:0}
+.canvas-gap-label{position:fixed;z-index:2147483646;pointer-events:none;padding:3px 6px;border-radius:5px;background:#d62976;color:#fff;font:600 11px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 1px 4px #0002}
