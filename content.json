@@ -336,18 +336,18 @@
           "showCaption": true,
           "elements": [
             {
+              "id": "text:projects/toyota-engine-swap/sections/section-c3db48e5-78da-4eb4-83b7-4ed685b4188e/text",
+              "x": 50.964187327823694,
+              "y": 34.81189738292011,
+              "width": 45.17906336088154,
+              "height": 125.1875
+            },
+            {
               "id": "image:projects/toyota-engine-swap/sections/section-c3db48e5-78da-4eb4-83b7-4ed685b4188e/imageStyle",
-              "x": 0,
+              "x": 8.172635445362717,
               "y": 6.841138659320478,
               "width": 36.17998163452709,
               "height": 734.390625
-            },
-            {
-              "id": "text:projects/toyota-engine-swap/sections/section-c3db48e5-78da-4eb4-83b7-4ed685b4188e/text",
-              "x": 41.96510560146924,
-              "y": 33.31970270890726,
-              "width": 54.82093663911846,
-              "height": 119.59375
             }
           ],
           "imageStyle": {
@@ -355,6 +355,84 @@
             "fit": "cover"
           },
           "text": "I tore apart my new (to me) 3.4 and had the parts spread out all over my garage."
+        },
+        {
+          "id": "section-6b150f09-ec8b-44aa-957a-9faa07479cba",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/muuf7b42-7k97e-rusted-cylinder-walls.jpg",
+          "heading": "",
+          "text": "After tearing down the engine, I discovered that the cylinder walls were badly rusted, something the seller didn't tell me. The damage was severe enough that the block had to be bored out by a machine shop.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover",
+            "aspect": "portrait",
+            "height": 0
+          }
+        },
+        {
+          "id": "section-096c680b-6c3f-4d98-b896-269122e36d87",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muufcdzn-k9lyp-machined-block.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/muufey4v-cqnsr-washing-engine.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            }
+          ],
+          "text": "While I had everything torn apart, I decided to also get the heads resurfaced, have the crankshaft ground & polished, and the engine block decked. This endeavor took 8 months.\n\nI washed and painted the engine block a beautiful glossy black.",
+          "elements": []
+        },
+        {
+          "id": "section-5683d42a-50af-4f6e-acf2-33c5003ebf30",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muufipjx-tz37h-taping-off-engine.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "portrait",
+                "enabled": true,
+                "height": 0
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/muufiza7-b16ag-painted-engine.jpeg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "portrait",
+                "enabled": true,
+                "height": 0,
+                "focalX": 47,
+                "focalY": 0
+              }
+            }
+          ],
+          "text": ""
         },
         {
           "id": "truck-project-end",
