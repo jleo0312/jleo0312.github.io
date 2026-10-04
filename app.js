@@ -98,7 +98,7 @@ function normalizeProject(project) {
     title: project.title || project.slug,
     theme: ['dark', 'silver', 'blue'].includes(project.theme) ? project.theme : 'silver',
     coverText: project.coverText ?? project.title ?? '',
-    photos: list(project.photos).filter(photo => photo && safeURL(photo.src)),
+    photos: list(project.photos).filter(photo => photo && (safeURL(photo.src) || safeURL(photo.imageStyle?.previewVideo) || editorPreview)),
     thumbnailMotion: project.thumbnailMotion || 'hover'
   };
 }
@@ -129,6 +129,7 @@ function renderShell() {
 
 function cover(project) {
   if (media(project.thumbnail)) return `<img src="${media(project.thumbnail)}" alt="${esc(project.thumbnailAlt || project.title)}" loading="lazy">`;
+  if (media(project.previewVideo)) return videoThumbnail(project.previewVideo,project.thumbnailAlt||project.title);
   return `<div class="type-cover ${project.theme}">${textElement('span', 'cover-label', settings.project.coverLabel)}<span class="cover-type">${paragraphs(project.coverText)}</span>${textElement('span', 'cover-bottom', settings.project.coverMark)}</div>`;
 }
 
@@ -378,6 +379,12 @@ function mediaPreview(src,motion='hover') {
   if(!media(src))return '';
   return /\.gif(?:[?#]|$)/i.test(src)?`<img class="media-preview" src="${media(src)}" alt="Preview animation" aria-hidden="true">`:`<video class="media-preview" data-motion="${motion}" data-src="${media(src)}" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>`;
 }
+function videoThumbnail(src,alt='Video thumbnail') {
+  // A separate paused video always stays on frame zero when the hover preview stops.
+  if(!media(src))return '';
+  if(/\.gif(?:[?#]|$)/i.test(src))return `<img src="${media(src)}" alt="${esc(alt)}" loading="lazy">`;
+  return `<video class="video-thumbnail" src="${media(src)}" muted playsinline preload="metadata" aria-label="${esc(alt)}" tabindex="-1"></video>`;
+}
 function photoFrame(src,alt,style={},options={}) {
   const geometry=['size','width','height','aspect','align','fit','focalX','focalY','margin','padding'];
   const custom=style.enabled!==false&&geometry.some(key=>style[key]!==undefined&&style[key]!==null&&style[key]!=='');
@@ -387,7 +394,8 @@ function photoFrame(src,alt,style={},options={}) {
   const above=style.captionPosition==='above';
   const previewSrc=options.previewSrc??style.previewVideo,motion=choice(options.motion??style.previewBehavior,['hover','loop','still'],'hover'),hasPreview=!!media(previewSrc);
   const previewStyle=options.previewStyle?{...style,previewStyle:options.previewStyle}:style;
-  return `<figure class="image-frame ${options.frameClass||''} ${custom?'image-custom':''} ${hasPreview?'media-preview-frame':''} image-align-${choice(style.align,['left','center','right'],'center')} ${above?'caption-above':''}" style="${imageCSS(style,options.fit)};${previewCSS(previewStyle,options.fit)}" data-image-style="${esc(options.path||'')}" data-motion="${motion}">${above?captionHTML:''}<div class="image-box ${options.boxClass||''}">${media(src)?`<img src="${media(src)}" alt="${esc(alt||'')}" ${options.eager?'':'loading="lazy"'}>`:'<span class="image-placeholder" role="img" aria-label="Space for a photo"></span>'}${hasPreview&&(editorPreview||motion!=='still')?mediaPreview(previewSrc,motion):''}</div>${above?'':captionHTML}</figure>`;
+  const thumbnail=media(src)?`<img src="${media(src)}" alt="${esc(alt||'')}" ${options.eager?'':'loading="lazy"'}>`:hasPreview?videoThumbnail(previewSrc,alt):'<span class="image-placeholder" role="img" aria-label="Space for a photo"></span>';
+  return `<figure class="image-frame ${options.frameClass||''} ${custom?'image-custom':''} ${hasPreview?'media-preview-frame':''} image-align-${choice(style.align,['left','center','right'],'center')} ${above?'caption-above':''}" style="${imageCSS(style,options.fit)};${previewCSS(previewStyle,options.fit)}" data-image-style="${esc(options.path||'')}" data-motion="${motion}">${above?captionHTML:''}<div class="image-box ${options.boxClass||''}">${thumbnail}${hasPreview&&(editorPreview||motion!=='still')?mediaPreview(previewSrc,motion):''}</div>${above?'':captionHTML}</figure>`;
 }
 function renderHero(data) {
   const headline=[settings.home.headline?paragraphs(settings.home.headline):'',settings.home.subheadline?`<span>${paragraphs(settings.home.subheadline)}</span>`:''].filter(Boolean).join('<br>');

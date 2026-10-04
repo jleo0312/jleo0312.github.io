@@ -10,6 +10,9 @@
 .image-frame{position:relative;min-width:0;margin:0}
 .image-box{position:relative;overflow:hidden}
 .image-box>img{display:block;width:100%;height:100%;object-fit:cover;border-radius:0}
+.image-box>.video-thumbnail{display:block;width:100%;height:100%;object-fit:var(--image-fit,cover);object-position:var(--image-x,50%) var(--image-y,50%);pointer-events:none}
+.hobby-photo>.video-thumbnail{position:absolute;inset:0}
+.thumbnail>.video-thumbnail{display:block;width:100%;height:100%;object-fit:var(--image-fit,cover);object-position:var(--image-x,50%) var(--image-y,50%);pointer-events:none}
 .image-placeholder{display:block;width:100%;height:100%;min-height:160px;background:#f0f0f3}
 .hero-frame{width:100%;max-width:320px;justify-self:end}
 .hero-frame .hero-photo{width:100%;max-width:none}
