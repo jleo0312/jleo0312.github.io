@@ -171,6 +171,7 @@ function mount({data,key,settings,model,send}){
   if(event.key==='Escape'){finishGesture(true);stopText();return;}
   if(editing){if(event.key==='Enter'){event.preventDefault();if(editing.dataset.singleLine==='true')stopText();else insertText(editing,'\n');}return;}
   if(!picked)return;
+  if(picked.kind==='text'&&(event.key==='Delete'||event.key==='Backspace')){event.preventDefault();transaction('delete-text');return;}
   if(event.key.startsWith('Arrow')&&objects.active()){event.preventDefault();const r=layoutValue(),scope=objects.scopeFor(picked).getBoundingClientRect(),step=(event.shiftKey?10:1)/Math.max(1,scope.width)*100;objectChange({x:clamp(r.x+({ArrowLeft:-step,ArrowRight:step}[event.key]||0),0,100-r.width),y:Math.max(0,r.y+({ArrowUp:-step,ArrowDown:step}[event.key]||0))});return;}
   if(picked.kind==='text'&&(event.key==='Enter'||event.key==='F2')){event.preventDefault();startText(picked.node);return;}
   if(picked.kind==='text'&&event.key.length===1&&!event.ctrlKey&&!event.metaKey&&!event.altKey){event.preventDefault();const node=picked.node;startText(node);insertText(node,event.key);}
