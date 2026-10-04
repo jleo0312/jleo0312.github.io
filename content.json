@@ -562,7 +562,16 @@
               }
             }
           ],
-          "text": "My first prototype quickly failed because it was printed from PLA, which proved too brittle for this load."
+          "text": "My first prototype quickly failed because it was printed from PLA and the layer lines weren't oriented properly.",
+          "elements": [
+            {
+              "id": "text:projects/camera-mount/sections/camera-mount-pla/text",
+              "x": 5.555555555555555,
+              "y": 72.70144628099173,
+              "width": 86.86868686868688,
+              "height": 125.1875
+            }
+          ]
         },
         {
           "id": "camera-mount-petg",
@@ -586,7 +595,36 @@
               }
             }
           ],
-          "text": "I bought PETG and reprinted everything. However, the new version failed in a similar way because the load was acting across the layer lines, so I reprinted it with the layers better aligned with the load path."
+          "text": "I bought PETG and reprinted everything. However, the new version failed in the same way because the load was acting across the layer lines, so I reprinted it with the layers aligned with the load path."
+        },
+        {
+          "id": "section-f1b6276c-a14c-4441-8978-259985ffb3a8",
+          "type": "video",
+          "visible": true,
+          "video": "/media/muuh6owh-rq03e-camera-assembly.mp4",
+          "caption": "",
+          "showCaption": true,
+          "elements": [
+            {
+              "id": "image:projects/camera-mount/sections/section-f1b6276c-a14c-4441-8978-259985ffb3a8/imageStyle",
+              "x": 5.601469237832874,
+              "y": 6.290174471992654,
+              "width": 35.62901744719926,
+              "height": 734.390625
+            },
+            {
+              "id": "text:projects/camera-mount/sections/section-f1b6276c-a14c-4441-8978-259985ffb3a8/text",
+              "x": 42.42424242424242,
+              "y": 39.06752180899908,
+              "width": 56.93296602387512,
+              "height": 94.59375
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          },
+          "text": "I learned how to make SolidWorks assemblies, and made my first one.\n"
         },
         {
           "id": "camera-mount-final",
@@ -613,26 +651,50 @@
           "text": "The newest prototype is capable of holding a flywheel. I also added GoPro-style knobs for easier tightening and adjustment."
         },
         {
-          "id": "camera-mount-cad-assembly",
-          "type": "videoText",
+          "id": "section-545e9a08-443c-4ca6-b1fc-ddacfb8df0c9",
+          "type": "photoText",
           "visible": true,
-          "video": "/media/muubqa94-tajnn-camera-assembly.mp4",
-          "videoPosition": "right",
-          "gifLike": true,
-          "alt": "Looping CAD assembly of the camera mount.",
-          "text": "I learned how to make CAD assemblies and created one for the camera mount.",
+          "image": "/media/muuh8xz8-ki2kf-camera-mount-outside.jpg",
+          "heading": "",
+          "text": "Here's my finished camera mount. It works exactly how I intended.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
           "elements": [
             {
-              "id": "image:projects/camera-mount/sections/camera-mount-cad-assembly/imageStyle",
-              "x": 64.00223829201101,
-              "y": 2.203856749311295,
-              "width": 31.68187557392103,
+              "id": "image:projects/camera-mount/sections/section-545e9a08-443c-4ca6-b1fc-ddacfb8df0c9/imageStyle",
+              "x": 8.677685950413224,
+              "y": 0,
+              "width": 42.33241505968779,
               "height": 654.390625
             }
           ],
           "imageStyle": {
             "enabled": true,
             "fit": "cover"
+          }
+        },
+        {
+          "id": "section-0935715f-afbc-4908-ab36-06d740e99530",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/muuhcwg1-y6h15-camera-mount-and-light.jpg",
+          "heading": "What's next?",
+          "text": "I want to improve my camera mount by modifying it to integrate it with the original floodlight, allowing both the camera and floodlight to be used at the same time.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover",
+            "aspect": "portrait",
+            "height": 0,
+            "focalX": 49,
+            "focalY": 74
           }
         },
         {
