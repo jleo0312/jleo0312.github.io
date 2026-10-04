@@ -244,7 +244,9 @@
           ],
           "imageStyle": {
             "enabled": true,
-            "fit": "cover"
+            "fit": "cover",
+            "aspect": "auto",
+            "height": 0
           }
         },
         {
@@ -286,7 +288,12 @@
           "showCaption": true,
           "imagePosition": "left",
           "imageWidth": 56,
-          "textWidth": 44
+          "textWidth": 44,
+          "imageStyle": {
+            "enabled": true,
+            "aspect": "auto",
+            "height": 0
+          }
         },
         {
           "id": "section-8c93013b-c1a9-4752-bc1a-e2caee3865f5",
@@ -310,7 +317,8 @@
                 "fit": "cover",
                 "aspect": "square",
                 "enabled": true,
-                "previewVideo": "/media/muudgk6q-t3ck5-pulling-3.4.mp4"
+                "previewVideo": "/media/muudgk6q-t3ck5-pulling-3.4.mp4",
+                "previewBehavior": "loop"
               }
             }
           ],
