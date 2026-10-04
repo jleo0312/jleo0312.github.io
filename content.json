@@ -270,7 +270,9 @@
           ],
           "imageStyle": {
             "enabled": true,
-            "fit": "contain"
+            "fit": "cover",
+            "focalX": 55,
+            "focalY": 91
           }
         },
         {
