@@ -268,9 +268,9 @@
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
       "slug": "camera-mount",
-      "thumbnail": "/camera-mount-poster.jpg",
+      "thumbnail": "/media/muu605dm-diq59-gravity-fed.mov",
       "description": "A custom camera mount.",
-      "previewVideo": "/media/muu4hfg6-indvf-gravity-fed.mov",
+      "previewVideo": "/media/muu607fe-vaq9n-messiing-around-with-lid.mp4",
       "thumbnailMotion": "hover",
       "thumbnailFit": "contain",
       "coverText": "Camera mount",
@@ -503,15 +503,18 @@
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
       "slug": "waste-oil-powered-furnace",
-      "thumbnail": "/media/waste-oil-furnace-thumbnail.webp",
+      "thumbnail": "/media/muu64qqx-iq069-furnace-thumbnail.jpeg",
       "thumbnailAlt": "Waste oil powered furnace",
       "description": "",
       "video": "/media/testing flame.mp4",
       "previewVideo": "/media/furnace-1080p60-under25mb.mp4",
       "thumbnailMotion": "hover",
       "thumbnailStyle": {
-        "enabled": false,
-        "showCaption": true
+        "enabled": true,
+        "showCaption": true,
+        "fit": "cover",
+        "focalX": 50,
+        "focalY": 53
       },
       "videoStyle": {
         "enabled": true,
@@ -770,6 +773,12 @@
           "elements": [
             {
               "id": "image:projects/toyota-engine-swap/thumbnailStyle",
+              "x": 0,
+              "y": 0,
+              "width": 100
+            },
+            {
+              "id": "image:projects/waste-oil-powered-furnace/thumbnailStyle",
               "x": 0,
               "y": 0,
               "width": 100
