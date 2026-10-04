@@ -248,12 +248,43 @@
           }
         },
         {
-          "id": "truck-later-work",
+          "id": "section-3871c822-ed2f-4b60-abec-7d3eacbe18a3",
           "type": "photoText",
           "visible": true,
-          "image": "/truck-engine-swap-work.png",
-          "alt": "Later engine swap work on the Toyota pickup.",
-          "imagePosition": "above"
+          "image": "/media/muu7gyu7-ilrtk-truck-on-fire.jpg",
+          "heading": "",
+          "text": "On the day of prom, I decided to take the truck out for a drive. It was raining, and I was feeling a little stupid, so I pulled into an empty parking lot to try a few donuts. The second I floored the gas pedal, I knew something was wrong. The engine didn’t respond at all.\n\nA few seconds later, smoke started emerging from the hood. I looked in the mirror and saw a trail of fire behind the truck, exactly like Back to the Future. Since the truck had been leaking coolant, I kept a jug with me, so I grabbed it and poured it over the engine. It did absolutely nothing.\n\nAt that point, I genuinely thought, “That’s it. It's gone,” and took this photo. You can also see the empty jug on the bottom right corner.\n\nA few landscapers nearby saw what was happening and came over with a fire extinguisher. By then, I was already on the phone with 911, and the dispatcher was telling me not to try to put the fire out myself. In my head, I said “Screw that.” I grabbed the extinguisher and managed to put it out before the fire could take the whole truck.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/sections/section-3871c822-ed2f-4b60-abec-7d3eacbe18a3/imageStyle",
+              "x": 5.725656488284853,
+              "y": 9.054044603861566,
+              "width": 46.4637165139962,
+              "height": 710.375
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "contain"
+          }
+        },
+        {
+          "id": "section-6cdac601-b3e4-4a93-b2c3-b59aa235039e",
+          "type": "photoText",
+          "visible": true,
+          "image": "",
+          "heading": "",
+          "text": "",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44
         },
         {
           "id": "truck-project-end",
@@ -268,8 +299,8 @@
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
       "slug": "camera-mount",
-      "thumbnail": "/media/muu6ze0x-4zvz1-camera-mount.jpg",
-      "description": "A custom camera mount.",
+      "thumbnail": "/media/muu8ai1b-9u43b-camera-mount-outside.jpg",
+      "description": "I record the work I do on my truck to upload to YouTube. Before making this mount, my best option was stacking containers to get the camera to the right height. I designed a custom camera mount that attaches directly to my floodlight stand, giving me a much more stable and adjustable setup.",
       "previewVideo": "/media/muu71xue-kz8ul-camera-mount.mov",
       "thumbnailMotion": "hover",
       "thumbnailFit": "contain",
@@ -279,8 +310,8 @@
         "enabled": true,
         "showCaption": true,
         "fit": "cover",
-        "focalX": 41,
-        "focalY": 71
+        "focalX": 42,
+        "focalY": 40
       },
       "videoStyle": {
         "enabled": false,
@@ -303,7 +334,7 @@
           "imageStyle": {
             "fit": "contain"
           },
-          "text": "My original design drawing for the camera mount."
+          "text": "This was my original design drawing for the camera mount."
         },
         {
           "id": "camera-mount-pla",
@@ -328,6 +359,30 @@
             }
           ],
           "text": "My first prototype quickly failed because it was printed from PLA, which proved too brittle for this load."
+        },
+        {
+          "id": "camera-mount-final",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/camera-mount-flywheel-test.jpg",
+              "alt": "Newest camera mount prototype holding a flywheel.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/camera-mount-final-camera.jpg",
+              "alt": "Newest camera mount prototype attached to a camera with GoPro-style knobs.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            }
+          ],
+          "text": "The newest prototype is capable of holding a flywheel. I also added GoPro-style knobs for easier tightening and adjustment."
         },
         {
           "id": "camera-mount-petg",
@@ -362,30 +417,6 @@
           "gifLike": true,
           "alt": "Looping CAD assembly of the camera mount.",
           "text": "I learned how to make CAD assemblies and created one for the camera mount."
-        },
-        {
-          "id": "camera-mount-final",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/camera-mount-flywheel-test.jpg",
-              "alt": "Newest camera mount prototype holding a flywheel.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            },
-            {
-              "type": "image",
-              "src": "/media/camera-mount-final-camera.jpg",
-              "alt": "Newest camera mount prototype attached to a camera with GoPro-style knobs.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            }
-          ],
-          "text": "The newest prototype is capable of holding a flywheel. I also added GoPro-style knobs for easier tightening and adjustment."
         },
         {
           "id": "camera-mount-end",
