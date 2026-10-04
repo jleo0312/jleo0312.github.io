@@ -562,7 +562,7 @@
               }
             }
           ],
-          "text": "My first prototype quickly failed because it was printed from PLA and the layer lines weren't oriented properly.",
+          "text": "My first prototype quickly failed because it was printed from PLA, a brittle material, and the layer lines weren't oriented properly.",
           "elements": [
             {
               "id": "text:projects/camera-mount/sections/camera-mount-pla/text",
