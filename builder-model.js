@@ -75,6 +75,23 @@
     return {id:id(),type,visible:true,...(type==='photoText'?{image:'',heading:'',text:'',caption:'',showCaption:true,imagePosition:'left',imageWidth:56,textWidth:44}:type==='heading'?{heading:'New heading'}:type==='text'?{text:''}:type==='video'?{video:'',caption:'',showCaption:true}:{})};
   }
   function photoSource(data,key,section) {const project=pageInfo(data,key)?.project; return project?.photos?.find(p=>p.id===section.sourceId);}
+  // Every media slot keeps its original source field; optional previews live with its image style.
+  function mediaPaths(data,path) {
+    const read=p=>p.split('.').reduce((value,key)=>value?.[key],data);
+    const ownerPath=path.replace(/\.(?:imageStyle|videoStyle|thumbnailStyle)$/,''),owner=read(ownerPath)||{};
+    const card=path.endsWith('.thumbnailStyle'),primaryVideo=path.endsWith('.videoStyle')||path.endsWith('.imageStyle')&&['video','videoText'].includes(owner.type);
+    let srcPath='';
+    if(path==='heroImage')srcPath='heroPhoto';
+    else if(path==='portraitImage')srcPath='portrait';
+    else if(/^hobbies\.\d+\.imageStyle$/.test(path))srcPath=ownerPath+'.photo';
+    else if(card)srcPath=ownerPath+'.thumbnail';
+    else if(path.endsWith('.videoStyle'))srcPath=ownerPath+'.video';
+    else if(path.includes('.photos.')||path.includes('.items.'))srcPath=ownerPath+'.src';
+    else srcPath=ownerPath+(primaryVideo?'.video':'.image');
+    const fallbackImage=primaryVideo?(path.endsWith('.videoStyle')?owner.thumbnail:owner.poster)||'':'';
+    const defaultFit=card?(owner.thumbnailFit==='contain'?'contain':'cover'):primaryVideo||path.includes('.photos.')||owner.type==='photoText'?'contain':'cover';
+    return {basePath:path,srcPath,primaryVideo,imageSrcPath:primaryVideo?path+'.poster':srcPath,videoSrcPath:primaryVideo?srcPath:card?ownerPath+'.previewVideo':path+'.previewVideo',previewPath:card?ownerPath+'.previewStyle':path+'.previewStyle',motionPath:card?ownerPath+'.thumbnailMotion':path+'.previewBehavior',fallbackImage,defaultFit,defaultMotion:primaryVideo?(owner.gifLike?'loop':'controls'):'hover'};
+  }
   function deleteSection(data,key,index) {const values=sections(data,key,true),section=values[index];if(!section)return;const project=pageInfo(data,key)?.project;if(section.type==='projectPhoto'&&project)project.photos=project.photos.filter(p=>p.id!==section.sourceId);values.splice(index,1);}
   function duplicateSection(data,key,index) {
     const values=sections(data,key,true),section=clone(values[index]),oldId=section.id,replacements=new Map();section.id=id();replacements.set(oldId,section.id);
@@ -90,5 +107,5 @@
     for(const info of pages(data)){const used=new Set();for(const section of sections(data,info.key)){if(!types[section.type])throw new Error('Unknown section type on '+info.title);if(used.has(section.id))throw new Error('Duplicate section on '+info.title);used.add(section.id);}}
     return true;
   }
-  root.PortfolioModel={clone,id,types,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,deleteSection,duplicateSection,reorder,validate};
+  root.PortfolioModel={clone,id,types,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,mediaPaths,deleteSection,duplicateSection,reorder,validate};
 })(typeof window==='undefined'?globalThis:window);

@@ -76,12 +76,13 @@ function collect({data,key,settings,model,editing=false}){
    let caption=frame.querySelector('figcaption')||frame.parentElement.querySelector(':scope > .image-caption');
    if(!caption&&editing){caption=document.createElement(frame.tagName==='FIGURE'?'figcaption':'p');caption.className='image-caption canvas-optional';if(frame.classList.contains('thumbnail'))frame.after(caption);else frame.append(caption);}
    if(caption){bind(caption,captionPath,'Click to add a caption');caption.dataset.captionFor=path;caption.dataset.captionHidden=String(read(data,visiblePath)===false);}
-   const item={frame,path,srcPath,captionPath,visiblePath,layoutPath,scope,sectionId:section.id,caption};
+   const media=model.mediaPaths(data,path);
+   const item={frame,path,srcPath,captionPath,visiblePath,layoutPath,scope,sectionId:section.id,caption,...media};
    if(!images.has(path)||!frame.closest('[inert]'))images.set(path,item);
    frame.dataset.objectImage=path;
-   if(editing&&path.endsWith('.thumbnailStyle')&&frame.querySelector('.preview')){
-    const previewPath=path.replace(/\.thumbnailStyle$/,'.previewStyle');
-    if(!images.has(previewPath)||!frame.closest('[inert]'))images.set(previewPath,{...item,path:previewPath,srcPath:path.replace(/\.thumbnailStyle$/,'.previewVideo'),caption:null,layoutPath:'',preview:true});
+   if(editing&&frame.querySelector('.preview,.media-preview')){
+    const previewPath=media.previewPath;
+    if(!images.has(previewPath)||!frame.closest('[inert]'))images.set(previewPath,{...item,path:previewPath,srcPath:media.videoSrcPath,caption:null,layoutPath:'',preview:true});
    }
   });
  }
