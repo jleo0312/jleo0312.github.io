@@ -281,7 +281,7 @@
           "visible": true,
           "image": "/media/muu8zlpv-5pxy2-3vze-exploded-view.jpg",
           "heading": "",
-          "text": "The 3VZ-E engine uses a crossover pipe that merges the passenger side exhaust manifold to the driver's side. The red arrow on the exploded view shows the path the passenger side's exhaust takes. The exhaust is then routed underneath the truck and towards the rear.\n\nDuring the head gasket repair, the crossover pipe was supposed to be installed before the heads because there isn’t enough clearance between the engine and firewall afterward. I didn’t realize this until the heads were already torqued down. Since the head bolts are single-use and I was already planning to build a custom exhaust, I decided not to remove the heads again and wait for new bolts. That meant running the engine without the crossover pipe, allowing hot exhaust to blow directly into the engine bay. It eventually melted a fuel line and started the fire.\n\nWhy did I decide to drive it instead of wait for the exhaust parts to come in?\n\nI was an impatient 18 year old boy with a cool truck.\n\n",
+          "text": "The 3VZ-E engine uses a crossover pipe that merges the passenger side exhaust manifold to the driver's side. The red arrow on the exploded view shows the path the passenger side's exhaust takes. The exhaust is then routed underneath the truck and towards the rear.\n\nDuring the head gasket repair, the crossover pipe is supposed to be installed before the heads because there isn’t enough clearance between the engine and firewall afterward. I didn’t realize this until the heads were already torqued down. Since the head bolts are single-use and I was already planning to build a custom exhaust, I decided not to remove the heads again and wait for new bolts. That meant running the engine without the crossover pipe, allowing hot exhaust to blow directly into the engine bay. It eventually melted a fuel line and started the fire.\n\nWhy did I decide to drive it instead of wait for the exhaust parts to come in?\n\nI was an impatient 18 year old boy with a cool truck.\n\n",
           "caption": "",
           "showCaption": true,
           "imagePosition": "left",
@@ -312,7 +312,15 @@
               }
             }
           ],
-          "text": "The 5VZ-FE (3.4L) is the successor to the 3VZ-E (3.0L) and is a popular swap in the Toyota community because it bolts directly to the factory transmission. \n\nI began the swap by pulling my burnt up 3.0L, and sourcing a 3.4L from Facebook marketplace."
+          "text": "The 5VZ-FE (3.4L) engine is the successor to the 3VZ-E (3.0L), being more powerful and reliable. \n\nThe \"3.4 swap\" is a very popular engine swap because the 3.4 can bolt directly to the factory transmission.\n\nI began the swap by pulling my burnt up 3.0L, and sourcing a 3.4L from Facebook marketplace."
+        },
+        {
+          "id": "section-c3db48e5-78da-4eb4-83b7-4ed685b4188e",
+          "type": "video",
+          "visible": true,
+          "video": "",
+          "caption": "",
+          "showCaption": true
         },
         {
           "id": "truck-project-end",
