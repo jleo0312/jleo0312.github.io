@@ -427,3 +427,27 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   object-position:center!important;
 }
 
+
+/* Toyota intro photo pair: fill the frame edge-to-edge instead of showing side gaps. */
+.builder-section[data-section-id="truck-first-two-pair"] .media-pair{
+  align-items:stretch!important;
+}
+.builder-section[data-section-id="truck-first-two-pair"] .paired-media-item,
+.builder-section[data-section-id="truck-first-two-pair"] .image-frame{
+  height:100%!important;
+}
+.builder-section[data-section-id="truck-first-two-pair"] .image-box{
+  width:100%!important;
+  aspect-ratio:7 / 8!important;
+  height:auto!important;
+  border-radius:14px!important;
+  overflow:hidden!important;
+}
+.builder-section[data-section-id="truck-first-two-pair"] .image-box > img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
