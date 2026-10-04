@@ -483,7 +483,7 @@ function applyThumbnailControls(data) {
     const style=project.thumbnailStyle||{},box=card.querySelector('.thumbnail');
     box.dataset.imageStyle=`projects.${index}.thumbnailStyle`;
     if(style.enabled===false||!Object.keys(style).length)return;
-    const renderStyle=style.aspect&&style.aspect!=='auto'?style:{...style,aspect:'landscape'};
+    const renderStyle=style.aspect&&style.aspect!=='auto'?style:{...style,aspect:'square'};
     box.classList.add('thumbnail-custom');box.style.cssText+=imageCSS(renderStyle,project.thumbnailFit==='contain'?'contain':'cover');
     box.dataset.align=choice(style.align,['left','center','right'],'center');
     let caption;
