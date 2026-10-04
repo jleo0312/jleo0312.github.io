@@ -40,15 +40,18 @@
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
       "slug": "toyota-engine-swap",
-      "thumbnail": "/truck-thumbnail.jpg",
+      "thumbnail": "/media/mut7061e-ohmdt-firrst-day-of-the-truck.jpg",
       "description": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
       "thumbnailMotion": "hover",
       "photos": [],
       "coverText": "A new heart.\nAn old Toyota.",
       "theme": "dark",
       "thumbnailStyle": {
-        "enabled": false,
-        "showCaption": true
+        "enabled": true,
+        "showCaption": true,
+        "focalX": 51,
+        "focalY": 73,
+        "fit": "cover"
       },
       "videoStyle": {
         "enabled": false,
@@ -483,7 +486,7 @@
       ]
     },
     {
-      "title": "Drone",
+      "title": "Mini-Drone",
       "showInGallery": true,
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
