@@ -59,7 +59,7 @@
 .photo-only .photo-pane{max-width:900px;margin:auto}
 .photo-pane,.section-copy{min-width:0}
 .section-copy h2,.text-section h2{margin-bottom:15px}
-.section-copy p,.text-section p,.content-section>p:not(.image-caption){font-size:var(--text-size,18px);line-height:1.7;color:#515155;margin:0;white-space:normal}
+.section-copy p,.text-section p,.content-section>p:not(.image-caption){font-size:var(--text-size,18px);line-height:1.7;color:#515155;margin:0;white-space:pre-wrap}
 .content-section .image-box{background:#f5f5f7;border-radius:14px}
 .section-projectPhoto+.section-projectPhoto{margin-top:0}
 .structured-gallery{padding-left:0;padding-right:0}
