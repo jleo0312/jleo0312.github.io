@@ -160,7 +160,7 @@
       "thumbnail": "/camera-mount-poster.jpg",
       "description": "A custom camera mount.",
       "previewVideo": "/media/muu4hfg6-indvf-gravity-fed.mov",
-      "thumbnailMotion": "loop",
+      "thumbnailMotion": "hover",
       "thumbnailFit": "contain",
       "coverText": "Camera mount",
       "theme": "silver",
