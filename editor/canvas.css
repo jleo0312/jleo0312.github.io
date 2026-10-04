@@ -48,6 +48,8 @@
 .canvas-move-edge.edge-left{left:-5px;top:8px;bottom:8px;width:10px}
 .canvas-move-edge.edge-right{right:-5px;top:8px;bottom:8px;width:10px}
 .canvas-toolbar-note{flex-basis:100%;padding:3px 5px;color:#596875;font-size:12px}
+.direct-editing-preview .canvas-preview-crop>.preview{opacity:1!important;cursor:move;transition:none!important}
+.canvas-preview-selection button{display:none}
 
 /* Smart guides: snap dragged objects to shared edges/centers and equal gaps. */
 .canvas-smart-guide,.canvas-gap-guide{position:fixed;z-index:2147483645;pointer-events:none;background:#d62976}

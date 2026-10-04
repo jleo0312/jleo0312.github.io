@@ -42,6 +42,7 @@
 .thumbnail-custom[data-align=center]{margin-left:auto;margin-right:auto}
 .thumbnail-custom[data-align=right]{margin-left:auto}
 .thumbnail-custom>img,.thumbnail-custom>video{object-fit:var(--image-fit,cover)!important;object-position:var(--image-x,50%) var(--image-y,50%);padding:var(--image-padding,0)}
+.thumbnail>video.preview,.thumbnail>img.preview-gif{object-fit:var(--preview-fit,cover)!important;object-position:var(--preview-x,50%) var(--preview-y,50%)!important}
 .thumbnail-custom[style*="--image-ratio:auto"]{aspect-ratio:1/1}
 .builder-section{min-width:0;position:relative;max-width:100%;overflow-wrap:anywhere}
 .section-width-narrow>.wrap{max-width:850px}
