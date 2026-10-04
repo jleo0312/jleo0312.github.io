@@ -69,7 +69,8 @@ function collect({data,key,settings,model,editing=false}){
    else if(path.includes('.photos.')){srcPath=path.replace(/\.imageStyle$/,'.src');captionPath=path.replace(/\.imageStyle$/,'.shortCaption');visiblePath=path.replace(/\.imageStyle$/,'.showCaption');}
    else if(path.endsWith('.thumbnailStyle')){srcPath=path.replace(/\.thumbnailStyle$/,'.thumbnail');if(frame.closest('.project-card')){layoutPath=path+'.position';scope=frame.closest('.project-link');}}
    else if(path.endsWith('.videoStyle')){srcPath=path.replace(/\.videoStyle$/,'.video');layoutPath='';}
-   else if(path.includes('.sections.')){srcPath=path.replace(/\.imageStyle$/,section.type==='video'?'.video':'.image');captionPath=path.replace(/\.imageStyle$/,'.caption');visiblePath=path.replace(/\.imageStyle$/,'.showCaption');if(section.type==='video')layoutPath='';}
+   else if(path.includes('.items.')){srcPath=path.replace(/\.imageStyle$/,'.src');layoutPath='';}
+   else if(path.includes('.sections.')){const video=section.type==='video'||section.type==='videoText';srcPath=path.replace(/\.imageStyle$/,video?'.video':'.image');captionPath=path.replace(/\.imageStyle$/,'.caption');visiblePath=path.replace(/\.imageStyle$/,'.showCaption');if(video)layoutPath='';}
    let caption=frame.querySelector('figcaption')||frame.parentElement.querySelector(':scope > .image-caption');
    if(!caption&&editing){caption=document.createElement(frame.tagName==='FIGURE'?'figcaption':'p');caption.className='image-caption canvas-optional';if(frame.classList.contains('thumbnail'))frame.after(caption);else frame.append(caption);}
    if(caption){bind(caption,captionPath,'Click to add a caption');caption.dataset.captionFor=path;caption.dataset.captionHidden=String(read(data,visiblePath)===false);}

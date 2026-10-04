@@ -386,13 +386,14 @@ function projectIntro(project) {
   const description=project.description??project.summary??'';
   return `${settings.project.back?`<a class="text-link back" href="${galleryURL}">${esc(settings.project.back)}</a>`:''}<div class="detail-heading"><h1>${esc(project.title)}</h1>${textElement('p','page-subtitle project-description',description)}</div>`;
 }
-function renderVideo(src,poster,style={},path='',className='section-video') {
+function renderVideo(src,poster,style={},path='',className='section-video',options={}) {
   if(!media(src))return '';
   if(/\.gif(?:[?#]|$)/i.test(src))return photoFrame(src,'Animated project image',style,{fit:'contain',path});
   const custom=style.enabled!==false&&Object.keys(style).some(key=>['width','height','aspect','align','fit','margin','padding'].includes(key));
   const caption=style.caption&&style.showCaption!==false?textElement('figcaption','image-caption',style.caption):'';
   const preload=media(poster)?'metadata':'auto';
-  return `<figure class="video-frame ${custom?'video-custom':''} image-align-${choice(style.align,['left','center','right'],'center')}" data-image-style="${esc(path)}" style="${imageCSS(style,'contain')}">${style.captionPosition==='above'?caption:''}<video class="${className}" controls playsinline preload="${preload}" ${style.loop?'loop':''} ${style.muted?'muted':''} ${media(poster)?`poster="${media(poster)}"`:''} src="${media(src)}">${esc(settings.project.videoFallback)} <a href="${media(src)}">${esc(settings.project.downloadVideo)}</a></video>${style.captionPosition!=='above'?caption:''}</figure>`;
+  const playback=options.gifLike?'autoplay loop muted playsinline preload="auto"':`controls playsinline preload="${preload}" ${style.loop?'loop':''} ${style.muted?'muted':''}`;
+  return `<figure class="video-frame ${custom?'video-custom':''} image-align-${choice(style.align,['left','center','right'],'center')}" data-image-style="${esc(path)}" style="${imageCSS(style,'contain')}">${style.captionPosition==='above'?caption:''}<video class="${className}" ${playback} ${options.alt?`aria-label="${esc(options.alt)}"`:''} ${media(poster)?`poster="${media(poster)}"`:''} src="${media(src)}">${esc(settings.project.videoFallback)} <a href="${media(src)}">${esc(settings.project.downloadVideo)}</a></video>${style.captionPosition!=='above'?caption:''}</figure>`;
 }
 function projectVideo(project,data) {
   return renderVideo(project.video,project.thumbnail,project.videoStyle||{},`projects.${data.projects.indexOf(project)}.videoStyle`,'main-video');
@@ -418,7 +419,7 @@ function renderMediaPair(section,ctx,sectionPath) {
     }
     if(item.type==='video'){
       if(item.gifLike===true){
-        return `<div class="paired-media-item paired-giflike-item"><video class="paired-giflike-video" autoplay loop muted playsinline preload="auto" aria-label="${esc(item.alt||ctx.info.title||'Animated project media')}" src="${media(item.src)}"></video></div>`;
+        return `<div class="paired-media-item paired-giflike-item">${renderVideo(item.src,item.poster,item.imageStyle||{},itemPath,'paired-giflike-video',{gifLike:true,alt:item.alt||ctx.info.title||'Animated project media'})}</div>`;
       }
       return `<div class="paired-media-item paired-video-item">${renderVideo(item.src,item.poster,item.imageStyle||{},itemPath,'paired-video')}</div>`;
     }
@@ -430,7 +431,7 @@ function renderMediaPair(section,ctx,sectionPath) {
 
 function renderVideoText(section,ctx,sectionPath) {
   const video=section.gifLike===true
-    ? (media(section.video)?`<video class="video-text-media" autoplay loop muted playsinline preload="auto" aria-label="${esc(section.alt||ctx.info.title||'Animated project media')}" src="${media(section.video)}"></video>`:'')
+    ? renderVideo(section.video,section.poster,section.imageStyle||{},`${sectionPath}.imageStyle`,'video-text-media',{gifLike:true,alt:section.alt||ctx.info.title||'Animated project media'})
     : renderVideo(section.video,section.poster||'',section.imageStyle||{},`${sectionPath}.imageStyle`,'video-text-media');
   const copy=textElement('p','',section.text);
   const position=section.videoPosition==='right'?'right':'left';
