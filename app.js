@@ -483,7 +483,8 @@ function applyThumbnailControls(data) {
     const style=project.thumbnailStyle||{},box=card.querySelector('.thumbnail');
     box.dataset.imageStyle=`projects.${index}.thumbnailStyle`;
     if(style.enabled===false||!Object.keys(style).length)return;
-    box.classList.add('thumbnail-custom');box.style.cssText+=imageCSS(style,project.thumbnailFit==='contain'?'contain':'cover');
+    const renderStyle=style.aspect&&style.aspect!=='auto'?style:{...style,aspect:'landscape'};
+    box.classList.add('thumbnail-custom');box.style.cssText+=imageCSS(renderStyle,project.thumbnailFit==='contain'?'contain':'cover');
     box.dataset.align=choice(style.align,['left','center','right'],'center');
     let caption;
     if(style.caption&&style.showCaption!==false){caption=document.createElement('p');caption.className='image-caption';caption.style.textAlign=choice(style.captionAlignment,['left','center','right'],'left');caption.textContent=style.caption;box.insertAdjacentElement(style.captionPosition==='above'?'beforebegin':'afterend',caption);}
