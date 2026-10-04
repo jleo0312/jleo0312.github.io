@@ -308,7 +308,9 @@
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square"
+                "aspect": "square",
+                "enabled": true,
+                "previewVideo": "/media/muudgk6q-t3ck5-pulling-3.4.mp4"
               }
             }
           ],
