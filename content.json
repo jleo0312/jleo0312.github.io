@@ -460,7 +460,13 @@
           "type": "projectEnd",
           "visible": true
         }
-      ]
+      ],
+      "previewStyle": {
+        "enabled": true,
+        "focalX": 39,
+        "focalY": 67,
+        "fit": "cover"
+      }
     },
     {
       "title": "Compression Molded Carbon Fiber Coaster",
@@ -653,7 +659,11 @@
               "type": "video",
               "src": "/media/muuc2s0d-oe81t-torch-test.mp4",
               "alt": "Testing the siphon-feed atomizer.",
-              "poster": "/media/testing-flame-thumbnail-hq.webp"
+              "poster": "/media/testing-flame-thumbnail-hq.webp",
+              "imageStyle": {
+                "enabled": true,
+                "fit": "cover"
+              }
             }
           ]
         },
@@ -674,7 +684,13 @@
           "loop": false,
           "muted": false
         }
-      ]
+      ],
+      "previewStyle": {
+        "enabled": true,
+        "focalX": 50,
+        "focalY": 59,
+        "fit": "cover"
+      }
     },
     {
       "title": "Mini-Drone",
