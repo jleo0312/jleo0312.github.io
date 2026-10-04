@@ -306,7 +306,9 @@
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square"
+                "aspect": "portrait",
+                "enabled": true,
+                "height": 0
               }
             },
             {
@@ -315,10 +317,11 @@
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square",
+                "aspect": "portrait",
                 "enabled": true,
                 "previewVideo": "/media/muudgk6q-t3ck5-pulling-3.4.mp4",
-                "previewBehavior": "loop"
+                "previewBehavior": "loop",
+                "height": 0
               }
             }
           ],
