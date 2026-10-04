@@ -399,7 +399,7 @@
               }
             }
           ],
-          "text": "While I had everything torn apart, I decided to also get the heads resurfaced, have the crankshaft ground & polished, and the engine block decked. This endeavor took 8 months.\n\nI washed and painted the engine block a beautiful glossy black.",
+          "text": "While I had everything torn apart, I decided to also get the heads resurfaced, have the crankshaft ground & polished, and the engine block decked. This endeavor took 8 months.",
           "elements": []
         },
         {
@@ -432,7 +432,33 @@
               }
             }
           ],
-          "text": ""
+          "text": "I washed and painted the engine block a beautiful glossy black.\n"
+        },
+        {
+          "id": "section-1ab4721d-d066-4851-97fb-9514bf5d2b69",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muufkt5m-8so6e-plastigage.jpeg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/muufkyab-ps72q-squished-plastigage.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            }
+          ],
+          "text": "I began assembly by checking all my bearing clearances with plastigage. You put a thin strip along the crankshaft journal, tighten the main cap onto the crankshaft, remove and check how much it squished down. All my clearances were within spec."
         },
         {
           "id": "truck-project-end",
