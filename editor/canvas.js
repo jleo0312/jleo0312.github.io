@@ -33,7 +33,11 @@ function mount({data,key,settings,model,send}){
    }
    toolbar.append(widthControl(),button('Reset position','reset-position'),button('Bring forward','front'),button('Send backward','back'));
    if(item){
-    toolbar.append(button('Replace','replace'));
+    const isThumbnail=item.path.endsWith('.thumbnailStyle')&&!!item.frame.closest('[data-project]');
+    if(isThumbnail){
+     const previewPath=item.path.replace(/\.thumbnailStyle$/,'.previewVideo'),hasPreview=!!read(data,previewPath);
+     toolbar.append(button('Thumbnail image','replace'),button(hasPreview?'Replace preview video':'Add preview video','preview-video'));
+    }else toolbar.append(button('Replace','replace'));
     for(const [value,label]of [['left','Photo left'],['right','Photo right'],['above','Above text'],['below','Below text']])if(item.layoutPath)toolbar.append(button(label,'layout',value));
     toolbar.append(selectControl('Image proportions','aspect',[['auto','Original shape'],['square','Square'],['portrait','Portrait'],['landscape','Landscape'],['wide','Wide']],read(data,item.path+'.aspect')||'auto'));
     toolbar.append(button(read(data,item.path+'.fit')==='cover'?'Show whole photo':'Fill / crop','fit'),button(cropping?'Done cropping':'Move crop','crop'),button('Edit caption','caption'));
@@ -122,7 +126,8 @@ function mount({data,key,settings,model,send}){
   if(action==='edit-text'){if(editing)stopText();else startText(picked.node);buildToolbar();}
   else if(action==='reset-position')objectChange(null);
   else if(action==='front'||action==='back')objectChange({layer:clamp((layoutValue()?.layer||1)+(action==='front'?1:-1),0,20)});
-  else if(action==='replace'){input.accept=item.srcPath.endsWith('.video')?'video/*,image/gif':'image/*';input.value='';input.click();}
+  else if(action==='replace'){input.accept=item.srcPath.endsWith('.video')?'video/*,image/gif':'image/*';input.dataset.uploadPath=item.srcPath;input.value='';input.click();}
+  else if(action==='preview-video'){input.accept='video/*,image/gif';input.dataset.uploadPath=item.path.replace(/\.thumbnailStyle$/,'.previewVideo');input.value='';input.click();}
   else if(action==='layout'){if(picked&&objects.record(picked))objectChange(null);transaction('image-layout',{position:b.dataset.value});}
   else if(action==='fit')transaction('image-fit',{fit:read(data,item.path+'.fit')==='cover'?'contain':'cover'});
   else if(action==='crop'){cropping=!cropping;buildToolbar();}
@@ -133,7 +138,7 @@ function mount({data,key,settings,model,send}){
  });
  on(toolbar,'change',event=>{const type=event.target.dataset.canvasControl;if(type==='font-size')objectChange({fontSize:Number(event.target.value)});else if(type==='text-align')objectChange({align:event.target.value});else if(type==='aspect')transaction('image-aspect',{aspect:event.target.value});else if(type==='object-width'){if(gesture?.type==='slider'){gesture=null;send({action:'object-end'});}}});
  on(toolbar,'input',event=>{if(event.target.dataset.canvasControl!=='object-width'||!picked||!objects.active())return;if(!gesture){objectStart(picked);gesture={type:'slider',entry:picked,original:objects.record(picked)?model.clone(objects.record(picked)):null};}const width=Number(event.target.value),r=layoutValue();objectSave(picked,{...r,width,x:Math.min(r.x,100-width)});});
- on(input,'change',()=>{const item=images.get(selectedImage);if(item&&input.files[0])send({action:'replace-file',id:selectedId,path:item.srcPath,file:input.files[0]});});
+ on(input,'change',()=>{const item=images.get(selectedImage),file=input.files[0],path=input.dataset.uploadPath||item?.srcPath;if(item&&file&&path)send({action:'replace-file',id:selectedId,path,file});delete input.dataset.uploadPath;input.value='';});
  on(document,'pointerdown',event=>{
   if(overlay.contains(event.target)||event.target.closest('.carousel-controls,.preview-play'))return;
   const text=event.target.closest('[data-edit-path]');if(text&&text===editing)return;
