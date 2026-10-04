@@ -741,7 +741,7 @@
       "homepageOrder": "auto",
       "slug": "drone",
       "thumbnail": "/media/drone-thumbnail.webp",
-      "description": "",
+      "description": "For my engineering 101 final project, I designed and made a drone. We were allowed to choose between a windmill or a drone. I was given a cheap drone and tasked with designing and making a new frame for it.",
       "thumbnailMotion": "hover",
       "coverText": "Drone",
       "theme": "blue",
@@ -753,7 +753,65 @@
         "enabled": false,
         "showCaption": true
       },
-      "useSections": false
+      "useSections": true,
+      "sections": [
+        {
+          "id": "original-projectIntro",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "original-projectThumbnail",
+          "type": "projectThumbnail",
+          "visible": true,
+          "elements": [
+            {
+              "id": "image:projects/drone/thumbnailStyle",
+              "x": 8.677685950413224,
+              "y": 0,
+              "width": 51.88246097337006,
+              "height": 654.390625
+            }
+          ]
+        },
+        {
+          "id": "original-projectEnd",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "title": "Pencil Case",
+      "slug": "pencil-case",
+      "showInGallery": true,
+      "featuredOnHomepage": false,
+      "photos": [],
+      "sections": [
+        {
+          "id": "original-projectIntro",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "original-projectVideo",
+          "type": "projectVideo",
+          "visible": true
+        },
+        {
+          "id": "original-projectEnd",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ],
+      "useSections": true,
+      "thumbnail": "/media/muudv8nr-r8xc8-pencil-case.jpg",
+      "thumbnailStyle": {
+        "enabled": true,
+        "fit": "cover",
+        "focalX": 53,
+        "focalY": 56
+      }
     }
   ],
   "website": {
@@ -910,6 +968,12 @@
               "id": "image:projects/camera-mount/thumbnailStyle",
               "x": 0,
               "y": 1.1278195488721803,
+              "width": 100
+            },
+            {
+              "id": "image:projects/pencil-case/thumbnailStyle",
+              "x": 0,
+              "y": 0,
               "width": 100
             }
           ]
