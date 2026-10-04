@@ -289,26 +289,30 @@
           "textWidth": 44
         },
         {
-          "id": "section-e759af6d-379c-44de-9f37-b7dd05509bf5",
-          "type": "photoText",
+          "id": "section-8c93013b-c1a9-4752-bc1a-e2caee3865f5",
+          "type": "mediaPair",
           "visible": true,
-          "image": "/media/muu9rspo-ja3q3-engine-pulled.jpg",
-          "heading": "",
-          "text": "",
-          "caption": "",
-          "showCaption": true,
-          "imagePosition": "left",
-          "imageWidth": 56,
-          "textWidth": 44,
-          "elements": [
+          "items": [
             {
-              "id": "image:projects/toyota-engine-swap/sections/section-e759af6d-379c-44de-9f37-b7dd05509bf5/imageStyle",
-              "x": 8.677685950413224,
-              "y": 0,
-              "width": 42.51606978879706,
-              "height": 654.390625
+              "type": "image",
+              "src": "/media/muuc8d3u-3iunf-engine-pulled.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
             }
-          ]
+          ],
+          "text": "The 5VZ-FE (3.4L) is the successor to the 3VZ-E (3.0L) and is a popular swap in the Toyota community because it bolts directly to the factory transmission. \n\nI began the swap by pulling my burnt up 3.0L, and sourcing a 3.4L from Facebook marketplace."
         },
         {
           "id": "truck-project-end",
