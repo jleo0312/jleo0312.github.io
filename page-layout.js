@@ -79,6 +79,10 @@ function collect({data,key,settings,model,editing=false}){
    const item={frame,path,srcPath,captionPath,visiblePath,layoutPath,scope,sectionId:section.id,caption};
    if(!images.has(path)||!frame.closest('[inert]'))images.set(path,item);
    frame.dataset.objectImage=path;
+   if(editing&&path.endsWith('.thumbnailStyle')&&frame.querySelector('.preview')){
+    const previewPath=path.replace(/\.thumbnailStyle$/,'.previewStyle');
+    if(!images.has(previewPath)||!frame.closest('[inert]'))images.set(previewPath,{...item,path:previewPath,srcPath:path.replace(/\.thumbnailStyle$/,'.previewVideo'),caption:null,layoutPath:'',preview:true});
+   }
   });
  }
  return {info,values,images,textNodes};

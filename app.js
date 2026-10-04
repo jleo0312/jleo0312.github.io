@@ -135,13 +135,17 @@ function cover(project) {
 function card(project, index) {
   const number = settings.project.showNumbers ? `<span class="card-index">${String(index + 1).padStart(2, '0')}</span>` : '';
   if (project.demo) return `<article class="project-card demo-card" aria-label="Empty gallery slot ${index + 1}"><div class="thumbnail demo-thumbnail demo-tone-${Math.floor(index / 3)}"></div><div class="card-heading"><span class="demo-title" aria-hidden="true"></span>${number}</div></article>`;
-  const gifPreview = project.thumbnailMotion !== 'still' && !reducedMotion.matches && /\.gif(?:[?#]|$)/i.test(project.previewVideo || '') && media(project.previewVideo);
+  const isGIF = /\.gif(?:[?#]|$)/i.test(project.previewVideo || '');
+  const gifPreview = project.thumbnailMotion !== 'still' && !reducedMotion.matches && isGIF && media(project.previewVideo);
   const previewURL = media(project.previewVideo);
   const previewMotion = project.thumbnailMotion === 'loop' ? 'loop' : 'hover';
-  const preview = previewURL && !gifPreview && !/\.gif(?:[?#]|$)/i.test(project.previewVideo || '') && project.thumbnailMotion !== 'still'
-    ? `<video class="preview" data-motion="${previewMotion}" muted loop playsinline preload="none" ${previewMotion === 'hover' ? `data-src="${previewURL}"` : `src="${previewURL}"`} aria-hidden="true" tabindex="-1"></video>` : '';
+  const preview = previewURL && (editorPreview || project.thumbnailMotion !== 'still')
+    ? isGIF
+      ? editorPreview ? `<img class="preview preview-gif" src="${previewURL}" alt="Preview animation" aria-hidden="true">` : ''
+      : `<video class="preview" data-motion="${previewMotion}" muted loop playsinline preload="none" ${previewMotion === 'hover' ? `data-src="${previewURL}"` : `src="${previewURL}"`} aria-hidden="true" tabindex="-1"></video>`
+    : '';
 
-  return `<article class="project-card" data-project="${esc(project.slug)}"><a class="project-link" href="/?project=${encodeURIComponent(project.slug)}"><div class="thumbnail" data-fit="${project.thumbnailFit === 'contain' ? 'contain' : 'cover'}">${gifPreview ? `<img src="${media(project.previewVideo)}" alt="${esc(project.thumbnailAlt || project.title)}" loading="lazy">` : cover(project)}${preview}</div><div class="card-heading"><h3>${esc(project.title)}</h3>${number}</div></a></article>`;
+  return `<article class="project-card" data-project="${esc(project.slug)}"><a class="project-link" href="/?project=${encodeURIComponent(project.slug)}"><div class="thumbnail" data-fit="${project.thumbnailFit === 'contain' ? 'contain' : 'cover'}">${gifPreview && !editorPreview ? `<img class="preview-gif" src="${media(project.previewVideo)}" alt="${esc(project.thumbnailAlt || project.title)}" loading="lazy">` : cover(project)}${preview}</div><div class="card-heading"><h3>${esc(project.title)}</h3>${number}</div></a></article>`;
 }
 
 function galleryProjects(data) {
@@ -187,6 +191,8 @@ function renderCarousel(data) {
 }
 
 function bindPreviews() {
+  // The editor plays only the preview explicitly selected for cropping.
+  if (editorPreview) return;
   const controller=new AbortController(),options={signal:controller.signal};
   const items=[...document.querySelectorAll('.project-card')].map(card=>{
     const video=card.querySelector('video.preview');
@@ -483,6 +489,10 @@ function applyThumbnailControls(data) {
     const index=data.projects.findIndex(p=>p.slug===card.dataset.project),project=data.projects[index];if(!project)return;
     const style=project.thumbnailStyle||{},box=card.querySelector('.thumbnail');
     box.dataset.imageStyle=`projects.${index}.thumbnailStyle`;
+    const inherited=style.enabled===false?{}:style,preview=project.previewStyle?.enabled===false?{}:project.previewStyle||{};
+    box.style.setProperty('--preview-fit',choice(preview.fit,['cover','contain'],choice(inherited.fit,['cover','contain'],project.thumbnailFit==='contain'?'contain':'cover')));
+    box.style.setProperty('--preview-x',number(preview.focalX,number(inherited.focalX,50,0,100),0,100)+'%');
+    box.style.setProperty('--preview-y',number(preview.focalY,number(inherited.focalY,50,0,100),0,100)+'%');
     if(style.enabled===false||!Object.keys(style).length)return;
     const renderStyle=style.aspect&&style.aspect!=='auto'?style:{...style,aspect:'square'};
     box.classList.add('thumbnail-custom');box.style.cssText+=imageCSS(renderStyle,project.thumbnailFit==='contain'?'contain':'cover');

@@ -70,7 +70,10 @@
     if(materialize){target.sections=values;target.useSections=true;}
     return values;
   }
-  function makeSection(type='photoText') { return {id:id(),type,visible:true,...(type==='photoText'?{image:'',heading:'',text:'',caption:'',showCaption:true,imagePosition:'left',imageWidth:56,textWidth:44}:type==='heading'?{heading:'New heading'}:type==='text'?{text:''}:type==='video'?{video:'',caption:'',showCaption:true}:{})}; }
+  function makeSection(type='photoText') {
+    if(['mediaPair','mediaPair2','mediaPair3'].includes(type))return {id:id(),type:'mediaPair',visible:true,items:Array.from({length:type==='mediaPair3'?3:2},()=>({type:'image',src:'',alt:'',imageStyle:{fit:'cover',aspect:'square'}})),text:''};
+    return {id:id(),type,visible:true,...(type==='photoText'?{image:'',heading:'',text:'',caption:'',showCaption:true,imagePosition:'left',imageWidth:56,textWidth:44}:type==='heading'?{heading:'New heading'}:type==='text'?{text:''}:type==='video'?{video:'',caption:'',showCaption:true}:{})};
+  }
   function photoSource(data,key,section) {const project=pageInfo(data,key)?.project; return project?.photos?.find(p=>p.id===section.sourceId);}
   function deleteSection(data,key,index) {const values=sections(data,key,true),section=values[index];if(!section)return;const project=pageInfo(data,key)?.project;if(section.type==='projectPhoto'&&project)project.photos=project.photos.filter(p=>p.id!==section.sourceId);values.splice(index,1);}
   function duplicateSection(data,key,index) {
