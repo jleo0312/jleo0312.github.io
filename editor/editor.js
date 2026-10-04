@@ -181,7 +181,7 @@ function canvasCommand(msg){
   }
   else if(imagePath&&action==='image-align'&&['left','center','right'].includes(msg.align))set(imagePath+'.align',msg.align);
   else if(imagePath&&action==='image-fit'&&['contain','cover'].includes(msg.fit))set(imagePath+'.fit',msg.fit);
-  else if(imagePath&&action==='image-aspect'&&['auto','square','portrait','landscape','wide'].includes(msg.aspect)){set(imagePath+'.aspect',msg.aspect);set(imagePath+'.height',0);}
+  else if(imagePath&&action==='image-aspect'&&['auto','square','portrait','tall','landscape','wide'].includes(msg.aspect)){set(imagePath+'.aspect',msg.aspect);set(imagePath+'.height',0);}
   else if(imagePath&&action==='caption-visibility'){
    const path=imagePath.includes('.sections.')||imagePath.includes('.photos.')?imagePath.replace(/\.imageStyle$/,'.showCaption'):imagePath+'.showCaption';set(path,!!msg.visible);
   }

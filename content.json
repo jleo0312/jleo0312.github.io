@@ -179,7 +179,11 @@
               "type": "video",
               "src": "/media/truck-clean-engine-turnover.mp4",
               "alt": "Turning the cleaned engine over.",
-              "gifLike": true
+              "gifLike": true,
+              "imageStyle": {
+                "aspect": "tall",
+                "fit": "cover"
+              }
             }
           ],
           "text": "The tops of the pistons had tons of carbon buildup, so I cleaned them up.",
@@ -189,6 +193,13 @@
               "x": 0,
               "y": 2.203856749311295,
               "width": 44.67401285583104,
+              "height": 864.8825562324274
+            },
+            {
+              "id": "image:projects/toyota-engine-swap/sections/truck-pistons-gif-pair/items/1/imageStyle",
+              "x": 51,
+              "y": 2.203856749311295,
+              "width": 49,
               "height": 864.8825562324274
             }
           ]

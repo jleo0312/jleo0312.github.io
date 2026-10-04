@@ -101,7 +101,7 @@ function mount({data,key,settings,model,send}){
      toolbar.append(button('Thumbnail image','replace'),button(hasPreview?'Replace preview video':'Add preview video','preview-video'));
     }else toolbar.append(button('Replace','replace'));
     for(const [value,label]of [['left','Photo left'],['right','Photo right'],['above','Above text'],['below','Below text']])if(item.layoutPath)toolbar.append(button(label,'layout',value));
-    toolbar.append(selectControl('Image proportions','aspect',[['auto','Original shape'],['square','Square'],['portrait','Portrait'],['landscape','Landscape'],['wide','Wide']],read(data,item.path+'.aspect')||'auto'));
+    toolbar.append(selectControl('Image proportions','aspect',[['auto','Original shape'],['square','Square'],['portrait','Portrait · 4:5'],['tall','Portrait · 3:4'],['landscape','Landscape'],['wide','Wide']],read(data,item.path+'.aspect')||'auto'));
     toolbar.append(button(read(data,item.path+'.fit')==='cover'?'Show whole photo':'Fill / crop','fit'),button(cropping?'Done cropping':'Move crop','crop'),button('Edit caption','caption'));
     if(item.caption?.textContent.trim())toolbar.append(button(read(data,item.visiblePath)===false?'Show caption':'Hide caption','caption-visibility'));
     if(item.frame.closest('[data-project]'))toolbar.append(button('✥ Reorder cards','reorder-cards'));
@@ -189,7 +189,7 @@ function mount({data,key,settings,model,send}){
   if(action==='edit-text'){if(editing)stopText();else startText(picked.node);buildToolbar();}
   else if(action==='reset-position')objectChange(null);
   else if(action==='front'||action==='back')objectChange({layer:clamp((layoutValue()?.layer||1)+(action==='front'?1:-1),0,20)});
-  else if(action==='replace'){input.accept=item.srcPath.endsWith('.video')?'video/*,image/gif':'image/*';input.dataset.uploadPath=item.srcPath;input.value='';input.click();}
+  else if(action==='replace'){const video=item.srcPath.endsWith('.video')||item.frame.querySelector('video')||read(data,item.srcPath.replace(/\.src$/,'.type'))==='video';input.accept=video?'video/*,image/gif':'image/*';input.dataset.uploadPath=item.srcPath;input.value='';input.click();}
   else if(action==='preview-video'){input.accept='video/*,image/gif';input.dataset.uploadPath=item.path.replace(/\.thumbnailStyle$/,'.previewVideo');input.value='';input.click();}
   else if(action==='layout'){if(picked&&objects.record(picked))objectChange(null);transaction('image-layout',{position:b.dataset.value});}
   else if(action==='fit')transaction('image-fit',{fit:read(data,item.path+'.fit')==='cover'?'contain':'cover'});
