@@ -398,3 +398,32 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   object-position:center!important;
   border-radius:14px!important;
 }
+
+/* Toyota piston-cleanup pair: make the photo exactly match the turnover video's height. */
+.builder-section[data-section-id="truck-pistons-gif-pair"] .media-pair{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:stretch!important;
+}
+.builder-section[data-section-id="truck-pistons-gif-pair"] .paired-media-item:first-child{
+  position:relative!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  border-radius:14px!important;
+}
+.builder-section[data-section-id="truck-pistons-gif-pair"] .paired-media-item:first-child .image-frame,
+.builder-section[data-section-id="truck-pistons-gif-pair"] .paired-media-item:first-child .image-box{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  margin:0!important;
+}
+.builder-section[data-section-id="truck-pistons-gif-pair"] .paired-media-item:first-child img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+
