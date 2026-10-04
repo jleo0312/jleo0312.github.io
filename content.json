@@ -664,12 +664,16 @@
           "items": [
             {
               "type": "video",
-              "src": "/square nozzle.mp4",
-              "alt": "Testing the redesigned circular nozzle."
+              "src": "/media/muud8bn3-78o6p-square-nozzle.mp4",
+              "alt": "Testing the redesigned circular nozzle.",
+              "imageStyle": {
+                "enabled": true,
+                "fit": "contain"
+              }
             },
             {
               "type": "video",
-              "src": "/media/muuc2s0d-oe81t-torch-test.mp4",
+              "src": "/media/muud8igr-tcl9x-gravity-fed.mov",
               "alt": "Testing the siphon-feed atomizer.",
               "poster": "/media/testing-flame-thumbnail-hq.webp",
               "imageStyle": {
@@ -677,13 +681,29 @@
                 "fit": "cover"
               }
             }
-          ]
+          ],
+          "elements": [
+            {
+              "id": "image:projects/waste-oil-powered-furnace/sections/furnace-siphon-atomizer-videos/items/1/imageStyle",
+              "x": 51.010101010101,
+              "y": 2.203856749311295,
+              "width": 48.98989898989899
+            }
+          ],
+          "text": ""
         },
         {
           "id": "section-20856c4d-1448-4bf5-8b8b-ef83cc8721de",
           "type": "text",
           "visible": true,
           "text": "The original design used a square inlet tube because it was built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. After switching to the liquid-fuel torch, atomized oil began collecting on the tube walls, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation.\n\nI fixed this by building a new torch assembly with a circular outlet tube."
+        },
+        {
+          "id": "section-d64225ea-6929-48ed-9960-330fe9de7542",
+          "type": "text",
+          "visible": true,
+          "text": "I plan to further upgrade the furnace by adding ceramic wool insulation. This should significantly improve efficiency by reducing the large amount of heat currently lost through the walls and surrounding air. With these upgrades, I’m hoping to reach temperatures high enough to melt copper.",
+          "heading": "What's next?"
         },
         {
           "id": "end-waste-oil-furnace",
