@@ -436,11 +436,24 @@
           "id": "camera-mount-cad-assembly",
           "type": "videoText",
           "visible": true,
-          "video": "/media/camera-mount-assembly-loop.mp4",
+          "video": "/media/muubqa94-tajnn-camera-assembly.mp4",
           "videoPosition": "right",
           "gifLike": true,
           "alt": "Looping CAD assembly of the camera mount.",
-          "text": "I learned how to make CAD assemblies and created one for the camera mount."
+          "text": "I learned how to make CAD assemblies and created one for the camera mount.",
+          "elements": [
+            {
+              "id": "image:projects/camera-mount/sections/camera-mount-cad-assembly/imageStyle",
+              "x": 64.00223829201101,
+              "y": 2.203856749311295,
+              "width": 31.68187557392103,
+              "height": 654.390625
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          }
         },
         {
           "id": "camera-mount-end",
