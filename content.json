@@ -268,16 +268,19 @@
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
       "slug": "camera-mount",
-      "thumbnail": "/media/muu605dm-diq59-gravity-fed.mov",
+      "thumbnail": "/media/muu6ze0x-4zvz1-camera-mount.jpg",
       "description": "A custom camera mount.",
-      "previewVideo": "/media/muu607fe-vaq9n-messiing-around-with-lid.mp4",
+      "previewVideo": "/media/muu71xue-kz8ul-camera-mount.mov",
       "thumbnailMotion": "hover",
       "thumbnailFit": "contain",
       "coverText": "Camera mount",
       "theme": "silver",
       "thumbnailStyle": {
-        "enabled": false,
-        "showCaption": true
+        "enabled": true,
+        "showCaption": true,
+        "fit": "cover",
+        "focalX": 41,
+        "focalY": 71
       },
       "videoStyle": {
         "enabled": false,
@@ -781,6 +784,12 @@
               "id": "image:projects/waste-oil-powered-furnace/thumbnailStyle",
               "x": 0,
               "y": 0,
+              "width": 100
+            },
+            {
+              "id": "image:projects/camera-mount/thumbnailStyle",
+              "x": 0,
+              "y": 1.1278195488721803,
               "width": 100
             }
           ]
