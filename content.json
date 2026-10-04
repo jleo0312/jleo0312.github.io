@@ -331,9 +331,30 @@
           "id": "section-c3db48e5-78da-4eb4-83b7-4ed685b4188e",
           "type": "video",
           "visible": true,
-          "video": "",
+          "video": "/media/muuf1u10-8sjaz-3.4-torn-apart.mp4",
           "caption": "",
-          "showCaption": true
+          "showCaption": true,
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/sections/section-c3db48e5-78da-4eb4-83b7-4ed685b4188e/imageStyle",
+              "x": 0,
+              "y": 6.841138659320478,
+              "width": 36.17998163452709,
+              "height": 734.390625
+            },
+            {
+              "id": "text:projects/toyota-engine-swap/sections/section-c3db48e5-78da-4eb4-83b7-4ed685b4188e/text",
+              "x": 41.96510560146924,
+              "y": 33.31970270890726,
+              "width": 54.82093663911846,
+              "height": 119.59375
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          },
+          "text": "I tore apart my new (to me) 3.4 and had the parts spread out all over my garage."
         },
         {
           "id": "truck-project-end",
