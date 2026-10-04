@@ -211,6 +211,32 @@
           ]
         },
         {
+          "id": "section-7ee5f353-0724-41eb-9c29-dd240a5ff2b2",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/muu5puck-chhz5-truck-at-schultz.jpg",
+          "heading": "",
+          "text": "I loved driving my truck around. It felt so good to hear it running, knowing the work I put into it.\n",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/sections/section-7ee5f353-0724-41eb-9c29-dd240a5ff2b2/imageStyle",
+              "x": 8.677685950413224,
+              "y": 0,
+              "width": 41.68962350780532,
+              "height": 654.390625
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          }
+        },
+        {
           "id": "truck-later-work",
           "type": "photoText",
           "visible": true,
