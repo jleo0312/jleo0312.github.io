@@ -40,7 +40,7 @@
       "featuredOnHomepage": true,
       "homepageOrder": "auto",
       "slug": "toyota-engine-swap",
-      "thumbnail": "/media/mut7061e-ohmdt-firrst-day-of-the-truck.jpg",
+      "thumbnail": "/media/muu4hm7a-046uw-firrst-day-of-the-truck.jpg",
       "description": "Swapping the engine, wiring harness, and ECU from a 1999 Toyota 4Runner into my 1989 Toyota pickup.",
       "thumbnailMotion": "hover",
       "photos": [],
@@ -159,7 +159,7 @@
       "slug": "camera-mount",
       "thumbnail": "/camera-mount-poster.jpg",
       "description": "A custom camera mount.",
-      "previewVideo": "/camera-mount-preview.mp4",
+      "previewVideo": "/media/muu4hfg6-indvf-gravity-fed.mov",
       "thumbnailMotion": "loop",
       "thumbnailFit": "contain",
       "coverText": "Camera mount",
@@ -473,6 +473,18 @@
           ]
         },
         {
+          "id": "section-20856c4d-1448-4bf5-8b8b-ef83cc8721de",
+          "type": "text",
+          "visible": true,
+          "text": "The original design used a square inlet tube because it was built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. After switching to the liquid-fuel torch, however, atomized oil began collecting on the tube walls, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation."
+        },
+        {
+          "id": "section-031b55a6-0330-4318-92c8-263e7c6404b7",
+          "type": "text",
+          "visible": true,
+          "text": "I fixed this by building a new torch\n assembly with a circular outlet tube."
+        },
+        {
           "id": "end-waste-oil-furnace",
           "type": "projectEnd",
           "visible": true,
@@ -643,7 +655,15 @@
             "enabled": false
           },
           "loop": false,
-          "muted": false
+          "muted": false,
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/thumbnailStyle",
+              "x": 0,
+              "y": 0,
+              "width": 100
+            }
+          ]
         }
       ],
       "useSections": true
