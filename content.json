@@ -677,6 +677,13 @@
           }
         },
         {
+          "id": "section-ee7f7348-8fa3-4332-95fc-29911267360c",
+          "type": "text",
+          "visible": true,
+          "text": "How to create assemblies\n3D printing capabilities & weaknesses\nDifferent filament properties\nCAD design & prototyping",
+          "heading": "What did I learn?"
+        },
+        {
           "id": "section-0935715f-afbc-4908-ab36-06d740e99530",
           "type": "photoText",
           "visible": true,
