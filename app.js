@@ -137,6 +137,10 @@ function card(project, index) {
   const number = settings.project.showNumbers ? `<span class="card-index">${String(index + 1).padStart(2, '0')}</span>` : '';
   if (project.demo) return `<article class="project-card demo-card" aria-label="Empty gallery slot ${index + 1}"><div class="thumbnail demo-thumbnail demo-tone-${Math.floor(index / 3)}"></div><div class="card-heading"><span class="demo-title" aria-hidden="true"></span>${number}</div></article>`;
   const isGIF = /\.gif(?:[?#]|$)/i.test(project.previewVideo || '');
+  if(project.thumbnailMotion==='controls'&&media(project.previewVideo)&&!isGIF){
+    const playback=editorPreview?'muted playsinline preload="metadata"':'controls playsinline preload="metadata"';
+    return `<article class="project-card" data-project="${esc(project.slug)}"><div class="project-link"><div class="thumbnail" data-fit="${project.thumbnailFit==='contain'?'contain':'cover'}"><video class="card-video-player ${editorPreview?'media-preview':''}" ${playback} src="${media(project.previewVideo)}" ${media(project.thumbnail)?`poster="${media(project.thumbnail)}"`:''} aria-label="${esc(project.title)}"></video>${editorPreview&&media(project.thumbnail)?`<img class="media-video-thumbnail" src="${media(project.thumbnail)}" alt="${esc(project.thumbnailAlt||project.title)}">`:''}</div><div class="card-heading"><h3><a href="/?project=${encodeURIComponent(project.slug)}">${esc(project.title)}</a></h3>${number}</div></div></article>`;
+  }
   const gifPreview = project.thumbnailMotion !== 'still' && !reducedMotion.matches && isGIF && media(project.previewVideo);
   const previewURL = media(project.previewVideo);
   const previewMotion = project.thumbnailMotion === 'loop' ? 'loop' : 'hover';
@@ -392,7 +396,8 @@ function photoFrame(src,alt,style={},options={}) {
   const caption=style.caption ?? options.caption ?? '';
   const captionHTML=caption && style.showCaption!==false ? `<figcaption class="${options.captionClass||'image-caption'}">${paragraphs(caption)}</figcaption>`:'';
   const above=style.captionPosition==='above';
-  const previewSrc=options.previewSrc??style.previewVideo,motion=choice(options.motion??style.previewBehavior,['hover','loop','still'],'hover'),hasPreview=!!media(previewSrc);
+  const previewSrc=options.previewSrc??style.previewVideo,motion=choice(options.motion??style.previewBehavior,['controls','hover','loop','still'],'hover'),hasPreview=!!media(previewSrc);
+  if(hasPreview&&motion==='controls')return renderVideo(previewSrc,src,{...style,caption,poster:src,previewVideo:undefined,previewBehavior:'controls'},options.path,'section-video',{frameClass:options.frameClass,alt});
   const previewStyle=options.previewStyle?{...style,previewStyle:options.previewStyle}:style;
   const thumbnail=media(src)?`<img src="${media(src)}" alt="${esc(alt||'')}" ${options.eager?'':'loading="lazy"'}>`:hasPreview?videoThumbnail(previewSrc,alt):'<span class="image-placeholder" role="img" aria-label="Space for a photo"></span>';
   return `<figure class="image-frame ${options.frameClass||''} ${custom?'image-custom':''} ${hasPreview?'media-preview-frame':''} image-align-${choice(style.align,['left','center','right'],'center')} ${above?'caption-above':''}" style="${imageCSS(style,options.fit)};${previewCSS(previewStyle,options.fit)}" data-image-style="${esc(options.path||'')}" data-motion="${motion}">${above?captionHTML:''}<div class="image-box ${options.boxClass||''}">${thumbnail}${hasPreview&&(editorPreview||motion!=='still')?mediaPreview(previewSrc,motion):''}</div>${above?'':captionHTML}</figure>`;
@@ -423,7 +428,7 @@ function renderVideo(src,poster,style={},path='',className='section-video',optio
   const preload=media(poster)?'metadata':'auto';
   const playback=editorPreview?'muted playsinline preload="metadata"':options.gifLike&&style.previewBehavior==null?'autoplay loop muted playsinline preload="auto"':`controls playsinline preload="${preload}" ${style.loop?'loop':''} ${style.muted?'muted':''}`;
   const video=`<video class="${className} media-video ${editorPreview?'media-preview':''}" ${playback} ${options.alt?`aria-label="${esc(options.alt)}"`:''} ${media(poster)?`poster="${media(poster)}"`:''} src="${media(src)}">${esc(settings.project.videoFallback)} <a href="${media(src)}">${esc(settings.project.downloadVideo)}</a></video>`;
-  return `<figure class="video-frame ${custom?'video-custom':''} image-align-${choice(style.align,['left','center','right'],'center')}" data-image-style="${esc(path)}" style="${imageCSS(style,'contain')};${previewCSS(style,'contain')}">${style.captionPosition==='above'?caption:''}${editorPreview?`<div class="video-media-box">${video}${media(poster)?`<img class="media-video-thumbnail" src="${media(poster)}" alt="${esc(options.alt||'Video thumbnail')}">`:''}</div>`:video}${style.captionPosition!=='above'?caption:''}</figure>`;
+  return `<figure class="video-frame ${options.frameClass||''} ${custom?'video-custom':''} image-align-${choice(style.align,['left','center','right'],'center')}" data-image-style="${esc(path)}" style="${imageCSS(style,'contain')};${previewCSS(style,'contain')}">${style.captionPosition==='above'?caption:''}<div class="video-media-box">${video}${editorPreview&&media(poster)?`<img class="media-video-thumbnail" src="${media(poster)}" alt="${esc(options.alt||'Video thumbnail')}">`:''}</div>${style.captionPosition!=='above'?caption:''}</figure>`;
 }
 function projectVideo(project,data) {
   return renderVideo(project.video,project.thumbnail,project.videoStyle||{},`projects.${data.projects.indexOf(project)}.videoStyle`,'main-video');
