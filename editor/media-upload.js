@@ -1,7 +1,14 @@
-/* Image validation and local HEIC conversion for portfolio uploads. */
+/* Shared media limits, image validation and local HEIC conversion. */
 (function(){
 'use strict';
 let converter;
+const MB=1024*1024;
+function checkSize(file,video=false){
+ const limit=video?100:30;
+ if(file.size<=limit*MB)return;
+ const size=(Math.ceil(file.size/MB*10)/10).toFixed(1);
+ throw new Error(video?`This video / GIF is ${size} MB. GitHub supports files up to 100 MB. Compress or trim it to 100 MB or less, then try again. Your existing media is unchanged.`:`This photo is ${size} MB. Choose a photo of 30 MB or less. Your existing media is unchanged.`);
+}
 function loadConverter(){
  if(typeof window.HeicTo==='function')return Promise.resolve(window.HeicTo);
  if(!converter)converter=new Promise((resolve,reject)=>{
@@ -19,10 +26,10 @@ async function validateImage(file){
  finally{URL.revokeObjectURL(src);}
 }
 async function prepare(file,{video=false,onStatus=()=>{}}={}){
- if(file.size>30*1024*1024)throw new Error('Choose a file smaller than 30 MB.');
+ checkSize(file,video);
  const heic=/\.hei[cf]$/i.test(file.name)||/^image\/(heic|heif)(?:-sequence)?$/i.test(file.type);
  if(video){
-  if(!/^video\//.test(file.type)&&!/^image\/gif$/i.test(file.type)&&!(/\.(mp4|mov|webm|m4v|ogv|gif)$/i.test(file.name)&&!file.type))throw new Error('Choose a video or animated GIF for this preview.');
+  if(!/^video\//.test(file.type)&&!/^image\/gif$/i.test(file.type)&&!(/\.(mp4|mov|webm|m4v|ogv|gif)$/i.test(file.name)&&!file.type))throw new Error('Choose a video or animated GIF.');
   return {file,converted:false};
  }
  if(file.type&&!/^image\//.test(file.type)&&!heic)throw new Error('Choose a photo for this image.');
@@ -33,7 +40,7 @@ async function prepare(file,{video=false,onStatus=()=>{}}={}){
   const name=/\.hei[cf]$/i.test(file.name)?file.name.replace(/\.hei[cf]$/i,'.jpg'):file.name+'.jpg';
   file=new File([jpeg],name,{type:'image/jpeg',lastModified:file.lastModified});
  }
- if(file.size>30*1024*1024)throw new Error('The converted photo is larger than 30 MB. Choose a smaller photo.');
+ checkSize(file);
  await validateImage(file);return {file,converted:heic};
 }
 window.PortfolioMediaUpload={prepare};
