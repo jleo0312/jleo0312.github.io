@@ -657,7 +657,7 @@
           "visible": true,
           "image": "/media/muuh8xz8-ki2kf-camera-mount-outside.jpg",
           "heading": "",
-          "text": "Here's my finished camera mount. It works exactly how I intended.",
+          "text": "Here's my finished camera mount. It works exactly how I intended, and I enjoy using it knowing that I turned an idea into a real thing.",
           "caption": "",
           "showCaption": true,
           "imagePosition": "left",
@@ -681,7 +681,7 @@
           "id": "section-ee7f7348-8fa3-4332-95fc-29911267360c",
           "type": "text",
           "visible": true,
-          "text": "How to create assemblies\n3D printing capabilities & weaknesses\nDifferent filament properties\nCAD design & prototyping",
+          "text": "CAD design & prototyping\n3D printing capabilities & weaknesses\nHow to create assemblies\nDifferent filament properties\n",
           "heading": "What did I learn?"
         },
         {
