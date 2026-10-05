@@ -82,23 +82,47 @@ function loadPreview(){
 function fitPreview(){const pane=$('.preview-pane'),width=Math.max(240,pane.clientWidth-36),scale=Math.min(1,width/device),height=window.innerWidth<=800?650:Math.max(360,window.innerHeight-215);$('#preview-shell').style.width=device*scale+'px';$('#preview-shell').style.height=height+'px';$('#preview').style.width=device+'px';$('#preview').style.height=Math.ceil(height/scale)+'px';$('#preview').style.transform=`scale(${scale})`;$('#preview-size').textContent=device+' px';}
 function canonical(value){if(Array.isArray(value))return value.map(canonical);if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(k=>[k,canonical(value[k])]));return value;}
 const same=(a,b)=>JSON.stringify(canonical(a))===JSON.stringify(canonical(b));
-async function request(path,{method='GET',body,auth=token}={}){const response=await fetch(API+path,{method,cache:'no-store',headers:{Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(auth?{Authorization:'Bearer '+auth}:{}),...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})});if(!response.ok){let message;try{message=(await response.json()).message;}catch{}throw new Error(response.status===401?'The GitHub token was not accepted.':response.status===403?'GitHub denied this request. This editor needs a fine-grained token with access to jleo0312.github.io and Repository permissions → Contents: Read and write.':response.status===409||response.status===422?'The repository changed or rejected the save. Your draft is still safe.':message||'GitHub request failed ('+response.status+').');}return response.status===204?{}:response.json();}
+function githubError(response,path,payload={},label='the request'){
+ const errors=Array.isArray(payload.errors)?payload.errors:[],detail=[payload.message,...errors.map(error=>typeof error==='string'?error:error.message||[error.field,error.code].filter(Boolean).join(': '))].filter(Boolean).join(' · ');
+ let message=`GitHub rejected ${label} (HTTP ${response.status}): ${detail||'No additional reason was returned.'}`;
+ if(response.status===401)message='The GitHub token was not accepted. Reconnect GitHub and try again.';
+ else if(response.status===403&&/rate limit|abuse|secondary|spam/i.test(detail))message='GitHub temporarily limited requests. Wait a few minutes, then try Publish again. '+detail;
+ else if(response.status===403)message='GitHub denied '+label+'. This editor needs Repository permissions → Contents: Read and write. '+detail;
+ if(response.status===413||/too large|size limit|exceeds.*size/i.test(detail))message+=' Compress or trim the file, then replace it and try again.';
+ const error=new Error(message+' Your draft is still safe.');error.status=response.status;error.path=path;return error;
+}
+async function request(path,{method='GET',body,auth=token,label='the request'}={}){const response=await fetch(API+path,{method,cache:'no-store',headers:{Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(auth?{Authorization:'Bearer '+auth}:{}),...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})});if(!response.ok){let payload={};try{payload=await response.json();}catch{}throw githubError(response,path,payload,label);}return response.status===204?{}:response.json();}
 function decode64(text){return new TextDecoder().decode(Uint8Array.from(atob(text.replace(/\s/g,'')),c=>c.charCodeAt(0)));}
 function encode64(buffer){const bytes=new Uint8Array(buffer);let result='';for(let i=0;i<bytes.length;i+=32768)result+=String.fromCharCode(...bytes.subarray(i,i+32768));return btoa(result);}
-async function readRemote(auth=''){const result=await request('/contents/content.json?ref=main',{auth});return {data:JSON.parse(decode64(result.content)),sha:result.sha};}
-function usedAssets(){const text=JSON.stringify(data);return [...assets].filter(([path])=>text.includes(path));}
+async function readRemote(auth='',ref='main'){const result=await request('/contents/content.json?ref='+encodeURIComponent(ref),{auth});return {data:JSON.parse(decode64(result.content)),sha:result.sha};}
+function usedAssets(snapshot=data){const text=JSON.stringify(snapshot);return [...assets].filter(([path])=>text.includes(path));}
+async function publishBase(expected){
+ const head=await request('/git/ref/heads/main'),sha=head.object.sha;
+ const [remote,commit]=await Promise.all([readRemote(token,sha),request('/git/commits/'+sha)]);
+ if(!same(remote.data,expected))throw new Error('The content changed in another editor. Your draft is preserved. Download a backup before reloading the latest website.');
+ return {sha,tree:commit.tree.sha};
+}
+async function savePublishedFiles(files,expected){
+ let base=await publishBase(expected);
+ for(let attempt=0;attempt<3;attempt++){
+  const tree=await request('/git/trees',{method:'POST',body:{base_tree:base.tree,tree:files},label:'the page and media files'});
+  const commit=await request('/git/commits',{method:'POST',body:{message:'Update portfolio from visual editor',tree:tree.sha,parents:[base.sha]},label:'the website save'});
+  try{await request('/git/refs/heads/main',{method:'PATCH',body:{sha:commit.sha,force:false},label:'the website update'});return;}
+  catch(error){
+   if(error.path!=='/git/refs/heads/main'||![409,422].includes(error.status))throw error;
+   const latest=await publishBase(expected);if(latest.sha===base.sha)throw error;
+   if(attempt===2)throw new Error('The website kept changing during this save. Try Publish again. Your draft is still safe.');
+   base=latest;status('The website changed during this save. Retrying…');
+  }
+ }
+}
 async function publish(){
  if(!token){$('#connect-dialog').showModal();return;}if(saving)return;
  try{M.validate(data);saving=true;$('#publish').disabled=true;status('Checking the latest saved content…');
- const remote=await readRemote(token);if(!same(remote.data,baseData))throw new Error('The content changed in another editor. Your draft is preserved. Download a backup, then reload the latest website before publishing.');
- const head=await request('/git/ref/heads/main'),commit=await request('/git/commits/'+head.object.sha);
- // Pin the content comparison to this exact parent commit, including changes between reads.
- const pinned=await request('/contents/content.json?ref='+head.object.sha);if(pinned.sha!==remote.sha)throw new Error('The website changed during this save. Try Publish again.');
- const snapshot=clone(data),tree=[{path:'content.json',mode:'100644',type:'blob',content:JSON.stringify(snapshot,null,2)+'\n'}];
- for(const [path,item] of usedAssets()){status('Uploading '+path.split('/').pop()+'…');const blob=await request('/git/blobs',{method:'POST',body:{content:encode64(await item.blob.arrayBuffer()),encoding:'base64'}});tree.push({path:path.slice(1),mode:'100644',type:'blob',sha:blob.sha});}
- const newTree=await request('/git/trees',{method:'POST',body:{base_tree:commit.tree.sha,tree}});
- const next=await request('/git/commits',{method:'POST',body:{message:'Update portfolio from visual editor',tree:newTree.sha,parents:[head.object.sha]}});
- await request('/git/refs/heads/main',{method:'PATCH',body:{sha:next.sha,force:false}});
+ const snapshot=clone(data),expected=clone(baseData),pendingAssets=usedAssets(snapshot),tree=[{path:'content.json',mode:'100644',type:'blob',content:JSON.stringify(snapshot,null,2)+'\n'}];
+ await publishBase(expected);
+ for(const [path,item] of pendingAssets){const name=path.split('/').pop(),size=(item.blob.size/1024/1024).toFixed(1);if(!item.sha){status('Uploading '+name+' ('+size+' MB)…');const blob=await request('/git/blobs',{method:'POST',body:{content:encode64(await item.blob.arrayBuffer()),encoding:'base64'},label:'the upload of '+name+' ('+size+' MB)'});item.sha=blob.sha;}tree.push({path:path.slice(1),mode:'100644',type:'blob',sha:item.sha});}
+ status('Saving the page and media…');await savePublishedFiles(tree,expected);
  baseData=snapshot;baseSha='';dirty=!same(data,snapshot);await saveDraft();status(dirty?'Saved to GitHub. Newer draft edits are still unpublished.':'Saved to GitHub. The website will update after publishing finishes.');
  }catch(error){status(error.message);}finally{saving=false;$('#publish').disabled=false;}
 }
