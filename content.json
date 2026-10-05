@@ -951,17 +951,34 @@
           "text": "I fixed this by building a new torch assembly, with a circular outlet tube.\n"
         },
         {
-          "id": "section-7db94714-92ec-47a3-8140-e2f9833724df",
-          "type": "photoText",
+          "id": "section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5",
+          "type": "video",
           "visible": true,
-          "image": "",
-          "heading": "",
-          "text": "",
+          "video": "",
           "caption": "",
           "showCaption": true,
-          "imagePosition": "left",
-          "imageWidth": 56,
-          "textWidth": 44
+          "imageStyle": {
+            "enabled": true,
+            "poster": "/media/muuinfrr-cw2ur-furnace-thumbnail.jpeg",
+            "fit": "cover"
+          },
+          "elements": [
+            {
+              "id": "image:projects/waste-oil-powered-furnace/sections/section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5/imageStyle",
+              "x": 0,
+              "y": 6.841138659320478,
+              "width": 43.15886134067952,
+              "height": 654.390625
+            },
+            {
+              "id": "text:projects/waste-oil-powered-furnace/sections/section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5/text",
+              "x": 50,
+              "y": 25.520115932047748,
+              "width": 41.8732782369146,
+              "height": 94.59375
+            }
+          ],
+          "text": "This was the best run I’ve had with the furnace so far. It can be a little finicky to start, since the furnace needs to be preheated with wood before switching to full oil. Once the chamber is hot enough, the oil ignites consistently and the furnace can sustain the burn on its own."
         },
         {
           "id": "section-d64225ea-6929-48ed-9960-330fe9de7542",
@@ -969,6 +986,18 @@
           "visible": true,
           "text": "I plan to further upgrade the furnace by adding ceramic wool insulation. This should significantly improve efficiency by reducing the large amount of heat currently lost through the walls and surrounding air. With these upgrades, I’m hoping to reach temperatures high enough to melt copper.",
           "heading": "What's next?"
+        },
+        {
+          "id": "section-5b348502-f7aa-4217-a2fa-1a819c500411",
+          "type": "spacer",
+          "visible": true
+        },
+        {
+          "id": "section-a2481c76-20fa-4867-b180-4a3debcc4ee7",
+          "type": "text",
+          "visible": true,
+          "text": "- Waste-oil burner assemblies\n- Optimizing combustion of oil\n- Iterative prototyping and design improvement",
+          "heading": "What did I learn?"
         },
         {
           "id": "end-waste-oil-furnace",
