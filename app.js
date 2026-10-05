@@ -556,10 +556,9 @@ function bindImageLightbox() {
   const overlay=document.createElement('div');
   overlay.className='photo-lightbox';
   overlay.hidden=true;
-  overlay.innerHTML='<button class="photo-lightbox-close" type="button" aria-label="Close enlarged photo">×</button><img class="photo-lightbox-image" alt="">';
+  overlay.innerHTML='<img class="photo-lightbox-image" alt="">';
   document.body.append(overlay);
   const enlarged=overlay.querySelector('.photo-lightbox-image');
-  const closeButton=overlay.querySelector('.photo-lightbox-close');
   let lastTrigger=null;
 
   function open(box,trigger){
@@ -570,7 +569,6 @@ function bindImageLightbox() {
     enlarged.alt=photo.alt||'Enlarged photo';
     overlay.hidden=false;
     document.body.classList.add('lightbox-open');
-    closeButton.focus({preventScroll:true});
   }
   function close(){
     if(overlay.hidden)return;
@@ -591,7 +589,6 @@ function bindImageLightbox() {
     trigger.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();open(box,trigger);},options);
   });
 
-  closeButton.addEventListener('click',close,options);
   enlarged.addEventListener('click',close,options);
   overlay.addEventListener('click',event=>{if(event.target===overlay)close();},options);
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!overlay.hidden)close();},options);
