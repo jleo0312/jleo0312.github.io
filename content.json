@@ -960,7 +960,8 @@
           "imageStyle": {
             "enabled": true,
             "poster": "/media/muuinfrr-cw2ur-furnace-thumbnail.jpeg",
-            "fit": "cover"
+            "fit": "cover",
+            "previewBehavior": "controls"
           },
           "elements": [
             {
