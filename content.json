@@ -491,6 +491,38 @@
           "text": "An internal combustion engine uses valves to \"breathe.\" The engine does this by opening and closing intake and exhaust valves. They are the blue and red upside-down T shaped objects in the gif. \n\nI lapped my valves, meaning I reground the mating surface between the valve and head. This increases it's ability to contain pressure and therefore results in more efficient combustion."
         },
         {
+          "id": "section-4619b606-e991-4753-866d-af92effaa423",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muvizwap-wnjac-engine-with-heads.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "portrait",
+                "enabled": true,
+                "focalX": 48,
+                "focalY": 88,
+                "height": 0
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/muvj0iy0-0n60x-engine.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "portrait",
+                "enabled": true,
+                "height": 0
+              }
+            }
+          ],
+          "text": "Slowly but surely, the engine came together.\n"
+        },
+        {
           "id": "truck-project-end",
           "type": "projectEnd",
           "visible": true
