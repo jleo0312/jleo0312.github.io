@@ -1030,8 +1030,9 @@
       "coverText": "Drone",
       "theme": "blue",
       "thumbnailStyle": {
-        "enabled": false,
-        "showCaption": true
+        "enabled": true,
+        "showCaption": true,
+        "fit": "cover"
       },
       "videoStyle": {
         "enabled": false,
@@ -1045,18 +1046,17 @@
           "visible": true
         },
         {
-          "id": "original-projectThumbnail",
-          "type": "projectThumbnail",
+          "id": "section-8e791d07-4d22-4eba-af04-2c38fe58b2e3",
+          "type": "photoText",
           "visible": true,
-          "elements": [
-            {
-              "id": "image:projects/drone/thumbnailStyle",
-              "x": 8.677685950413224,
-              "y": 0,
-              "width": 51.88246097337006,
-              "height": 654.390625
-            }
-          ]
+          "image": "",
+          "heading": "",
+          "text": "",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44
         },
         {
           "id": "original-projectEnd",
