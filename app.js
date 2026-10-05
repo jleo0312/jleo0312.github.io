@@ -544,6 +544,64 @@ function applyThumbnailControls(data) {
     if(button){const observer=new ResizeObserver(()=>{const photo=box.getBoundingClientRect(),bounds=card.getBoundingClientRect();button.style.top=(photo.top-bounds.top+12)+'px';button.style.right=(bounds.right-photo.right+12)+'px';button.style.maxWidth=Math.max(44,photo.width-24)+'px';});observer.observe(box);activeCleanups.push(()=>observer.disconnect());}
   });
 }
+function bindImageLightbox() {
+  if (editorPreview) return;
+  const boxes=[...app.querySelectorAll('.image-frame .image-box')].filter(box=>{
+    const photo=box.querySelector(':scope > img:not(.media-preview):not(.video-thumbnail)');
+    return photo && !box.querySelector(':scope > video, :scope > .media-preview');
+  });
+  if(!boxes.length)return;
+
+  const events=new AbortController(),options={signal:events.signal};
+  const overlay=document.createElement('div');
+  overlay.className='photo-lightbox';
+  overlay.hidden=true;
+  overlay.innerHTML='<button class="photo-lightbox-close" type="button" aria-label="Close enlarged photo">×</button><img class="photo-lightbox-image" alt="">';
+  document.body.append(overlay);
+  const enlarged=overlay.querySelector('.photo-lightbox-image');
+  const closeButton=overlay.querySelector('.photo-lightbox-close');
+  let lastTrigger=null;
+
+  function open(box,trigger){
+    const photo=box.querySelector(':scope > img:not(.media-preview):not(.video-thumbnail)');
+    if(!photo)return;
+    lastTrigger=trigger;
+    enlarged.src=photo.currentSrc||photo.src;
+    enlarged.alt=photo.alt||'Enlarged photo';
+    overlay.hidden=false;
+    document.body.classList.add('lightbox-open');
+    closeButton.focus({preventScroll:true});
+  }
+  function close(){
+    if(overlay.hidden)return;
+    overlay.hidden=true;
+    enlarged.removeAttribute('src');
+    document.body.classList.remove('lightbox-open');
+    lastTrigger?.focus({preventScroll:true});
+  }
+
+  boxes.forEach(box=>{
+    box.classList.add('photo-zoomable');
+    const trigger=document.createElement('button');
+    trigger.type='button';
+    trigger.className='photo-zoom-trigger';
+    trigger.setAttribute('aria-label','Enlarge photo');
+    trigger.innerHTML='<span class="photo-zoom-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6"></path></svg>Tap to enlarge</span>';
+    box.append(trigger);
+    trigger.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();open(box,trigger);},options);
+  });
+
+  closeButton.addEventListener('click',close,options);
+  overlay.addEventListener('click',event=>{if(event.target===overlay)close();},options);
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!overlay.hidden)close();},options);
+  activeCleanups.push(()=>{
+    events.abort();
+    overlay.remove();
+    document.body.classList.remove('lightbox-open');
+    boxes.forEach(box=>{box.classList.remove('photo-zoomable');box.querySelector(':scope > .photo-zoom-trigger')?.remove();});
+  });
+}
+
 function cleanupActive() {activeCleanups.forEach(fn=>fn());activeCleanups=[];}
 function displayPortfolio(input,key) {
   cleanupActive();
@@ -569,6 +627,7 @@ function displayPortfolio(input,key) {
   app.removeAttribute('aria-busy');applyThumbnailControls(data);
   if(info&&window.PortfolioObjects){const objects=window.PortfolioObjects.mount({data,key,settings,model:Model,editing:editorPreview});activeCleanups.push(()=>objects.destroy());}
   bindPreviews();
+  bindImageLightbox();
   document.querySelectorAll('.project-carousel').forEach(bindCarousel);
   if(editorPreview)decoratePreview();
 }
