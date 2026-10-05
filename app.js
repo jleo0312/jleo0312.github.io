@@ -586,7 +586,7 @@ function bindImageLightbox() {
     trigger.type='button';
     trigger.className='photo-zoom-trigger';
     trigger.setAttribute('aria-label','Enlarge photo');
-    trigger.innerHTML='<span class="photo-zoom-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6"></path></svg>Tap to enlarge</span>';
+    trigger.innerHTML='<span class="photo-zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6"></path></svg></span>';
     box.append(trigger);
     trigger.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();open(box,trigger);},options);
   });
