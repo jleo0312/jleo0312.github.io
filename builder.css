@@ -201,6 +201,7 @@
   overscroll-behavior:contain;
 }
 .photo-lightbox-image{
+  cursor:zoom-out;
   display:block;
   width:auto;
   height:auto;
