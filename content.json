@@ -488,7 +488,7 @@
               }
             }
           ],
-          "text": "An internal combustion engine uses valves to \"breathe.\" The engine does this by opening and closing intake and exhaust valves. They are the blue and red upside-down T shaped objects in the gif. \n\nI lapped my valves, meaning I reground the mating surface between the valve and head. This increases it's ability to contain pressure and therefore results in more efficient combustion."
+          "text": "An internal combustion engine uses valves to \"breathe.\" The engine does this by opening and closing intake and exhaust valves. They are the blue and red upside-down T shaped objects in the gif. \n\nI lapped my valves by applying a fine abrasive lapping compound between the valve face and valve seat, then rotating the valve back and forth against the seat. The compound removes small surface imperfections and helps the two surfaces mate evenly. This improves the seal between the valve and cylinder head, helping the engine maintain compression and preventing combustion gases from leaking past the valve."
         },
         {
           "id": "section-4619b606-e991-4753-866d-af92effaa423",
@@ -521,6 +521,46 @@
             }
           ],
           "text": "Slowly but surely, the engine came together.\n"
+        },
+        {
+          "id": "section-de88dade-4616-472e-923f-7c191cdef346",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/muvjc9yp-92why-dad-and-i-installing-engine.jpg",
+          "heading": "",
+          "text": "My dad helped me install the engine into the truck.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/sections/section-de88dade-4616-472e-923f-7c191cdef346/imageStyle",
+              "x": 8.729579389082662,
+              "y": 0.00006717191139353169,
+              "width": 43.02128621895468,
+              "height": 654.38916015625
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          }
+        },
+        {
+          "id": "section-c1d7118c-4954-4c99-9210-bcc0af117795",
+          "type": "text",
+          "visible": true,
+          "text": "I ran out of time to complete the wiring before returning to school. The engine is fully installed, mounted to the transmission and secured to the engine mounts. The remaining work is primarily electrical: connecting the ECU and integrating the 5VZ-FE wiring into the truck’s original harness. Once those connections are completed, the engine should be ready for its first start.",
+          "heading": "What now?"
+        },
+        {
+          "id": "section-61e60df5-fe18-4212-ba30-9bed90cdf54e",
+          "type": "text",
+          "visible": true,
+          "text": "Before this project, I understood how an engine worked theoretically. After disassembling and rebuilding a few engines, I understand it physically. I touched, installed, and torqued every bolt myself, and handled every major component along the way. That experience gave me a level of understanding that I could never have gained from diagrams and videos. I now know exactly how the systems work together, and I can explain the fundamentals of an engine to just about anyone.\n\nMore importantly, I learned that being cheap is expensive. Early on, I rushed my head gasket repair and made decisions based on money and impatience instead of doing the job properly the first time. If I had taken more time and done it right, there is a good chance the original engine would still be running today. I regret that mistake, but I do not regret what came from it. This journey taught me more about engines, problem solving, patience, and workmanship than I ever expected when the project began.",
+          "heading": "What did I learn?\n"
         },
         {
           "id": "truck-project-end",
