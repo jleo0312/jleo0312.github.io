@@ -491,6 +491,32 @@
           "text": "An internal combustion engine uses valves to \"breathe.\" The engine does this by opening and closing intake and exhaust valves. They are the blue and red upside-down T shaped objects in the gif. \n\nI lapped my valves by applying a fine abrasive lapping compound between the valve face and valve seat, then rotating the valve back and forth against the seat. The compound removes small surface imperfections and helps the two surfaces mate evenly. This improves the seal between the valve and cylinder head, helping the engine maintain compression and preventing combustion gases from leaking past the valve."
         },
         {
+          "id": "section-626472a2-527b-4e92-b627-d635cf6946c3",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            }
+          ],
+          "text": ""
+        },
+        {
           "id": "section-4619b606-e991-4753-866d-af92effaa423",
           "type": "mediaPair",
           "visible": true,
@@ -559,7 +585,7 @@
           "id": "section-61e60df5-fe18-4212-ba30-9bed90cdf54e",
           "type": "text",
           "visible": true,
-          "text": "Before this project, I understood how an engine worked theoretically. After disassembling and rebuilding a few engines, I understand it physically. I touched, installed, and torqued every bolt myself, and handled every major component along the way. That experience gave me a level of understanding that I could never have gained from diagrams and videos. I now know exactly how the systems work together, and I can explain the fundamentals of an engine to just about anyone.\n\nMore importantly, I learned that being cheap is expensive. Early on, I rushed my head gasket repair and made decisions based on money and impatience instead of doing the job properly the first time. If I had taken more time and done it right, there is a good chance the original engine would still be running today. I regret that mistake, but I do not regret what came from it. This journey taught me more about engines, problem solving, patience, and workmanship than I ever expected when the project began.",
+          "text": "Before this project, I understood how an engine worked theoretically. After disassembling and rebuilding several engines, that understanding became physical. There was not a single part of the engine I didn’t physically handle myself. I understand what each part does, where it goes, how it interacts with the rest of the engine, and why it matters. I’m confident I can now explain how an engine works to anybody.\n\nMore importantly, I learned that being cheap is expensive. My original head gasket repair was rushed because I was impatient and trying to save money. I regret not doing it properly, but I do not regret what came from that mistake because it completely changed the way I approach things in general. During the rebuild, I scratched a cylinder wall while installing a piston. Instead of convincing myself it was probably fine, I disassembled the engine again, re-honed and cleaned the cylinder, and rebuilt it. Now, if something is questionable or does not look right, I deal with it properly before moving forward.\n\nThe project also changed the way I approach problems in general. Sitting around frustrated does not move a project forward. I learned to ask myself: What is the problem? What is the next step? What do I need to learn or make to solve it? This journey taught me far more than how an engine works; it taught me patience, workmanship, and how to keep solving problems when I do not immediately know the answer.",
           "heading": "What did I learn?\n"
         },
         {
