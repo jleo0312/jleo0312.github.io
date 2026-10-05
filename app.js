@@ -546,10 +546,14 @@ function applyThumbnailControls(data) {
 }
 function bindImageLightbox() {
   if (editorPreview) return;
-  const boxes=[...app.querySelectorAll('.image-frame .image-box')].filter(box=>{
-    const photo=box.querySelector(':scope > img:not(.media-preview):not(.video-thumbnail)');
-    return photo && !box.querySelector(':scope > video, :scope > .media-preview');
-  });
+
+  // Static photos and real GIF <img> elements can be enlarged; videos stay playback-only.
+  const zoomImage=box=>{
+    if(box.querySelector(':scope > video'))return null;
+    const animated=[...box.querySelectorAll(':scope > img.media-preview')].find(img=>/\.gif(?:[?#]|$)/i.test(img.currentSrc||img.src||''));
+    return animated||box.querySelector(':scope > img:not(.video-thumbnail)');
+  };
+  const boxes=[...app.querySelectorAll('.image-frame .image-box')].filter(box=>zoomImage(box));
   if(!boxes.length)return;
 
   const events=new AbortController(),options={signal:events.signal};
@@ -562,11 +566,11 @@ function bindImageLightbox() {
   let lastTrigger=null;
 
   function open(box,trigger){
-    const photo=box.querySelector(':scope > img:not(.media-preview):not(.video-thumbnail)');
+    const photo=zoomImage(box);
     if(!photo)return;
     lastTrigger=trigger;
     enlarged.src=photo.currentSrc||photo.src;
-    enlarged.alt=photo.alt||'Enlarged photo';
+    enlarged.alt=photo.alt||'Enlarged image';
     overlay.hidden=false;
     document.body.classList.add('lightbox-open');
   }
@@ -583,7 +587,7 @@ function bindImageLightbox() {
     const trigger=document.createElement('button');
     trigger.type='button';
     trigger.className='photo-zoom-trigger';
-    trigger.setAttribute('aria-label','Enlarge photo');
+    trigger.setAttribute('aria-label','Enlarge image');
     trigger.innerHTML='<span class="photo-zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6"></path></svg></span>';
     box.append(trigger);
     trigger.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();open(box,trigger);},options);
