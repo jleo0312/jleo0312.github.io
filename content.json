@@ -959,7 +959,7 @@
           "showCaption": true,
           "imageStyle": {
             "enabled": true,
-            "poster": "/media/muuinfrr-cw2ur-furnace-thumbnail.jpeg",
+            "poster": "",
             "fit": "cover",
             "previewBehavior": "controls"
           },
