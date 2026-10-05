@@ -622,7 +622,8 @@
           ],
           "imageStyle": {
             "enabled": true,
-            "fit": "cover"
+            "fit": "cover",
+            "previewBehavior": "loop"
           },
           "text": "I learned how to make SolidWorks assemblies, and made my first one.\n"
         },
