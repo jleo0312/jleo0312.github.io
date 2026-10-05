@@ -425,7 +425,7 @@ function renderVideo(src,poster,style={},path='',className='section-video',optio
   if(/\.gif(?:[?#]|$)/i.test(src))return photoFrame(src,'Animated project image',style,{fit:'contain',path});
   const custom=style.enabled!==false&&Object.keys(style).some(key=>['width','height','aspect','align','fit','margin','padding'].includes(key));
   const caption=style.caption&&style.showCaption!==false?textElement('figcaption','image-caption',style.caption):'';
-  const preload=media(poster)?'metadata':'auto';
+  const preload='metadata';
   const playback=editorPreview?'muted playsinline preload="metadata"':options.gifLike&&style.previewBehavior==null?'autoplay loop muted playsinline preload="auto"':`controls playsinline preload="${preload}" ${style.loop?'loop':''} ${style.muted?'muted':''}`;
   const video=`<video class="${className} media-video ${editorPreview?'media-preview':''}" ${playback} ${options.alt?`aria-label="${esc(options.alt)}"`:''} ${media(poster)?`poster="${media(poster)}"`:''} src="${media(src)}">${esc(settings.project.videoFallback)} <a href="${media(src)}">${esc(settings.project.downloadVideo)}</a></video>`;
   return `<figure class="video-frame ${options.frameClass||''} ${custom?'video-custom':''} image-align-${choice(style.align,['left','center','right'],'center')}" data-image-style="${esc(path)}" style="${imageCSS(style,'contain')};${previewCSS(style,'contain')}">${style.captionPosition==='above'?caption:''}<div class="video-media-box">${video}${editorPreview&&media(poster)?`<img class="media-video-thumbnail" src="${media(poster)}" alt="${esc(options.alt||'Video thumbnail')}">`:''}</div>${style.captionPosition!=='above'?caption:''}</figure>`;
