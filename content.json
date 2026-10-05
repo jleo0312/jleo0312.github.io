@@ -981,11 +981,11 @@
           "text": "This was the best run I’ve had with the furnace so far. It can be a little finicky to start, since the furnace needs to be preheated with wood before switching to full oil. Once the chamber is hot enough, the oil ignites consistently and the furnace can sustain the burn on its own."
         },
         {
-          "id": "section-d64225ea-6929-48ed-9960-330fe9de7542",
+          "id": "section-a2481c76-20fa-4867-b180-4a3debcc4ee7",
           "type": "text",
           "visible": true,
-          "text": "I plan to further upgrade the furnace by adding ceramic wool insulation. This should significantly improve efficiency by reducing the large amount of heat currently lost through the walls and surrounding air. With these upgrades, I’m hoping to reach temperatures high enough to melt copper.",
-          "heading": "What's next?"
+          "text": "- Waste-oil burner assemblies\n- Optimizing combustion of oil\n- Iterative prototyping and design improvement",
+          "heading": "What did I learn?"
         },
         {
           "id": "section-5b348502-f7aa-4217-a2fa-1a819c500411",
@@ -993,11 +993,11 @@
           "visible": true
         },
         {
-          "id": "section-a2481c76-20fa-4867-b180-4a3debcc4ee7",
+          "id": "section-d64225ea-6929-48ed-9960-330fe9de7542",
           "type": "text",
           "visible": true,
-          "text": "- Waste-oil burner assemblies\n- Optimizing combustion of oil\n- Iterative prototyping and design improvement",
-          "heading": "What did I learn?"
+          "text": "I plan to further upgrade the furnace by adding ceramic wool insulation. This should significantly improve efficiency by reducing the large amount of heat currently lost through the walls and surrounding air. With these upgrades, I’m hoping to reach temperatures high enough to melt copper.",
+          "heading": "What's next?"
         },
         {
           "id": "end-waste-oil-furnace",
