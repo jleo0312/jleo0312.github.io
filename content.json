@@ -891,7 +891,11 @@
               "src": "",
               "imageStyle": {
                 "enabled": true,
-                "previewVideo": ""
+                "previewVideo": "/media/muuihhmk-hxuht-gravity-fed.mov",
+                "previewBehavior": "controls",
+                "aspect": "portrait",
+                "height": 0,
+                "fit": "cover"
               }
             },
             {
@@ -899,7 +903,11 @@
               "alt": "Video placeholder for the first furnace design.",
               "imageStyle": {
                 "enabled": true,
-                "previewVideo": "/media/muug38qm-f3wfn-square-nozzle.mp4"
+                "previewVideo": "/media/muug38qm-f3wfn-square-nozzle.mp4",
+                "previewBehavior": "controls",
+                "fit": "cover",
+                "aspect": "portrait",
+                "height": 0
               }
             }
           ],
