@@ -966,16 +966,16 @@
           "elements": [
             {
               "id": "image:projects/waste-oil-powered-furnace/sections/section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5/imageStyle",
-              "x": 0,
-              "y": 6.841138659320478,
-              "width": 43.15886134067952,
-              "height": 654.390625
+              "x": 2.8018767705382435,
+              "y": 5.333746458923513,
+              "width": 47.19812322946176,
+              "height": 715.6527260638297
             },
             {
               "id": "text:projects/waste-oil-powered-furnace/sections/section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5/text",
-              "x": 50,
-              "y": 25.520115932047748,
-              "width": 41.8732782369146,
+              "x": 54.04769856436832,
+              "y": 26.802050517055786,
+              "width": 41.87227708861263,
               "height": 94.59375
             }
           ],
