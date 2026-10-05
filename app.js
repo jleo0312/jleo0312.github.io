@@ -592,6 +592,7 @@ function bindImageLightbox() {
   });
 
   closeButton.addEventListener('click',close,options);
+  enlarged.addEventListener('click',close,options);
   overlay.addEventListener('click',event=>{if(event.target===overlay)close();},options);
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!overlay.hidden)close();},options);
   activeCleanups.push(()=>{
