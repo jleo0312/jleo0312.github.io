@@ -209,25 +209,5 @@
   box-shadow:0 16px 50px rgba(0,0,0,.4);
   touch-action:pinch-zoom;
 }
-.photo-lightbox-close{
-  position:fixed;
-  top:max(12px,env(safe-area-inset-top));
-  right:max(12px,env(safe-area-inset-right));
-  z-index:10001;
-  display:grid;
-  place-items:center;
-  width:44px;
-  height:44px;
-  padding:0 0 3px;
-  border:1px solid rgba(255,255,255,.24);
-  border-radius:50%;
-  background:rgba(28,28,30,.72);
-  color:#fff;
-  box-shadow:0 4px 18px rgba(0,0,0,.25);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  font-size:31px;
-  font-weight:300;
-  line-height:1;
-}
+
 body.lightbox-open{overflow:hidden}
