@@ -497,7 +497,7 @@
           "items": [
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muvk8mce-3v8dw-valve-shims.jpg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
@@ -506,7 +506,7 @@
             },
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muvk938r-njcqv-valve-lash.jpg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
@@ -514,7 +514,62 @@
               }
             }
           ],
-          "text": ""
+          "text": "Valve lash is the small clearance between the camshaft lobe and the top of the valve shim when the valve is closed. The clearances on my engine were too tight, likely from a combination of valve lapping and normal wear over the engine’s life. I measured each valve clearance with feeler gauges, measured the thickness of each shim with a micrometer, and recorded the results."
+        },
+        {
+          "id": "section-07fdf0b3-ed2a-4cbe-a279-9cda8655d1ea",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muvkdcx4-tqjwr-valve-lash-spreadsheet.png",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/muvkdiuz-5lvk6-new-valve-shims.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square",
+                "enabled": true,
+                "focalX": 50,
+                "focalY": 90
+              }
+            }
+          ],
+          "text": "I made a spreadsheet to calculate the correct replacement shim thickness for each valve based on my measured clearances and the original shim sizes. From those calculations, I selected the new shims needed to bring the valve lash back within specification."
+        },
+        {
+          "id": "section-14c91f34-010e-4af8-aeb4-1a67d2cc6010",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/muvkfemf-ftsvp-spare-parts.jpg",
+          "heading": "",
+          "text": "I got tired of making trips to junkyards for individual parts, so I decided to pick up an entire spare motor to pull components from as I needed them.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [
+            {
+              "id": "image:projects/toyota-engine-swap/sections/section-14c91f34-010e-4af8-aeb4-1a67d2cc6010/imageStyle",
+              "x": 8.729579389082662,
+              "y": 0,
+              "width": 43.02129181661397,
+              "height": 654.38916015625
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          }
         },
         {
           "id": "section-4619b606-e991-4753-866d-af92effaa423",
