@@ -97,7 +97,7 @@
  .hobbies-intro{font-size:17px}.carousel-slide .thumbnail{border-radius:13px}.carousel-slide .card-heading{margin-top:16px;gap:10px}.carousel-slide .card-heading h3{font-size:19px}.carousel-slide .type-cover{padding:28px}.carousel-slide .cover-type{font-size:clamp(28px,8vw,42px);letter-spacing:-1px}.carousel-slide .cover-label{display:block;font-size:11px}
  .carousel-controls{flex-direction:column;gap:8px}.carousel-dots{max-width:100%;justify-content:center;flex-wrap:wrap}.carousel-dot{min-height:44px;min-width:28px;padding:8px 6px}.carousel-actions{justify-content:center;gap:8px}.carousel-arrow,.carousel-pause{min-height:44px;min-width:44px}
  .section-row{display:flex;flex-direction:column;gap:min(var(--content-gap,46px),24px)}.section-row>*{width:100%;min-width:0}.section-row.layout-right .photo-pane{order:0}.section-row.layout-below .photo-pane{order:2}
- .image-custom .image-box{max-height:80vh}.content-section{padding-top:20px;padding-bottom:20px}.section-copy p,.text-section p{font-size:min(var(--text-size,18px),20px)}
+ .image-custom .image-box{max-height:80svh}.content-section{padding-top:20px;padding-bottom:20px}.section-copy p,.text-section p{font-size:min(var(--text-size,18px),20px)}
  .builder-layout .hero-with-photo,.builder-layout .about-grid{grid-template-columns:1fr!important;gap:28px}.builder-layout .hero-frame,.builder-layout .about-portrait-column{order:0}.builder-position-below .hero-frame,.builder-position-below .about-portrait-column{order:2}
 }
 .editing-preview .builder-section{cursor:pointer}
@@ -120,7 +120,7 @@
 .video-custom{width:var(--image-width,100%);max-width:100%;padding:var(--image-padding,0);margin-top:var(--image-margin,0);margin-bottom:var(--image-margin,0)}
 .video-custom.image-align-left{margin-right:auto}.video-custom.image-align-center{margin-left:auto;margin-right:auto}.video-custom.image-align-right{margin-left:auto}
 .video-custom video{height:var(--image-height,auto);aspect-ratio:var(--image-ratio,auto);object-fit:var(--image-fit,contain);object-position:var(--image-x,50%) var(--image-y,50%)}
-@media(max-width:650px){.video-frame video{max-height:80vh}}
+@media(max-width:650px){.video-frame video{max-height:80svh}}
 
 .thumbnail-group{min-width:0}
 .thumbnail-layout-left,.thumbnail-layout-right{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:18px}
