@@ -38,5 +38,23 @@
 .section-context-menu button{display:block;width:100%;text-align:left;border:0;border-radius:4px;padding:9px 12px}
 .section-context-menu button:focus{background:#e6f0fc;outline:2px solid #80addb;outline-offset:-2px}
 .layout-warning{padding:12px 14px;background:#fff7df;border:1px solid #e7c66d;border-radius:7px;color:#634a13}
+.notes-button{display:flex;align-items:center;justify-content:space-between;margin-top:10px;text-align:left}
+.notes-button span{color:#7b8290;font-size:18px}
+.editor-notepad[hidden]{display:none}
+.notes-open .workspace,.notes-open.details-open .workspace{grid-template-columns:220px minmax(0,1fr)}
+.notes-open .workspace>.preview-pane,.notes-open .workspace>.inspector,.notes-open .toolbar-actions{display:none}
+.editor-notepad{grid-column:2;grid-row:1;display:flex;flex-direction:column;gap:16px;min-width:0;min-height:0;padding:28px 32px;background:#f6f7f9;overflow:auto}
+.notepad-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.notepad-eyebrow{font-size:10px;letter-spacing:.1em;color:#7b8290;margin:0 0 5px}
+.notepad-heading h1{font-size:28px;line-height:1.2;margin:0}
+.notepad-heading p:not(.notepad-eyebrow){color:#687382;margin:8px 0 0}
+.notepad-heading button{white-space:nowrap}
+.notepad-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;color:#687382}
+.notepad-label{font-size:13px;font-weight:600;margin-bottom:-8px}
+#notes-text{flex:1;min-height:260px;width:100%;resize:none;border:1px solid #dce0e6;border-radius:10px;padding:22px 24px;box-shadow:0 2px 12px #29394b0a;background:#fff;color:#25272b;font:16px/1.8 ui-monospace,Consolas,monospace;tab-size:4}
+.notepad-help{font-size:12px;color:#687382;margin:0}
+#notes-save-status[data-error=true]{color:#a12525}
+@media(max-width:1100px){.notes-open .workspace,.notes-open.details-open .workspace{grid-template-columns:185px minmax(0,1fr)}.editor-notepad{padding:22px}}
+@media(max-width:800px){.notes-open .workspace,.notes-open.details-open .workspace{grid-template-columns:minmax(0,1fr)}.editor-notepad{grid-column:1;grid-row:2;min-height:600px;padding:20px}.notepad-heading{flex-wrap:wrap}#notes-text{min-height:330px;padding:16px}}
 @media(max-width:1100px){.workspace{grid-template-columns:185px minmax(0,1fr)}.details-open .workspace{grid-template-columns:185px minmax(0,1fr) 270px}}
 @media(max-width:800px){.workspace,.details-open .workspace{grid-template-columns:minmax(0,1fr)}.outline{max-height:240px}.preview-pane{grid-column:1;grid-row:2}.details-open .workspace>.inspector{grid-column:1;grid-row:3;max-height:550px}}
