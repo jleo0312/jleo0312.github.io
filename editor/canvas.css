@@ -1,4 +1,6 @@
 /* These controls exist only inside the editing canvas. */
+/* Dragging resizes the document; keep the browser from moving the scroll position. */
+html{overflow-anchor:none}
 .direct-editing-preview [data-edit-path]{white-space:pre-wrap;cursor:text;outline:1px solid transparent;border-radius:3px;min-width:12px;overflow-wrap:anywhere}
 .direct-editing-preview [data-edit-path]:hover{outline:1px dashed #478fca;outline-offset:4px}
 .direct-editing-preview [data-edit-path]:focus{outline:2px solid #2277cb;outline-offset:5px;background:#eaf3ff55}
