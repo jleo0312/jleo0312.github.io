@@ -218,7 +218,7 @@
   background:rgba(10,10,12,.95);
   overscroll-behavior:contain;
 }
-.photo-lightbox-image{
+.photo-lightbox-image,.photo-lightbox-video{
   cursor:zoom-out;
   display:block;
   width:auto;
@@ -230,6 +230,8 @@
   box-shadow:0 16px 50px rgba(0,0,0,.4);
   touch-action:pinch-zoom;
 }
+
+.photo-lightbox-image[hidden],.photo-lightbox-video[hidden]{display:none!important}
 
 body.lightbox-open{overflow:hidden}
 

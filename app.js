@@ -438,7 +438,7 @@ function renderVideo(src,poster,style={},path='',className='section-video',optio
   const caption=style.caption&&style.showCaption!==false?textElement('figcaption','image-caption',style.caption):'';
   const preload='metadata';
   const playback=editorPreview?'muted playsinline preload="metadata"':options.gifLike&&style.previewBehavior==null?'autoplay loop muted playsinline preload="auto"':`controls playsinline preload="${preload}" ${style.loop?'loop':''} ${style.muted?'muted':''}`;
-  const video=`<video class="${className} media-video ${editorPreview?'media-preview':''}" ${playback} ${options.alt?`aria-label="${esc(options.alt)}"`:''} ${media(poster)?`poster="${media(poster)}"`:''} src="${media(poster)?media(src):firstFrameSource(src)}">${esc(settings.project.videoFallback)} <a href="${media(src)}">${esc(settings.project.downloadVideo)}</a></video>`;
+  const video=`<video class="${className} media-video ${editorPreview?'media-preview':''}" ${playback} ${options.gifLike?'data-gif-like="true"':''} ${options.alt?`aria-label="${esc(options.alt)}"`:''} ${media(poster)?`poster="${media(poster)}"`:''} src="${media(poster)?media(src):firstFrameSource(src)}">${esc(settings.project.videoFallback)} <a href="${media(src)}">${esc(settings.project.downloadVideo)}</a></video>`;
   return `<figure class="video-frame ${options.frameClass||''} ${custom?'video-custom':''} image-align-${choice(style.align,['left','center','right'],'center')}" data-image-style="${esc(path)}" style="${imageCSS(style,'contain')};${previewCSS(style,'contain')}">${style.captionPosition==='above'?caption:''}<div class="video-media-box">${video}${editorPreview&&media(poster)?`<img class="media-video-thumbnail" src="${media(poster)}" alt="${esc(options.alt||'Video thumbnail')}">`:''}</div>${style.captionPosition!=='above'?caption:''}</figure>`;
 }
 function projectVideo(project,data) {
@@ -601,47 +601,56 @@ function bindPhotoRotations(){
 function bindImageLightbox() {
   if (editorPreview) return;
 
-  // Static photos and real GIF <img> elements can be enlarged; videos stay playback-only.
-  const zoomImage=box=>{
-    if(box.querySelector(':scope > video'))return null;
+  // Photos, real GIFs, and clips explicitly displayed as GIFs share the enlarge control.
+  const zoomMedia=box=>{
+    const video=box.querySelector(':scope > video');
+    if(video)return video.dataset.gifLike==='true'?video:null;
     const animated=[...box.querySelectorAll(':scope > img.media-preview')].find(img=>/\.gif(?:[?#]|$)/i.test(img.currentSrc||img.src||''));
     return animated||box.querySelector(':scope > img:not(.video-thumbnail)');
   };
-  const boxes=[...app.querySelectorAll('.image-frame .image-box')].filter(box=>zoomImage(box));
+  const boxes=[...app.querySelectorAll('.image-frame .image-box,.video-frame .video-media-box')].filter(box=>zoomMedia(box));
   if(!boxes.length)return;
 
   const events=new AbortController(),options={signal:events.signal};
   const overlay=document.createElement('div');
   overlay.className='photo-lightbox';
   overlay.hidden=true;
-  overlay.innerHTML='<img class="photo-lightbox-image" alt="">';
+  overlay.innerHTML='<img class="photo-lightbox-image" alt="" hidden><video class="photo-lightbox-video" autoplay loop muted playsinline preload="metadata" hidden></video>';
   document.body.append(overlay);
-  const enlarged=overlay.querySelector('.photo-lightbox-image');
+  const enlargedImage=overlay.querySelector('.photo-lightbox-image'),enlargedVideo=overlay.querySelector('.photo-lightbox-video');
   let lastTrigger=null;
   let rotation=0;
   function fitEnlarged(){
-    if(overlay.hidden||!enlarged.naturalWidth||!enlarged.naturalHeight)return;
+    if(overlay.hidden)return;
+    const enlarged=enlargedVideo.hidden?enlargedImage:enlargedVideo;
+    const naturalWidth=enlarged===enlargedVideo?enlarged.videoWidth:enlarged.naturalWidth,naturalHeight=enlarged===enlargedVideo?enlarged.videoHeight:enlarged.naturalHeight;
+    if(!naturalWidth||!naturalHeight)return;
     const quarter=rotation%180!==0,width=overlay.clientWidth-40,height=overlay.clientHeight-40;
-    const scale=Math.min(1,(quarter?height:width)/enlarged.naturalWidth,(quarter?width:height)/enlarged.naturalHeight);
-    enlarged.style.width=enlarged.naturalWidth*scale+'px';enlarged.style.height=enlarged.naturalHeight*scale+'px';enlarged.style.maxWidth='none';enlarged.style.maxHeight='none';enlarged.style.transform=`rotate(${rotation}deg)`;
+    const scale=Math.min(1,(quarter?height:width)/naturalWidth,(quarter?width:height)/naturalHeight);
+    enlarged.style.width=naturalWidth*scale+'px';enlarged.style.height=naturalHeight*scale+'px';enlarged.style.maxWidth='none';enlarged.style.maxHeight='none';enlarged.style.transform=`rotate(${rotation}deg)`;
   }
-  enlarged.addEventListener('load',fitEnlarged,options);window.addEventListener('resize',fitEnlarged,options);
+  enlargedImage.addEventListener('load',fitEnlarged,options);enlargedVideo.addEventListener('loadedmetadata',fitEnlarged,options);window.addEventListener('resize',fitEnlarged,options);
 
   function open(box,trigger){
-    const photo=zoomImage(box);
-    if(!photo)return;
+    const media=zoomMedia(box);
+    if(!media)return;
     lastTrigger=trigger;
-    rotation=photo.classList.contains('media-preview')?0:photoRotation(getComputedStyle(box.closest('[data-image-style]')).getPropertyValue('--photo-rotation'));
-    enlarged.src=photo.currentSrc||photo.src;
-    enlarged.alt=photo.alt||'Enlarged image';
+    const isVideo=media.tagName==='VIDEO',enlarged=isVideo?enlargedVideo:enlargedImage;
+    rotation=isVideo||media.classList.contains('media-preview')?0:photoRotation(getComputedStyle(box.closest('[data-image-style]')).getPropertyValue('--photo-rotation'));
+    enlargedImage.hidden=isVideo;enlargedVideo.hidden=!isVideo;
+    enlarged.src=media.currentSrc||media.src;
+    if(isVideo){enlargedVideo.volume=media.volume;enlargedVideo.setAttribute('aria-label',media.getAttribute('aria-label')||'Enlarged animation');}
+    else enlargedImage.alt=media.alt||'Enlarged image';
     overlay.hidden=false;
     document.body.classList.add('lightbox-open');
     fitEnlarged();
+    if(isVideo)enlargedVideo.play().catch(()=>{});
   }
   function close(){
     if(overlay.hidden)return;
     overlay.hidden=true;
-    enlarged.removeAttribute('src');
+    enlargedVideo.pause();enlargedVideo.removeAttribute('src');enlargedVideo.load();
+    enlargedImage.removeAttribute('src');
     document.body.classList.remove('lightbox-open');
     lastTrigger?.focus({preventScroll:true});
   }
@@ -651,17 +660,18 @@ function bindImageLightbox() {
     const trigger=document.createElement('button');
     trigger.type='button';
     trigger.className='photo-zoom-trigger';
-    trigger.setAttribute('aria-label','Enlarge image');
+    trigger.setAttribute('aria-label',box.querySelector(':scope > video')?'Enlarge animation':'Enlarge image');
     trigger.innerHTML='<span class="photo-zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6"></path></svg></span>';
     box.append(trigger);
     trigger.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();open(box,trigger);},options);
   });
 
-  enlarged.addEventListener('click',close,options);
+  enlargedImage.addEventListener('click',close,options);enlargedVideo.addEventListener('click',close,options);
   overlay.addEventListener('click',event=>{if(event.target===overlay)close();},options);
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!overlay.hidden)close();},options);
   activeCleanups.push(()=>{
     events.abort();
+    enlargedVideo.pause();
     overlay.remove();
     document.body.classList.remove('lightbox-open');
     boxes.forEach(box=>{box.classList.remove('photo-zoomable');box.querySelector(':scope > .photo-zoom-trigger')?.remove();});
