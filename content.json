@@ -1266,7 +1266,7 @@
           "id": "section-652bb3f0-57cb-4d61-b293-c0870fa60672",
           "visible": true,
           "heading": "",
-          "text": "Ducts are rings that surround the propellers and help control the airflow passing through them. They can improve airflow velocity, reduce inefficiencies caused by vortices at the tips of the propellers, and even generate additional aerodynamic lift through the shape of the inlet. I became fascinated with this concept and got obsessed with implementing it into my drone",
+          "text": "Ducts are rings, or shrouds, that surround the propellers and help control the airflow passing through them. They can improve propeller efficiency by reducing losses caused by tip vortices and, when properly shaped, can also contribute additional thrust through pressure differences around the inlet. I became fascinated with this concept and got obsessed with finding a way to implement it into my drone.",
           "imagePosition": "left",
           "imageWidth": 56,
           "textWidth": 44,
@@ -1280,8 +1280,9 @@
               "imageStyle": {
                 "fit": "cover",
                 "aspect": "square",
-                "caption": "",
-                "showCaption": true
+                "caption": "A Boeing 767 jet engine.",
+                "showCaption": true,
+                "enabled": true
               }
             },
             {
@@ -1290,7 +1291,13 @@
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square"
+                "aspect": "square",
+                "enabled": true,
+                "previewVideo": "/media/muw840va-2bmhz-propeller-cfdd.mov",
+                "previewBehavior": "loop",
+                "height": 0,
+                "focalX": 31,
+                "focalY": 29
               }
             }
           ]
@@ -1765,6 +1772,7 @@
   "visualEditorLink": "https://jleo0312.github.io/editor/",
   "videoPosters": {
     "/media/muw3djnp-8uxr3-pencil-case.mov": "/media/muw3djnp-8uxr3-pencil-case.mov-first-frame.jpg",
-    "/media/muw3eczi-tn87e-pencil-case.mov": "/media/muw3eczi-tn87e-pencil-case.mov-first-frame.jpg"
+    "/media/muw3eczi-tn87e-pencil-case.mov": "/media/muw3eczi-tn87e-pencil-case.mov-first-frame.jpg",
+    "/media/muw840va-2bmhz-propeller-cfdd.mov": "/media/muw840va-2bmhz-propeller-cfdd.mov-first-frame.jpg"
   }
 }
