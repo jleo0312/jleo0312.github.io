@@ -1524,7 +1524,7 @@
                 "enabled": true,
                 "aspect": "portrait",
                 "height": 0,
-                "fit": "cover",
+                "fit": "contain",
                 "focalX": 0,
                 "focalY": 47
               }
@@ -1534,7 +1534,7 @@
               "src": "/media/muw91fx8-c21fp-drone-honorable-mention.png",
               "alt": "",
               "imageStyle": {
-                "fit": "cover",
+                "fit": "contain",
                 "aspect": "portrait",
                 "enabled": true,
                 "height": 0
