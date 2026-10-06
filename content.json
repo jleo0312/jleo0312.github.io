@@ -1851,7 +1851,9 @@
                 "aspect": "square",
                 "enabled": true,
                 "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
-                "previewBehavior": "loop"
+                "previewBehavior": "loop",
+                "caption": "Fiberglass panel resin infusion\n",
+                "showCaption": true
               }
             }
           ]
