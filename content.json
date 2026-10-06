@@ -1431,7 +1431,7 @@
               }
             }
           ],
-          "text": "I dropped the ducted-propeller idea because the extra weight wasn’t worth it. The flexible propellers could rotate or flex out of the way when they touched the ground until the frame made contact, at which point the impact force was transferred into the frame. Because of this, I shifted my focus toward making the frame as strong and lightweight as possible."
+          "text": "I dropped the ducted-propeller idea because at this scale, the gains from the ducts would be negligible, and not worth the weight. Propeller protection was another function of the ducts. However, on ground contact the flexible blades could rotate or deflect out of the way until the frame made contact, allowing the frame to absorb the impact instead of the propellers taking the full force. Because of this, I shifted my focus toward making the frame as strong and lightweight as possible."
         },
         {
           "id": "section-0d4e9631-17e5-407a-8e8e-6fff5eb71422",
