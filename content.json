@@ -1815,8 +1815,10 @@
         },
         {
           "id": "section-1de4cbd6-e65e-4daf-850d-f9a0fa15a2d4",
-          "type": "mediaPair",
           "visible": true,
+          "text": "",
+          "elements": [],
+          "type": "mediaPair",
           "items": [
             {
               "type": "image",
@@ -1827,35 +1829,22 @@
                 "aspect": "square",
                 "enabled": true,
                 "focalX": 46,
-                "focalY": 96
+                "focalY": 96,
+                "caption": "USB drive case\n",
+                "showCaption": true
               }
             },
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muw9t7j9-ez0bl-strutn-bar-on-wall.jpg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square"
+                "aspect": "square",
+                "enabled": true,
+                "caption": "Custom strut bar",
+                "showCaption": true
               }
-            },
-            {
-              "type": "image",
-              "src": "",
-              "alt": "",
-              "imageStyle": {
-                "fit": "cover",
-                "aspect": "square"
-              }
-            }
-          ],
-          "text": "",
-          "elements": [
-            {
-              "id": "image:pageLayouts/gallery/sections/section-1de4cbd6-e65e-4daf-850d-f9a0fa15a2d4/items/0/imageStyle",
-              "x": 3.969108018250606,
-              "y": 2.0234716087279656,
-              "width": 29.400142467745916
             }
           ]
         }
