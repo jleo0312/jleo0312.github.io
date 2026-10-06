@@ -601,10 +601,12 @@ function bindPhotoRotations(){
 function bindImageLightbox() {
   if (editorPreview) return;
 
-  // Photos, real GIFs, and clips explicitly displayed as GIFs share the enlarge control.
+  // Photos, GIFs, and preview animations share the enlarge control.
   const zoomMedia=box=>{
-    const video=box.querySelector(':scope > video');
-    if(video)return video.dataset.gifLike==='true'?video:null;
+    const videos=[...box.querySelectorAll(':scope > video')];
+    const animation=videos.find(video=>video.dataset.gifLike==='true'||video.classList.contains('media-preview'));
+    if(animation)return animation;
+    if(videos.length)return null;
     const animated=[...box.querySelectorAll(':scope > img.media-preview')].find(img=>/\.gif(?:[?#]|$)/i.test(img.currentSrc||img.src||''));
     return animated||box.querySelector(':scope > img:not(.video-thumbnail)');
   };
@@ -634,11 +636,13 @@ function bindImageLightbox() {
   function open(box,trigger){
     const media=zoomMedia(box);
     if(!media)return;
+    const source=media.currentSrc||media.getAttribute('src')||media.dataset.src;
+    if(!source)return;
     lastTrigger=trigger;
     const isVideo=media.tagName==='VIDEO',enlarged=isVideo?enlargedVideo:enlargedImage;
     rotation=isVideo||media.classList.contains('media-preview')?0:photoRotation(getComputedStyle(box.closest('[data-image-style]')).getPropertyValue('--photo-rotation'));
     enlargedImage.hidden=isVideo;enlargedVideo.hidden=!isVideo;
-    enlarged.src=media.currentSrc||media.src;
+    enlarged.src=source;
     if(isVideo){enlargedVideo.volume=media.volume;enlargedVideo.setAttribute('aria-label',media.getAttribute('aria-label')||'Enlarged animation');}
     else enlargedImage.alt=media.alt||'Enlarged image';
     overlay.hidden=false;
