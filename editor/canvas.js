@@ -114,11 +114,13 @@ function mount({data,key,settings,model,send}){
    }
    if(picked.kind==='text'&&section)toolbar.append(button('Duplicate text','duplicate-text'),button('Delete text','delete-text'));
    if(section)toolbar.append(button('+ Text box','add-text'));
+   if(section&&['text','heading','photoText','projectPhoto','projectThumbnail','mediaPair','videoText','video'].includes(section.type))toolbar.append(button('Background','background'));
    toolbar.append(button('More controls','details'));
   }else{
    const label=document.createElement('span');label.className='canvas-toolbar-label';label.textContent=model.types[section.type]||'Section';toolbar.append(label);
    const drag=button('✥ Move section','drag-section');drag.className='canvas-grab';toolbar.append(drag);
    for(const [label,action]of [['↑','up'],['↓','down'],['Duplicate','duplicate'],['Hide','hide'],['Delete','delete'],['+ Text box','add-text'],['+ Section','add'],['More controls','details']])toolbar.append(button(label,action));
+   if(['text','heading','photoText','projectPhoto','projectThumbnail','mediaPair','videoText','video'].includes(section.type))toolbar.append(button('Background','background'));
   }
   if(!objects.active()){const note=document.createElement('span');note.className='canvas-toolbar-note';note.textContent='Mobile stacks automatically. Use Desktop to position boxes.';toolbar.append(note);}
  }
@@ -214,6 +216,7 @@ function mount({data,key,settings,model,send}){
   else if(action==='caption'){item.caption.classList.remove('canvas-optional');item.caption.dataset.forceShow='true';startText(item.caption);}
   else if(action==='caption-visibility')transaction('caption-visibility',{visible:read(data,item.visiblePath)===false});
   else if(action==='details')send({action:'show-details',id:selectedId,imagePath:selectedImage,textPath:selectedText});
+  else if(action==='background'){stopText();send({action:'show-background',id:selectedId,textPath:selectedText});}
   else if(!['drag-object','drag-section','reorder-cards'].includes(action))transaction(action);
  });
  on(toolbar,'change',event=>{const type=event.target.dataset.canvasControl;if(type==='video-behavior')transaction('video-behavior',{value:event.target.value});else if(type==='font-size')objectChange({fontSize:Number(event.target.value)});else if(type==='text-align')objectChange({align:event.target.value});else if(type==='aspect')transaction('image-aspect',{aspect:event.target.value});else if(type==='object-width'){if(gesture?.type==='slider'){gesture=null;send({action:'object-end'});}}});

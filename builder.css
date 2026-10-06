@@ -1,4 +1,23 @@
 /* Extensions preserve the original portfolio styles until an override is chosen. */
+
+/* Optional text panel controls override only the properties the editor changes. */
+.builder-section[data-panel-color] :is(.text-section,.section-copy,.pair-caption,.video-text-copy),
+.builder-section.section-video[data-panel-color] > .content-section > p{
+  background:var(--panel-color)!important;
+}
+.builder-section[data-panel-radius] :is(.text-section,.section-copy,.pair-caption,.video-text-copy),
+.builder-section.section-video[data-panel-radius] > .content-section > p{
+  border-radius:var(--panel-radius)!important;
+}
+.builder-section[data-panel-padding] :is(.text-section,.section-copy,.pair-caption,.video-text-copy),
+.builder-section.section-video[data-panel-padding] > .content-section > p{
+  padding:var(--panel-padding)!important;
+}
+.builder-section[data-panel-text-color] :is(.text-section,.section-copy,.pair-caption,.video-text-copy),
+.builder-section.section-video[data-panel-text-color] > .content-section > p{
+  color:var(--panel-text-color)!important;
+}
+.builder-section[data-panel-text-color] :is(.text-section,.section-copy,.video-text-copy) :is(p,h1,h2,h3){color:var(--panel-text-color)!important}
 /* Text has identical line-break behavior in the editor and on the website. */
 .portfolio-text{white-space:pre-wrap;overflow-wrap:anywhere}
 .canvas-hero-first{color:inherit}

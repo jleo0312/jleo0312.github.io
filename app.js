@@ -484,12 +484,27 @@ function renderVideoText(section,ctx,sectionPath) {
   return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="video-text-row video-${position}"><div class="video-text-media-wrap">${video}</div><div class="video-text-copy">${copy}</div></div></section>`;
 }
 
+function panelAppearance(section){
+  const style=section.panelStyle;
+  if(!style||typeof style!=='object')return {css:'',attributes:''};
+  let css='',attributes='';
+  const property=(name,value)=>{css+=`--panel-${name}:${value};`;attributes+=` data-panel-${name}`;};
+  const color=value=>typeof value==='string'&&/^#[0-9a-f]{6}$/i.test(value);
+  if(style.transparent===true)property('color','transparent');
+  else if(color(style.color))property('color',style.color);
+  else if(style.transparent===false)property('color','#f3f1ec');
+  if(color(style.textColor))property('text-color',style.textColor);
+  if(['square','rounded','pill','custom'].includes(style.shape))property('radius',style.shape==='custom'?number(style.radius,16,0,120)+'px':{square:'0px',rounded:'16px',pill:'9999px'}[style.shape]);
+  if(style.padding!=null&&Number.isFinite(Number(style.padding))&&style.padding!=='')property('padding',number(style.padding,32,0,120)+'px');
+  return {css,attributes};
+}
 function renderSection(section,ctx,index) {
   if(section.visible===false)return '';
   const {data,info}=ctx;
   const project=info.project;
   const keyPath=info.kind==='project'?`projects.${data.projects.indexOf(project)}.sections`:info.kind==='page'?`pages.${data.pages.indexOf(info.page)}.sections`:`pageLayouts.${info.key}.sections`;
   const sectionPath=`${keyPath}.${index}`;
+  const panel=panelAppearance(section);
   let html='';
   switch(section.type) {
     case 'hero':html=renderHero(data);break;
@@ -512,7 +527,7 @@ function renderSection(section,ctx,index) {
   }
   const customLayout=section.imagePosition&&['hero','about'].includes(section.type);
   const css=`${section.spacingTop!=null?`padding-top:${number(section.spacingTop,0,0,200)}px;`:''}${section.spacingBottom!=null?`padding-bottom:${number(section.spacingBottom,0,0,200)}px;`:''}--section-gap:${number(section.gap,48,0,100)}px;--layout-columns:${section.imagePosition==='right'?`minmax(0,${number(section.textWidth,55,10,90)}fr) minmax(0,${number(section.imageWidth,45,10,90)}fr)`:`minmax(0,${number(section.imageWidth,45,10,90)}fr) minmax(0,${number(section.textWidth,55,10,90)}fr)`};${section.textAlign?`text-align:${choice(section.textAlign,['left','center','right'],'left')};`:``}${section.textSize?`--section-text-size:${{small:16,normal:18,large:22}[section.textSize]||18}px;`:``}`;
-  return `<div class="builder-section section-${esc(section.type)} section-width-${choice(section.contentWidth,['default','narrow','wide','full'],'default')} ${customLayout?'builder-layout builder-position-'+choice(section.imagePosition,['left','right','above','below'],'left'):''}" data-section-id="${esc(section.id)}" style="${css}">${html}</div>`;
+  return `<div class="builder-section section-${esc(section.type)} section-width-${choice(section.contentWidth,['default','narrow','wide','full'],'default')} ${customLayout?'builder-layout builder-position-'+choice(section.imagePosition,['left','right','above','below'],'left'):''}" data-section-id="${esc(section.id)}"${panel.attributes} style="${css}${panel.css}">${html}</div>`;
 }
 function renderStructured(data,key) {
   const info=Model.pageInfo(data,key);if(!info)return '';
