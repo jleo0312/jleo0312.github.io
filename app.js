@@ -695,7 +695,7 @@ function displayPortfolio(input,key) {
   bindPhotoRotations();
   if(info&&window.PortfolioObjects){const objects=window.PortfolioObjects.mount({data,key,settings,model:Model,editing:editorPreview});activeCleanups.push(()=>objects.destroy());}
   // Set the starting volume once so visitors can still adjust the native controls.
-  app.querySelectorAll('video').forEach(video=>{video.volume=0.25;});
+  app.querySelectorAll('video').forEach(video=>{video.volume=0.5;});
   bindPreviews();
   bindImageLightbox();
   document.querySelectorAll('.project-carousel').forEach(node=>{const saved=carouselState.get(node.closest('[data-section-id]')?.dataset.sectionId);if(saved!=null)node.dataset.currentGroup=saved;bindCarousel(node);});
