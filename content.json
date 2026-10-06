@@ -1311,24 +1311,28 @@
           "items": [
             {
               "type": "image",
-              "src": "/media/muw86wnv-rxq3z-drone.jpeg",
+              "src": "/media/muw87on6-ee1yq-drone.jpeg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square"
+                "aspect": "square",
+                "enabled": true,
+                "rotation": 180
               }
             },
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muw87wn3-q131l-drone2.jpeg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square"
+                "aspect": "square",
+                "enabled": true,
+                "rotation": 180
               }
             }
           ],
-          "text": ""
+          "text": "My initial concept sketches for the drone. The factory design had extra slack in the motor wires, so I designed my own motor mounts that let me extend the motors farther outward. This increased the motor-to-motor span, theoretically improving stability."
         },
         {
           "id": "section-77dfd0d0-747c-432e-98c8-009689dc374c",
@@ -1337,16 +1341,19 @@
           "items": [
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muw8arah-yi498-img_3146.jpg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square"
+                "aspect": "square",
+                "enabled": true,
+                "focalX": 49,
+                "focalY": 5
               }
             },
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muw8aj32-egvax-first-drone-broken.jpg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
@@ -1354,7 +1361,7 @@
               }
             }
           ],
-          "text": ""
+          "text": "My first drone design was far too heavy, weighing around 60 grams compared with the original 10-gram frame. I intentionally broke this prototype to identify its weakest points and see where the structure would fail."
         },
         {
           "id": "section-b96942d2-e784-4800-b8bd-3024feb4b14f",
@@ -1363,7 +1370,7 @@
           "items": [
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muw8cpdf-fedp6-skinned-drone.jpg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
@@ -1372,7 +1379,7 @@
             },
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muw8dmrg-bbvcg-broken-drone-2.jpg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
@@ -1380,7 +1387,15 @@
               }
             }
           ],
-          "text": ""
+          "text": "The design on the left was my first major weight reduction attempt, where I removed material anywhere I could. It ended up being too thin and fragile, so I began iterating on the frame by adjusting wall thicknesses and intentionally breaking each version to identify its weak points and improve the next design.",
+          "elements": [
+            {
+              "id": "image:projects/drone/sections/section-b96942d2-e784-4800-b8bd-3024feb4b14f/items/1/imageStyle",
+              "x": 51.008311964269026,
+              "y": 3.3675511248216448,
+              "width": 48.99168803573098
+            }
+          ]
         },
         {
           "id": "section-93ad86d3-ecc0-450d-96a9-9dc7f3030432",
@@ -1389,7 +1404,7 @@
           "items": [
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muw8fct1-j9j26-drone-4.jpg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
@@ -1398,7 +1413,7 @@
             },
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muw8fm33-8hcsi-drone-5.jpg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
@@ -1406,7 +1421,105 @@
               }
             }
           ],
-          "text": ""
+          "text": "I dropped the ducted-propeller idea because the extra weight wasn’t worth it. The flexible propellers could rotate or flex out of the way when they touched the ground until the frame made contact, at which point the impact force was transferred into the frame. Because of this, I shifted my focus toward making the frame as strong and lightweight as possible."
+        },
+        {
+          "id": "section-0d4e9631-17e5-407a-8e8e-6fff5eb71422",
+          "type": "photoText",
+          "visible": true,
+          "heading": "",
+          "text": "This was the final design I was happy with. Through repeated testing, I rounded sharp corners to reduce stress concentrations and reinforced weak areas until the frame no longer failed at obvious geometric weak points. In the final version, failure occurred along the 3D-printed layer lines, suggesting that the limiting factor had shifted from the frame geometry to the strength between printed layers.",
+          "alt": "",
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          },
+          "caption": "",
+          "showCaption": true,
+          "image": "/media/muw8gmy0-t8tr9-final-drone.jpg",
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [
+            {
+              "id": "image:projects/drone/sections/section-0d4e9631-17e5-407a-8e8e-6fff5eb71422/imageStyle",
+              "x": 8.729579389082662,
+              "y": 0,
+              "width": 43.43814950340366,
+              "height": 654.38916015625
+            }
+          ]
+        },
+        {
+          "id": "section-ba40b789-2bc6-4f38-839d-0aad418581fd",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muw8kfhx-4hcs6-final-drone-comp-day.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "tall",
+                "enabled": true,
+                "focalX": 50,
+                "focalY": 73,
+                "height": 0
+              }
+            },
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square",
+                "enabled": true,
+                "previewVideo": "/media/muw8v54o-bd1c4-comp-day.mov",
+                "previewBehavior": "controls"
+              }
+            }
+          ],
+          "text": "The final drone used a lid that was soldered directly to the frame to create a simple, secure connection. Small access holes were added so the drone could still be powered on without removing the lid. On competition day, the design was put through two main tests: whether it could fly successfully and whether it could survive a durability test that involved flying directly into a wall."
+        },
+        {
+          "id": "section-c35795ea-e8b8-4138-937c-094a02b2eb7d",
+          "visible": true,
+          "heading": "",
+          "text": "Unfortunately, my drone didn’t win. The design on the left was selected as the best overall. I’m obviously biased, but I still believe my design had some advantages, including a larger motor-to-motor span and a frame that I had repeatedly tested and reinforced for impact. I like to think I took more of a “Toyota” approach to the project. Focusing on improving what was already there and prioritizing simplicity, durability, and reliability, while the winning design took more of a “BMW” approach, with a flashier and more complex design. I believe mine would have held up better over time because every change was focused on eliminating weak points while keeping the frame simple and lightweight. The final judge wasn’t present for the presentations or testing, so the decision was made mostly from the finished drones themselves rather than the full design process behind them, which was disappointing because so much of my work went into the iteration and testing that wasn’t obvious just by looking at the final result.",
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [],
+          "type": "mediaPair",
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muw90nld-ksulq-drone-winnter.png",
+              "alt": "",
+              "imageStyle": {
+                "caption": "",
+                "showCaption": true
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/muw91fx8-c21fp-drone-honorable-mention.png",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            }
+          ]
+        },
+        {
+          "id": "section-92de6776-d1d8-4ccd-9366-6b39537aaab7",
+          "type": "text",
+          "visible": true,
+          "text": "- Failure testing\n- SolidWorks\n- Managing engineering tradeoffs\n- Prototyping is fun",
+          "heading": "What did I learn?"
         },
         {
           "id": "original-projectEnd",
@@ -1775,6 +1888,7 @@
   "videoPosters": {
     "/media/muw3djnp-8uxr3-pencil-case.mov": "/media/muw3djnp-8uxr3-pencil-case.mov-first-frame.jpg",
     "/media/muw3eczi-tn87e-pencil-case.mov": "/media/muw3eczi-tn87e-pencil-case.mov-first-frame.jpg",
-    "/media/muw840va-2bmhz-propeller-cfdd.mov": "/media/muw840va-2bmhz-propeller-cfdd.mov-first-frame.jpg"
+    "/media/muw840va-2bmhz-propeller-cfdd.mov": "/media/muw840va-2bmhz-propeller-cfdd.mov-first-frame.jpg",
+    "/media/muw8v54o-bd1c4-comp-day.mov": "/media/muw8v54o-bd1c4-comp-day.mov-first-frame.jpg"
   }
 }
