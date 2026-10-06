@@ -418,3 +418,23 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   object-position:center!important;
 }
 
+
+/* More Projects gallery heading: plain text, no project-story panel. */
+.builder-section[data-section-id="more-projects"] .text-section{
+  background:transparent!important;
+  border-radius:0!important;
+  padding:0!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+.builder-section[data-section-id="more-projects"] .text-section h2{
+  font-weight:700;
+  margin:0;
+}
+.builder-section[data-section-id="more-projects"] .text-section p{
+  margin:8px 0 0;
+  color:var(--muted)!important;
+  font-size:14px;
+  line-height:1.5;
+}
