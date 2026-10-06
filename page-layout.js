@@ -149,7 +149,29 @@ function mount(options){
   }
   const roots=new Map();
   for(const {entry,r}of placed){const rootNode=r.targetSection?scopeFor(entry,r):entry.root,rect=entry.node.getBoundingClientRect(),root=rootNode.getBoundingClientRect();roots.set(rootNode,Math.max(roots.get(rootNode)||0,rect.bottom-root.bottom));}
-  for(const [root,extra]of roots){if(extra<=0)continue;grown.set(root,root.getAttribute('style'));
+  for(const [root,extra]of roots){
+   // Repositioned text still occupies its old flow slot. Fit ordinary content
+   // sections to their visible boxes so moving it beside media removes that slot.
+   const crossSection=placed.some(({entry,r})=>r.targetSection&&(entry.root===root||r.targetSection===root.dataset.sectionId));
+   if(root.matches('.builder-section')&&root.querySelector(':scope > .content-section')&&!root.querySelector('.project-carousel')&&!crossSection){
+    const bounds=root.getBoundingClientRect();let bottom=bounds.top;
+    for(const node of root.querySelectorAll('.portfolio-positioned,h1,h2,h3,p,img,video,iframe,.image-placeholder,.type-cover')){
+     const positioned=node.closest('.portfolio-positioned');
+     if(positioned&&positioned!==node&&!node.classList.contains('portfolio-positioned'))continue;
+     const rect=node.getBoundingClientRect(),css=getComputedStyle(node);
+     if(!rect.width||!rect.height||css.visibility==='hidden'||css.opacity==='0')continue;
+     let trailing=parseFloat(css.marginBottom)||0;
+     for(let parent=node.parentElement;parent&&root.contains(parent);parent=parent.parentElement){
+      const style=getComputedStyle(parent);
+      trailing+=(parseFloat(style.paddingBottom)||0)+(parseFloat(style.borderBottomWidth)||0);
+      if(parent===root)break;
+      trailing+=parseFloat(style.marginBottom)||0;
+     }
+     bottom=Math.max(bottom,rect.bottom+trailing);
+    }
+    if(bottom>bounds.top){grown.set(root,root.getAttribute('style'));root.style.height=Math.ceil(bottom-bounds.top)+'px';continue;}
+   }
+   if(extra<=0)continue;grown.set(root,root.getAttribute('style'));
    if(root.matches('header')){const nav=root.querySelector('.nav');if(nav){grown.set(nav,nav.getAttribute('style'));nav.style.height=nav.getBoundingClientRect().height+'px';}root.style.height=root.getBoundingClientRect().height+extra+16+'px';}
    else root.style.paddingBottom=(parseFloat(getComputedStyle(root).paddingBottom)||0)+extra+16+'px';
   }
