@@ -1415,6 +1415,18 @@
               "width": 100
             }
           ]
+        },
+        {
+          "id": "more-projects",
+          "type": "text",
+          "visible": true,
+          "heading": "More Projects",
+          "text": "",
+          "contentWidth": "default",
+          "spacingTop": 72,
+          "spacingBottom": 24,
+          "textAlign": "left",
+          "textSize": "normal"
         }
       ],
       "useSections": true
