@@ -1474,14 +1474,24 @@
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square",
+                "aspect": "portrait",
                 "enabled": true,
                 "previewVideo": "/media/muw8v54o-bd1c4-comp-day.mov",
-                "previewBehavior": "controls"
+                "previewBehavior": "controls",
+                "height": 0
               }
             }
           ],
-          "text": "The final drone used a lid that was soldered directly to the frame to create a simple, secure connection. Small access holes were added so the drone could still be powered on without removing the lid. On competition day, the design was put through two main tests: whether it could fly successfully and whether it could survive a durability test that involved flying directly into a wall."
+          "text": "The final drone used a lid that was soldered directly to the frame to create a simple, secure connection. Small access holes were added so the drone could still be powered on without removing the lid. On competition day, the design was put through two main tests: whether it could fly successfully and whether it could survive a durability test that involved flying directly into a wall.",
+          "elements": [
+            {
+              "id": "image:projects/drone/sections/section-ba40b789-2bc6-4f38-839d-0aad418581fd/items/1/imageStyle",
+              "x": 51.008309515293085,
+              "y": 2.2003083190732964,
+              "width": 48.99168803573098,
+              "height": 745.8522644042969
+            }
+          ]
         },
         {
           "id": "section-c35795ea-e8b8-4138-937c-094a02b2eb7d",
@@ -1500,7 +1510,13 @@
               "alt": "",
               "imageStyle": {
                 "caption": "",
-                "showCaption": true
+                "showCaption": true,
+                "enabled": true,
+                "aspect": "portrait",
+                "height": 0,
+                "fit": "cover",
+                "focalX": 0,
+                "focalY": 47
               }
             },
             {
@@ -1509,7 +1525,9 @@
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square"
+                "aspect": "portrait",
+                "enabled": true,
+                "height": 0
               }
             }
           ]
