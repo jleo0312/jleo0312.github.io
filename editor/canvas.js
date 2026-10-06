@@ -104,6 +104,7 @@ function mount({data,key,settings,model,send}){
     const hasPreview=!!read(data,item.videoSrcPath);
     toolbar.append(button('Photo / thumbnail','replace'),button(hasPreview?'Replace video':'Add video','preview-video'),button('GIF / animation','animation-video'));
     if(read(data,item.imageSrcPath)??item.fallbackImage)toolbar.append(button('Remove thumbnail','remove-thumbnail'));
+    if(read(data,item.imageSrcPath)??item.fallbackImage)toolbar.append(button('↶ Rotate left','rotate-photo','-90','Rotate photo left'),button('↷ Rotate right','rotate-photo','90','Rotate photo right'),button('Reset rotation','rotate-photo','0'));
     if(hasPreview)toolbar.append(button('Crop video','preview-crop'),button('Remove video','remove-video'));
     toolbar.append(selectControl('Media type','video-behavior',[['still','Photo'],['controls','Video player'],['loop','GIF / animated video'],['hover','Hover preview']],read(data,item.motionPath)||(hasPreview?item.defaultMotion:'still')));
     for(const [value,label]of [['left','Photo left'],['right','Photo right'],['above','Above text'],['below','Below text']])if(item.layoutPath)toolbar.append(button(label,'layout',value));
@@ -187,7 +188,8 @@ function mount({data,key,settings,model,send}){
  on(document,'pointermove',event=>{
   const g=gesture;if(!g)return;if(g.type==='move'||g.type==='size'){moveObject(event,g);return;}
   if(g.type==='crop'){
-   const r=g.item.frame.getBoundingClientRect(),x=clamp(Math.round(g.focalX-(event.clientX-g.x)/Math.max(1,r.width)*100),0,100),y=clamp(Math.round(g.focalY-(event.clientY-g.y)/Math.max(1,r.height)*100),0,100);
+   const r=g.item.frame.getBoundingClientRect(),angle=g.item.preview?0:Number(read(data,g.item.path+'.rotation')||0)*Math.PI/180,cos=Math.round(Math.cos(angle)),sin=Math.round(Math.sin(angle)),dx=event.clientX-g.x,dy=event.clientY-g.y,quarter=Math.abs(sin)===1;
+   const x=clamp(Math.round(g.focalX-(cos*dx+sin*dy)/Math.max(1,quarter?r.height:r.width)*100),0,100),y=clamp(Math.round(g.focalY-(-sin*dx+cos*dy)/Math.max(1,quarter?r.width:r.height)*100),0,100);
    const prefix=g.item.preview?'--preview-':'--image-';g.item.frame.style.setProperty(prefix+'fit','cover');g.item.frame.style.setProperty(prefix+'x',x+'%');g.item.frame.style.setProperty(prefix+'y',y+'%');g.item.frame.querySelectorAll(g.item.preview?'.preview,.media-preview':'img:not(.preview):not(.preview-gif):not(.media-preview)').forEach(n=>{n.style.objectFit='cover';n.style.objectPosition=x+'% '+y+'%';});send({action:'resize',path:g.item.path,focalX:x,focalY:y,fit:'cover'});return;
   }
   if(Math.hypot(event.clientX-g.x,event.clientY-g.y)<6&&!g.changed)return;g.changed=true;event.preventDefault();document.body.classList.add('canvas-dragging');
@@ -208,6 +210,7 @@ function mount({data,key,settings,model,send}){
   else if(action==='preview-video'||action==='animation-video'){input.accept=action==='animation-video'?'image/gif,video/*':'video/*';input.dataset.uploadPath=item.videoSrcPath;input.dataset.motionPath=item.motionPath;input.dataset.motion=action==='animation-video'?'loop':'controls';input.value='';send({action:'upload-start'});input.click();}
   else if(action==='remove-video')transaction('remove-video',{path:item.videoSrcPath});
   else if(action==='remove-thumbnail')transaction('remove-thumbnail',{path:item.imageSrcPath});
+  else if(action==='rotate-photo')transaction('image-rotate',{degrees:Number(b.dataset.value)});
   else if(action==='preview-crop'){const path=item.previewPath;if(images.has(path)){cropping=true;select(selectedId,path);send({action:'select',id:selectedId,imagePath:path,textPath:''});}}
   else if(action==='thumbnail-view'){const path=item.basePath;cropping=false;select(selectedId,path);send({action:'select',id:selectedId,imagePath:path,textPath:''});}
   else if(action==='layout'){if(picked&&objects.record(picked))objectChange(null);transaction('image-layout',{position:b.dataset.value});}
