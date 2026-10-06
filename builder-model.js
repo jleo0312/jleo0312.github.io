@@ -77,6 +77,59 @@
     return {id:id(),type,visible:true,...(type==='photoText'?{image:'',heading:'',text:'',caption:'',showCaption:true,imagePosition:'left',imageWidth:56,textWidth:44}:type==='heading'?{heading:'New heading'}:type==='text'?{text:''}:type==='video'?{video:'',caption:'',showCaption:true}:{})};
   }
   function photoSource(data,key,section) {const project=pageInfo(data,key)?.project; return project?.photos?.find(p=>p.id===section.sourceId);}
+  const mediaLayouts=[['photoText','Photo and text'],['mediaPair2','Double media + text'],['mediaPair3','Triple media + text'],['mediaCarousel','Photo / video carousel']];
+  function layoutOptions(section) {
+    if(['photoText','mediaPair','mediaCarousel','video','videoText'].includes(section?.type))return mediaLayouts;
+    if(['text','heading'].includes(section?.type))return [['text','Text'],['heading','Heading']];
+    return [];
+  }
+  function layoutType(section) {return section?.type==='mediaPair'?'mediaPair'+(section.items?.length===3?3:2):['video','videoText'].includes(section?.type)?'photoText':section?.type;}
+  // Keep source files, captions and crop settings when moving media between presets.
+  function sectionMedia(section) {
+    if(['mediaPair','mediaCarousel'].includes(section.type))return clone(section.items||[]);
+    const video=['video','videoText'].includes(section.type),style=clone(section.imageStyle||{});
+    if(section.caption!=null)style.caption=section.caption;
+    if(section.showCaption!=null)style.showCaption=section.showCaption;
+    if(video){if(section.loop!=null)style.loop=section.loop;if(section.muted!=null)style.muted=section.muted;}
+    return [{type:video?'video':'image',src:(video?section.video:section.image)||'',alt:section.alt||'',imageStyle:style,...(video?{poster:section.poster||'',gifLike:section.gifLike===true}:{})}];
+  }
+  function hasMedia(item) {return !!(item.src||item.poster||item.imageStyle?.poster||item.imageStyle?.previewVideo||item.imageStyle?.caption||item.alt);}
+  function singleMedia(item,sectionId=id()) {
+    const video=item.type==='video',style=clone(item.imageStyle||{});
+    return {id:sectionId,type:video?'videoText':'photoText',visible:true,heading:'',text:'',alt:item.alt||'',imageStyle:style,caption:style.caption||'',showCaption:style.showCaption!==false,...(video?{video:item.src||'',poster:item.poster||'',gifLike:item.gifLike===true,videoPosition:'left'}:{image:item.src||'',imagePosition:'left',imageWidth:56,textWidth:44})};
+  }
+  function layoutPlan(section,target) {
+    if(!layoutOptions(section).some(([value])=>value===target))throw new Error('Choose a compatible section layout.');
+    let media=sectionMedia(section);const slots=target==='mediaCarousel'?Math.max(6,media.length):target==='mediaPair3'?3:target==='mediaPair2'?2:target==='photoText'?1:0;
+    if(media.length>slots)media=media.filter(hasMedia);
+    const overflow=media.slice(slots).filter(hasMedia),occupied=media.filter(hasMedia);
+    const photos=occupied.every(item=>item.type!=='video'&&!item.imageStyle?.previewVideo);
+    return {slots,media,overflow,count:occupied.length,kind:photos?'photo':'media item'};
+  }
+  function changeLayout(data,key,index,target) {
+    const values=sections(data,key,true),original=values[index];
+    if(!original)throw new Error('This section is no longer available.');
+    const plan=layoutPlan(original,target),media=plan.media;
+    const common=clone(original);
+    for(const name of ['type','items','image','video','poster','alt','imageStyle','caption','showCaption','gifLike','loop','muted'])delete common[name];
+    // A new preset uses its own placement; keep layouts for manually added text boxes.
+    common.elements=(common.elements||[]).filter(element=>element.id.includes('/textBoxes/'));
+    let changed;
+    if(target.startsWith('mediaPair')){
+      changed={...common,type:'mediaPair',items:media.slice(0,plan.slots),text:original.text||''};
+      while(changed.items.length<plan.slots)changed.items.push(makeSection('mediaPair2').items[0]);
+      if(original.heading){changed.textBoxes||=[];changed.textBoxes.unshift({id:id(),text:original.heading});delete changed.heading;}
+    }else if(target==='mediaCarousel'){
+      changed={...common,type:'mediaCarousel',autoplay:original.autoplay??true,seconds:original.seconds??3,items:media.map(item=>({...item,id:item.id||id()}))};
+      while(changed.items.length<plan.slots)changed.items.push(makeCarouselItem());
+      if(original.text){changed.textBoxes||=[];changed.textBoxes.push({id:id(),text:original.text});delete changed.text;}
+    }else if(target==='photoText'){
+      const item=media[0]||{type:'image',src:'',imageStyle:{}};
+      changed={...singleMedia(item,original.id),...common};
+    }else changed={...common,type:target};
+    values.splice(index,1,changed,...plan.overflow.map(item=>({...singleMedia(item),visible:original.visible,contentWidth:original.contentWidth,panelStyle:original.panelStyle?clone(original.panelStyle):undefined})));
+    return changed;
+  }
   // Every media slot keeps its original source field; optional previews live with its image style.
   function mediaPaths(data,path) {
     const read=p=>p.split('.').reduce((value,key)=>value?.[key],data);
@@ -109,6 +162,5 @@
     for(const info of pages(data)){const used=new Set();for(const section of sections(data,info.key)){if(!types[section.type])throw new Error('Unknown section type on '+info.title);if(used.has(section.id))throw new Error('Duplicate section on '+info.title);used.add(section.id);}}
     return true;
   }
-  root.PortfolioModel={clone,id,types,makeCarouselItem,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,mediaPaths,deleteSection,duplicateSection,reorder,validate};
+  root.PortfolioModel={clone,id,types,makeCarouselItem,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,mediaPaths,deleteSection,duplicateSection,reorder,validate};
 })(typeof window==='undefined'?globalThis:window);
-

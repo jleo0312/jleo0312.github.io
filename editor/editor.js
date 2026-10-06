@@ -14,6 +14,29 @@ function mutate(fn){remember();fn();mark();renderAll();}
 function sectionList(){return M.sections(data,key,true);}
 function section(){return sectionList().find(s=>s.id===selected);}
 function sectionLabel(s){return s.type==='mediaPair'&&[2,3].includes(s.items?.length)?(s.items.length===2?'Double media + text':'Triple media + text'):M.types[s.type]||'Section';}
+let menuSection='',layoutSection='',layoutPage='';
+function closeSectionMenu(restoreFocus=false){$('#section-menu').hidden=true;if(restoreFocus)outlineButton(menuSection)?.focus();}
+function outlineButton(id){return [...$('#sections').querySelectorAll('[data-select]')].find(button=>button.dataset.select===id);}
+function showSectionMenu(id,x,y){
+ selectSection(id);menuSection=id;const menu=$('#section-menu'),canChange=M.layoutOptions(section()).length>1;
+ $('#menu-layout').disabled=!canChange;$('#menu-layout').title=canChange?'Choose a preset layout':'This section uses the page’s built-in layout. Use Edit section for its controls.';
+ menu.hidden=false;menu.style.left=Math.max(4,Math.min(x,innerWidth-menu.offsetWidth-4))+'px';menu.style.top=Math.max(4,Math.min(y,innerHeight-menu.offsetHeight-4))+'px';
+ (canChange?$('#menu-layout'):$('#menu-controls')).focus();
+}
+function openLayout(id){
+ closeSectionMenu();selectSection(id);const s=section(),options=M.layoutOptions(s);if(options.length<2)return;
+ layoutSection=id;layoutPage=key;$('#layout-current').textContent='Current layout: '+sectionLabel(s);
+ $('#layout-preset').innerHTML=options.map(([value,label])=>`<option value="${value}">${escape(label)}</option>`).join('');$('#layout-preset').value=M.layoutType(s);
+ if(!$('#layout-preset').value)$('#layout-preset').value=options[0][0];
+ updateLayoutWarning();$('#layout-dialog').showModal();$('#layout-preset').focus();
+}
+function updateLayoutWarning(){
+ const s=M.sections(data,layoutPage).find(value=>value.id===layoutSection);if(!s)return;
+ const target=$('#layout-preset').value,plan=M.layoutPlan(s,target),warning=$('#layout-warning');
+ warning.hidden=!plan.overflow.length;
+ warning.textContent=plan.overflow.length?`You have ${plan.count} ${plan.kind}${plan.count===1?'':'s'} in this section. This layout holds ${plan.slots}. The extra ${plan.overflow.length===1?plan.kind:plan.kind+'s'} will move to ${plan.overflow.length===1?'a new section':'new sections'} below.`:'';
+ $('#apply-layout').disabled=target===M.layoutType(s);
+}
 function sectionPath(){const info=M.pageInfo(data,key),i=sectionList().findIndex(s=>s.id===selected);return info.project?`projects.${data.projects.indexOf(info.project)}.sections.${i}`:info.page?`pages.${data.pages.indexOf(info.page)}.sections.${i}`:`pageLayouts.${key}.sections.${i}`;}
 function url(path){return assets.get(path)?.url||path||'';}
 function plainField(label,path,type='text',fallback='',hint=''){
@@ -72,9 +95,10 @@ function inspector(){
  panel.innerHTML=`<h2>${escape(sectionLabel(s))}</h2>${fields}${panelControls(s,p)}${layoutControls(p,['photoText','projectPhoto','projectThumbnail','hero','about'].includes(s.type))}`;
 }
 function renderOutline(){
+ closeSectionMenu();
  $('#page-select').innerHTML=M.pages(data).map(info=>`<option value="${escape(info.key)}" ${info.key===key?'selected':''}>${escape(info.kind==='project'?'Project · '+info.title:info.title)}</option>`).join('');
  const values=sectionList();if(!values.some(s=>s.id===selected)&&!textPath)selected=values[0]?.id||'';
- $('#sections').innerHTML=values.map((s,i)=>`<div class="section-item ${s.id===selected?'selected':''} ${s.visible===false?'is-hidden':''}" draggable="true" data-index="${i}"><button class="section-select" data-select="${escape(s.id)}">${escape(s.heading||sectionLabel(s))}</button><div class="section-tools"><button data-action="up" data-index="${i}" aria-label="Move section up" ${i?'':'disabled'}>↑</button><button data-action="down" data-index="${i}" aria-label="Move section down" ${i===values.length-1?'disabled':''}>↓</button><button data-action="duplicate" data-index="${i}">Duplicate</button><button data-action="hide" data-index="${i}">${s.visible===false?'Show':'Hide'}</button><button data-action="delete" data-index="${i}" class="danger">Delete</button></div></div>`).join('');
+ $('#sections').innerHTML=values.map((s,i)=>`<div class="section-item ${s.id===selected?'selected':''} ${s.visible===false?'is-hidden':''}" draggable="true" data-index="${i}"><button class="section-select" data-select="${escape(s.id)}">${escape(s.heading||sectionLabel(s))}</button><div class="section-tools"><button data-action="up" data-index="${i}" aria-label="Move section up" ${i?'':'disabled'}>↑</button><button data-action="down" data-index="${i}" aria-label="Move section down" ${i===values.length-1?'disabled':''}>↓</button>${M.layoutOptions(s).length>1?`<button data-layout="${escape(s.id)}" aria-label="Change section layout">Layout…</button>`:''}<button data-action="duplicate" data-index="${i}">Duplicate</button><button data-action="hide" data-index="${i}">${s.visible===false?'Show':'Hide'}</button><button data-action="delete" data-index="${i}" class="danger">Delete</button></div></div>`).join('');
  $('#open-page').href=M.pageInfo(data,key).url;updateUndo();
 }
 function renderAll(){renderOutline();inspector();preview();}
@@ -160,6 +184,7 @@ $('#inspector').addEventListener('focusout',()=>{fieldEditing=false;});
 $('#inspector').addEventListener('input',e=>{const control=e.target,path=control.dataset.path;if(!path)return;const previous=get(path);set(path,control.type==='checkbox'?control.checked:control.dataset.number?Number(control.value):control.value);if(path.endsWith('.panelStyle.color')){const transparentPath=path.replace(/\.color$/,'.transparent');set(transparentPath,false);const checkbox=$('#inspector').querySelector(`[data-path="${transparentPath}"]`);if(checkbox)checkbox.checked=false;}if(imagePath&&!imagePath.endsWith('.previewStyle')&&!previous&&control.value){const media=M.mediaPaths(data,imagePath);if(path===media.videoSrcPath)set(media.motionPath,/\.gif(?:[?#]|$)/i.test(control.value)?'loop':'controls');}if(control.type==='range')control.closest('label').querySelector('output').textContent=control.value==='0'&&path.endsWith('.height')?'Auto':control.value+(control.dataset.unit||'');mark();});
 $('#inspector').addEventListener('change',e=>{const path=e.target.dataset.path;if(path?.endsWith('.slug')){const info=M.pageInfo(data,key);if(!info){const target=path.startsWith('projects.')?data.projects[Number(path.split('.')[1])]:data.pages[Number(path.split('.')[1])];key=(path.startsWith('projects.')?'project:':'page:')+target.slug;}renderOutline();}else if(path?.endsWith('.title'))renderOutline();});
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.layout)openLayout(b.dataset.layout);
  if(b.dataset.close)$('#'+b.dataset.close).close();
  if(b.dataset.select)selectSection(b.dataset.select);
  if(b.dataset.carouselItem&&section()?.type==='mediaCarousel'){
@@ -177,6 +202,26 @@ document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)r
  if(b.dataset.action){const index=Number(b.dataset.index),action=b.dataset.action;imagePath='';textPath='';mutate(()=>{if(action==='up'||action==='down')M.reorder(data,key,index,index+(action==='up'?-1:1));if(action==='duplicate')selected=M.duplicateSection(data,key,index).id;if(action==='delete')M.deleteSection(data,key,index);if(action==='hide')sectionList()[index].visible=sectionList()[index].visible===false;});}
  if(b.id==='import-button')$('#import-content').click();
 });
+$('#sections').addEventListener('contextmenu',e=>{const node=e.target.closest('.section-item');if(!node)return;e.preventDefault();showSectionMenu(node.querySelector('[data-select]').dataset.select,e.clientX,e.clientY);});
+$('#sections').addEventListener('keydown',e=>{if(e.key!=='ContextMenu'&&!(e.shiftKey&&e.key==='F10'))return;const node=e.target.closest('.section-item');if(!node)return;e.preventDefault();const rect=node.getBoundingClientRect();showSectionMenu(node.querySelector('[data-select]').dataset.select,rect.left+20,rect.top+20);});
+$('#section-menu').addEventListener('keydown',e=>{
+ if(e.key==='Escape'){e.preventDefault();closeSectionMenu(true);return;}
+ if(!['ArrowDown','ArrowUp','Home','End'].includes(e.key))return;e.preventDefault();
+ const buttons=[...$('#section-menu').querySelectorAll('button:not(:disabled)')],index=buttons.indexOf(document.activeElement);
+ buttons[e.key==='Home'?0:e.key==='End'?buttons.length-1:(index+(e.key==='ArrowDown'?1:-1)+buttons.length)%buttons.length]?.focus();
+});
+document.addEventListener('pointerdown',e=>{if(!e.target.closest('#section-menu'))closeSectionMenu();});
+document.addEventListener('focusin',e=>{if(!e.target.closest('#section-menu'))closeSectionMenu();});
+document.addEventListener('scroll',()=>closeSectionMenu(),true);window.addEventListener('resize',()=>closeSectionMenu());window.addEventListener('blur',()=>closeSectionMenu());
+$('#menu-layout').onclick=()=>openLayout(menuSection);
+$('#menu-controls').onclick=()=>{const id=menuSection;closeSectionMenu();selectSection(id);details();};
+$('#layout-preset').onchange=updateLayoutWarning;
+$('#layout-dialog').addEventListener('close',()=>outlineButton(layoutSection)?.focus());
+$('#layout-form').onsubmit=e=>{
+ e.preventDefault();if(key!==layoutPage)return;const index=sectionList().findIndex(value=>value.id===layoutSection);if(index<0)return;
+ const target=$('#layout-preset').value;if(target===M.layoutType(sectionList()[index]))return;
+ mutate(()=>{selected=M.changeLayout(data,key,index,target).id;imagePath='';textPath='';mode='section';});$('#layout-dialog').close();
+};
 let dragIndex=-1;$('#sections').addEventListener('dragstart',e=>{const node=e.target.closest('[data-index]');if(node){dragIndex=Number(node.dataset.index);e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',String(dragIndex));}});$('#sections').addEventListener('dragover',e=>e.preventDefault());$('#sections').addEventListener('drop',e=>{e.preventDefault();const node=e.target.closest('[data-index]');if(node&&dragIndex>=0){imagePath='';textPath='';mutate(()=>M.reorder(data,key,dragIndex,Number(node.dataset.index)));}dragIndex=-1;});
 $('#add-section').onclick=()=>mutate(()=>{const s=M.makeSection($('#section-type').value),values=sectionList(),index=values.findIndex(v=>v.id===selected);values.splice(index<0?values.length:index+1,0,s);selected=s.id;imagePath='';textPath='';mode='section';});
 $('#add-text-box').onclick=()=>canvasCommand({command:'add-text',id:selected||sectionList()[0]?.id});
