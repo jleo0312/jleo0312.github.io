@@ -1481,11 +1481,14 @@
           "items": [
             {
               "type": "image",
-              "src": "",
+              "src": "/media/muw3a55c-03q74-usb-drive.jpg",
               "alt": "",
               "imageStyle": {
                 "fit": "cover",
-                "aspect": "square"
+                "aspect": "square",
+                "enabled": true,
+                "focalX": 46,
+                "focalY": 96
               }
             },
             {
@@ -1507,7 +1510,15 @@
               }
             }
           ],
-          "text": ""
+          "text": "",
+          "elements": [
+            {
+              "id": "image:pageLayouts/gallery/sections/section-1de4cbd6-e65e-4daf-850d-f9a0fa15a2d4/items/0/imageStyle",
+              "x": 3.969108018250606,
+              "y": 2.0234716087279656,
+              "width": 29.400142467745916
+            }
+          ]
         }
       ],
       "useSections": true
