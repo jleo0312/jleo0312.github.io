@@ -1175,6 +1175,11 @@
           "text": "This is the best run I’ve had with the furnace so far. It can be a little finicky to start, since the furnace needs to be preheated with wood before switching to full oil. Once the chamber is hot enough, the oil ignites consistently and the furnace can sustain the burn on its own."
         },
         {
+          "id": "section-fbf70361-d5ee-414e-97d5-bd95ffdc8f8e",
+          "type": "spacer",
+          "visible": true
+        },
+        {
           "id": "section-a2481c76-20fa-4867-b180-4a3debcc4ee7",
           "type": "text",
           "visible": true,
