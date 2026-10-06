@@ -1280,7 +1280,7 @@
               "imageStyle": {
                 "fit": "cover",
                 "aspect": "square",
-                "caption": "A Boeing 767 jet engine.",
+                "caption": "A turbofan engine on a Boeing 767.\n\n",
                 "showCaption": true,
                 "enabled": true
               }
@@ -1297,7 +1297,9 @@
                 "previewBehavior": "loop",
                 "height": 0,
                 "focalX": 31,
-                "focalY": 29
+                "focalY": 29,
+                "caption": "NASA CFD simulation visualizing airflow and tip vortex formation around a non-ducted propeller.",
+                "showCaption": true
               }
             }
           ]
