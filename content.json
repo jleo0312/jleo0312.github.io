@@ -1476,7 +1476,7 @@
                 "fit": "cover",
                 "aspect": "portrait",
                 "enabled": true,
-                "previewVideo": "/media/muw99ze8-b61kh-comp-day.mov",
+                "previewVideo": "/media/muw9lwh9-t4sdf-comp_day_25mb.mp4",
                 "previewBehavior": "controls",
                 "height": 0
               }
@@ -1908,6 +1908,7 @@
     "/media/muw3eczi-tn87e-pencil-case.mov": "/media/muw3eczi-tn87e-pencil-case.mov-first-frame.jpg",
     "/media/muw840va-2bmhz-propeller-cfdd.mov": "/media/muw840va-2bmhz-propeller-cfdd.mov-first-frame.jpg",
     "/media/muw8v54o-bd1c4-comp-day.mov": "/media/muw8v54o-bd1c4-comp-day.mov-first-frame.jpg",
-    "/media/muw99ze8-b61kh-comp-day.mov": "/media/muw99ze8-b61kh-comp-day.mov-first-frame.jpg"
+    "/media/muw99ze8-b61kh-comp-day.mov": "/media/muw99ze8-b61kh-comp-day.mov-first-frame.jpg",
+    "/media/muw9lwh9-t4sdf-comp_day_25mb.mp4": "/media/muw9lwh9-t4sdf-comp_day_25mb.mp4-first-frame.jpg"
   }
 }
