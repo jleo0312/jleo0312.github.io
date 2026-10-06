@@ -155,7 +155,7 @@ function mount(options){
    const crossSection=placed.some(({entry,r})=>r.targetSection&&(entry.root===root||r.targetSection===root.dataset.sectionId));
    if(root.matches('.builder-section')&&root.querySelector(':scope > .content-section')&&!root.querySelector('.project-carousel')&&!crossSection){
     const bounds=root.getBoundingClientRect();let bottom=bounds.top;
-    for(const node of root.querySelectorAll('.portfolio-positioned,h1,h2,h3,p,img,video,iframe,.image-placeholder,.type-cover')){
+    for(const node of root.querySelectorAll('.portfolio-positioned,h1,h2,h3,p,figcaption,img,video,iframe,.image-placeholder,.video-placeholder,.type-cover')){
      const positioned=node.closest('.portfolio-positioned');
      if(positioned&&positioned!==node&&!node.classList.contains('portfolio-positioned'))continue;
      const rect=node.getBoundingClientRect(),css=getComputedStyle(node);
