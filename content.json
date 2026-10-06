@@ -1420,31 +1420,47 @@
         },
         {
           "id": "section-a8d851ef-8976-4737-a7d8-e7f38f107d28",
-          "type": "photoText",
           "visible": true,
-          "image": "",
           "heading": "",
-          "text": "Thankfully, I took a video for my mom.",
-          "caption": "",
-          "showCaption": true,
+          "text": "Luckily, I took a video for my mom.",
           "imagePosition": "left",
           "imageWidth": 56,
           "textWidth": 44,
           "elements": [
             {
-              "id": "image:projects/pencil-case/sections/section-a8d851ef-8976-4737-a7d8-e7f38f107d28/imageStyle",
-              "x": 8.729579389082662,
-              "y": 0,
-              "width": 37.684010454188474,
-              "height": 805.2272338867188
+              "id": "image:projects/pencil-case/sections/section-a8d851ef-8976-4737-a7d8-e7f38f107d28/items/1/imageStyle",
+              "x": 51.008311964269026,
+              "y": 2.2003083190732964,
+              "width": 48.99168803573098
             }
           ],
-          "imageStyle": {
-            "enabled": true,
-            "previewVideo": "/media/muw3eczi-tn87e-pencil-case.mov",
-            "previewBehavior": "controls",
-            "fit": "cover"
-          }
+          "type": "mediaPair",
+          "items": [
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "enabled": true,
+                "previewVideo": "/media/muw3eczi-tn87e-pencil-case.mov",
+                "previewBehavior": "controls",
+                "fit": "cover",
+                "caption": "",
+                "showCaption": true
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/muw7jcza-cm9kz-pencil-case.jpeg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "tall",
+                "enabled": true,
+                "height": 0
+              }
+            }
+          ]
         },
         {
           "id": "original-projectEnd",
