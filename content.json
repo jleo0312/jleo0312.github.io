@@ -1069,7 +1069,7 @@
           "id": "furnace-siphon-transition",
           "type": "text",
           "visible": true,
-          "text": "The blower melted, so I switched to a siphon-style atomizer, which is commonly used in waste oil heaters.",
+          "text": "Unfortunately, I don't have any pictures or videos of my first prototype. That design ultimately failed when the blower melted, which pushed me to redesign the furnace around a compressed-air, siphon fed atomizer commonly used in waste oil heaters.",
           "textAlign": "left",
           "textSize": "normal"
         },
@@ -1112,7 +1112,7 @@
               "width": 48.98989898989899
             }
           ],
-          "text": "The initial fuel system was extremely simple, with no real plumbing. A container gravity-fed oil through a tube directly into the siphon nozzle inlet. The original burner used a square inlet tube because it had been built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. However, after switching to the liquid-fuel torch, atomized oil began collecting on the walls of the square tube, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation."
+          "text": "The initial fuel system was extremely simple, with no real plumbing. A container gravity-fed oil through a tube directly into the siphon nozzle inlet. The original burner used a square inlet tube because it had been built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. However, after switching to the liquid-fuel torch, atomized oil began collecting on the walls of the square tube, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation. The furnace also required a large amount of burning wood to generate enough heat for the atomized oil to ignite reliably, and the pooled oil made that transition to sustained oil combustion even more difficult.\n\nAs the oil level in the container dropped, the available head pressure decreased, weakening the gravity-fed flow. Eventually, the oil stream would no longer reach the atomizer inlet consistently, interrupting the fuel supply and forcing me to readjust the setup about every 10 minutes. My second version used copper plumbing to create a direct connection between the fuel container and the atomizer, providing a much more reliable oil feed."
         },
         {
           "id": "section-4f21a1d2-e261-432e-8cff-87ae69583e41",
@@ -1131,9 +1131,9 @@
             },
             {
               "id": "text:projects/waste-oil-powered-furnace/sections/section-4f21a1d2-e261-432e-8cff-87ae69583e41/text",
-              "x": 54.315886134067945,
-              "y": 37.662850091827366,
-              "width": 38.01652892561984,
+              "x": 55.25898964012854,
+              "y": 19.39988180693305,
+              "width": 38.01628123930142,
               "height": 111.1875
             }
           ],
@@ -1141,7 +1141,7 @@
             "enabled": true,
             "fit": "cover"
           },
-          "text": "I fixed this by building a new torch assembly, with a circular outlet tube.\n"
+          "text": "I fixed this by building a new torch assembly, with a circular outlet tube.\n\nAs the oil level dropped, reduced head pressure weakened the gravity-fed flow until it could no longer reliably reach the atomizer inlet. I would have to readjust the container every 10 mintues or so. My second version used both the new torch assembly and copper plumbing for the oil."
         },
         {
           "id": "section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5",
@@ -1190,7 +1190,7 @@
           "id": "section-d64225ea-6929-48ed-9960-330fe9de7542",
           "type": "text",
           "visible": true,
-          "text": "I plan to further upgrade the furnace by adding ceramic wool insulation. This should significantly improve efficiency by reducing the large amount of heat currently lost through the walls and surrounding air. With these upgrades, I’m hoping to reach temperatures high enough to melt copper.",
+          "text": "I plan to further upgrade the furnace by adding ceramic wool insulation to reduce heat loss and improve efficiency. I also want to add a dedicated oil preheating system to lower the fuel’s viscosity and improve flow and atomization. With these upgrades, I’m hoping to reach temperatures high enough to melt copper.",
           "heading": "What's next?"
         },
         {
