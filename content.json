@@ -1267,9 +1267,32 @@
           "visible": true
         },
         {
-          "id": "original-projectVideo",
-          "type": "projectVideo",
-          "visible": true
+          "id": "section-a8d851ef-8976-4737-a7d8-e7f38f107d28",
+          "type": "photoText",
+          "visible": true,
+          "image": "",
+          "heading": "",
+          "text": "Thankfully, I took a video for my mom.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [
+            {
+              "id": "image:projects/pencil-case/sections/section-a8d851ef-8976-4737-a7d8-e7f38f107d28/imageStyle",
+              "x": 8.729579389082662,
+              "y": 0,
+              "width": 37.684010454188474,
+              "height": 805.2272338867188
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "previewVideo": "/media/muw3eczi-tn87e-pencil-case.mov",
+            "previewBehavior": "controls",
+            "fit": "cover"
+          }
         },
         {
           "id": "original-projectEnd",
@@ -1285,7 +1308,15 @@
         "focalX": 53,
         "focalY": 56
       },
-      "description": "This was my first useful SolidWorks project, and it felt amazing to finally use the skills I've been learning. Unfortunately, I didn't take many photos."
+      "description": "This was my first useful SolidWorks project, and it felt amazing to finally use the skills I've been learning. Unfortunately, I didn't take many photos.",
+      "video": "/media/muw3djnp-8uxr3-pencil-case.mov",
+      "videoStyle": {
+        "enabled": true,
+        "previewBehavior": "controls",
+        "fit": "cover",
+        "caption": "",
+        "showCaption": true
+      }
     }
   ],
   "website": {
@@ -1563,5 +1594,9 @@
     "captionPosition": "below",
     "showCaption": true
   },
-  "visualEditorLink": "https://jleo0312.github.io/editor/"
+  "visualEditorLink": "https://jleo0312.github.io/editor/",
+  "videoPosters": {
+    "/media/muw3djnp-8uxr3-pencil-case.mov": "/media/muw3djnp-8uxr3-pencil-case.mov-first-frame.jpg",
+    "/media/muw3eczi-tn87e-pencil-case.mov": "/media/muw3eczi-tn87e-pencil-case.mov-first-frame.jpg"
+  }
 }
