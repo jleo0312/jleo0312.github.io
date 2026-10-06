@@ -926,26 +926,34 @@
         },
         {
           "id": "coaster-row-2",
-          "type": "mediaPair",
           "visible": true,
+          "text": "Then, with a paintbrush, you wet the fibers by stippling until they are saturated. Repeat until all of the measured carbon fiber is used. Then you compress the mold using bolts and clamps.",
+          "elements": [],
+          "type": "mediaPair",
           "items": [
             {
               "type": "video",
               "src": "/media/coaster-stippling-loop.mp4?v=1",
               "alt": "Stippling resin into the chopped carbon fiber.",
-              "gifLike": true
+              "gifLike": true,
+              "imageStyle": {
+                "enabled": true,
+                "fit": "cover",
+                "aspect": "portrait",
+                "height": 0
+              }
             },
             {
               "type": "image",
               "src": "/media/coaster-saturated.svg?v=2",
-              "alt": "Carbon fiber saturated with resin in the mold."
-            },
-            {
-              "type": "blank",
-              "alt": "Compressing the mold with bolts and clamps."
+              "alt": "Carbon fiber saturated with resin in the mold.",
+              "imageStyle": {
+                "enabled": true,
+                "aspect": "portrait",
+                "height": 0
+              }
             }
-          ],
-          "text": "Then, with a paintbrush, you slowly saturate the fibers by stippling until they are fully wet out. Repeat until all of the measured carbon fiber is used. Then you compress the mold using bolts and clamps."
+          ]
         },
         {
           "id": "coaster-row-3",
