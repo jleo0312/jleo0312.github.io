@@ -1456,12 +1456,57 @@
           "type": "text",
           "visible": true,
           "heading": "More Projects",
-          "text": "Full project writeups are currently in progress.",
+          "text": "",
           "contentWidth": "default",
           "spacingTop": 72,
           "spacingBottom": 24,
           "textAlign": "left",
-          "textSize": "normal"
+          "textSize": "normal",
+          "elements": [
+            {
+              "id": "text:pageLayouts/gallery/sections/more-projects/heading",
+              "x": 3.9846743506918783,
+              "y": 0,
+              "width": 88.19923382686001,
+              "height": 32.48579406738281,
+              "align": "left"
+            }
+          ]
+        },
+        {
+          "id": "section-1de4cbd6-e65e-4daf-850d-f9a0fa15a2d4",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            }
+          ],
+          "text": ""
         }
       ],
       "useSections": true
