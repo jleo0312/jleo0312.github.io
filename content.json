@@ -1755,6 +1755,11 @@
           "muted": false
         },
         {
+          "id": "section-5a952903-341a-4188-bb5a-8278b5313e6d",
+          "type": "spacer",
+          "visible": true
+        },
+        {
           "id": "original-galleryGrid",
           "type": "galleryGrid",
           "visible": true,
@@ -1796,7 +1801,7 @@
           "type": "text",
           "visible": true,
           "heading": "More Projects",
-          "text": "",
+          "text": "I'll get around to writing about them soon.\n",
           "contentWidth": "default",
           "spacingTop": 72,
           "spacingBottom": 24,
@@ -1809,6 +1814,14 @@
               "y": 0,
               "width": 88.19923382686001,
               "height": 32.48579406738281,
+              "align": "center"
+            },
+            {
+              "id": "text:pageLayouts/gallery/sections/more-projects/text",
+              "x": 36.934866344140374,
+              "y": 3.4123559245272848,
+              "width": 22.298849196872293,
+              "height": 24,
               "align": "center"
             }
           ]
