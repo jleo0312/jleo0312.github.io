@@ -1555,7 +1555,7 @@
       "title": "Pencil Case",
       "slug": "pencil-case",
       "showInGallery": true,
-      "featuredOnHomepage": false,
+      "featuredOnHomepage": true,
       "photos": [],
       "sections": [
         {
