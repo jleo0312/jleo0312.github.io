@@ -1492,7 +1492,7 @@
               }
             }
           ],
-          "text": "The final drone used a lid that was soldered directly to the frame to create a simple, secure connection. Small access holes were added so the drone could still be powered on without removing the lid. On competition day, the design was put through two main tests: whether it could fly successfully and whether it could survive a durability test that involved flying directly into a wall.",
+          "text": "The final drone used a lid that was soldered directly to the frame to create a simple, secure connection. Small access holes were added so the drone could still be powered on without removing the lid. \n\nOn competition day, the design was put through three tests: a 60 second stability test to see whether it could maintain altitude, an obstacle course to evaluate agility around a post, and a durability test that involved flying directly into a wall.",
           "elements": [
             {
               "id": "image:projects/drone/sections/section-ba40b789-2bc6-4f38-839d-0aad418581fd/items/1/imageStyle",
