@@ -976,7 +976,7 @@
               "alt": "Finished coaster under inspection light."
             }
           ],
-          "text": "This was my second prototype using this process. After curing according to the resin manufacturer’s instructions, I demolded the coasters and evaluated the results. The part showed visible voids and resin-rich areas around the logo where the fibers bridged the gap. I’m currently refining the process, focusing on fiber placement and mold filling, with the goal of producing a clean, consistent part."
+          "text": "This was my second prototype using this process. After curing according to the resin manufacturer’s instructions, I demolded the coasters and evaluated the results. The part showed visible voids and resin-rich areas around the logo where the fibers bridged the gap."
         },
         {
           "id": "section-1e793d2a-dc3c-4745-8f21-ac1b46f0f6f6",
@@ -992,6 +992,18 @@
               "width": 92.89141797494968
             }
           ]
+        },
+        {
+          "id": "section-31c8a468-623e-494a-bc2f-f264ea025100",
+          "type": "spacer",
+          "visible": true
+        },
+        {
+          "id": "section-1e7fd514-9c12-4a44-ae15-7179b231d4fb",
+          "type": "text",
+          "visible": true,
+          "text": " I’m currently refining the process, focusing on tool design and fiber placement, with the goal of producing a clean, consistent part.",
+          "heading": "What now?"
         },
         {
           "id": "coaster-end",
