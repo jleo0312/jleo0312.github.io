@@ -1238,14 +1238,166 @@
           "id": "section-8e791d07-4d22-4eba-af04-2c38fe58b2e3",
           "type": "photoText",
           "visible": true,
-          "image": "",
+          "image": "/media/muw3hdqk-3j6ez-walmart-drdone.png",
           "heading": "",
-          "text": "",
+          "text": "For my engineering 101 final project, we were given the choice to make a windmill, or a drone frame. Choosing the drone, the goal is to create a new drone frame while maintaining factory electronics and it's ability to fly.",
           "caption": "",
           "showCaption": true,
           "imagePosition": "left",
           "imageWidth": 56,
-          "textWidth": 44
+          "textWidth": 44,
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover",
+            "aspect": "tall",
+            "height": 0
+          },
+          "elements": [
+            {
+              "id": "image:projects/drone/sections/section-8e791d07-4d22-4eba-af04-2c38fe58b2e3/imageStyle",
+              "x": 9.64669708714604,
+              "y": 0,
+              "width": 41.52054256991896,
+              "height": 445.84817135161126
+            }
+          ]
+        },
+        {
+          "id": "section-652bb3f0-57cb-4d61-b293-c0870fa60672",
+          "visible": true,
+          "heading": "",
+          "text": "Ducts are rings that surround the propellers and help control the airflow passing through them. They can improve airflow velocity, reduce inefficiencies caused by vortices at the tips of the propellers, and even generate additional aerodynamic lift through the shape of the inlet. I became fascinated with this concept and got obsessed with implementing it into my drone",
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [],
+          "type": "mediaPair",
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muw3qled-bllkc-boeing-767.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square",
+                "caption": "",
+                "showCaption": true
+              }
+            },
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            }
+          ]
+        },
+        {
+          "id": "section-bff9d1bf-51a4-4a6b-b3c0-a90ffbca822e",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            }
+          ],
+          "text": ""
+        },
+        {
+          "id": "section-77dfd0d0-747c-432e-98c8-009689dc374c",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            }
+          ],
+          "text": ""
+        },
+        {
+          "id": "section-b96942d2-e784-4800-b8bd-3024feb4b14f",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            }
+          ],
+          "text": ""
+        },
+        {
+          "id": "section-93ad86d3-ecc0-450d-96a9-9dc7f3030432",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            },
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square"
+              }
+            }
+          ],
+          "text": ""
         },
         {
           "id": "original-projectEnd",
