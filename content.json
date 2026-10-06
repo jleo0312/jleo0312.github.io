@@ -637,6 +637,11 @@
           "heading": "What now?"
         },
         {
+          "id": "section-72f0b4d4-ef71-408f-8e4d-3a8ea8c2fd66",
+          "type": "spacer",
+          "visible": true
+        },
+        {
           "id": "section-61e60df5-fe18-4212-ba30-9bed90cdf54e",
           "type": "text",
           "visible": true,
