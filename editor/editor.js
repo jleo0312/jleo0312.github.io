@@ -63,6 +63,7 @@ function inspector(){
   case 'projectThumbnail':{const p=`projects.${data.projects.indexOf(info.project)}`;fields=mediaField('Project cover photo',p+'.thumbnail')+imageControls(p+'.thumbnailStyle',{position:true});break;}
   case 'projectEnd':fields=plainField('Footer text','website.project.endText','text',defaults.project.endText)+plainField('Gallery button','website.project.galleryButton','text',defaults.project.galleryButton);break;
   case 'photoText':fields=mediaField('Photo',p+'.image')+plainField('Image description',p+'.alt')+plainField('Heading',p+'.heading')+plainField('Text beside photo',p+'.text','textarea')+plainField('Caption',p+'.caption','textarea')+captionControls(p+'.imageStyle',p+'.showCaption')+imageControls(p+'.imageStyle',{caption:false});break;
+  case 'mediaCarousel':fields=plainField('Heading',p+'.heading')+plainField('Play slideshow automatically',p+'.autoplay','checkbox',true)+range('Seconds between slides',p+'.seconds',1,30,3,' seconds')+'<p class="help">Three cards at a time on desktop; one on mobile. Use the arrows to reach the next group. Photos, videos and GIFs use the same media tools as other sections.</p>'+(s.items||[]).map((item,i)=>{const path=p+'.items.'+i;return `<details><summary>Card ${i+1}${item.alt?' · '+escape(item.alt):''}</summary><div class="button-row"><button data-carousel-item="up" data-item-index="${i}" ${i===0?'disabled':''}>Move left</button><button data-carousel-item="down" data-item-index="${i}" ${i===(s.items.length-1)?'disabled':''}>Move right</button><button data-carousel-item="delete" data-item-index="${i}">Remove card</button></div>${plainField('Image description',path+'.alt')}${mediaControls(path+'.imageStyle')}${imageControls(path+'.imageStyle')}</details>`;}).join('')+'<button data-carousel-item="add">+ Add photo / video card</button>';break;
   case 'mediaPair':fields=plainField('Text below photos',p+'.text','textarea')+(s.items||[]).slice(0,3).map((item,i)=>{const path=p+'.items.'+i,video=item.type==='video',label=(video?'Video ':'Photo ')+(i+1);return `<details ${i===0?'open':''}><summary>${label}</summary>${mediaField(label,path+'.src',video?'video':'image')}${plainField('Description',path+'.alt')}${imageControls(path+'.imageStyle')}</details>`;}).join('');break;
   case 'text':case 'heading':fields=plainField('Heading',p+'.heading')+select('Heading size',p+'.headingLevel',[['h1','Large heading'],['h2','Section heading'],['h3','Small heading']],'h2')+(s.type==='text'?plainField('Paragraphs',p+'.text','textarea'):'');break;
   case 'video':fields=plainField('Heading',p+'.heading')+mediaField('Video file',p+'.video','video')+mediaField('Poster image',p+'.poster')+plainField('Loop video',p+'.loop','checkbox',false)+plainField('Mute video',p+'.muted','checkbox',false)+plainField('Caption',p+'.caption','textarea')+plainField('Show caption',p+'.showCaption','checkbox',true)+plainField('Text',p+'.text','textarea')+imageControls(p+'.imageStyle',{caption:false});break;
@@ -161,6 +162,10 @@ $('#inspector').addEventListener('change',e=>{const path=e.target.dataset.path;i
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
  if(b.dataset.close)$('#'+b.dataset.close).close();
  if(b.dataset.select)selectSection(b.dataset.select);
+ if(b.dataset.carouselItem&&section()?.type==='mediaCarousel'){
+  const action=b.dataset.carouselItem,index=Number(b.dataset.itemIndex);imagePath='';textPath='';
+  mutate(()=>{const s=section();s.items||=[];if(action==='add')s.items.push(M.makeCarouselItem());else if(index>=0&&index<s.items.length){if(action==='delete')s.items.splice(index,1);else{const to=index+(action==='up'?-1:1);if(to>=0&&to<s.items.length){const [item]=s.items.splice(index,1);s.items.splice(to,0,item);}}}});
+ }
  if(b.dataset.backSection!==undefined){imagePath='';textPath='';inspector();}
  if(b.dataset.resetPanel!==undefined&&section())mutate(()=>{delete section().panelStyle;});
  if(b.dataset.upload){pendingUpload=b.dataset.upload;pendingMotionPath=b.dataset.videoMotion||'';pendingMotion=pendingMotionPath?'controls':'';clearTimeout(previewTimer);$('#file-upload').accept=b.dataset.mediaType==='video'?'video/*,image/gif':'image/*,.heic,.heif';$('#file-upload').value='';$('#file-upload').click();}
@@ -196,6 +201,7 @@ function addTextBox(value='New text box',sourcePath=''){
 }
 function canvasCommand(msg){
  inlineEditing=false;
+ if(msg.command==='add'){const control=$('#section-type');control.scrollIntoView({block:'center'});control.focus();status('Choose a section type, then click + Add Section.');return;}
  if(msg.command==='undo'||msg.command==='redo'){$('#'+msg.command).click();return;}
  const values=sectionList(),index=values.findIndex(s=>s.id===msg.id);if(index<0)return;
  selected=msg.id;if(typeof msg.imagePath==='string')imagePath=msg.imagePath;if(typeof msg.textPath==='string')textPath=msg.textPath;
@@ -279,3 +285,4 @@ $('#restore-draft').onclick=()=>{data=M.upgrade(draftRecord.data);baseData=draft
 loadPreview();
 (async()=>{try{let remote;try{remote=await readRemote();}catch{const response=await fetch('/content.json?editor='+Date.now(),{cache:'no-store'});if(!response.ok)throw new Error('Could not load portfolio content.');remote={data:await response.json(),sha:''};}baseData=clone(remote.data);baseSha=remote.sha;data=M.upgrade(remote.data);renderAll();fitPreview();$('#preview').contentWindow.postMessage({portfolioEditor:true,action:'ping'},location.origin);status('Ready · drag to move, use handles to resize, double-click text to type');draftRecord=await loadDraft();if(draftRecord?.dirty&&!same(draftRecord.data,data))$('#draft-dialog').showModal();}catch(error){status(error.message);}})();
 })();
+

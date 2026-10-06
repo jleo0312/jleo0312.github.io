@@ -3,7 +3,7 @@
   'use strict';
   const clone = value => JSON.parse(JSON.stringify(value));
   const id = () => 'section-' + (root.crypto?.randomUUID?.() || Date.now().toString(36) + Math.random().toString(36).slice(2));
-  const types = { hero:'Homepage introduction', about:'About me', hobbies:'Hobbies', highlights:'Project highlights', galleryIntro:'Gallery introduction', galleryGrid:'Project gallery', projectIntro:'Project introduction', projectVideo:'Project video', projectPhoto:'Project photo', projectThumbnail:'Project cover photo', projectEnd:'Project footer', photoText:'Photo and text', text:'Text', heading:'Heading', video:'Video / GIF', videoText:'Video + text', mediaPair:'Media row', spacer:'Spacer' };
+  const types = { hero:'Homepage introduction', about:'About me', hobbies:'Hobbies', highlights:'Project highlights', galleryIntro:'Gallery introduction', galleryGrid:'Project gallery', projectIntro:'Project introduction', projectVideo:'Project video', projectPhoto:'Project photo', projectThumbnail:'Project cover photo', projectEnd:'Project footer', photoText:'Photo and text', text:'Text', heading:'Heading', video:'Video / GIF', videoText:'Video + text', mediaPair:'Media row', mediaCarousel:'Photo / video carousel', spacer:'Spacer' };
   const numeric = (value, fallback, min, max) => value != null && value !== '' && Number.isFinite(Number(value)) ? Math.max(min, Math.min(max, Number(value))) : fallback;
   const hash = text => [...String(text)].reduce((n,c)=>((n*31+c.charCodeAt(0))>>>0),0).toString(36);
   function upgrade(input) {
@@ -70,7 +70,9 @@
     if(materialize){target.sections=values;target.useSections=true;}
     return values;
   }
+  function makeCarouselItem(){return {id:id(),type:'image',src:'',alt:'',imageStyle:{fit:'cover',aspect:'square'}};}
   function makeSection(type='photoText') {
+    if(type==='mediaCarousel')return {id:id(),type,visible:true,heading:'Photo / video carousel',autoplay:true,seconds:3,items:Array.from({length:6},makeCarouselItem)};
     if(['mediaPair','mediaPair2','mediaPair3'].includes(type))return {id:id(),type:'mediaPair',visible:true,items:Array.from({length:type==='mediaPair3'?3:2},()=>({type:'image',src:'',alt:'',imageStyle:{fit:'cover',aspect:'square'}})),text:''};
     return {id:id(),type,visible:true,...(type==='photoText'?{image:'',heading:'',text:'',caption:'',showCaption:true,imagePosition:'left',imageWidth:56,textWidth:44}:type==='heading'?{heading:'New heading'}:type==='text'?{text:''}:type==='video'?{video:'',caption:'',showCaption:true}:{})};
   }
@@ -107,5 +109,6 @@
     for(const info of pages(data)){const used=new Set();for(const section of sections(data,info.key)){if(!types[section.type])throw new Error('Unknown section type on '+info.title);if(used.has(section.id))throw new Error('Duplicate section on '+info.title);used.add(section.id);}}
     return true;
   }
-  root.PortfolioModel={clone,id,types,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,mediaPaths,deleteSection,duplicateSection,reorder,validate};
+  root.PortfolioModel={clone,id,types,makeCarouselItem,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,mediaPaths,deleteSection,duplicateSection,reorder,validate};
 })(typeof window==='undefined'?globalThis:window);
+

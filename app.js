@@ -265,10 +265,10 @@ function bindCarousel(carousel) {
   const dots = [...carousel.querySelectorAll('.carousel-dot')];
   const pause = carousel.querySelector('.carousel-pause');
   const status = carousel.querySelector('.carousel-status');
-  const seconds = Number(settings.carousel.seconds);
+  const seconds = Number(carousel.dataset.seconds ?? settings.carousel.seconds);
   const interval = (Number.isFinite(seconds) ? Math.max(1, Math.min(30, seconds)) : 2.5) * 1000;
-  let index = 0, visualIndex = 0, timer, finishTimer, busy = false;
-  let userPaused = reducedMotion.matches || editorPreview, hovered = false, focused = false, visible = false;
+  let index = Math.max(0,Math.min(count-1,Number(carousel.dataset.currentGroup)||0)), visualIndex = index, timer, finishTimer, busy = false;
+  let userPaused = reducedMotion.matches || editorPreview || carousel.dataset.autoplay==='false', hovered = false, focused = false, visible = false;
   const canRun = () => !userPaused && !hovered && !focused && visible && !document.hidden;
   function schedule() {
     clearTimeout(timer);
@@ -281,6 +281,7 @@ function bindCarousel(carousel) {
     track.style.transform = `translate3d(${-visualIndex * step}px, 0, 0)`;
   }
   function showState() {
+    carousel.dataset.currentGroup=String(index);
     dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === index)));
     slides.forEach((slide, i) => {
       const active = i === index && i < count;
@@ -344,7 +345,7 @@ function bindCarousel(carousel) {
   viewport.addEventListener('click', e => {if(suppressTap){e.preventDefault();e.stopPropagation();suppressTap=false;}}, {...eventOptions,capture:true});
   viewport.addEventListener('touchcancel', () => {start=null;schedule();}, eventOptions);
   activeCleanups.push(() => {events.abort();clearTimeout(timer);clearTimeout(finishTimer);visibilityObserver.disconnect();resizeObserver.disconnect();});
-  showState();
+  showState();position();
 }
 
 async function fetchJSON(path) {
@@ -454,6 +455,17 @@ function renderPhotoText(section,ctx,path,legacyPhoto) {
   return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="section-row layout-${position} ${only?'photo-only':''}" style="--photo-columns:${position==='right'?`minmax(0,${number(section.textWidth,44,10,90)}fr) minmax(0,${number(section.imageWidth,56,10,90)}fr)`:`minmax(0,${number(section.imageWidth,56,10,90)}fr) minmax(0,${number(section.textWidth,44,10,90)}fr)`};--content-gap:${number(section.gap,46,0,100)}px;--text-size:${{small:16,normal:18,large:22}[section.textSize]||18}px;align-items:${choice(section.alignment,['start','center','end'],'center')}"><div class="photo-pane">${photoFrame(src,photo.alt||heading||ctx.info.title,style,{fit:'contain',path})}</div>${only?'':`<div class="section-copy" style="text-align:${choice(section.textAlign,['left','center','right'],'left')}">${textElement('h2','',heading)}${textElement('p','',text)}</div>`}</div></section>`;
 }
 
+function renderMediaCarousel(section,ctx,sectionPath){
+  const items=list(section.items),perSlide=Math.min(smallScreen.matches?1:3,items.length);
+  if(!items.length)return editorPreview?`<section class="wrap content-section"><p>Add photos or videos in More controls.</p></section>`:'';
+  const groups=Array.from({length:Math.ceil(items.length/perSlide)},(_,group)=>items.slice(group*perSlide,(group+1)*perSlide).map((item,offset)=>{
+    const i=group*perSlide+offset,path=`${sectionPath}.items.${i}.imageStyle`;
+    const frame=item.type==='video'?renderVideo(item.src,item.poster,item.imageStyle||{},path,'carousel-video'):photoFrame(item.src,item.alt||'Carousel media '+(i+1),item.imageStyle||{},{fit:'cover',path});
+    return `<div class="carousel-media-item">${frame}</div>`;
+  }).join(''));
+  return `<section class="wrap content-section media-carousel-section"><div class="section-heading">${textElement('h2','',section.heading)}</div><div class="project-carousel media-carousel" style="--cards-per-slide:${perSlide}" role="region" aria-roledescription="carousel" aria-label="${esc(section.heading||'Photo and video carousel')}" data-groups="${groups.length}" data-seconds="${number(section.seconds,3,1,30)}" data-autoplay="${section.autoplay!==false}"><div class="carousel-viewport"><div class="carousel-track">${groups.map((html,i)=>`<div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="${i+1} of ${groups.length}" ${i?'inert aria-hidden="true"':'aria-hidden="false"'}>${html}</div>`).join('')}${groups.length>1?`<div class="carousel-slide carousel-clone" inert aria-hidden="true">${groups[0]}</div>`:''}</div></div>${groups.length>1?`<div class="carousel-controls"><div class="carousel-dots">${groups.map((_,i)=>`<button type="button" class="carousel-dot" data-page="${i}" aria-label="Show group ${i+1}" aria-current="${i===0}"></button>`).join('')}</div><div class="carousel-actions"><span class="carousel-status" aria-live="off">1 / ${groups.length}</span><button type="button" class="carousel-arrow" data-direction="-1" aria-label="Previous media">${esc(settings.carousel.previous)}</button><button type="button" class="carousel-arrow" data-direction="1" aria-label="Next media">${esc(settings.carousel.next)}</button><button type="button" class="carousel-pause" aria-label="Pause gallery slideshow">${esc(settings.carousel.pause)}</button></div></div>`:''}</div></section>`;
+}
+
 function renderMediaPair(section,ctx,sectionPath) {
   const items=list(section.items).slice(0,3);
   if(!items.length)return '';
@@ -520,6 +532,7 @@ function renderSection(section,ctx,index) {
     case 'projectEnd':html=`<div class="project-end">${textElement('span','',settings.project.endText)}${settings.project.galleryButton?`<a class="pill" href="${galleryURL}">${esc(settings.project.galleryButton)}</a>`:''}</div>`;break;
     case 'photoText':html=renderPhotoText(section,ctx,`${sectionPath}.imageStyle`);break;
     case 'mediaPair':html=renderMediaPair(section,ctx,sectionPath);break;
+    case 'mediaCarousel':html=renderMediaCarousel(section,ctx,sectionPath);break;
     case 'text':case 'heading':html=`<section class="content-section text-section ${info.kind==='project'?'':'wrap'}" style="text-align:${choice(section.textAlign,['left','center','right'],'left')};--text-size:${{small:16,normal:18,large:22}[section.textSize]||18}px">${textElement(choice(section.headingLevel,['h1','h2','h3'],'h2'),'',section.heading)}${textElement('p','',section.text)}</section>`;break;
     case 'videoText':html=renderVideoText(section,ctx,sectionPath);break;
     case 'video':html=`<section class="content-section ${info.kind==='project'?'':'wrap'}">${textElement('h2','',section.heading)}${renderVideo(section.video,section.poster,{...section.imageStyle,caption:section.caption,showCaption:section.showCaption,loop:section.loop,muted:section.muted},`${sectionPath}.imageStyle`)}${textElement('p','',section.text)}</section>`;break;
@@ -621,6 +634,7 @@ function bindImageLightbox() {
 
 function cleanupActive() {activeCleanups.forEach(fn=>fn());activeCleanups=[];}
 function displayPortfolio(input,key) {
+  const carouselState=new Map(editorPreview&&key===currentPageKey?[...document.querySelectorAll('.media-carousel')].map(node=>[node.closest('[data-section-id]')?.dataset.sectionId,node.dataset.currentGroup||'0']):[]);
   cleanupActive();
   document.documentElement.style.setProperty('--viewport-width', document.documentElement.clientWidth+'px');
   currentData=Model.upgrade(input);currentPageKey=key;
@@ -645,7 +659,7 @@ function displayPortfolio(input,key) {
   if(info&&window.PortfolioObjects){const objects=window.PortfolioObjects.mount({data,key,settings,model:Model,editing:editorPreview});activeCleanups.push(()=>objects.destroy());}
   bindPreviews();
   bindImageLightbox();
-  document.querySelectorAll('.project-carousel').forEach(bindCarousel);
+  document.querySelectorAll('.project-carousel').forEach(node=>{const saved=carouselState.get(node.closest('[data-section-id]')?.dataset.sectionId);if(saved!=null)node.dataset.currentGroup=saved;bindCarousel(node);});
   if(editorPreview)decoratePreview();
 }
 function routeKey() {
@@ -708,3 +722,4 @@ if(app&&editorPreview) {
 }
 window.PortfolioDefaults=DEFAULT_SETTINGS;
 if(app&&!editorPreview)boot();
+

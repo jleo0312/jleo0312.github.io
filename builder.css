@@ -230,3 +230,15 @@
 }
 
 body.lightbox-open{overflow:hidden}
+
+
+/* Uploaded media uses the homepage slideshow layout without cropping captions. */
+.media-carousel-section .section-heading:empty{display:none}
+.media-carousel .carousel-media-item{min-width:0}
+.media-carousel .image-frame{width:100%;max-width:100%}
+.media-carousel .image-box{aspect-ratio:1/1;background:#f0f0f3;border-radius:14px}
+.media-carousel .image-box>img{width:100%;height:100%;object-fit:cover}
+.media-carousel .image-custom .image-box{aspect-ratio:var(--image-ratio,1/1)}
+.media-carousel .image-custom .image-box>img{object-fit:var(--image-fit,cover)}
+.media-carousel .carousel-video{width:100%;aspect-ratio:1/1;object-fit:contain}
+@media(max-width:650px){.media-carousel .carousel-slide{grid-template-columns:minmax(0,1fr)}}

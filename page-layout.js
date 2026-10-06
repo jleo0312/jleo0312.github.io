@@ -54,6 +54,7 @@ function collect({data,key,settings,model,editing=false}){
     const text=field(root,'.section-copy p',path+'.text','Click to write beside this photo',{parent:copy,optional:true});if(text&&photo?.text==null&&photo?.caption){text.textContent=photo.caption;text.dataset.empty='false';}
     break;
    }
+   case 'mediaCarousel':field(root,'.section-heading h2',base+'.heading','Carousel heading',{parent:root.querySelector('.section-heading'),tag:'h2',prepend:true});break;
    case 'mediaPair':field(root,'.pair-caption',base+'.text','Media row text',{parent:root.querySelector('.content-section'),className:'pair-caption',optional:true});break;
    case 'videoText':field(root,'.video-text-copy p',base+'.text','Video description',{parent:root.querySelector('.video-text-copy'),optional:true});break;
    case 'text':case 'heading':{
@@ -109,7 +110,7 @@ function mount(options){
  function describe(node,path,kind){
   const section=node.closest('[data-section-id]'),id=section?.dataset.sectionId||'',index=values.findIndex(s=>s.id===id),shell=node.closest('header')?'header':'footer';
   const layoutPath=index>=0?sectionBase(index)+'.elements':`website.elementLayouts.${shell}`;
-  const scope=(kind==='text'&&node.closest('[data-object-image]'))||node.closest('.hobby-card,.project-card')||node.closest('.hero-with-photo,.about-grid,.section-row,.text-section,.gallery-intro,.gallery-meta,.project-end,.nav,.footer-inner')||section||node.parentElement;
+  const scope=(kind==='text'&&node.closest('[data-object-image]'))||node.closest('.hobby-card,.project-card,.carousel-media-item')||node.closest('.hero-with-photo,.about-grid,.section-row,.text-section,.gallery-intro,.gallery-meta,.project-end,.nav,.footer-inner')||section||node.parentElement;
   const entry={node,path,kind,sectionId:id,layoutPath,id:kind+':'+stableKey(data,path),scope,root:section||node.closest('header,footer')||scope};
   entry.node.dataset.objectKind=kind;entries.push(entry);byNode.set(node,entry);return entry;
  }
@@ -167,3 +168,4 @@ function mount(options){
 }
 window.PortfolioObjects={mount,stableKey,clean,current:null};
 })();
+
