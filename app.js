@@ -539,7 +539,7 @@ function renderSection(section,ctx,index) {
     case 'spacer':html=`<div style="height:${number(section.height,40,0,200)}px"></div>`;break;
   }
   const customLayout=section.imagePosition&&['hero','about'].includes(section.type);
-  const css=`${section.spacingTop!=null?`padding-top:${number(section.spacingTop,0,0,200)}px;`:''}${section.spacingBottom!=null?`padding-bottom:${number(section.spacingBottom,0,0,200)}px;`:''}--section-gap:${number(section.gap,48,0,100)}px;--layout-columns:${section.imagePosition==='right'?`minmax(0,${number(section.textWidth,55,10,90)}fr) minmax(0,${number(section.imageWidth,45,10,90)}fr)`:`minmax(0,${number(section.imageWidth,45,10,90)}fr) minmax(0,${number(section.textWidth,55,10,90)}fr)`};${section.textAlign?`text-align:${choice(section.textAlign,['left','center','right'],'left')};`:``}${section.textSize?`--section-text-size:${{small:16,normal:18,large:22}[section.textSize]||18}px;`:``}`;
+  const css=`${section.spacingTop!=null?`padding-top:${number(section.spacingTop,0,0,200)}px;`:''}${section.spacingBottom!=null?`padding-bottom:${number(section.spacingBottom,0,0,200)}px;`:''}--section-gap:${number(section.gap,48,0,100)}px;--section-text-align:${choice(section.textAlign,['left','center','right'],'left')};--layout-columns:${section.imagePosition==='right'?`minmax(0,${number(section.textWidth,55,10,90)}fr) minmax(0,${number(section.imageWidth,45,10,90)}fr)`:`minmax(0,${number(section.imageWidth,45,10,90)}fr) minmax(0,${number(section.textWidth,55,10,90)}fr)`};${section.textAlign?`text-align:${choice(section.textAlign,['left','center','right'],'left')};`:``}${section.textSize?`--section-text-size:${{small:16,normal:18,large:22}[section.textSize]||18}px;`:``}`;
   return `<div class="builder-section section-${esc(section.type)} section-width-${choice(section.contentWidth,['default','narrow','wide','full'],'default')} ${customLayout?'builder-layout builder-position-'+choice(section.imagePosition,['left','right','above','below'],'left'):''}" data-section-id="${esc(section.id)}"${panel.attributes} style="${css}${panel.css}">${html}</div>`;
 }
 function renderStructured(data,key) {
@@ -759,3 +759,4 @@ if(app&&editorPreview) {
 }
 window.PortfolioDefaults=DEFAULT_SETTINGS;
 if(app&&!editorPreview)boot();
+

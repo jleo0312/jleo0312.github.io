@@ -126,11 +126,15 @@ function mount(options){
  }
  function refresh(){
   if(busy)return;busy=true;restore();
-  if(!active()){busy=false;return;}
   const placed=[];
   for(const entry of entries){
-   const saved=record(entry);if(!saved)continue;const r=clean(saved),scope=scopeFor(entry,r).getBoundingClientRect();if(scope.width<1)continue;
-   const node=entry.node;originals.set(node,node.getAttribute('style'));node.classList.add('portfolio-positioned');
+   const saved=record(entry);if(!saved)continue;const r=clean(saved),node=entry.node;
+   originals.set(node,node.getAttribute('style'));
+   // Keep chosen text alignment on mobile too; only free positioning stacks away.
+   if(r.align&&entry.kind==='text')node.style.setProperty('text-align',r.align,'important');
+   if(!active())continue;
+   const scope=scopeFor(entry,r).getBoundingClientRect();if(scope.width<1)continue;
+   node.classList.add('portfolio-positioned');
    node.style.setProperty('--object-width',scope.width*r.width/100+'px');node.style.setProperty('--object-x','0px');node.style.setProperty('--object-y','0px');
    if(r.fontSize&&entry.kind==='text')node.style.fontSize=r.fontSize+'px';
    if(r.align)node.style.setProperty('--object-align',r.align);

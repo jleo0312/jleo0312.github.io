@@ -318,7 +318,7 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   max-width:900px;
   margin-left:auto;
   margin-right:auto;
-  text-align:left!important;
+  text-align:var(--section-text-align,left)!important;
 }
 .builder-section .pair-caption{
   margin-top:28px!important;
@@ -328,7 +328,7 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
 .builder-section.section-text .text-section p,
 .builder-section.section-video > .content-section > p{
   color:#3f3f43;
-  text-align:left!important;
+  text-align:var(--section-text-align,left)!important;
 }
 @media(max-width:700px){
   .builder-section .section-copy,
@@ -438,3 +438,4 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   font-size:14px;
   line-height:1.5;
 }
+

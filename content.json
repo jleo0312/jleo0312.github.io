@@ -1805,26 +1805,9 @@
           "contentWidth": "default",
           "spacingTop": 72,
           "spacingBottom": 24,
-          "textAlign": "left",
+          "textAlign": "center",
           "textSize": "normal",
-          "elements": [
-            {
-              "id": "text:pageLayouts/gallery/sections/more-projects/heading",
-              "x": 3.9846743506918783,
-              "y": 0,
-              "width": 88.19923382686001,
-              "height": 32.48579406738281,
-              "align": "center"
-            },
-            {
-              "id": "text:pageLayouts/gallery/sections/more-projects/text",
-              "x": 36.934866344140374,
-              "y": 3.4123559245272848,
-              "width": 22.298849196872293,
-              "height": 24,
-              "align": "center"
-            }
-          ]
+          "elements": []
         },
         {
           "id": "section-1de4cbd6-e65e-4daf-850d-f9a0fa15a2d4",
