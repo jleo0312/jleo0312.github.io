@@ -246,3 +246,4 @@ body.lightbox-open{overflow:hidden}
 .media-carousel .image-custom .image-box>img{object-fit:var(--image-fit,cover)}
 .media-carousel .carousel-video{width:100%;aspect-ratio:1/1;object-fit:contain}
 @media(max-width:650px){.media-carousel .carousel-slide{grid-template-columns:minmax(0,1fr)}}
+.media-pair.media-count-1{grid-template-columns:minmax(0,1fr)}

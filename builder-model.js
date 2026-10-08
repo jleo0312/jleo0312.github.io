@@ -27,6 +27,7 @@
     for(const target of [...Object.values(data.pageLayouts||{}),...data.projects,...(data.pages||[])]) {
       if(Array.isArray(target.sections))target.sections.forEach((section,i)=>{section.id ||= 'saved-section-'+i+'-'+hash(JSON.stringify(section));section.type ||= 'photoText';if(Array.isArray(section.textBoxes))section.textBoxes.forEach((box,j)=>{box.id ||= 'text-'+j+'-'+hash(box.text||'');});});
     }
+    ensureFutureGallery(data);
     return data;
   }
   function pageInfo(data,key) {
@@ -73,7 +74,7 @@
   function makeCarouselItem(){return {id:id(),type:'image',src:'',alt:'',imageStyle:{fit:'cover',aspect:'square'}};}
   function makeSection(type='photoText') {
     if(type==='mediaCarousel')return {id:id(),type,visible:true,heading:'Photo / video carousel',autoplay:true,seconds:3,items:Array.from({length:6},makeCarouselItem)};
-    if(['mediaPair','mediaPair2','mediaPair3'].includes(type))return {id:id(),type:'mediaPair',visible:true,items:Array.from({length:type==='mediaPair3'?3:2},()=>({type:'image',src:'',alt:'',imageStyle:{fit:'cover',aspect:'square'}})),text:''};
+    if(['mediaPair','mediaPair2','mediaPair3'].includes(type))return {id:id(),type:'mediaPair',visible:true,items:Array.from({length:type==='mediaPair3'?3:2},makeCarouselItem),text:''};
     return {id:id(),type,visible:true,...(type==='photoText'?{image:'',heading:'',text:'',caption:'',showCaption:true,imagePosition:'left',imageWidth:56,textWidth:44}:type==='heading'?{heading:'New heading'}:type==='text'?{text:''}:type==='video'?{video:'',caption:'',showCaption:true}:{})};
   }
   function photoSource(data,key,section) {const project=pageInfo(data,key)?.project; return project?.photos?.find(p=>p.id===section.sourceId);}
@@ -94,6 +95,7 @@
     return [{type:video?'video':'image',src:(video?section.video:section.image)||'',alt:section.alt||'',imageStyle:style,...(video?{poster:section.poster||'',gifLike:section.gifLike===true}:{})}];
   }
   function hasMedia(item) {return !!(item.src||item.poster||item.imageStyle?.poster||item.imageStyle?.previewVideo||item.imageStyle?.caption||item.alt);}
+  function hasAttachedMedia(item) {return !!(item.src||item.poster||item.imageStyle?.poster||item.imageStyle?.previewVideo);}
   function singleMedia(item,sectionId=id()) {
     const video=item.type==='video',style=clone(item.imageStyle||{});
     return {id:sectionId,type:video?'videoText':'photoText',visible:true,heading:'',text:'',alt:item.alt||'',imageStyle:style,caption:style.caption||'',showCaption:style.showCaption!==false,...(video?{video:item.src||'',poster:item.poster||'',gifLike:item.gifLike===true,videoPosition:'left'}:{image:item.src||'',imagePosition:'left',imageWidth:56,textWidth:44})};
@@ -101,7 +103,9 @@
   function layoutPlan(section,target) {
     if(!layoutOptions(section).some(([value])=>value===target))throw new Error('Choose a compatible section layout.');
     let media=sectionMedia(section);const slots=target==='mediaCarousel'?Math.max(6,media.length):target==='mediaPair3'?3:target==='mediaPair2'?2:target==='photoText'?1:0;
-    if(media.length>slots)media=media.filter(hasMedia);
+    // Empty cards can still have captions or alt text. Keep real media first
+    // when shrinking, so an empty middle card cannot displace a later photo.
+    if(media.length>slots)media=[...media.filter(hasAttachedMedia),...media.filter(item=>!hasAttachedMedia(item)&&hasMedia(item))];
     const overflow=media.slice(slots).filter(hasMedia),occupied=media.filter(hasMedia);
     const photos=occupied.every(item=>item.type!=='video'&&!item.imageStyle?.previewVideo);
     return {slots,media,overflow,count:occupied.length,kind:photos?'photo':'media item'};
@@ -129,6 +133,66 @@
     }else changed={...common,type:target};
     values.splice(index,1,changed,...plan.overflow.map(item=>({...singleMedia(item),visible:original.visible,contentWidth:original.contentWidth,panelStyle:original.panelStyle?clone(original.panelStyle):undefined})));
     return changed;
+  }
+  function projectPlacement(project) {return project.gallerySection==='future'?'future':'main';}
+  function galleryProjects(data,placement='main') {return data.projects.filter(project=>project.showInGallery!==false&&projectPlacement(project)===placement);}
+  function futureHeading(section) {return section.projectSection==='future'||['more-projects','future-projects'].includes(section.id)||/^(more|future)\s+projects$/i.test(String(section.heading||'').trim());}
+  function legacyProjectEntries(data) {
+    const result=[];let future=false;
+    for(const section of sections(data,'gallery')) {
+      if(futureHeading(section)){future=true;continue;}
+      if(['heading','galleryIntro'].includes(section.type)||section.type==='text'&&section.heading)future=false;
+      if(!future||!['mediaPair','mediaCarousel','photoText','video','videoText'].includes(section.type))continue;
+      const items=sectionMedia(section),seen=new Map();
+      items.forEach((item,index)=>{
+        if(!hasMedia(item))return;
+        const title=String(item.imageStyle?.caption||item.alt||section.heading||'Untitled project').trim().split('\n')[0];
+        const identity=item.id||hash(JSON.stringify(item)),occurrence=seen.get(identity)||0;seen.set(identity,occurrence+1);
+        result.push({id:'media:'+section.id+':'+identity+':'+occurrence,kind:'media',title,placement:'future',sectionId:section.id,itemIndex:index,visible:section.visible!==false,thumbnail:item.type==='video'?item.poster||item.imageStyle?.poster||'':item.src||item.imageStyle?.poster||'',item});
+      });
+    }
+    return result;
+  }
+  function projectEntries(data) {
+    return [...data.projects.map(project=>({id:'project:'+project.slug,kind:'project',title:project.title,slug:project.slug,placement:projectPlacement(project),visible:project.showInGallery!==false,thumbnail:project.thumbnail||'',project})),...legacyProjectEntries(data)];
+  }
+  function ensureFutureGallery(data) {
+    if(!data.projects.some(project=>projectPlacement(project)==='future'))return;
+    const values=sections(data,'gallery',true);
+    if(values.some(section=>section.type==='galleryGrid'&&section.projectSection==='future'))return;
+    let heading=values.findIndex(futureHeading);
+    if(heading<0){heading=values.length;values.push({id:id(),type:'heading',projectSection:'future',heading:'Future Projects',visible:true,textAlign:'center',spacingTop:72,spacingBottom:24});}
+    let end=heading+1;
+    while(end<values.length&&!(['heading','galleryIntro'].includes(values[end].type)||values[end].type==='text'&&values[end].heading))end++;
+    values.splice(end,0,{id:id(),type:'galleryGrid',projectSection:'future',visible:true});
+  }
+  function setProjectPlacement(data,entryId,placement) {
+    if(!['main','future'].includes(placement))throw new Error('Choose Main gallery or Future projects.');
+    const entry=projectEntries(data).find(value=>value.id===entryId);
+    if(!entry)throw new Error('This project is no longer available.');
+    let project=entry.project;
+    if(!project){
+      // Convert an old standalone gallery card only when it is moved.
+      // Its complete media record also lives on its new project page.
+      const item=clone(entry.item),stem=entry.title.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'project';
+      let slug=stem,suffix=2;while(data.projects.some(value=>value.slug===slug))slug=stem+'-'+suffix++;
+      const style=clone(item.imageStyle||{}),video=item.type==='video';
+      project={title:entry.title,slug,gallerySection:placement,showInGallery:entry.visible,featuredOnHomepage:false,photos:[],thumbnail:entry.thumbnail,thumbnailAlt:item.alt||entry.title,thumbnailStyle:style,previewVideo:video?item.src||'':style.previewVideo||'',thumbnailMotion:video?(item.gifLike?'loop':'controls'):style.previewBehavior||'hover',previewStyle:clone(style.previewStyle||{}),useSections:true,sections:[{id:id(),type:'projectIntro',visible:true},{id:id(),type:'mediaPair',visible:true,items:[item],text:''},{id:id(),type:'projectEnd',visible:true}]};
+      data.projects.push(project);
+      const values=sections(data,'gallery',true),section=values.find(value=>value.id===entry.sectionId);
+      if(Array.isArray(section.items)){
+        section.items.splice(entry.itemIndex,1);
+        // Re-indexed cards get the preset layout; retain free text-box placement.
+        section.elements=(section.elements||[]).filter(element=>element.id.includes('/textBoxes/'));
+        if(!section.items.length){section.type='text';delete section.items;}
+      }else{
+        for(const name of ['image','video','poster','alt','imageStyle','caption','showCaption','gifLike','loop','muted'])delete section[name];
+        section.type='text';
+        section.elements=(section.elements||[]).filter(element=>element.id.includes('/textBoxes/'));
+      }
+    }
+    project.gallerySection=placement;ensureFutureGallery(data);
+    return project;
   }
   // Every media slot keeps its original source field; optional previews live with its image style.
   function mediaPaths(data,path) {
@@ -162,5 +226,5 @@
     for(const info of pages(data)){const used=new Set();for(const section of sections(data,info.key)){if(!types[section.type])throw new Error('Unknown section type on '+info.title);if(used.has(section.id))throw new Error('Duplicate section on '+info.title);used.add(section.id);}}
     return true;
   }
-  root.PortfolioModel={clone,id,types,makeCarouselItem,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,mediaPaths,deleteSection,duplicateSection,reorder,validate};
+  root.PortfolioModel={clone,id,types,makeCarouselItem,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,projectPlacement,galleryProjects,projectEntries,ensureFutureGallery,setProjectPlacement,mediaPaths,deleteSection,duplicateSection,reorder,validate};
 })(typeof window==='undefined'?globalThis:window);

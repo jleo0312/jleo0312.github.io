@@ -339,18 +339,29 @@ content:
       label: Project title
       type: string
       required: true
+    - name: gallerySection
+      label: Gallery section
+      type: select
+      default: main
+      description: Choose where the project card appears. Future projects use the second gallery section. Existing projects default to Main gallery.
+      options:
+        values:
+        - name: main
+          label: Main gallery
+        - name: future
+          label: Future projects
     - name: showInGallery
-      label: Show in gallery
+      label: Show project card
       type: boolean
       default: true
-      description: Turn on to include this project in the gallery. Turning it off also removes it from homepage
+      description: Turn on to include this project in its chosen gallery section. Turning it off also removes it from homepage
         highlights; its direct project link still works.
     - name: featuredOnHomepage
       label: Feature on homepage
       type: boolean
       default: true
-      description: Turn on for projects you want in the homepage highlights. Choose up to nine. Show in gallery
-        must also be on. Turn off for gallery-only projects.
+      description: Turn on for Main gallery projects you want in the homepage highlights. Choose up to nine.
+        Show project card must also be on. Future projects remain in their gallery section.
     - name: homepageOrder
       label: Homepage highlight order
       type: select
@@ -797,6 +808,10 @@ components:
         - name: projectEnd
           label: Project footer
       default: photoText
+    - name: projectSection
+      label: Gallery project list
+      type: string
+      hidden: true
     - name: visible
       label: Show this section
       type: boolean

@@ -154,9 +154,8 @@ function card(project, index) {
   return `<article class="project-card" data-project="${esc(project.slug)}"><a class="project-link" href="/?project=${encodeURIComponent(project.slug)}"><div class="thumbnail" data-fit="${project.thumbnailFit === 'contain' ? 'contain' : 'cover'}">${gifPreview && !editorPreview ? `<img class="preview-gif" src="${media(project.previewVideo)}" alt="${esc(project.thumbnailAlt || project.title)}" loading="lazy">` : cover(project)}${preview}</div><div class="card-heading"><h3>${esc(project.title)}</h3>${number}</div></a></article>`;
 }
 
-function galleryProjects(data) {
-  // Existing projects stay visible until their gallery switch is turned off.
-  return data.projects.filter(project => project.showInGallery !== false);
+function galleryProjects(data,placement='main') {
+  return Model.galleryProjects(data,placement);
 }
 
 function highlightPosition(value) {
@@ -524,7 +523,7 @@ function renderSection(section,ctx,index) {
     case 'hobbies':html=renderHobbies(data);break;
     case 'highlights':html=renderCarousel(data);break;
     case 'galleryIntro':html=`<div class="wrap gallery-intro">${textElement('p','eyebrow',settings.gallery.eyebrow)}${textElement('h1','',settings.gallery.headline)}${textElement('p','page-subtitle',settings.gallery.subtitle)}</div>`;break;
-    case 'galleryGrid': {const projects=galleryProjects(data);html=`<section class="wrap gallery-list"><div class="project-grid">${projects.map(card).join('')}</div></section>`;break;}
+    case 'galleryGrid': {const projects=galleryProjects(data,section.projectSection==='future'?'future':'main');if(!projects.length&&!editorPreview)return '';html=`<section class="wrap gallery-list" data-project-section="${section.projectSection==='future'?'future':'main'}"><div class="project-grid">${projects.map(card).join('')}</div></section>`;break;}
     case 'projectIntro':if(project)html=projectIntro(project);break;
     case 'projectVideo':if(project)html=projectVideo(project,data);break;
     case 'projectPhoto': {const photo=Model.photoSource(data,info.key,section);if(photo)html=renderPhotoText(section,ctx,`projects.${data.projects.indexOf(project)}.photos.${project.photos.indexOf(photo)}.imageStyle`,photo);break;}

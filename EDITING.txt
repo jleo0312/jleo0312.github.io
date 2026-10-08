@@ -35,4 +35,10 @@ Click Save in Pages CMS to publish content changes. No code editing is needed. W
 The website does not include editor controls for visitors.
 
 NEW PROJECTS
-Add a project in the Projects list. Give it a unique Project address, using lowercase letters, numbers and dashes. Links use /?project=your-address, so new projects do not require creating folders.
+In https://jleo0312.github.io/editor/, click Projects · choose gallery section to see every project, including existing cards under More Projects. Choose Main gallery or Future projects beside a title. Click the title to edit that project. Use Publish to save your placement changes.
+Click + New project to create a project and choose its gallery section. New projects initially select Future projects. Give each one a unique Project address, using lowercase letters, numbers and dashes. Links use /?project=your-address, so new projects do not require creating folders.
+Pages CMS also has a Gallery section field for every project. Existing projects without a section choice appear in Main gallery. Future projects appear under More Projects, or under a Future Projects heading if the gallery has no second heading yet.
+Homepage highlights use visible Main gallery projects with Feature on homepage turned on.
+
+CHANGE MEDIA ROW LAYOUTS
+Use Layout… on a media row to choose Triple media + text, Double media + text, or Photo and text. When shrinking a row, cards with attached photos, videos, GIFs, or video previews stay together ahead of empty cards with leftover captions. Extra media moves to new sections directly below, preserving its captions and crop settings. Undo restores the previous layout.
