@@ -207,7 +207,7 @@ function restoreSaved(record){
  draftSavedTime=Number(record.time)||0;updateUndo();updateDraftStatus();
 }
 function renderHistory(){
- $('#history-summary').textContent=history.length?history.length+' previous '+(history.length===1?'edit':'edits')+' · '+future.length+' redo '+(future.length===1?'step':'steps'):'Your previous edits will appear here as you work.';
+ $('#history-summary').textContent=history.length||future.length?history.length+' previous '+(history.length===1?'edit':'edits')+' · '+future.length+' redo '+(future.length===1?'step':'steps'):'Your previous edits will appear here as you work.';
  $('#history-list').innerHTML=history.map((record,index)=>({record,index})).reverse().map(({record,index})=>'<div class="draft-history-row"><div><strong>'+escape(record.label||'Earlier edit')+'</strong><span>'+escape(record.time?new Date(record.time).toLocaleString():'Saved earlier')+'</span></div><button type="button" data-restore-edit="'+index+'">Restore this edit</button></div>').join('');
 }
 $('#open-history').onclick=()=>{if(!data)return;renderHistory();$('#history-dialog').showModal();};
