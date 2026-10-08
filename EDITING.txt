@@ -42,3 +42,12 @@ Homepage highlights use visible Main gallery projects with Feature on homepage t
 
 CHANGE MEDIA ROW LAYOUTS
 Use Layout… on a media row to choose Triple media + text, Double media + text, or Photo and text. When shrinking a row, cards with attached photos, videos, GIFs, or video previews stay together ahead of empty cards with leftover captions. Extra media moves to new sections directly below, preserving its captions and crop settings. Undo restores the previous layout.
+
+
+AUTOMATIC DRAFTS AND PREVIOUS EDITS
+The visual editor saves your draft automatically in this browser on this device, including uploaded photos and videos, the last 200 edits, and your Undo/Redo steps. Check the Draft saved indicator, then close the tab. Reopen /editor/ in the same browser to continue automatically. Nothing on the published website changes until you click Publish.
+Use Undo or Redo to step through saved edits, even after reopening the editor. Previous edits also lets you restore a specific earlier version of your draft; restoring can itself be undone.
+An unpublished draft does not trigger a close-tab warning once it has saved. If browser storage fails or the latest edit is still saving, the editor tells you and protects unsaved work when closing.
+If the website changes in Pages CMS or another editor, your saved draft is kept and the editor asks which version to continue. Use latest website keeps the earlier draft in Previous edits. Continue saved draft keeps your work and uses the latest website as the baseline for a future Publish.
+Two editor tabs cannot silently overwrite the same saved draft. If another tab saves newer work, download any changes you need from the older tab and reload it.
+Drafts are local to this browser, not synced between devices. Clearing this website's browser data removes local drafts and edit history. Download changes keeps a backup of your content and uploaded media.
