@@ -66,3 +66,8 @@ html{overflow-anchor:none}
 .canvas-gap-guide-y:before,.canvas-gap-guide-y:after{left:-3px;width:7px;height:1px}
 .canvas-gap-guide-y:before{top:0}.canvas-gap-guide-y:after{bottom:0}
 .canvas-gap-label{position:fixed;z-index:2147483646;pointer-events:none;padding:3px 6px;border-radius:5px;background:#d62976;color:#fff;font:600 11px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 1px 4px #0002}
+
+
+.canvas-media-mode [data-canvas-image]{cursor:grab;outline:1px dashed #9abbdb;outline-offset:3px}
+.canvas-media-mode [data-canvas-image] img{pointer-events:none}
+.canvas-media-drop{outline:3px solid #1670c7!important;outline-offset:3px;background:#edf5ff!important}

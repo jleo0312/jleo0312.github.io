@@ -9,7 +9,7 @@ function mount({data,key,settings,model,send}){
  active?.destroy();
  const objects=window.PortfolioObjects.current,{values,images,textNodes}=objects;
  const events=new AbortController(),on=(node,name,fn,options={})=>node?.addEventListener(name,fn,{...options,signal:events.signal});
- let selectedId='',selectedImage='',selectedText='',picked=null,gesture=null,editing=null,frame=0,cropping=false,suppressClick=false,previewMedia=null;
+ let selectedId='',selectedImage='',selectedText='',picked=null,gesture=null,editing=null,frame=0,cropping=false,suppressClick=false,previewMedia=null,mediaMode=false;
  const overlay=document.createElement('div');overlay.className='canvas-ui';overlay.contentEditable='false';document.body.append(overlay);
  const toolbar=document.createElement('div');toolbar.className='canvas-toolbar';toolbar.setAttribute('role','toolbar');toolbar.setAttribute('aria-label','Selected object');overlay.append(toolbar);
  const selection=document.createElement('div');selection.className='canvas-image-selection';selection.hidden=true;overlay.append(selection);
@@ -80,6 +80,7 @@ function mount({data,key,settings,model,send}){
  }
  for(const [path,nodes]of textNodes)for(const node of nodes){node.dataset.editPath=path;node.dataset.editLabel=node.dataset.objectLabel;node.contentEditable='false';node.spellcheck=true;node.tabIndex=0;node.setAttribute('role','textbox');node.setAttribute('aria-label',node.dataset.objectLabel);node.setAttribute('aria-multiline',String(node.dataset.singleLine!=='true'));}
  for(const item of images.values()){if(item.preview)continue;item.frame.dataset.canvasImage=item.path;item.frame.querySelectorAll('img,video').forEach(n=>n.draggable=false);}
+ function setMediaMode(open){mediaMode=!!open;document.body.classList.toggle('canvas-media-mode',mediaMode);for(const item of images.values())if(!item.preview)item.frame.draggable=mediaMode;}
  function button(label,action,value='',title=label){const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.canvasAction=action;b.dataset.value=value;b.title=title;b.setAttribute('aria-label',title);return b;}
  function selectControl(label,name,choices,value){const control=document.createElement('select');control.dataset.canvasControl=name;control.setAttribute('aria-label',label);for(const [v,text]of choices)control.add(new Option(text,v));control.value=String(value);return control;}
  function layoutValue(){return picked?objects.record(picked)||objects.capture(picked):null;}
@@ -102,6 +103,7 @@ function mount({data,key,settings,model,send}){
    toolbar.append(widthControl(),button('Reset position','reset-position'),button('Bring forward','front'),button('Send backward','back'));
    if(item){
     const hasPreview=!!read(data,item.videoSrcPath);
+    toolbar.append(button('Return to Media','return-media'));
     toolbar.append(button('Photo / thumbnail','replace'),button(hasPreview?'Replace video':'Add video','preview-video'),button('GIF / animation','animation-video'));
     if(read(data,item.imageSrcPath)??item.fallbackImage)toolbar.append(button('Remove thumbnail','remove-thumbnail'));
     if(read(data,item.imageSrcPath)??item.fallbackImage)toolbar.append(button('↶ Rotate left','rotate-photo','-90','Rotate photo left'),button('↷ Rotate right','rotate-photo','90','Rotate photo right'),button('Reset rotation','rotate-photo','0'));
@@ -206,6 +208,7 @@ function mount({data,key,settings,model,send}){
   if(action==='edit-text'){if(editing)stopText();else startText(picked.node);buildToolbar();}
   else if(action==='reset-position')objectChange(null);
   else if(action==='front'||action==='back')objectChange({layer:clamp((layoutValue()?.layer||1)+(action==='front'?1:-1),0,20)});
+  else if(action==='return-media'){const base=item.preview?images.get(item.basePath):item;if(base){const src=read(data,base.imageSrcPath)||read(data,base.videoSrcPath)||base.fallbackImage;send({action:'media-return',key,path:base.path,src});}}
   else if(action==='replace'){input.accept=item.preview?'video/*,image/gif':'image/*,.heic,.heif';input.dataset.uploadPath=item.preview?item.videoSrcPath:item.imageSrcPath;delete input.dataset.motionPath;delete input.dataset.motion;input.value='';send({action:'upload-start'});input.click();}
   else if(action==='preview-video'||action==='animation-video'){input.accept=action==='animation-video'?'image/gif,video/*':'video/*';input.dataset.uploadPath=item.videoSrcPath;input.dataset.motionPath=item.motionPath;input.dataset.motion=action==='animation-video'?'loop':'controls';input.value='';send({action:'upload-start'});input.click();}
   else if(action==='remove-video')transaction('remove-video',{path:item.videoSrcPath});
@@ -230,14 +233,15 @@ function mount({data,key,settings,model,send}){
   if(overlay.contains(event.target)||event.target.closest('.carousel-controls,.preview-play'))return;
   const text=event.target.closest('[data-edit-path]');if(text&&text===editing)return;
   const image=event.target.closest('[data-canvas-image]'),node=text||image,entry=node&&objects.byNode.get(node);
-  if(entry){announce(entry);if(image&&!text&&cropping)beginLegacy(event,'crop');else beginObject(event,'move');}
+  if(entry){announce(entry);if(image&&!text&&mediaMode)return;if(image&&!text&&cropping)beginLegacy(event,'crop');else beginObject(event,'move');}
   else{const root=event.target.closest('[data-section-id]');if(root){stopText();select(root.dataset.sectionId);send({action:'select',id:selectedId,imagePath:'',textPath:''});}else stopText();}
  });
  on(document,'click',event=>{if(overlay.contains(event.target))return;if(event.target.closest('a'))event.preventDefault();if(suppressClick||editing||gesture)return;const node=event.target.closest('[data-edit-path],[data-canvas-image]');if(node&&objects.byNode.has(node))announce(objects.byNode.get(node));});
  on(document,'dblclick',event=>{const node=event.target.closest('[data-edit-path]');if(node){event.preventDefault();finishGesture();startText(node);}});
- on(document,'dragstart',event=>{if(event.target.closest('[data-edit-path],[data-canvas-image]'))event.preventDefault();});
- on(document,'dragover',event=>{if(event.dataTransfer?.types?.includes('Files'))event.preventDefault();});
- on(document,'drop',event=>{const node=event.target.closest('[data-canvas-image]'),file=event.dataTransfer?.files[0];if(node&&file){event.preventDefault();const item=images.get(node.dataset.canvasImage),gif=file.type==='image/gif'||/\.gif$/i.test(file.name),video=gif||file.type.startsWith('video/')||/\.(mp4|mov|webm|m4v|ogv)$/i.test(file.name);send({action:'replace-file',id:item.sectionId,path:video?item.videoSrcPath:item.imageSrcPath,file,motionPath:video?item.motionPath:'',motion:video?(gif?'loop':'controls'):''});}});
+ on(document,'dragstart',event=>{const node=event.target.closest('[data-canvas-image]');if(mediaMode&&node&&!event.target.closest('[data-edit-path]')){const item=images.get(node.dataset.canvasImage),src=read(data,item.imageSrcPath)||read(data,item.videoSrcPath)||item.fallbackImage;if(src){const payload={origin:'canvas',key,path:item.path,src};event.dataTransfer.setData('application/x-portfolio-media',JSON.stringify(payload));event.dataTransfer.setData('text/plain',src);event.dataTransfer.effectAllowed='move';return;}}if(event.target.closest('[data-edit-path],[data-canvas-image]'))event.preventDefault();});
+ on(document,'dragover',event=>{if(event.dataTransfer?.types?.includes('Files')||event.dataTransfer?.types?.includes('application/x-portfolio-media')){event.preventDefault();const node=event.target.closest('[data-canvas-image]');document.querySelectorAll('.canvas-media-drop').forEach(item=>item.classList.remove('canvas-media-drop'));if(node)node.classList.add('canvas-media-drop');}});
+ on(document,'dragleave',event=>{const node=event.target.closest('[data-canvas-image]');if(node&&!node.contains(event.relatedTarget))node.classList.remove('canvas-media-drop');});
+ on(document,'drop',event=>{document.querySelectorAll('.canvas-media-drop').forEach(item=>item.classList.remove('canvas-media-drop'));const node=event.target.closest('[data-canvas-image]');if(node&&event.dataTransfer?.types?.includes('application/x-portfolio-media')){event.preventDefault();try{const payload=JSON.parse(event.dataTransfer.getData('application/x-portfolio-media')),item=images.get(node.dataset.canvasImage);if(payload.key===key&&payload.origin==='library')send({action:'media-place',key,path:item.path,src:payload.src});}catch{}return;}const file=event.dataTransfer?.files[0];if(node&&file){event.preventDefault();const item=images.get(node.dataset.canvasImage),gif=file.type==='image/gif'||/\.gif$/i.test(file.name),video=gif||file.type.startsWith('video/')||/\.(mp4|mov|webm|m4v|ogv)$/i.test(file.name);send({action:'replace-file',id:item.sectionId,path:video?item.videoSrcPath:item.imageSrcPath,file,motionPath:video?item.motionPath:'',motion:video?(gif?'loop':'controls'):''});}});
  function startText(node){
   if(!node||editing===node)return;stopText();announce(objects.byNode.get(node));editing=node;node.contentEditable='true';node.focus();send({action:'text-start',id:selectedId,path:node.dataset.editPath});
   const range=document.createRange();range.selectNodeContents(node);range.collapse(false);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);buildToolbar();position();
@@ -266,7 +270,8 @@ function mount({data,key,settings,model,send}){
  on(window,'scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(position);},{passive:true});on(window,'resize',queuePosition);
  const observer=new ResizeObserver(position);for(const entry of objects.entries)observer.observe(entry.node);
  document.body.classList.add('editing-preview','direct-editing-preview');
- const api={select,destroy(){events.abort();observer.disconnect();cancelAnimationFrame(frame);previewMedia?.pause?.();previewMedia?.closest('[data-image-style]')?.classList.remove('canvas-preview-crop');overlay.remove();document.body.classList.remove('canvas-dragging');}};active=api;return api;
+ const api={setMediaMode,select,destroy(){events.abort();observer.disconnect();cancelAnimationFrame(frame);previewMedia?.pause?.();previewMedia?.closest('[data-image-style]')?.classList.remove('canvas-preview-crop');overlay.remove();document.body.classList.remove('canvas-dragging');}};active=api;return api;
 }
-window.PortfolioCanvas={mount,select:(...args)=>active?.select(...args),version:'slides-20260927-1'};
+window.PortfolioCanvas={setMediaMode(open){active?.setMediaMode(open);},mount,select:(...args)=>active?.select(...args),version:'slides-20260927-1'};
 })();
+
