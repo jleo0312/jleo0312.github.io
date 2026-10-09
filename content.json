@@ -1645,6 +1645,64 @@
         "caption": "",
         "showCaption": true
       }
+    },
+    {
+      "title": "Fiberglass panel resin infusion",
+      "slug": "fiberglass-panel-resin-infusion",
+      "gallerySection": "future",
+      "showInGallery": true,
+      "featuredOnHomepage": false,
+      "photos": [],
+      "thumbnail": "",
+      "thumbnailAlt": "Fiberglass panel resin infusion",
+      "thumbnailStyle": {
+        "fit": "cover",
+        "aspect": "square",
+        "enabled": true,
+        "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
+        "previewBehavior": "loop",
+        "caption": "Fiberglass panel resin infusion\n",
+        "showCaption": true
+      },
+      "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
+      "thumbnailMotion": "loop",
+      "previewStyle": {},
+      "useSections": true,
+      "sections": [
+        {
+          "id": "section-befd1d5d-46a5-43a8-b257-04343098e85d",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "section-82e96f58-a366-4e6d-bcfa-1b7e5ee38eba",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square",
+                "enabled": true,
+                "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
+                "previewBehavior": "loop",
+                "caption": "Fiberglass panel resin infusion\n",
+                "showCaption": true
+              }
+            }
+          ],
+          "text": ""
+        },
+        {
+          "id": "section-2ad69895-96b1-41d1-9fa2-e89cb68b2b2d",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ],
+      "publicationStatus": "public"
     }
   ],
   "website": {
@@ -1734,7 +1792,15 @@
             "enabled": false
           },
           "loop": false,
-          "muted": false
+          "muted": false,
+          "elements": [
+            {
+              "id": "text:bio",
+              "x": 45.71719072043756,
+              "y": 9.000241133296655,
+              "width": 49.70066442075378
+            }
+          ]
         },
         {
           "id": "original-hobbies",
@@ -1821,7 +1887,7 @@
           "type": "text",
           "visible": true,
           "heading": "More Projects",
-          "text": "I'll get around to writing about them soon.\n",
+          "text": "Write-ups coming soon.\n",
           "contentWidth": "default",
           "spacingTop": 72,
           "spacingBottom": 24,
@@ -1861,22 +1927,14 @@
                 "caption": "Custom strut bar",
                 "showCaption": true
               }
-            },
-            {
-              "type": "image",
-              "src": "",
-              "alt": "",
-              "imageStyle": {
-                "fit": "cover",
-                "aspect": "square",
-                "enabled": true,
-                "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
-                "previewBehavior": "loop",
-                "caption": "Fiberglass panel resin infusion\n",
-                "showCaption": true
-              }
             }
           ]
+        },
+        {
+          "id": "section-8b3fa4d4-e4f0-4ed4-b173-f071b3195b39",
+          "type": "galleryGrid",
+          "projectSection": "future",
+          "visible": true
         }
       ],
       "useSections": true
@@ -1919,15 +1977,15 @@
     "enabled": true,
     "captionAlignment": "left",
     "captionPosition": "below",
-    "showCaption": true
+    "showCaption": true,
+    "aspect": "tall",
+    "height": 0
   },
   "visualEditorLink": "https://jleo0312.github.io/editor/",
   "videoPosters": {
     "/media/muw3djnp-8uxr3-pencil-case.mov": "/media/muw3djnp-8uxr3-pencil-case.mov-first-frame.jpg",
     "/media/muw3eczi-tn87e-pencil-case.mov": "/media/muw3eczi-tn87e-pencil-case.mov-first-frame.jpg",
     "/media/muw840va-2bmhz-propeller-cfdd.mov": "/media/muw840va-2bmhz-propeller-cfdd.mov-first-frame.jpg",
-    "/media/muw8v54o-bd1c4-comp-day.mov": "/media/muw8v54o-bd1c4-comp-day.mov-first-frame.jpg",
-    "/media/muw99ze8-b61kh-comp-day.mov": "/media/muw99ze8-b61kh-comp-day.mov-first-frame.jpg",
     "/media/muw9lwh9-t4sdf-comp_day_25mb.mp4": "/media/muw9lwh9-t4sdf-comp_day_25mb.mp4-first-frame.jpg",
     "/media/muwvtnuy-rw9a4-infusion.mov": "/media/muwvtnuy-rw9a4-infusion.mov-first-frame.jpg",
     "/media/muwx0p3o-tsyj9-furnace-1080p60-under25mb.mp4": "/media/muwx0p3o-tsyj9-furnace-1080p60-under25mb.mp4-first-frame.jpg"
