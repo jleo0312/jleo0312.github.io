@@ -1,7 +1,7 @@
 /* Slides-style selection, free positioning and plain-text editing. */
 (function(){
 'use strict';
-let active;
+let active,mediaEnabled=false;
 const read=(object,path)=>path.split('.').reduce((value,key)=>value?.[key],object);
 const write=(object,path,value)=>{const parts=path.split('.');if(parts.some(k=>['__proto__','constructor','prototype'].includes(k)))return;let target=object;parts.forEach((key,i)=>{if(i===parts.length-1)target[key]=value;else target=target[key]||=(/^\d+$/.test(parts[i+1])?[]:{});});};
 const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
@@ -270,8 +270,8 @@ function mount({data,key,settings,model,send}){
  on(window,'scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(position);},{passive:true});on(window,'resize',queuePosition);
  const observer=new ResizeObserver(position);for(const entry of objects.entries)observer.observe(entry.node);
  document.body.classList.add('editing-preview','direct-editing-preview');
- const api={setMediaMode,select,destroy(){events.abort();observer.disconnect();cancelAnimationFrame(frame);previewMedia?.pause?.();previewMedia?.closest('[data-image-style]')?.classList.remove('canvas-preview-crop');overlay.remove();document.body.classList.remove('canvas-dragging');}};active=api;return api;
+ const api={setMediaMode,select,destroy(){events.abort();observer.disconnect();cancelAnimationFrame(frame);previewMedia?.pause?.();previewMedia?.closest('[data-image-style]')?.classList.remove('canvas-preview-crop');overlay.remove();document.body.classList.remove('canvas-dragging');}};active=api;setMediaMode(mediaEnabled);return api;
 }
-window.PortfolioCanvas={setMediaMode(open){active?.setMediaMode(open);},mount,select:(...args)=>active?.select(...args),version:'slides-20260927-1'};
+window.PortfolioCanvas={setMediaMode(open){mediaEnabled=!!open;active?.setMediaMode(mediaEnabled);},mount,select:(...args)=>active?.select(...args),version:'slides-20260927-1'};
 })();
 
