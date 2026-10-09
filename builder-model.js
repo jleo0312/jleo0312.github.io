@@ -135,7 +135,17 @@
     return changed;
   }
   function projectPlacement(project) {return project.gallerySection==='future'?'future':'main';}
-  function galleryProjects(data,placement='main') {return data.projects.filter(project=>project.showInGallery!==false&&projectPlacement(project)===placement);}
+  function isProjectPublic(project) {return project.publicationStatus!=='draft';}
+  function publishSnapshot(data) {
+    const snapshot=clone(data);
+    snapshot.projects=snapshot.projects.filter(isProjectPublic);
+    if(snapshot.videoPosters){
+      const {videoPosters,...content}=snapshot,references=JSON.stringify(content,(field,value)=>field==='mediaLibraryHidden'?undefined:value);
+      snapshot.videoPosters=Object.fromEntries(Object.entries(videoPosters).filter(([source])=>references.includes(source)));
+    }
+    return snapshot;
+  }
+  function galleryProjects(data,placement='main') {return data.projects.filter(project=>isProjectPublic(project)&&project.showInGallery!==false&&projectPlacement(project)===placement);}
   function futureHeading(section) {return section.projectSection==='future'||['more-projects','future-projects'].includes(section.id)||/^(more|future)\s+projects$/i.test(String(section.heading||'').trim());}
   function legacyProjectEntries(data) {
     const result=[];let future=false;
@@ -154,10 +164,10 @@
     return result;
   }
   function projectEntries(data) {
-    return [...data.projects.map(project=>({id:'project:'+project.slug,kind:'project',title:project.title,slug:project.slug,placement:projectPlacement(project),visible:project.showInGallery!==false,thumbnail:project.thumbnail||'',project})),...legacyProjectEntries(data)];
+    return [...data.projects.map(project=>({id:'project:'+project.slug,kind:'project',title:project.title,slug:project.slug,placement:projectPlacement(project),publication:isProjectPublic(project)?'public':'draft',visible:project.showInGallery!==false,thumbnail:project.thumbnail||'',project})),...legacyProjectEntries(data).map(entry=>({...entry,publication:'public'}))];
   }
   function ensureFutureGallery(data) {
-    if(!data.projects.some(project=>projectPlacement(project)==='future'))return;
+    if(!data.projects.some(project=>isProjectPublic(project)&&projectPlacement(project)==='future'))return;
     const values=sections(data,'gallery',true);
     if(values.some(section=>section.type==='galleryGrid'&&section.projectSection==='future'))return;
     let heading=values.findIndex(futureHeading);
@@ -194,6 +204,14 @@
     project.gallerySection=placement;ensureFutureGallery(data);
     return project;
   }
+  function setProjectPublication(data,entryId,publication) {
+    if(!['public','draft'].includes(publication))throw new Error('Choose Public or Draft.');
+    const entry=projectEntries(data).find(value=>value.id===entryId);
+    if(!entry)throw new Error('This project is no longer available.');
+    const project=entry.project||setProjectPlacement(data,entryId,entry.placement);
+    project.publicationStatus=publication;ensureFutureGallery(data);
+    return project;
+  }
   // Every media slot keeps its original source field; optional previews live with its image style.
   function mediaPaths(data,path) {
     const read=p=>p.split('.').reduce((value,key)=>value?.[key],data);
@@ -226,5 +244,5 @@
     for(const info of pages(data)){const used=new Set();for(const section of sections(data,info.key)){if(!types[section.type])throw new Error('Unknown section type on '+info.title);if(used.has(section.id))throw new Error('Duplicate section on '+info.title);used.add(section.id);}}
     return true;
   }
-  root.PortfolioModel={clone,id,types,makeCarouselItem,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,projectPlacement,galleryProjects,projectEntries,ensureFutureGallery,setProjectPlacement,mediaPaths,deleteSection,duplicateSection,reorder,validate};
+  root.PortfolioModel={clone,id,types,makeCarouselItem,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,projectPlacement,isProjectPublic,publishSnapshot,galleryProjects,projectEntries,ensureFutureGallery,setProjectPlacement,setProjectPublication,mediaPaths,deleteSection,duplicateSection,reorder,validate};
 })(typeof window==='undefined'?globalThis:window);

@@ -688,7 +688,7 @@ function displayPortfolio(input,key) {
   document.documentElement.style.setProperty('--viewport-width', document.documentElement.clientWidth+'px');
   currentData=Model.upgrade(input);currentPageKey=key;
   const data=currentData;
-  data.projects=list(data.projects).filter(p=>p&&p.slug).map(normalizeProject);
+  data.projects=list(data.projects).filter(p=>p&&p.slug&&(editorPreview||Model.isProjectPublic(p))).map(normalizeProject);
   settings=mergeSettings(window.legacyPortfolioSettings||{},data.website);
   if(Object.hasOwn(data,'siteIcon'))settings.identity.siteIcon=data.siteIcon;
   data.name ||= settings.identity.brand;
@@ -775,5 +775,3 @@ if(app&&editorPreview) {
 }
 window.PortfolioDefaults=DEFAULT_SETTINGS;
 if(app&&!editorPreview)boot();
-
-

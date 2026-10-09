@@ -1,7 +1,7 @@
-#projects-dialog{width:min(780px,calc(100vw - 32px));max-width:780px}
+#projects-dialog{width:min(980px,calc(100vw - 32px));max-width:980px}
 #projects-summary{font-weight:600;color:#556171}
 #project-list{display:grid;gap:12px;margin:20px 0}
-.project-placement-row{display:grid;grid-template-columns:64px minmax(0,1fr) 185px;gap:16px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px}
+.project-placement-row{display:grid;grid-template-columns:64px minmax(0,1fr) 150px 170px;gap:16px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px}
 .project-list-thumbnail{width:64px;height:64px;object-fit:cover;border-radius:7px;background:#f0f1f4}
 .project-list-placeholder{display:grid;place-items:center;color:#798493;font-size:24px}
 .project-list-copy{display:grid;gap:4px;min-width:0}
@@ -10,7 +10,7 @@
 .project-placement-row .field{margin:0;font-size:12px}
 #manage-projects{margin-bottom:10px}
 #new-project-placement[hidden]{display:none}
-@media(max-width:600px){.project-placement-row{grid-template-columns:48px minmax(0,1fr);gap:12px}.project-list-thumbnail{width:48px;height:48px}.project-placement-row .field{grid-column:2}}
+@media(max-width:700px){.project-placement-row{grid-template-columns:48px minmax(0,1fr);gap:12px}.project-list-thumbnail{width:48px;height:48px}.project-placement-row .field{grid-column:2}}
 :root{font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#25272b;background:#f3f4f6;--line:#dee1e6;--blue:#1769ba}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}button{border:1px solid var(--line);border-radius:7px;background:#fff;color:#30333a;padding:8px 11px;cursor:pointer;line-height:1.35}button:hover{background:#edf3fa}button:disabled{opacity:.45;cursor:default}button.primary{background:#24272e;color:#fff;border-color:#24272e}.primary:hover{background:#3c4350}button[aria-pressed=true]{background:#e6f0fc;color:#125ca4;border-color:#80addb}a{color:#1769ba;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #5f9ede;outline-offset:2px}.toolbar{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 20px;background:#fff;border-bottom:1px solid var(--line)}.editor-brand{font-weight:700;font-size:18px;color:#24272e;white-space:nowrap}.editor-brand span{color:#828996}.toolbar-actions,.button-row{display:flex;align-items:center;flex-wrap:wrap;gap:7px}.status-bar{display:flex;gap:16px;align-items:center;min-height:42px;padding:6px 20px;background:#f9fafc;border-bottom:1px solid var(--line);font-size:12px}.status-bar #status{margin-right:auto}.status-bar button{padding:4px 9px;font-size:12px}.workspace{display:grid;grid-template-columns:248px minmax(0,1fr) 318px;height:calc(100vh - 108px)}.outline,.inspector{background:white;overflow:auto;padding:18px;border-right:1px solid var(--line)}.inspector{border-left:1px solid var(--line);border-right:0}.field{display:flex;flex-direction:column;gap:5px;margin:0 0 16px;color:#3e444e;font-weight:500}.field input:not([type=checkbox]),.field textarea,.field select{width:100%;min-width:0;border:1px solid #ccd1d9;border-radius:6px;padding:9px;background:#fff;color:#25272b;font-weight:400}.field textarea{resize:vertical;min-height:94px;line-height:1.55;transition:box-shadow .15s ease}
 .inspector .field textarea:focus{
   position:fixed;
@@ -110,3 +110,9 @@
 .notes-open.media-open .workspace{grid-template-columns:220px minmax(0,1fr)}
 @media(max-width:1100px){.media-open .workspace{grid-template-columns:185px minmax(0,1fr) 270px}.notes-open.media-open .workspace{grid-template-columns:185px minmax(0,1fr)}.media-sidebar{padding:12px}}
 @media(max-width:800px){.media-open .workspace,.notes-open.media-open .workspace{grid-template-columns:minmax(0,1fr)}.media-sidebar{grid-column:1;grid-row:3;max-height:600px;border-top:1px solid var(--line)}.media-tray-items{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.project-publication-badge{justify-self:start;border-radius:5px;padding:3px 7px;background:#eaf4ed;color:#2b6942!important;font-weight:600;font-size:11px!important}
+.project-publication-badge[data-state=draft]{background:#fff2d7;color:#806024!important}
+.project-draft-notice{padding:9px 12px;border:1px solid #e4d2a2;border-radius:7px;background:#fff8e8;color:#725a25;font-size:12px}
+.project-draft-notice[hidden]{display:none}
+#open-page[aria-disabled=true]{color:#7d7258;cursor:default;pointer-events:none}
