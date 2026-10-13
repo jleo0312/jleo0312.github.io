@@ -247,3 +247,13 @@ body.lightbox-open{overflow:hidden}
 .media-carousel .carousel-video{width:100%;aspect-ratio:1/1;object-fit:contain}
 @media(max-width:650px){.media-carousel .carousel-slide{grid-template-columns:minmax(0,1fr)}}
 .media-pair.media-count-1{grid-template-columns:minmax(0,1fr)}
+
+/* Contact links follow the editable name/email box in the header. */
+.header-identity{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;max-width:100%}
+.header-identity .brand{white-space:pre-wrap}
+.header-linkedin{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:8px 14px;border-radius:7px;background:#0a66c2;color:#fff;font-size:14px;font-weight:600;line-height:1.3;letter-spacing:0;white-space:nowrap}
+.header-linkedin:hover{background:#004182}
+.header-linkedin[hidden]{display:none}
+.site-header.has-contact-link{height:auto}
+.site-header.has-contact-link .nav{height:auto;align-items:center;padding-top:16px;padding-bottom:16px}
+@media(max-width:650px){.site-header.has-contact-link .nav{align-items:flex-start;gap:12px}.header-identity{flex-basis:100%}.header-identity .brand{font-size:18px;line-height:1.45;letter-spacing:-.4px}.site-header.has-contact-link .nav-links{height:auto;min-height:30px}.site-header.has-contact-link .nav-links a{height:auto;padding:4px 0}}

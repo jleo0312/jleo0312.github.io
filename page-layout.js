@@ -13,6 +13,7 @@ function collect({data,key,settings,model,editing=false}){
   node.dataset.objectPath=path;node.dataset.objectLabel=label;node.dataset.singleLine=String(single);node.classList.add('portfolio-text');
   // Text nodes and line breaks stay plain text; pasted HTML never becomes website code.
   const value=read(data,path);if(value!=null)node.textContent=String(value);else{const copy=node.cloneNode(true);copy.querySelectorAll('br').forEach(br=>br.replaceWith('\n'));node.textContent=copy.textContent;}
+  if(path==='website.identity.brand'&&window.PortfolioContact)node.textContent=window.PortfolioContact.brandText(node.textContent);
   node.dataset.empty=String(!node.textContent.trim());
   if(!textNodes.has(path))textNodes.set(path,[]);textNodes.get(path).push(node);
  }
@@ -149,6 +150,8 @@ function mount(options){
   }
   const roots=new Map();
   for(const {entry,r}of placed){const rootNode=r.targetSection?scopeFor(entry,r):entry.root,rect=entry.node.getBoundingClientRect(),root=rootNode.getBoundingClientRect();roots.set(rootNode,Math.max(roots.get(rootNode)||0,rect.bottom-root.bottom));}
+  const contact=window.PortfolioContact?.align(),header=contact?.closest('header');
+  if(header){const extra=contact.getBoundingClientRect().bottom-header.getBoundingClientRect().bottom;roots.set(header,Math.max(roots.get(header)||0,extra));}
   for(const [root,extra]of roots){
    // Repositioned text still occupies its old flow slot. Fit ordinary content
    // sections to their visible boxes so moving it beside media removes that slot.

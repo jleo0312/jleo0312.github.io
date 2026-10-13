@@ -1,6 +1,8 @@
 const DEFAULT_SETTINGS = {
   "identity": {
     "brand": "Josh.",
+    "linkedinLabel": "LinkedIn",
+    "linkedinUrl": "https://www.linkedin.com/in/josh-leonard-7a1a59383/",
     "homeTitle": "Josh — Mechanical Engineering",
     "galleryTitle": "Projects — Josh",
     "description": "Josh’s mechanical engineering portfolio. Automotive builds, fabrication, and composites projects at Washington State University.",
@@ -103,12 +105,55 @@ function normalizeProject(project) {
   };
 }
 
+// The contact button stays beneath the name/email even when that box is dragged.
+function linkedinURL(value) {
+  if(typeof value!=='string'||!value.trim())return '';
+  try {
+    const text=value.trim(),url=new URL(/^(?:[\w-]+\.)*linkedin\.com\//i.test(text)?'https://'+text:text);
+    if(!['http:','https:'].includes(url.protocol)||url.username||url.password||!(url.hostname==='linkedin.com'||url.hostname.endsWith('.linkedin.com'))||!/^\/in\/[^/]+(?:\/.*)?$/.test(url.pathname))return '';
+    url.protocol='https:';return url.href;
+  }catch{return '';}
+}
+function headerBrandText(value) {
+  const source=String(value??'');
+  if(!linkedinURL(settings?.identity.linkedinUrl))return source;
+  // A typed "LinkedIn" line is replaced visually by the separate button.
+  return source.split('\n').filter(line=>{
+    const text=line.trim().replace(/\s*↗$/,'').trim();
+    return !/^linkedin$/i.test(text)&&!(linkedinURL(text)&&linkedinURL(text)===linkedinURL(settings.identity.linkedinUrl));
+  }).join('\n');
+}
+function alignHeaderContact() {
+  const brand=document.querySelector('.brand'),button=document.querySelector('.header-linkedin');
+  if(!button||button.hidden)return null;
+  button.style.removeProperty('transform');
+  if(brand&&!brand.hidden&&brand.getClientRects().length){
+    const text=brand.getBoundingClientRect(),box=button.getBoundingClientRect();
+    button.style.transform='translate('+(text.left-box.left)+'px,'+(text.bottom+10-box.top)+'px)';
+  }
+  return button;
+}
+window.PortfolioContact={brandText:headerBrandText,align:alignHeaderContact};
 function renderShell() {
   const setText = (selector, value) => {
     const node = document.querySelector(selector);
     if (node) { node.textContent = value ?? ''; node.hidden = !value; }
   };
-  setText('.brand', settings.identity.brand);
+  setText('.brand', headerBrandText(settings.identity.brand));
+  const brand=document.querySelector('.brand');
+  let contact=document.querySelector('.header-identity'),button=document.querySelector('.header-linkedin');
+  const profile=linkedinURL(settings.identity.linkedinUrl),label=String(settings.identity.linkedinLabel||'').trim();
+  if(brand&&profile&&label){
+    if(!contact){contact=document.createElement('div');contact.className='header-identity';brand.before(contact);contact.append(brand);}
+    if(!button){
+      button=document.createElement('a');button.className='header-linkedin';button.target='_blank';button.rel='noopener noreferrer';contact.append(button);
+      button.addEventListener('click',event=>{
+        if(editorPreview){event.preventDefault();window.parent.postMessage({portfolioPreview:true,action:'show-contact-settings'},location.origin);}
+      });
+    }
+    button.href=profile;button.textContent=label+' ↗';button.setAttribute('aria-label',label+' (opens in a new tab)');button.hidden=false;
+  }else if(button){button.hidden=true;button.style.removeProperty('transform');}
+  document.querySelector('.site-header')?.classList.toggle('has-contact-link',!!(profile&&label));
   setText('[data-nav="about"]', settings.navigation.about);
   setText('[data-nav="gallery"]', settings.navigation.gallery);
   setText('.skip', settings.navigation.skip);

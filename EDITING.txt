@@ -51,3 +51,10 @@ An unpublished draft does not trigger a close-tab warning once it has saved. If 
 If the website changes in Pages CMS or another editor, your saved draft is kept and the editor asks which version to continue. Use latest website keeps the earlier draft in Previous edits. Continue saved draft keeps your work and uses the latest website as the baseline for a future Publish.
 Two editor tabs cannot silently overwrite the same saved draft. If another tab saves newer work, download any changes you need from the older tab and reload it.
 Drafts are local to this browser, not synced between devices. Clearing this website's browser data removes local drafts and edit history. Download changes keeps a backup of your content and uploaded media.
+
+
+LINKEDIN BUTTON UNDER YOUR EMAIL
+The header has a separate LinkedIn button beneath your name and email. It opens your LinkedIn profile in a new tab and follows the name/email box when you move it.
+In the visual editor, click this button or select the name/email text and open More controls. Use LinkedIn button text and LinkedIn profile URL to edit it. These fields are also under Website settings > Name and browser titles. Leave the profile URL blank to hide the button. Use Open page to test the published link; clicking the button in the editing canvas opens its controls.
+A standalone LinkedIn line or the same LinkedIn URL pasted into the name/email box is displayed as the separate button, rather than a duplicate plain-text line. Your draft text is preserved.
+Changes to these settings autosave in your draft. Click Publish when you want to update the public settings. The Explore my projects button keeps its original link.

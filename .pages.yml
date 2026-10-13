@@ -124,6 +124,15 @@ content:
         label: Name in the top left
         type: string
         default: Josh.
+      - name: linkedinLabel
+        label: LinkedIn button text
+        type: string
+        default: LinkedIn
+      - name: linkedinUrl
+        label: LinkedIn profile URL
+        type: string
+        default: https://www.linkedin.com/in/josh-leonard-7a1a59383/
+        description: The separate button beneath your name and email opens this profile in a new tab. Leave blank to hide the button.
       - name: homeTitle
         label: Homepage browser tab title
         type: string
