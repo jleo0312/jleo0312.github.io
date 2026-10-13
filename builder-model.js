@@ -73,6 +73,7 @@
   }
   function makeCarouselItem(){return {id:id(),type:'image',src:'',alt:'',imageStyle:{fit:'cover',aspect:'square'}};}
   function makeSection(type='photoText') {
+    if(type==='futureGallery')return {id:id(),type:'galleryGrid',projectSection:'future',visible:true};
     if(type==='mediaCarousel')return {id:id(),type,visible:true,heading:'Photo / video carousel',autoplay:true,seconds:3,items:Array.from({length:6},makeCarouselItem)};
     if(['mediaPair','mediaPair2','mediaPair3'].includes(type))return {id:id(),type:'mediaPair',visible:true,items:Array.from({length:type==='mediaPair3'?3:2},makeCarouselItem),text:''};
     return {id:id(),type,visible:true,...(type==='photoText'?{image:'',heading:'',text:'',caption:'',showCaption:true,imagePosition:'left',imageWidth:56,textWidth:44}:type==='heading'?{heading:'New heading'}:type==='text'?{text:''}:type==='video'?{video:'',caption:'',showCaption:true}:{})};
@@ -167,6 +168,7 @@
     return [...data.projects.map(project=>({id:'project:'+project.slug,kind:'project',title:project.title,slug:project.slug,placement:projectPlacement(project),publication:isProjectPublic(project)?'public':'draft',visible:project.showInGallery!==false,thumbnail:project.thumbnail||'',project})),...legacyProjectEntries(data).map(entry=>({...entry,publication:'public'}))];
   }
   function ensureFutureGallery(data) {
+    if(data.pageLayouts?.gallery?.futureGalleryRemoved)return;
     if(!data.projects.some(project=>isProjectPublic(project)&&projectPlacement(project)==='future'))return;
     const values=sections(data,'gallery',true);
     if(values.some(section=>section.type==='galleryGrid'&&section.projectSection==='future'))return;
@@ -229,7 +231,7 @@
     const defaultFit=card?(owner.thumbnailFit==='contain'?'contain':'cover'):primaryVideo||path.includes('.photos.')||owner.type==='photoText'?'contain':'cover';
     return {basePath:path,srcPath,primaryVideo,imageSrcPath:primaryVideo?path+'.poster':srcPath,videoSrcPath:primaryVideo?srcPath:card?ownerPath+'.previewVideo':path+'.previewVideo',previewPath:card?ownerPath+'.previewStyle':path+'.previewStyle',motionPath:card?ownerPath+'.thumbnailMotion':path+'.previewBehavior',fallbackImage,defaultFit,defaultMotion:primaryVideo?(owner.gifLike?'loop':'controls'):'hover'};
   }
-  function deleteSection(data,key,index) {const values=sections(data,key,true),section=values[index];if(!section)return;const project=pageInfo(data,key)?.project;if(section.type==='projectPhoto'&&project)project.photos=project.photos.filter(p=>p.id!==section.sourceId);values.splice(index,1);}
+  function deleteSection(data,key,index) {const values=sections(data,key,true),section=values[index];if(!section)return;if(key==='gallery'&&section.type==='galleryGrid'&&section.projectSection==='future')container(data,key,true).futureGalleryRemoved=true;const project=pageInfo(data,key)?.project;if(section.type==='projectPhoto'&&project)project.photos=project.photos.filter(p=>p.id!==section.sourceId);values.splice(index,1);}
   function duplicateSection(data,key,index) {
     const values=sections(data,key,true),section=clone(values[index]),oldId=section.id,replacements=new Map();section.id=id();replacements.set(oldId,section.id);
     if(section.type==='projectPhoto'){const source=photoSource(data,key,section);if(source){const photo=clone(source);photo.id=id();replacements.set(source.id,photo.id);pageInfo(data,key).project.photos.push(photo);section.sourceId=photo.id;}}

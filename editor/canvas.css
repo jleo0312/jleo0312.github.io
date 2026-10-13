@@ -71,3 +71,5 @@ html{overflow-anchor:none}
 .canvas-media-mode [data-canvas-image]{cursor:grab;outline:1px dashed #9abbdb;outline-offset:3px}
 .canvas-media-mode [data-canvas-image] img{pointer-events:none}
 .canvas-media-drop{outline:3px solid #1670c7!important;outline-offset:3px;background:#edf5ff!important}
+
+.canvas-toolbar button[data-canvas-action="remove-project-card"]{color:#a32d2d;border-color:#e6b6b6}

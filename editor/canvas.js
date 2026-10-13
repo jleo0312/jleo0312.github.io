@@ -79,7 +79,7 @@ function mount({data,key,settings,model,send}){
   return {left,top};
  }
  for(const [path,nodes]of textNodes)for(const node of nodes){node.dataset.editPath=path;node.dataset.editLabel=node.dataset.objectLabel;node.contentEditable='false';node.spellcheck=true;node.tabIndex=0;node.setAttribute('role','textbox');node.setAttribute('aria-label',node.dataset.objectLabel);node.setAttribute('aria-multiline',String(node.dataset.singleLine!=='true'));}
- for(const item of images.values()){if(item.preview)continue;item.frame.dataset.canvasImage=item.path;item.frame.querySelectorAll('img,video').forEach(n=>n.draggable=false);}
+ for(const item of images.values()){if(item.preview)continue;item.frame.dataset.canvasImage=item.path;item.frame.tabIndex=0;item.frame.querySelectorAll('img,video').forEach(n=>n.draggable=false);}
  function setMediaMode(open){mediaMode=!!open;document.body.classList.toggle('canvas-media-mode',mediaMode);for(const item of images.values())if(!item.preview)item.frame.draggable=mediaMode;}
  function button(label,action,value='',title=label){const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.canvasAction=action;b.dataset.value=value;b.title=title;b.setAttribute('aria-label',title);return b;}
  function selectControl(label,name,choices,value){const control=document.createElement('select');control.dataset.canvasControl=name;control.setAttribute('aria-label',label);for(const [v,text]of choices)control.add(new Option(text,v));control.value=String(value);return control;}
@@ -94,6 +94,7 @@ function mount({data,key,settings,model,send}){
    const note=document.createElement('span');note.className='canvas-toolbar-note';note.textContent='Drag the video to reframe it. The thumbnail photo has a separate crop.';toolbar.append(note);return;
   }
   if(picked){
+   if(picked.node.closest('.project-card[data-project]'))toolbar.append(button('Remove box','remove-project-card'));
    const drag=button(picked.kind==='text'?'✥ Drag text':'✥ Drag photo','drag-object');drag.className='canvas-grab';toolbar.append(drag);
    if(picked.kind==='text'){
     toolbar.append(button(editing===picked.node?'Done typing':'Edit text','edit-text'));
@@ -208,6 +209,7 @@ function mount({data,key,settings,model,send}){
   if(action==='edit-text'){if(editing)stopText();else startText(picked.node);buildToolbar();}
   else if(action==='reset-position')objectChange(null);
   else if(action==='front'||action==='back')objectChange({layer:clamp((layoutValue()?.layer||1)+(action==='front'?1:-1),0,20)});
+  else if(action==='remove-project-card'){const card=picked?.node.closest('.project-card[data-project]');if(card)transaction(action,{slug:card.dataset.project});}
   else if(action==='return-media'){const base=item.preview?images.get(item.basePath):item;if(base){const src=read(data,base.imageSrcPath)||read(data,base.videoSrcPath)||base.fallbackImage;send({action:'media-return',key,path:base.path,src});}}
   else if(action==='replace'){input.accept=item.preview?'video/*,image/gif':'image/*,.heic,.heif';input.dataset.uploadPath=item.preview?item.videoSrcPath:item.imageSrcPath;delete input.dataset.motionPath;delete input.dataset.motion;input.value='';send({action:'upload-start'});input.click();}
   else if(action==='preview-video'||action==='animation-video'){input.accept=action==='animation-video'?'image/gif,video/*':'video/*';input.dataset.uploadPath=item.videoSrcPath;input.dataset.motionPath=item.motionPath;input.dataset.motion=action==='animation-video'?'loop':'controls';input.value='';send({action:'upload-start'});input.click();}
@@ -229,11 +231,12 @@ function mount({data,key,settings,model,send}){
  on(toolbar,'input',event=>{if(event.target.dataset.canvasControl!=='object-width'||!picked||!objects.active())return;if(!gesture){objectStart(picked);gesture={type:'slider',entry:picked,original:objects.record(picked)?model.clone(objects.record(picked)):null};}const width=Number(event.target.value),r=layoutValue();objectSave(picked,{...r,width,x:Math.min(r.x,100-width)});});
  on(input,'change',()=>{const item=images.get(selectedImage),file=input.files[0],path=input.dataset.uploadPath||item?.srcPath;if(item&&file&&path)send({action:'replace-file',id:selectedId,path,file,motionPath:input.dataset.motionPath,motion:input.dataset.motion});delete input.dataset.uploadPath;delete input.dataset.motionPath;delete input.dataset.motion;input.value='';});
  on(input,'cancel',()=>{delete input.dataset.uploadPath;delete input.dataset.motionPath;delete input.dataset.motion;send({action:'upload-cancel'});});
+ on(document,'focusin',event=>{const node=event.target.closest('[data-canvas-image]');if(node&&event.target===node){const entry=objects.byNode.get(node);if(entry&&entry!==picked)announce(entry);}});
  on(document,'pointerdown',event=>{
   if(overlay.contains(event.target)||event.target.closest('.carousel-controls,.preview-play'))return;
   const text=event.target.closest('[data-edit-path]');if(text&&text===editing)return;
   const image=event.target.closest('[data-canvas-image]'),node=text||image,entry=node&&objects.byNode.get(node);
-  if(entry){announce(entry);if(image&&!text&&mediaMode)return;if(image&&!text&&cropping)beginLegacy(event,'crop');else beginObject(event,'move');}
+  if(entry){announce(entry);if(image&&!text)image.focus({preventScroll:true});if(image&&!text&&mediaMode)return;if(image&&!text&&cropping)beginLegacy(event,'crop');else beginObject(event,'move');}
   else{const root=event.target.closest('[data-section-id]');if(root){stopText();select(root.dataset.sectionId);send({action:'select',id:selectedId,imagePath:'',textPath:''});}else stopText();}
  });
  on(document,'click',event=>{if(overlay.contains(event.target))return;if(event.target.closest('a'))event.preventDefault();if(suppressClick||editing||gesture)return;const node=event.target.closest('[data-edit-path],[data-canvas-image]');if(node&&objects.byNode.has(node))announce(objects.byNode.get(node));});
@@ -262,6 +265,7 @@ function mount({data,key,settings,model,send}){
   if(event.key==='Escape'){finishGesture(true);stopText();return;}
   if(editing){if(event.key==='Enter'){event.preventDefault();if(editing.dataset.singleLine==='true')stopText();else insertText(editing,'\n');}return;}
   if(!picked)return;
+  if(picked.kind==='image'&&!images.get(selectedImage)?.preview&&(event.key==='Delete'||event.key==='Backspace')){const card=picked.node.closest('.project-card[data-project]');if(card){event.preventDefault();transaction('remove-project-card',{slug:card.dataset.project});return;}}
   if(picked.kind==='text'&&(event.key==='Delete'||event.key==='Backspace')){event.preventDefault();transaction('delete-text');return;}
   if(event.key.startsWith('Arrow')&&objects.active()){event.preventDefault();const r=layoutValue(),scope=objects.scopeFor(picked).getBoundingClientRect(),step=(event.shiftKey?10:1)/Math.max(1,scope.width)*100;objectChange({x:clamp(r.x+({ArrowLeft:-step,ArrowRight:step}[event.key]||0),0,100-r.width),y:Math.max(0,r.y+({ArrowUp:-step,ArrowDown:step}[event.key]||0))});return;}
   if(picked.kind==='text'&&(event.key==='Enter'||event.key==='F2')){event.preventDefault();startText(picked.node);return;}
@@ -274,4 +278,3 @@ function mount({data,key,settings,model,send}){
 }
 window.PortfolioCanvas={setMediaMode(open){mediaEnabled=!!open;active?.setMediaMode(mediaEnabled);},mount,select:(...args)=>active?.select(...args),version:'slides-20260927-1'};
 })();
-
