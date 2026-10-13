@@ -1664,8 +1664,8 @@
         "caption": "Fiberglass panel resin infusion\n",
         "showCaption": true
       },
-      "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
-      "thumbnailMotion": "loop",
+      "previewVideo": "",
+      "thumbnailMotion": "still",
       "previewStyle": {},
       "useSections": true,
       "sections": [
@@ -1927,17 +1927,36 @@
                 "caption": "Custom strut bar",
                 "showCaption": true
               }
+            },
+            {
+              "id": "section-4f7a8302-10ff-4154-9b98-6f3b7c28de01",
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square",
+                "enabled": true,
+                "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
+                "previewBehavior": "controls",
+                "caption": "Fiberglass panel infusion\n",
+                "showCaption": true
+              }
             }
           ]
-        },
-        {
-          "id": "section-8b3fa4d4-e4f0-4ed4-b173-f071b3195b39",
-          "type": "galleryGrid",
-          "projectSection": "future",
-          "visible": true
         }
       ],
-      "useSections": true
+      "useSections": true,
+      "mediaLibraryHidden": [],
+      "mediaLibrary": [
+        {
+          "id": "section-b690961a-4b43-486a-9e76-c6af48b2b99e",
+          "src": "/media/muwvtnuy-rw9a4-infusion.mov",
+          "name": "muwvtnuy-rw9a4-infusion.mov",
+          "type": "video"
+        }
+      ],
+      "futureGalleryRemoved": true
     },
     "about": {
       "sections": [
