@@ -232,11 +232,46 @@ function carouselGroups(projects) {
   );
 }
 
+function futureHighlights(data) {
+  const seen = new Set();
+  // Older future projects are gallery media cards, while newer ones have project pages.
+  return Model.projectEntries(data)
+    .filter(entry => entry.placement === 'future' && entry.visible && entry.publication === 'public')
+    .sort((a, b) => Number(a.kind === 'project') - Number(b.kind === 'project'))
+    .filter(entry => {
+      const source = mediaURL(entry.item?.type === 'video' ? entry.item.src : entry.item?.imageStyle?.previewVideo || entry.project?.previewVideo || entry.project?.thumbnailStyle?.previewVideo || entry.thumbnail);
+      if (source && seen.has(source)) return false;
+      if (source) seen.add(source);
+      return true;
+    })
+    .map(entry => ({ futureEntry: entry }));
+}
+
+function futureHighlightCard(entry, index, data) {
+  const item = entry.item || {}, original = entry.project || {};
+  const imageStyle = original.thumbnailStyle || item.imageStyle || {};
+  const style = imageStyle.enabled === false ? {} : imageStyle;
+  const previewVideo = item.type === 'video' ? item.src : original.previewVideo || imageStyle.previewVideo || '';
+  const project = normalizeProject({ ...original, title: entry.title, thumbnail: entry.thumbnail, previewVideo });
+  const href = entry.kind === 'project' ? `/?project=${encodeURIComponent(entry.slug)}` : galleryURL;
+  const sectionIndex = Model.sections(data, 'gallery').findIndex(section => section.id === entry.sectionId);
+  const section = Model.sections(data, 'gallery')[sectionIndex];
+  const imagePath = entry.kind === 'project'
+    ? `projects.${data.projects.indexOf(original)}.thumbnailStyle`
+    : `pageLayouts.gallery.sections.${sectionIndex}.${Array.isArray(section?.items) ? `items.${entry.itemIndex}.` : ''}imageStyle`;
+  const motion = original.thumbnailMotion || imageStyle.previewBehavior || (item.gifLike ? 'loop' : 'hover');
+  const preview = media(previewVideo) && motion !== 'still' && !/\.gif(?:[?#]|$)/i.test(previewVideo)
+    ? `<video class="preview" data-motion="hover" data-src="${media(previewVideo)}" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>` : '';
+  const number = settings.project.showNumbers ? `<span class="card-index">${String(index + 1).padStart(2, '0')}</span>` : '';
+  return `<article class="project-card" data-future-project="${esc(entry.id)}"><a class="project-link" href="${href}"><div class="thumbnail thumbnail-custom" data-image-style="${esc(imagePath)}" style="${imageCSS({ ...style, width: 100, height: 0, aspect: 'square', margin: 0, padding: 0 })}${previewCSS(style)}">${cover(project)}${preview}</div><div class="card-heading"><h3>${esc(entry.title)}</h3>${number}</div></a></article>`;
+}
+
 function renderCarousel(data) {
   const projects = highlightProjects(data);
+  if (smallScreen.matches && settings.carousel.source !== 'demo') projects.push(...futureHighlights(data));
   if (!projects.length) return '';
   // Wrap the final group back to the beginning instead of leaving empty columns.
-  const groups = carouselGroups(projects).map(group => group.map(({ project, index }) => card(project, index)).join(''));
+  const groups = carouselGroups(projects).map(group => group.map(({ project, index }) => project.futureEntry ? futureHighlightCard(project.futureEntry, index, data) : card(project, index)).join(''));
   return `<section class="wrap selected"><div class="section-heading">${textElement('h2', '', settings.home.highlightsTitle)}${settings.home.galleryLink ? `<a class="text-link" href="${galleryURL}">${esc(settings.home.galleryLink)}</a>` : ''}</div><div class="project-carousel" style="--cards-per-slide:${Math.min(smallScreen.matches ? 1 : 3, projects.length)}" role="region" aria-roledescription="carousel" aria-label="Project highlights" data-groups="${groups.length}"><div class="carousel-viewport"><div class="carousel-track">${groups.map((group, i) => `<div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${groups.length}" ${i ? 'inert aria-hidden="true"' : 'aria-hidden="false"'}>${group}</div>`).join('')}${groups.length > 1 ? `<div class="carousel-slide carousel-clone" inert aria-hidden="true">${groups[0]}</div>` : ''}</div></div>${groups.length > 1 ? `<div class="carousel-controls"><div class="carousel-dots">${groups.map((_, i) => `<button type="button" class="carousel-dot" data-page="${i}" aria-label="Show group ${i + 1}" aria-current="${i === 0}"></button>`).join('')}</div><div class="carousel-actions">${settings.carousel.showCount ? `<span class="carousel-status" aria-live="off">1 / ${groups.length}</span>` : ''}<button type="button" class="carousel-arrow" data-direction="-1" aria-label="Previous projects">${esc(settings.carousel.previous)}</button><button type="button" class="carousel-arrow" data-direction="1" aria-label="Next projects">${esc(settings.carousel.next)}</button><button type="button" class="carousel-pause" aria-label="Pause gallery slideshow">${esc(settings.carousel.pause)}</button></div></div>` : ''}</div></section>`;
 }
 
@@ -820,3 +855,4 @@ if(app&&editorPreview) {
 }
 window.PortfolioDefaults=DEFAULT_SETTINGS;
 if(app&&!editorPreview)boot();
+
