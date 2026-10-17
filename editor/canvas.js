@@ -94,6 +94,7 @@ function mount({data,key,settings,model,send}){
    const note=document.createElement('span');note.className='canvas-toolbar-note';note.textContent='Drag the video to reframe it. The thumbnail photo has a separate crop.';toolbar.append(note);return;
   }
   if(picked){
+   if(picked.node.closest('[data-balanced-media] > .paired-media-item'))toolbar.append(button('Remove box','remove-media-card'));
    if(picked.node.closest('.project-card[data-project]'))toolbar.append(button('Remove box','remove-project-card'));
    const drag=button(picked.kind==='text'?'✥ Drag text':'✥ Drag photo','drag-object');drag.className='canvas-grab';toolbar.append(drag);
    if(picked.kind==='text'){
@@ -209,6 +210,7 @@ function mount({data,key,settings,model,send}){
   if(action==='edit-text'){if(editing)stopText();else startText(picked.node);buildToolbar();}
   else if(action==='reset-position')objectChange(null);
   else if(action==='front'||action==='back')objectChange({layer:clamp((layoutValue()?.layer||1)+(action==='front'?1:-1),0,20)});
+  else if(action==='remove-media-card'){const card=picked?.node.closest('[data-balanced-media] > .paired-media-item');if(card)transaction(action,{index:Number(card.dataset.mediaIndex)});}
   else if(action==='remove-project-card'){const card=picked?.node.closest('.project-card[data-project]');if(card)transaction(action,{slug:card.dataset.project});}
   else if(action==='return-media'){const base=item.preview?images.get(item.basePath):item;if(base){const src=read(data,base.imageSrcPath)||read(data,base.videoSrcPath)||base.fallbackImage;send({action:'media-return',key,path:base.path,src});}}
   else if(action==='replace'){input.accept=item.preview?'video/*,image/gif':'image/*,.heic,.heif';input.dataset.uploadPath=item.preview?item.videoSrcPath:item.imageSrcPath;delete input.dataset.motionPath;delete input.dataset.motion;input.value='';send({action:'upload-start'});input.click();}
@@ -233,7 +235,7 @@ function mount({data,key,settings,model,send}){
  on(input,'cancel',()=>{delete input.dataset.uploadPath;delete input.dataset.motionPath;delete input.dataset.motion;send({action:'upload-cancel'});});
  on(document,'focusin',event=>{const node=event.target.closest('[data-canvas-image]');if(node&&event.target===node){const entry=objects.byNode.get(node);if(entry&&entry!==picked)announce(entry);}});
  on(document,'pointerdown',event=>{
-  if(overlay.contains(event.target)||event.target.closest('.carousel-controls,.preview-play'))return;
+  if(overlay.contains(event.target)||event.target.closest('.carousel-controls,.preview-play,.future-add-control,.future-radial-menu'))return;
   const text=event.target.closest('[data-edit-path]');if(text&&text===editing)return;
   const image=event.target.closest('[data-canvas-image]'),node=text||image,entry=node&&objects.byNode.get(node);
   if(entry){announce(entry);if(image&&!text)image.focus({preventScroll:true});if(image&&!text&&mediaMode)return;if(image&&!text&&cropping)beginLegacy(event,'crop');else beginObject(event,'move');}
@@ -266,6 +268,7 @@ function mount({data,key,settings,model,send}){
   if(editing){if(event.key==='Enter'){event.preventDefault();if(editing.dataset.singleLine==='true')stopText();else insertText(editing,'\n');}return;}
   if(!picked)return;
   if(picked.kind==='image'&&!images.get(selectedImage)?.preview&&(event.key==='Delete'||event.key==='Backspace')){const card=picked.node.closest('.project-card[data-project]');if(card){event.preventDefault();transaction('remove-project-card',{slug:card.dataset.project});return;}}
+  if(picked.kind==='image'&&!images.get(selectedImage)?.preview&&(event.key==='Delete'||event.key==='Backspace')){const card=picked.node.closest('[data-balanced-media] > .paired-media-item');if(card){event.preventDefault();transaction('remove-media-card',{index:Number(card.dataset.mediaIndex)});return;}}
   if(picked.kind==='text'&&(event.key==='Delete'||event.key==='Backspace')){event.preventDefault();transaction('delete-text');return;}
   if(event.key.startsWith('Arrow')&&objects.active()){event.preventDefault();const r=layoutValue(),scope=objects.scopeFor(picked).getBoundingClientRect(),step=(event.shiftKey?10:1)/Math.max(1,scope.width)*100;objectChange({x:clamp(r.x+({ArrowLeft:-step,ArrowRight:step}[event.key]||0),0,100-r.width),y:Math.max(0,r.y+({ArrowUp:-step,ArrowDown:step}[event.key]||0))});return;}
   if(picked.kind==='text'&&(event.key==='Enter'||event.key==='F2')){event.preventDefault();startText(picked.node);return;}
@@ -274,7 +277,8 @@ function mount({data,key,settings,model,send}){
  on(window,'scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(position);},{passive:true});on(window,'resize',queuePosition);
  const observer=new ResizeObserver(position);for(const entry of objects.entries)observer.observe(entry.node);
  document.body.classList.add('editing-preview','direct-editing-preview');
- const api={setMediaMode,select,destroy(){events.abort();observer.disconnect();cancelAnimationFrame(frame);previewMedia?.pause?.();previewMedia?.closest('[data-image-style]')?.classList.remove('canvas-preview-crop');overlay.remove();document.body.classList.remove('canvas-dragging');}};active=api;setMediaMode(mediaEnabled);return api;
+ const radial=window.PortfolioRadialMenu?.mount({root:overlay,choose:(id,count)=>send({action:'canvas-command',command:'add-media-cards',id,count})});
+ const api={setMediaMode,select,destroy(){radial?.destroy();events.abort();observer.disconnect();cancelAnimationFrame(frame);previewMedia?.pause?.();previewMedia?.closest('[data-image-style]')?.classList.remove('canvas-preview-crop');overlay.remove();document.body.classList.remove('canvas-dragging');}};active=api;setMediaMode(mediaEnabled);return api;
 }
 window.PortfolioCanvas={setMediaMode(open){mediaEnabled=!!open;active?.setMediaMode(mediaEnabled);},mount,select:(...args)=>active?.select(...args),version:'slides-20260927-1'};
 })();

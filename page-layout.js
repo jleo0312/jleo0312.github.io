@@ -111,7 +111,7 @@ function mount(options){
  function describe(node,path,kind){
   const section=node.closest('[data-section-id]'),id=section?.dataset.sectionId||'',index=values.findIndex(s=>s.id===id),shell=node.closest('header')?'header':'footer';
   const layoutPath=index>=0?sectionBase(index)+'.elements':`website.elementLayouts.${shell}`;
-  const scope=(kind==='text'&&node.closest('[data-object-image]'))||node.closest('.hobby-card,.project-card,.carousel-media-item')||node.closest('.hero-with-photo,.about-grid,.section-row,.text-section,.gallery-intro,.gallery-meta,.project-end,.nav,.footer-inner')||section||node.parentElement;
+  const scope=(kind==='text'&&node.closest('[data-object-image]'))||node.closest('[data-balanced-media] > .paired-media-item')||node.closest('.hobby-card,.project-card,.carousel-media-item')||node.closest('.hero-with-photo,.about-grid,.section-row,.text-section,.gallery-intro,.gallery-meta,.project-end,.nav,.footer-inner')||section||node.parentElement;
   const entry={node,path,kind,sectionId:id,layoutPath,id:kind+':'+stableKey(data,path),scope,root:section||node.closest('header,footer')||scope};
   entry.node.dataset.objectKind=kind;entries.push(entry);byNode.set(node,entry);return entry;
  }
@@ -158,7 +158,7 @@ function mount(options){
    const crossSection=placed.some(({entry,r})=>r.targetSection&&(entry.root===root||r.targetSection===root.dataset.sectionId));
    if(root.matches('.builder-section')&&root.querySelector(':scope > .content-section')&&!root.querySelector('.project-carousel')&&!crossSection){
     const bounds=root.getBoundingClientRect();let bottom=bounds.top;
-    for(const node of root.querySelectorAll('.portfolio-positioned,h1,h2,h3,p,figcaption,img,video,iframe,.image-placeholder,.video-placeholder,.type-cover')){
+    for(const node of root.querySelectorAll('.portfolio-positioned,h1,h2,h3,p,figcaption,img,video,iframe,.image-placeholder,.video-placeholder,.type-cover,.future-add-control')){
      const positioned=node.closest('.portfolio-positioned');
      if(positioned&&positioned!==node&&!node.classList.contains('portfolio-positioned'))continue;
      const rect=node.getBoundingClientRect(),css=getComputedStyle(node);
@@ -197,4 +197,3 @@ function mount(options){
 }
 window.PortfolioObjects={mount,stableKey,clean,current:null};
 })();
-

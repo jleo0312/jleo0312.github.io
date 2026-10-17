@@ -73,3 +73,16 @@ html{overflow-anchor:none}
 .canvas-media-drop{outline:3px solid #1670c7!important;outline-offset:3px;background:#edf5ff!important}
 
 .canvas-toolbar button[data-canvas-action="remove-project-card"]{color:#a32d2d;border-color:#e6b6b6}
+
+.future-add-control{display:flex;justify-content:center;padding-top:24px;padding-bottom:14px}
+.future-add-control button{display:grid;place-items:center;width:50px;height:50px;border:1px solid #d8dce2;border-radius:50%;background:#f2f3f5;color:#8b919b;font:32px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;transition:background .15s,color .15s,transform .15s}
+.future-add-control button:hover,.future-add-control button.is-open{background:#e6edf6;color:#34689c;border-color:#a8bed6}
+.future-add-control button:focus-visible{outline:3px solid #77a4d5;outline-offset:4px}
+.section-mediaPair:has([data-balanced-media]) .pair-caption.canvas-optional[data-empty=true]{display:none}
+.future-radial-menu{position:fixed;z-index:20;width:304px;height:304px;border-radius:50%;border:1px solid #dce2e9;background:rgba(255,255,255,.98);box-shadow:0 14px 55px #1e334132;pointer-events:auto;animation:future-menu-open .16s ease-out}
+.future-radial-menu[hidden]{display:none!important}
+.future-radial-option{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:86px;height:86px;border:1px solid #d2dce8;border-radius:50%;background:#f5f7fa;color:#3c4b5e;cursor:pointer;padding:8px;font:12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.future-radial-option>span:first-child{font-size:24px;color:#6e7f94}.future-radial-option:hover,.future-radial-option:focus-visible{outline:2px solid #80addb;outline-offset:3px;background:#e8f1fc;color:#125ca4}
+.future-radial-close{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:48px;height:48px;padding:0;border:1px solid #d7dce3;border-radius:50%;background:#fff;color:#8b919b;font-size:28px;cursor:pointer}.future-radial-close:focus-visible{outline:3px solid #80addb;outline-offset:3px}
+@keyframes future-menu-open{from{opacity:0;scale:.88}to{opacity:1;scale:1}}
+@media(prefers-reduced-motion:reduce){.future-radial-menu{animation:none}.future-add-control button{transition:none}}

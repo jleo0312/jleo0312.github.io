@@ -545,24 +545,24 @@ function renderMediaCarousel(section,ctx,sectionPath){
   return `<section class="wrap content-section media-carousel-section"><div class="section-heading">${textElement('h2','',section.heading)}</div><div class="project-carousel media-carousel" style="--cards-per-slide:${perSlide}" role="region" aria-roledescription="carousel" aria-label="${esc(section.heading||'Photo and video carousel')}" data-groups="${groups.length}" data-seconds="${number(section.seconds,3,1,30)}" data-autoplay="${section.autoplay!==false}"><div class="carousel-viewport"><div class="carousel-track">${groups.map((html,i)=>`<div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="${i+1} of ${groups.length}" ${i?'inert aria-hidden="true"':'aria-hidden="false"'}>${html}</div>`).join('')}${groups.length>1?`<div class="carousel-slide carousel-clone" inert aria-hidden="true">${groups[0]}</div>`:''}</div></div>${groups.length>1?`<div class="carousel-controls"><div class="carousel-dots">${groups.map((_,i)=>`<button type="button" class="carousel-dot" data-page="${i}" aria-label="Show group ${i+1}" aria-current="${i===0}"></button>`).join('')}</div><div class="carousel-actions"><span class="carousel-status" aria-live="off">1 / ${groups.length}</span><button type="button" class="carousel-arrow" data-direction="-1" aria-label="Previous media">${esc(settings.carousel.previous)}</button><button type="button" class="carousel-arrow" data-direction="1" aria-label="Next media">${esc(settings.carousel.next)}</button><button type="button" class="carousel-pause" aria-label="Pause gallery slideshow">${esc(settings.carousel.pause)}</button></div></div>`:''}</div></section>`;
 }
 
+function balancedMediaLayout(count,maxColumns){
+  const rows=Model.balancedRows(count,maxColumns),columns=Math.max(1,...rows),positions=[];
+  rows.forEach((size,row)=>{for(let column=0;column<size;column++)positions.push({row:row+1,column:columns-size+1+column*2});});
+  return {columns,positions};
+}
 function renderMediaPair(section,ctx,sectionPath) {
-  const items=list(section.items).slice(0,3);
-  if(!items.length)return '';
+  const balanced=section.autoBalance||Model.futureMediaSections(ctx.data,ctx.info.key).includes(section.id),all=list(section.items),items=balanced?all:all.slice(0,3);
+  if(!items.length&&!editorPreview)return '';
+  const layouts=balanced?[3,2,1].map(columns=>balancedMediaLayout(items.length,columns)):[];
   const mediaItems=items.map((item,i)=>{
-    const itemPath=`${sectionPath}.items.${i}.imageStyle`;
-    if(item.type==='blank'&&!media(item.src)&&!media(item.imageStyle?.previewVideo)&&!editorPreview){
-      return `<div class="paired-media-item media-placeholder" role="img" aria-label="${esc(item.alt||'Placeholder image')}"></div>`;
-    }
-    if(item.type==='video'){
-      if(item.gifLike===true){
-        return `<div class="paired-media-item paired-giflike-item">${renderVideo(item.src,item.poster,item.imageStyle||{},itemPath,'paired-giflike-video',{gifLike:true,alt:item.alt||ctx.info.title||'Animated project media'})}</div>`;
-      }
-      return `<div class="paired-media-item paired-video-item">${renderVideo(item.src,item.poster,item.imageStyle||{},itemPath,'paired-video')}</div>`;
-    }
-    const gifClass=/\.gif(?:[?#]|$)/i.test(item.src||'')?' paired-gif-item':'';
-    return `<div class="paired-media-item${gifClass}">${photoFrame(item.src,item.alt||ctx.info.title,item.imageStyle||{},{fit:'cover',path:itemPath})}</div>`;
+    const itemPath=`${sectionPath}.items.${i}.imageStyle`,position=balanced?` style="${layouts.map((layout,index)=>`--balanced-column${index?'-'+index:''}:${layout.positions[i].column};--balanced-row${index?'-'+index:''}:${layout.positions[i].row};`).join('')}" data-media-index="${i}"`:'';
+    const wrap=(html,extra='')=>`<div class="paired-media-item${extra}"${position}>${html}</div>`;
+    if(item.type==='blank'&&!media(item.src)&&!media(item.imageStyle?.previewVideo)&&!editorPreview)return wrap(`<div class="media-placeholder" role="img" aria-label="${esc(item.alt||'Placeholder image')}"></div>`);
+    if(item.type==='video')return wrap(renderVideo(item.src,item.poster,item.imageStyle||{},itemPath,item.gifLike?'paired-giflike-video':'paired-video',{gifLike:item.gifLike===true,alt:item.alt||ctx.info.title}),item.gifLike?' paired-giflike-item':' paired-video-item');
+    return wrap(photoFrame(item.src,item.alt||ctx.info.title,item.imageStyle||{},{fit:'cover',path:itemPath}),/\.gif(?:[?#]|$)/i.test(item.src||'')?' paired-gif-item':'');
   }).join('');
-  return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="media-pair media-count-${items.length}">${mediaItems}</div>${textElement('p','pair-caption',section.text)}</section>`;
+  const attributes=balanced?` data-balanced-media style="${layouts.map((layout,index)=>`--balanced-tracks${index?'-'+index:''}:${layout.columns*2};`).join('')}"`:'';
+  return `<section class="content-section ${ctx.info.kind==='project'?'':'wrap'}"><div class="media-pair media-count-${items.length}${balanced?' balanced-media':''}"${attributes}>${mediaItems||'<p class="balanced-media-empty">Add a photo or video box to this group.</p>'}</div>${textElement('p','pair-caption',section.text)}</section>`;
 }
 
 function renderVideoText(section,ctx,sectionPath) {
@@ -617,6 +617,7 @@ function renderSection(section,ctx,index) {
     case 'video':html=`<section class="content-section ${info.kind==='project'?'':'wrap'}">${textElement('h2','',section.heading)}${renderVideo(section.video,section.poster,{...section.imageStyle,caption:section.caption,showCaption:section.showCaption,loop:section.loop,muted:section.muted},`${sectionPath}.imageStyle`)}${textElement('p','',section.text)}</section>`;break;
     case 'spacer':html=`<div style="height:${number(section.height,40,0,200)}px"></div>`;break;
   }
+  if(editorPreview&&(section.autoBalance||Model.futureMediaSections(data,info.key).includes(section.id)))html+=`<div class="wrap future-add-control"><button type="button" data-future-add="${esc(section.id)}" aria-label="Add future project media" aria-expanded="false" aria-haspopup="menu"><span aria-hidden="true">+</span></button></div>`;
   const customLayout=section.imagePosition&&['hero','about'].includes(section.type);
   const css=`${section.spacingTop!=null?`padding-top:${number(section.spacingTop,0,0,200)}px;`:''}${section.spacingBottom!=null?`padding-bottom:${number(section.spacingBottom,0,0,200)}px;`:''}--section-gap:${number(section.gap,48,0,100)}px;--section-text-align:${choice(section.textAlign,['left','center','right'],'left')};--layout-columns:${section.imagePosition==='right'?`minmax(0,${number(section.textWidth,55,10,90)}fr) minmax(0,${number(section.imageWidth,45,10,90)}fr)`:`minmax(0,${number(section.imageWidth,45,10,90)}fr) minmax(0,${number(section.textWidth,55,10,90)}fr)`};${section.textAlign?`text-align:${choice(section.textAlign,['left','center','right'],'left')};`:``}${section.textSize?`--section-text-size:${{small:16,normal:18,large:22}[section.textSize]||18}px;`:``}`;
   return `<div class="builder-section section-${esc(section.type)} section-width-${choice(section.contentWidth,['default','narrow','wide','full'],'default')} ${customLayout?'builder-layout builder-position-'+choice(section.imagePosition,['left','right','above','below'],'left'):''}" data-section-id="${esc(section.id)}"${panel.attributes} style="${css}${panel.css}">${html}</div>`;
@@ -855,4 +856,3 @@ if(app&&editorPreview) {
 }
 window.PortfolioDefaults=DEFAULT_SETTINGS;
 if(app&&!editorPreview)boot();
-
