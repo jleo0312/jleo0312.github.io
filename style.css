@@ -439,3 +439,7 @@ h1,h2,h3,.brand,.nav-links a,.footer-inner>span{overflow-wrap:anywhere}
   line-height:1.5;
 }
 
+
+/* Matching homepage links to the two project galleries. */
+.hero-copy .intro-bottom.hero-actions{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:12px}
+.hero-actions .pill{min-width:min(220px,100%);max-width:100%;margin-top:0;text-align:center;white-space:normal}

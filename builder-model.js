@@ -32,15 +32,36 @@
       data.futureProjectsRepairVersion=1;
     }
     ensureFutureGallery(data);
+    ensureProfessionalGallery(data);
     return data;
   }
+  function projectGallery(project){return project.projectGallery==='professional'?'professional':'personal';}
+  function professionalPage(data){return (data.pages||[]).find(page=>page.projectGallery==='professional');}
+  function professionalURL(data){return '/?page='+encodeURIComponent(professionalPage(data)?.slug||'professional-projects');}
+  function ensureProfessionalGallery(data){
+    if(data.professionalGalleryVersion===1)return;
+    data.pages||=[];
+    if(!professionalPage(data)){
+      let slug='professional-projects',suffix=2;while(data.pages.some(page=>page.slug===slug))slug='professional-projects-'+suffix++;
+      const source=sections(data,'gallery'),values=source.filter(section=>['galleryIntro','galleryGrid','spacer'].includes(section.type)||futureHeading(section)).map(section=>{
+        const copy=clone(section);copy.id='professional-'+copy.id;copy.elements=[];
+        if(futureHeading(section))copy.projectSection='future';return copy;
+      });
+      if(!values.some(section=>section.type==='galleryIntro'))values.unshift({id:'professional-intro',type:'galleryIntro',visible:true});
+      if(!values.some(section=>section.type==='galleryGrid'&&section.projectSection!=='future'))values.push({id:'professional-grid',type:'galleryGrid',visible:true});
+      data.pages.push({title:'Professional projects',slug,projectGallery:'professional',showInNavigation:false,useSections:true,sections:values,gallerySettings:{...(clone(data.website?.gallery||{})),eyebrow:'PROFESSIONAL PROJECTS',headline:'My professional projects.',subtitle:''}});
+    }
+    data.website||={};data.website.home||={};
+    Object.assign(data.website.home,{button:'My personal projects ↗',buttonLink:'/?view=gallery',professionalButton:'My professional projects ↗',professionalButtonLink:professionalURL(data)});
+    data.professionalGalleryVersion=1;
+  }
   function pageInfo(data,key) {
-    if (['home','about','gallery'].includes(key)) return {key,kind:key,title:{home:'Homepage',about:'About page',gallery:'Gallery'}[key],url:key==='home'?'/' : key==='gallery'?'/?view=gallery':'/?page=about'};
+    if (['home','about','gallery'].includes(key)) return {key,kind:key,title:{home:'Homepage',about:'About page',gallery:'Personal gallery'}[key],url:key==='home'?'/' : key==='gallery'?'/?view=gallery':'/?page=about'};
     if (key.startsWith('project:')) { let slug=key.slice(8);for(let i=0;i<8&&data.projectAliases?.[slug];i++)slug=data.projectAliases[slug];const project=data.projects.find(p=>p.slug===slug); if(project)return {key:'project:'+project.slug,kind:'project',title:project.title,project,url:'/?project='+encodeURIComponent(project.slug)}; }
     if (key.startsWith('page:')) { const page=(data.pages||[]).find(p=>p.slug===key.slice(5));if(page)return {key,kind:'page',title:page.title,page,url:'/?page='+encodeURIComponent(page.slug)}; }
     return null;
   }
-  function pages(data) { return ['home','about','gallery',...data.projects.map(p=>'project:'+p.slug),...(data.pages||[]).map(p=>'page:'+p.slug)].map(key=>pageInfo(data,key)); }
+  function pages(data) { const professional=professionalPage(data);return ['home','about','gallery',...(professional?['page:'+professional.slug]:[]),...data.projects.map(p=>'project:'+p.slug),...(data.pages||[]).filter(page=>page!==professional).map(p=>'page:'+p.slug)].map(key=>pageInfo(data,key)); }
   function container(data,key,create=false) {
     const info=pageInfo(data,key); if(!info)return null;
     if(info.project)return info.project;
@@ -161,7 +182,7 @@
     }
     return snapshot;
   }
-  function galleryProjects(data,placement='main') {return data.projects.filter(project=>isProjectPublic(project)&&project.showInGallery!==false&&projectPlacement(project)===placement);}
+  function galleryProjects(data,placement='main',gallery='personal') {return data.projects.filter(project=>isProjectPublic(project)&&project.showInGallery!==false&&projectPlacement(project)===placement&&(gallery==='all'||projectGallery(project)===gallery));}
   function futureHeading(section) {return section.projectSection==='future'||['more-projects','future-projects'].includes(section.id)||/^(more|future)\s+projects$/i.test(String(section.heading||'').trim());}
   function futureMediaSections(data,key) {
     if(key!=='gallery')return [];
@@ -207,7 +228,7 @@
     return result;
   }
   function projectEntries(data) {
-    return [...data.projects.map(project=>({id:'project:'+project.slug,kind:'project',title:project.title,slug:project.slug,placement:projectPlacement(project),publication:isProjectPublic(project)?'public':'draft',visible:project.showInGallery!==false,thumbnail:project.thumbnail||data.videoPosters?.[project.previewVideo]||data.videoPosters?.[project.thumbnailStyle?.previewVideo]||'',project})),...legacyProjectEntries(data).map(entry=>({...entry,publication:'public'}))];
+    return [...data.projects.map(project=>({id:'project:'+project.slug,kind:'project',title:project.title,slug:project.slug,placement:projectPlacement(project),publication:isProjectPublic(project)?'public':'draft',gallery:projectGallery(project),visible:project.showInGallery!==false,thumbnail:project.thumbnail||data.videoPosters?.[project.previewVideo]||data.videoPosters?.[project.thumbnailStyle?.previewVideo]||'',project})),...legacyProjectEntries(data).map(entry=>({...entry,publication:'public'}))];
   }
   const mediaIdentity=value=>String(value||'').replace(/^https?:\/\/jleo0312\.github\.io/i,'').split(/[?#]/)[0];
   const projectTitle=value=>String(value||'').trim().toLowerCase().replace(/[^a-z0-9]/g,'');
@@ -224,7 +245,7 @@
   function matchingProject(projects,candidate){
     const sources=projectSources(candidate),empty=!sources.size;
     return projects.find(project=>{
-      if(projectPlacement(project)!=='future'||!simpleProject(candidate)&&!simpleProject(project))return false;
+      if(projectPlacement(project)!=='future'||projectGallery(project)!==projectGallery(candidate)||!simpleProject(candidate)&&!simpleProject(project))return false;
       const existing=projectSources(project);
       return (convertedGalleryProject(candidate)||convertedGalleryProject(project))&&[...sources].some(source=>existing.has(source))||projectTitle(project.title)===projectTitle(candidate.title)&&(empty||!existing.size);
     });
@@ -289,18 +310,20 @@
     return 'project:'+projects.get(entryId).slug;
   }
   function ensureFutureGallery(data) {
-    if(data.pageLayouts?.gallery?.futureGalleryRemoved)return;
-    if(!data.projects.some(project=>isProjectPublic(project)&&projectPlacement(project)==='future'))return;
-    const values=sections(data,'gallery',true);
-    if(values.some(section=>section.type==='galleryGrid'&&section.projectSection==='future'))return;
-    let heading=values.findIndex(futureHeading);
-    if(heading<0){heading=values.length;values.push({id:id(),type:'heading',projectSection:'future',heading:'Future Projects',visible:true,textAlign:'center',spacingTop:72,spacingBottom:24});}
-    let end=heading+1;
-    while(end<values.length&&!(['heading','galleryIntro'].includes(values[end].type)||values[end].type==='text'&&values[end].heading))end++;
-    values.splice(end,0,{id:id(),type:'galleryGrid',projectSection:'future',visible:true});
+    for(const [key,gallery]of [['gallery','personal'],...(professionalPage(data)?[['page:'+professionalPage(data).slug,'professional']]:[])]){
+      if(container(data,key)?.futureGalleryRemoved||!data.projects.some(project=>isProjectPublic(project)&&projectPlacement(project)==='future'&&projectGallery(project)===gallery))continue;
+      const values=sections(data,key,true);
+      if(values.some(section=>section.type==='galleryGrid'&&section.projectSection==='future'))continue;
+      let heading=values.findIndex(futureHeading);
+      if(heading<0){heading=values.length;values.push({id:id(),type:'heading',projectSection:'future',heading:'Future Projects',visible:true,textAlign:'center',spacingTop:72,spacingBottom:24});}
+      let end=heading+1;
+      while(end<values.length&&!(['heading','galleryIntro'].includes(values[end].type)||values[end].type==='text'&&values[end].heading))end++;
+      values.splice(end,0,{id:id(),type:'galleryGrid',projectSection:'future',visible:true});
+    }
   }
-  function setProjectPlacement(data,entryId,placement) {
+  function setProjectPlacement(data,entryId,placement,gallery) {
     if(!['main','future'].includes(placement))throw new Error('Choose Main gallery or Future projects.');
+    if(gallery!=null&&!['personal','professional'].includes(gallery))throw new Error('Choose Personal or Professional projects.');
     const entry=projectEntries(data).find(value=>value.id===entryId);
     if(!entry)throw new Error('This project is no longer available.');
     let project=entry.project;
@@ -325,7 +348,8 @@
         section.elements=(section.elements||[]).filter(element=>element.id.includes('/textBoxes/'));
       }
     }
-    project.gallerySection=placement;if(placement==='future'){delete container(data,'gallery',true).futureGalleryRemoved;const grid=sections(data,'gallery').find(section=>section.type==='galleryGrid'&&section.projectSection==='future');if(grid)grid.visible=true;}ensureFutureGallery(data);
+    project.gallerySection=placement;if(gallery)project.projectGallery=gallery;
+    if(placement==='future'){const key=projectGallery(project)==='professional'?'page:'+professionalPage(data).slug:'gallery';delete container(data,key,true).futureGalleryRemoved;const grid=sections(data,key).find(section=>section.type==='galleryGrid'&&section.projectSection==='future');if(grid)grid.visible=true;}ensureFutureGallery(data);
     return project;
   }
   function setProjectPublication(data,entryId,publication) {
@@ -333,7 +357,7 @@
     const entry=projectEntries(data).find(value=>value.id===entryId);
     if(!entry)throw new Error('This project is no longer available.');
     const project=entry.project||setProjectPlacement(data,entryId,entry.placement);
-    project.publicationStatus=publication;if(publication==='public'&&projectPlacement(project)==='future')delete container(data,'gallery',true).futureGalleryRemoved;ensureFutureGallery(data);
+    project.publicationStatus=publication;if(publication==='public'&&projectPlacement(project)==='future'){const key=projectGallery(project)==='professional'?'page:'+professionalPage(data).slug:'gallery';delete container(data,key,true).futureGalleryRemoved;}ensureFutureGallery(data);
     return project;
   }
   // Every media slot keeps its original source field; optional previews live with its image style.
@@ -353,7 +377,7 @@
     const defaultFit=card?(owner.thumbnailFit==='contain'?'contain':'cover'):primaryVideo||path.includes('.photos.')||owner.type==='photoText'?'contain':'cover';
     return {basePath:path,srcPath,primaryVideo,imageSrcPath:primaryVideo?path+'.poster':srcPath,videoSrcPath:primaryVideo?srcPath:card?ownerPath+'.previewVideo':path+'.previewVideo',previewPath:card?ownerPath+'.previewStyle':path+'.previewStyle',motionPath:card?ownerPath+'.thumbnailMotion':path+'.previewBehavior',fallbackImage,defaultFit,defaultMotion:primaryVideo?(owner.gifLike?'loop':'controls'):'hover'};
   }
-  function deleteSection(data,key,index) {const values=sections(data,key,true),section=values[index];if(!section)return;if(key==='gallery'&&section.type==='galleryGrid'&&section.projectSection==='future')container(data,key,true).futureGalleryRemoved=true;const project=pageInfo(data,key)?.project;if(section.type==='projectPhoto'&&project)project.photos=project.photos.filter(p=>p.id!==section.sourceId);values.splice(index,1);}
+  function deleteSection(data,key,index) {const values=sections(data,key,true),section=values[index];if(!section)return;if((key==='gallery'||pageInfo(data,key)?.page?.projectGallery)&&section.type==='galleryGrid'&&section.projectSection==='future')container(data,key,true).futureGalleryRemoved=true;const project=pageInfo(data,key)?.project;if(section.type==='projectPhoto'&&project)project.photos=project.photos.filter(p=>p.id!==section.sourceId);values.splice(index,1);}
   function duplicateSection(data,key,index) {
     const values=sections(data,key,true),section=clone(values[index]),oldId=section.id,replacements=new Map();section.id=id();replacements.set(oldId,section.id);
     if(section.type==='projectPhoto'){const source=photoSource(data,key,section);if(source){const photo=clone(source);photo.id=id();replacements.set(source.id,photo.id);pageInfo(data,key).project.photos.push(photo);section.sourceId=photo.id;}}
@@ -368,5 +392,5 @@
     for(const info of pages(data)){const used=new Set();for(const section of sections(data,info.key)){if(!types[section.type])throw new Error('Unknown section type on '+info.title);if(used.has(section.id))throw new Error('Duplicate section on '+info.title);used.add(section.id);}}
     return true;
   }
-  root.PortfolioModel={clone,id,types,makeCarouselItem,balancedRows,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,projectPlacement,isProjectPublic,publishSnapshot,galleryProjects,projectEntries,reorderProjects,futureMediaSections,addMediaCards,removeMediaCard,ensureFutureGallery,setProjectPlacement,setProjectPublication,mediaPaths,deleteSection,duplicateSection,reorder,validate};
+  root.PortfolioModel={clone,id,types,makeCarouselItem,balancedRows,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,projectPlacement,projectGallery,professionalPage,professionalURL,isProjectPublic,publishSnapshot,galleryProjects,projectEntries,reorderProjects,futureMediaSections,addMediaCards,removeMediaCard,ensureFutureGallery,setProjectPlacement,setProjectPublication,mediaPaths,deleteSection,duplicateSection,reorder,validate};
 })(typeof window==='undefined'?globalThis:window);

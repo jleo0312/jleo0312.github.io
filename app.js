@@ -17,8 +17,10 @@ const DEFAULT_SETTINGS = {
     "eyebrow": "MECHANICAL ENGINEERING · WASHINGTON STATE UNIVERSITY",
     "headline": "Hi, I’m Josh.",
     "subheadline": "I like to build things.",
-    "button": "Explore my projects ↗",
+    "button": "My personal projects ↗",
     "buttonLink": "/?view=gallery",
+    "professionalButton": "My professional projects ↗",
+    "professionalButtonLink": "/?page=professional-projects",
     "aboutTitle": "A little about me.",
     "hobbiesTitle": "Hobbies",
     "highlightsTitle": "Things I’ve been working on.",
@@ -199,9 +201,10 @@ function card(project, index) {
   return `<article class="project-card" data-project="${esc(project.slug)}"><a class="project-link" href="/?project=${encodeURIComponent(project.slug)}"><div class="thumbnail" data-fit="${project.thumbnailFit === 'contain' ? 'contain' : 'cover'}">${gifPreview && !editorPreview ? `<img class="preview-gif" src="${media(project.previewVideo)}" alt="${esc(project.thumbnailAlt || project.title)}" loading="lazy">` : cover(project)}${preview}</div><div class="card-heading"><h3>${esc(project.title)}</h3>${number}</div></a></article>`;
 }
 
-function galleryProjects(data,placement='main') {
-  return Model.galleryProjects(data,placement);
+function galleryProjects(data,placement='main',gallery='personal') {
+  return Model.galleryProjects(data,placement,gallery);
 }
+function projectGalleryURL(data,project){return Model.projectGallery(project)==='professional'?Model.professionalURL(data):galleryURL;}
 
 function highlightPosition(value) {
   const position = Number(value);
@@ -211,7 +214,7 @@ function highlightPosition(value) {
 function highlightProjects(data) {
   if (settings.carousel.source === 'demo') return Array.from({ length: 9 }, () => ({ demo: true }));
   const legacySelection = data.projects.some(project => project.homepageHighlight != null && project.homepageHighlight !== '');
-  return galleryProjects(data)
+  return galleryProjects(data,'main','all')
     .filter(project => {
       if (typeof project.featuredOnHomepage === 'boolean') return project.featuredOnHomepage;
       // Preserve choices made with the earlier position dropdown until switches are saved.
@@ -494,7 +497,7 @@ function photoFrame(src,alt,style={},options={}) {
 }
 function renderHero(data) {
   const headline=[settings.home.headline?paragraphs(settings.home.headline):'',settings.home.subheadline?`<span>${paragraphs(settings.home.subheadline)}</span>`:''].filter(Boolean).join('<br>');
-  return `<section class="intro wrap hero-with-photo"><div class="hero-copy">${textElement('p','eyebrow',settings.home.eyebrow)}${headline?`<h1>${headline}</h1>`:''}${settings.home.button?`<div class="intro-bottom"><a class="pill" href="${safe(settings.home.buttonLink)||galleryURL}">${esc(settings.home.button)}</a></div>`:''}</div>${photoFrame(data.heroPhoto,data.heroPhotoAlt||`Portrait of ${data.name}`,data.heroImage||{},{frameClass:'hero-frame',boxClass:'hero-photo'+(media(data.heroPhoto)?' has-photo':''),path:'heroImage',eager:true})}</section>`;
+  return `<section class="intro wrap hero-with-photo"><div class="hero-copy">${textElement('p','eyebrow',settings.home.eyebrow)}${headline?`<h1>${headline}</h1>`:''}${settings.home.button||settings.home.professionalButton?`<div class="intro-bottom hero-actions">${settings.home.button?`<a class="pill home-personal-button" href="${safe(settings.home.buttonLink)||galleryURL}">${esc(settings.home.button)}</a>`:''}${settings.home.professionalButton?`<a class="pill home-professional-button" href="${safe(settings.home.professionalButtonLink)||Model.professionalURL(data)}">${esc(settings.home.professionalButton)}</a>`:''}</div>`:''}</div>${photoFrame(data.heroPhoto,data.heroPhotoAlt||`Portrait of ${data.name}`,data.heroImage||{},{frameClass:'hero-frame',boxClass:'hero-photo'+(media(data.heroPhoto)?' has-photo':''),path:'heroImage',eager:true})}</section>`;
 }
 function renderAbout(data) {
   return `<section class="about-section"><div class="wrap about-grid"><div class="about-portrait-column">${textElement('h2','',settings.home.aboutTitle)}${photoFrame(data.portrait,data.portraitAlt||`Portrait of ${data.name}`,data.portraitImage||{},{frameClass:'portrait-figure',boxClass:'portrait-box',caption:data.personal??data.portraitCaption??'',captionClass:'portrait-caption',path:'portraitImage'})}</div><div class="about-copy">${textElement('p','',data.bio)}</div></div></section>`;
@@ -503,9 +506,9 @@ function renderHobbies(data) {
   const hobbies=Array.from({length:3},(_,i)=>list(data.hobbies)[i]||{});
   return `<section class="wrap hobbies-section">${textElement('h2','',settings.home.hobbiesTitle)}${textElement('p','hobbies-intro',data.hobbiesIntro)}<div class="hobbies-grid">${hobbies.map((hobby,i)=>`<article class="hobby-card hobby-position-${choice(hobby.imageStyle?.position,['left','right','above','below'],'above')}">${photoFrame(hobby.photo,hobby.alt||hobby.title,hobby.imageStyle||{},{boxClass:'hobby-photo',path:`hobbies.${i}.imageStyle`})}<div class="hobby-copy">${textElement('h3','',hobby.title)}${textElement('p','',hobby.text)}</div></article>`).join('')}</div></section>`;
 }
-function projectIntro(project) {
+function projectIntro(project,data) {
   const description=project.description??project.summary??'';
-  return `${settings.project.back?`<a class="text-link back" href="${galleryURL}">${esc(settings.project.back)}</a>`:''}<div class="detail-heading"><h1>${esc(project.title)}</h1>${textElement('p','page-subtitle project-description',description)}</div>`;
+  return `${settings.project.back?`<a class="text-link back" href="${projectGalleryURL(data,project)}">${esc(settings.project.back)}</a>`:''}<div class="detail-heading"><h1>${esc(project.title)}</h1>${textElement('p','page-subtitle project-description',description)}</div>`;
 }
 function renderVideo(src,poster,style={},path='',className='section-video',options={}) {
   if(!media(src)&&!editorPreview&&style.poster==null)return '';
@@ -593,6 +596,8 @@ function renderSection(section,ctx,index) {
   if(section.visible===false)return '';
   const {data,info}=ctx;
   const project=info.project;
+  const gallery=info.page?.projectGallery==='professional'?'professional':'personal',gallerySettings=info.page?.gallerySettings||settings.gallery;
+  if(gallery==='professional'&&section.projectSection==='future'&&!editorPreview&&!galleryProjects(data,'future','professional').length)return '';
   const keyPath=info.kind==='project'?`projects.${data.projects.indexOf(project)}.sections`:info.kind==='page'?`pages.${data.pages.indexOf(info.page)}.sections`:`pageLayouts.${info.key}.sections`;
   const sectionPath=`${keyPath}.${index}`;
   const panel=panelAppearance(section);
@@ -602,13 +607,13 @@ function renderSection(section,ctx,index) {
     case 'about':html=renderAbout(data);break;
     case 'hobbies':html=renderHobbies(data);break;
     case 'highlights':html=renderCarousel(data);break;
-    case 'galleryIntro':html=`<div class="wrap gallery-intro">${textElement('p','eyebrow',settings.gallery.eyebrow)}${textElement('h1','',settings.gallery.headline)}${textElement('p','page-subtitle',settings.gallery.subtitle)}</div>`;break;
-    case 'galleryGrid': {const projects=galleryProjects(data,section.projectSection==='future'?'future':'main');if(!projects.length&&!editorPreview)return '';html=`<section class="wrap gallery-list" data-project-section="${section.projectSection==='future'?'future':'main'}"><div class="project-grid">${projects.map(card).join('')}</div></section>`;break;}
-    case 'projectIntro':if(project)html=projectIntro(project);break;
+    case 'galleryIntro':html=`<div class="wrap gallery-intro">${textElement('p','eyebrow',gallerySettings.eyebrow)}${textElement('h1','',gallerySettings.headline)}${textElement('p','page-subtitle',gallerySettings.subtitle)}</div>`;break;
+    case 'galleryGrid': {const projects=galleryProjects(data,section.projectSection==='future'?'future':'main',gallery);if(!projects.length&&!editorPreview)return '';html=`<section class="wrap gallery-list" data-project-section="${section.projectSection==='future'?'future':'main'}"><div class="project-grid">${projects.map(card).join('')}</div></section>`;break;}
+    case 'projectIntro':if(project)html=projectIntro(project,data);break;
     case 'projectVideo':if(project)html=projectVideo(project,data);break;
     case 'projectPhoto': {const photo=Model.photoSource(data,info.key,section);if(photo)html=renderPhotoText(section,ctx,`projects.${data.projects.indexOf(project)}.photos.${project.photos.indexOf(photo)}.imageStyle`,photo);break;}
     case 'projectThumbnail':if(project)html=renderPhotoText({...section,image:project.thumbnail,alt:project.thumbnailAlt||project.title,imageStyle:{...project.thumbnailStyle,previewVideo:project.previewVideo,previewStyle:project.previewStyle,previewBehavior:project.thumbnailMotion},showCaption:project.thumbnailStyle?.showCaption},ctx,`projects.${data.projects.indexOf(project)}.thumbnailStyle`);break;
-    case 'projectEnd':html=`<div class="project-end">${textElement('span','',settings.project.endText)}${settings.project.galleryButton?`<a class="pill" href="${galleryURL}">${esc(settings.project.galleryButton)}</a>`:''}</div>`;break;
+    case 'projectEnd':html=`<div class="project-end">${textElement('span','',settings.project.endText)}${settings.project.galleryButton?`<a class="pill" href="${projectGalleryURL(data,project)}">${esc(settings.project.galleryButton)}</a>`:''}</div>`;break;
     case 'photoText':html=renderPhotoText(section,ctx,`${sectionPath}.imageStyle`);break;
     case 'mediaPair':html=renderMediaPair(section,ctx,sectionPath);break;
     case 'mediaCarousel':html=renderMediaCarousel(section,ctx,sectionPath);break;
@@ -626,7 +631,7 @@ function renderStructured(data,key) {
   const info=Model.pageInfo(data,key);if(!info)return '';
   const html=Model.sections(data,key).map((s,i)=>renderSection(s,{data,info},i)).join('');
   if(info.kind==='project')return `<article class="wrap detail">${html}</article>`;
-  if(info.kind==='gallery')return `<div class="gallery structured-gallery">${html}</div>`;
+  if(info.kind==='gallery'||info.page?.projectGallery)return `<div class="gallery structured-gallery">${html}</div>`;
   return html;
 }
 function renderHome(data) {document.title=settings.identity.homeTitle;return renderStructured(data,'home');}
