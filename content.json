@@ -235,6 +235,227 @@
       }
     },
     {
+      "title": "Camera Mount",
+      "showInGallery": true,
+      "featuredOnHomepage": true,
+      "homepageOrder": "auto",
+      "slug": "camera-mount",
+      "thumbnail": "/media/muu8ai1b-9u43b-camera-mount-outside.jpg",
+      "description": "I record the work I do on my truck to upload to YouTube. Before making this mount, my best option was stacking containers to get the camera to the right height. I designed a custom camera mount that attaches directly to my floodlight stand, giving me a much more stable and adjustable setup.",
+      "previewVideo": "/media/muu9f707-cm9mr-camera-mount.mov",
+      "thumbnailMotion": "hover",
+      "thumbnailFit": "contain",
+      "coverText": "Camera mount",
+      "theme": "silver",
+      "thumbnailStyle": {
+        "enabled": true,
+        "showCaption": true,
+        "fit": "cover",
+        "focalX": 42,
+        "focalY": 40
+      },
+      "videoStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "useSections": true,
+      "sections": [
+        {
+          "id": "camera-mount-intro",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "camera-mount-sketch",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/camera-mount-design-sketch.jpg",
+          "alt": "Original hand-drawn design sketch for the camera mount.",
+          "imagePosition": "left",
+          "imageStyle": {
+            "fit": "contain"
+          },
+          "text": "This was my original design drawing for the camera mount."
+        },
+        {
+          "id": "camera-mount-pla",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/camera-mount-pla-assembled.jpg",
+              "alt": "First red PLA camera mount prototype.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/camera-mount-pla-failed-part.jpg",
+              "alt": "Failed red PLA camera mount component.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            }
+          ],
+          "text": "My first prototype quickly failed because it was printed from PLA, a brittle material, and the layer lines weren't oriented properly.",
+          "elements": [
+            {
+              "id": "text:projects/camera-mount/sections/camera-mount-pla/text",
+              "x": 5.555555555555555,
+              "y": 72.70144628099173,
+              "width": 86.86868686868688,
+              "height": 125.1875
+            }
+          ]
+        },
+        {
+          "id": "camera-mount-petg",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/camera-mount-petg-failure.jpg",
+              "alt": "PETG camera mount parts after failure.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/camera-mount-petg-reoriented.jpg",
+              "alt": "PETG parts reprinted with a stronger layer orientation.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            }
+          ],
+          "text": "I bought PETG and reprinted everything. However, the new version failed in the same way because the load was acting across the layer lines, so I reprinted it with the layers aligned with the load path."
+        },
+        {
+          "id": "section-f1b6276c-a14c-4441-8978-259985ffb3a8",
+          "type": "video",
+          "visible": true,
+          "video": "/media/muuh6owh-rq03e-camera-assembly.mp4",
+          "caption": "",
+          "showCaption": true,
+          "elements": [
+            {
+              "id": "image:projects/camera-mount/sections/section-f1b6276c-a14c-4441-8978-259985ffb3a8/imageStyle",
+              "x": 5.601469237832874,
+              "y": 6.290174471992654,
+              "width": 35.62901744719926,
+              "height": 734.390625
+            },
+            {
+              "id": "text:projects/camera-mount/sections/section-f1b6276c-a14c-4441-8978-259985ffb3a8/text",
+              "x": 42.42424242424242,
+              "y": 39.06752180899908,
+              "width": 56.93296602387512,
+              "height": 94.59375
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover",
+            "previewBehavior": "loop"
+          },
+          "text": "I learned how to make SolidWorks assemblies, and made my first one.\n"
+        },
+        {
+          "id": "camera-mount-final",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/camera-mount-flywheel-test.jpg",
+              "alt": "Newest camera mount prototype holding a flywheel.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/camera-mount-final-camera.jpg",
+              "alt": "Newest camera mount prototype attached to a camera with GoPro-style knobs.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            }
+          ],
+          "text": "The newest prototype is capable of holding a flywheel. I also added GoPro-style knobs for easier tightening and adjustment."
+        },
+        {
+          "id": "section-545e9a08-443c-4ca6-b1fc-ddacfb8df0c9",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/muuh8xz8-ki2kf-camera-mount-outside.jpg",
+          "heading": "",
+          "text": "Here's my finished camera mount. It works exactly how I intended, and I enjoy using it knowing that I turned an idea into a real thing.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [
+            {
+              "id": "image:projects/camera-mount/sections/section-545e9a08-443c-4ca6-b1fc-ddacfb8df0c9/imageStyle",
+              "x": 8.677685950413224,
+              "y": 0,
+              "width": 42.33241505968779,
+              "height": 654.390625
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          }
+        },
+        {
+          "id": "section-ee7f7348-8fa3-4332-95fc-29911267360c",
+          "type": "text",
+          "visible": true,
+          "text": "-CAD design & prototyping\n-3D printing capabilities & weaknesses\n-How to create assemblies\n-Different filament properties\n",
+          "heading": "What did I learn?"
+        },
+        {
+          "id": "section-0935715f-afbc-4908-ab36-06d740e99530",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/muuhcwg1-y6h15-camera-mount-and-light.jpg",
+          "heading": "What's next?",
+          "text": "I want to improve my camera mount by modifying it to integrate it with the original floodlight, allowing both the camera and floodlight to be used at the same time.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover",
+            "aspect": "portrait",
+            "height": 0,
+            "focalX": 49,
+            "focalY": 74
+          }
+        },
+        {
+          "id": "camera-mount-end",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ],
+      "previewStyle": {
+        "enabled": true,
+        "focalX": 39,
+        "focalY": 67,
+        "fit": "cover"
+      }
+    },
+    {
       "title": "1989 Toyota Pickup",
       "showInGallery": true,
       "featuredOnHomepage": true,
@@ -1336,227 +1557,6 @@
       ]
     },
     {
-      "title": "Camera Mount",
-      "showInGallery": true,
-      "featuredOnHomepage": true,
-      "homepageOrder": "auto",
-      "slug": "camera-mount",
-      "thumbnail": "/media/muu8ai1b-9u43b-camera-mount-outside.jpg",
-      "description": "I record the work I do on my truck to upload to YouTube. Before making this mount, my best option was stacking containers to get the camera to the right height. I designed a custom camera mount that attaches directly to my floodlight stand, giving me a much more stable and adjustable setup.",
-      "previewVideo": "/media/muu9f707-cm9mr-camera-mount.mov",
-      "thumbnailMotion": "hover",
-      "thumbnailFit": "contain",
-      "coverText": "Camera mount",
-      "theme": "silver",
-      "thumbnailStyle": {
-        "enabled": true,
-        "showCaption": true,
-        "fit": "cover",
-        "focalX": 42,
-        "focalY": 40
-      },
-      "videoStyle": {
-        "enabled": false,
-        "showCaption": true
-      },
-      "useSections": true,
-      "sections": [
-        {
-          "id": "camera-mount-intro",
-          "type": "projectIntro",
-          "visible": true
-        },
-        {
-          "id": "camera-mount-sketch",
-          "type": "photoText",
-          "visible": true,
-          "image": "/media/camera-mount-design-sketch.jpg",
-          "alt": "Original hand-drawn design sketch for the camera mount.",
-          "imagePosition": "left",
-          "imageStyle": {
-            "fit": "contain"
-          },
-          "text": "This was my original design drawing for the camera mount."
-        },
-        {
-          "id": "camera-mount-pla",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/camera-mount-pla-assembled.jpg",
-              "alt": "First red PLA camera mount prototype.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            },
-            {
-              "type": "image",
-              "src": "/media/camera-mount-pla-failed-part.jpg",
-              "alt": "Failed red PLA camera mount component.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            }
-          ],
-          "text": "My first prototype quickly failed because it was printed from PLA, a brittle material, and the layer lines weren't oriented properly.",
-          "elements": [
-            {
-              "id": "text:projects/camera-mount/sections/camera-mount-pla/text",
-              "x": 5.555555555555555,
-              "y": 72.70144628099173,
-              "width": 86.86868686868688,
-              "height": 125.1875
-            }
-          ]
-        },
-        {
-          "id": "camera-mount-petg",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/camera-mount-petg-failure.jpg",
-              "alt": "PETG camera mount parts after failure.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            },
-            {
-              "type": "image",
-              "src": "/media/camera-mount-petg-reoriented.jpg",
-              "alt": "PETG parts reprinted with a stronger layer orientation.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            }
-          ],
-          "text": "I bought PETG and reprinted everything. However, the new version failed in the same way because the load was acting across the layer lines, so I reprinted it with the layers aligned with the load path."
-        },
-        {
-          "id": "section-f1b6276c-a14c-4441-8978-259985ffb3a8",
-          "type": "video",
-          "visible": true,
-          "video": "/media/muuh6owh-rq03e-camera-assembly.mp4",
-          "caption": "",
-          "showCaption": true,
-          "elements": [
-            {
-              "id": "image:projects/camera-mount/sections/section-f1b6276c-a14c-4441-8978-259985ffb3a8/imageStyle",
-              "x": 5.601469237832874,
-              "y": 6.290174471992654,
-              "width": 35.62901744719926,
-              "height": 734.390625
-            },
-            {
-              "id": "text:projects/camera-mount/sections/section-f1b6276c-a14c-4441-8978-259985ffb3a8/text",
-              "x": 42.42424242424242,
-              "y": 39.06752180899908,
-              "width": 56.93296602387512,
-              "height": 94.59375
-            }
-          ],
-          "imageStyle": {
-            "enabled": true,
-            "fit": "cover",
-            "previewBehavior": "loop"
-          },
-          "text": "I learned how to make SolidWorks assemblies, and made my first one.\n"
-        },
-        {
-          "id": "camera-mount-final",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/camera-mount-flywheel-test.jpg",
-              "alt": "Newest camera mount prototype holding a flywheel.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            },
-            {
-              "type": "image",
-              "src": "/media/camera-mount-final-camera.jpg",
-              "alt": "Newest camera mount prototype attached to a camera with GoPro-style knobs.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            }
-          ],
-          "text": "The newest prototype is capable of holding a flywheel. I also added GoPro-style knobs for easier tightening and adjustment."
-        },
-        {
-          "id": "section-545e9a08-443c-4ca6-b1fc-ddacfb8df0c9",
-          "type": "photoText",
-          "visible": true,
-          "image": "/media/muuh8xz8-ki2kf-camera-mount-outside.jpg",
-          "heading": "",
-          "text": "Here's my finished camera mount. It works exactly how I intended, and I enjoy using it knowing that I turned an idea into a real thing.",
-          "caption": "",
-          "showCaption": true,
-          "imagePosition": "left",
-          "imageWidth": 56,
-          "textWidth": 44,
-          "elements": [
-            {
-              "id": "image:projects/camera-mount/sections/section-545e9a08-443c-4ca6-b1fc-ddacfb8df0c9/imageStyle",
-              "x": 8.677685950413224,
-              "y": 0,
-              "width": 42.33241505968779,
-              "height": 654.390625
-            }
-          ],
-          "imageStyle": {
-            "enabled": true,
-            "fit": "cover"
-          }
-        },
-        {
-          "id": "section-ee7f7348-8fa3-4332-95fc-29911267360c",
-          "type": "text",
-          "visible": true,
-          "text": "-CAD design & prototyping\n-3D printing capabilities & weaknesses\n-How to create assemblies\n-Different filament properties\n",
-          "heading": "What did I learn?"
-        },
-        {
-          "id": "section-0935715f-afbc-4908-ab36-06d740e99530",
-          "type": "photoText",
-          "visible": true,
-          "image": "/media/muuhcwg1-y6h15-camera-mount-and-light.jpg",
-          "heading": "What's next?",
-          "text": "I want to improve my camera mount by modifying it to integrate it with the original floodlight, allowing both the camera and floodlight to be used at the same time.",
-          "caption": "",
-          "showCaption": true,
-          "imagePosition": "left",
-          "imageWidth": 56,
-          "textWidth": 44,
-          "imageStyle": {
-            "enabled": true,
-            "fit": "cover",
-            "aspect": "portrait",
-            "height": 0,
-            "focalX": 49,
-            "focalY": 74
-          }
-        },
-        {
-          "id": "camera-mount-end",
-          "type": "projectEnd",
-          "visible": true
-        }
-      ],
-      "previewStyle": {
-        "enabled": true,
-        "focalX": 39,
-        "focalY": 67,
-        "fit": "cover"
-      }
-    },
-    {
       "title": "Pencil Case",
       "slug": "pencil-case",
       "showInGallery": true,
@@ -1730,6 +1730,234 @@
         }
       ],
       "useSections": true
+    },
+    {
+      "title": "3-Piece Compression Mold",
+      "slug": "3-piece-compression-mold-2",
+      "gallerySection": "future",
+      "showInGallery": true,
+      "featuredOnHomepage": false,
+      "photos": [],
+      "thumbnail": "",
+      "thumbnailAlt": "3-Piece Compression Mold",
+      "thumbnailStyle": {
+        "fit": "cover",
+        "aspect": "square",
+        "enabled": true,
+        "previewVideo": "/media/mvcmjj80-x9yzm-3-piece-assembly.mp4",
+        "previewBehavior": "loop",
+        "caption": "3-Piece Compression Mold\n",
+        "showCaption": true
+      },
+      "previewVideo": "/media/mvcmjj80-x9yzm-3-piece-assembly.mp4",
+      "thumbnailMotion": "loop",
+      "previewStyle": {},
+      "useSections": true,
+      "sections": [
+        {
+          "id": "section-347af204-6d99-4250-b707-9af16b84e773",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "section-7c431339-5ae8-4577-97f4-907bc23c3d6d",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "id": "section-e7b2ef45-b2ad-4175-a17c-43ba01589e67",
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square",
+                "enabled": true,
+                "previewVideo": "/media/mvcmjj80-x9yzm-3-piece-assembly.mp4",
+                "previewBehavior": "loop",
+                "caption": "3-Piece Compression Mold\n",
+                "showCaption": true
+              }
+            }
+          ],
+          "text": ""
+        },
+        {
+          "id": "section-e1c080b4-d78c-4fe9-857a-130c7c3376e9",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "title": "Fiberglass Panel Infusion",
+      "slug": "fiberglass-panel-infusion",
+      "gallerySection": "future",
+      "showInGallery": true,
+      "featuredOnHomepage": false,
+      "photos": [],
+      "thumbnail": "",
+      "thumbnailAlt": "Fiberglass Panel Infusion",
+      "thumbnailStyle": {
+        "fit": "cover",
+        "aspect": "square",
+        "enabled": true,
+        "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
+        "previewBehavior": "controls",
+        "caption": "Fiberglass Panel Infusion",
+        "showCaption": true
+      },
+      "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
+      "thumbnailMotion": "controls",
+      "previewStyle": {},
+      "useSections": true,
+      "sections": [
+        {
+          "id": "section-cdfd7a40-17c4-4823-9464-16860877bd25",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "section-26c54007-7773-482c-a8da-d576d1b9285b",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "id": "section-4f7a8302-10ff-4154-9b98-6f3b7c28de01",
+              "type": "image",
+              "src": "",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square",
+                "enabled": true,
+                "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
+                "previewBehavior": "controls",
+                "caption": "Fiberglass Panel Infusion",
+                "showCaption": true
+              }
+            }
+          ],
+          "text": ""
+        },
+        {
+          "id": "section-8b236bf3-45fc-44ce-8db5-916026c5c27f",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "title": "Custom Strut Bar",
+      "slug": "custom-strut-bar",
+      "gallerySection": "future",
+      "showInGallery": true,
+      "featuredOnHomepage": false,
+      "photos": [],
+      "thumbnail": "/media/muw9t7j9-ez0bl-strutn-bar-on-wall.jpg",
+      "thumbnailAlt": "Custom Strut Bar",
+      "thumbnailStyle": {
+        "fit": "cover",
+        "aspect": "square",
+        "enabled": true,
+        "caption": "Custom Strut Bar",
+        "showCaption": true
+      },
+      "previewVideo": "",
+      "thumbnailMotion": "hover",
+      "previewStyle": {},
+      "useSections": true,
+      "sections": [
+        {
+          "id": "section-d3119f3e-ef6d-46a7-98c1-3b95afa224db",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "section-a1e8af79-250b-473a-9555-b825346ad5fe",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muw9t7j9-ez0bl-strutn-bar-on-wall.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square",
+                "enabled": true,
+                "caption": "Custom Strut Bar",
+                "showCaption": true
+              },
+              "id": "section-a53d5f39-64b4-40ae-97a0-d768249750a0"
+            }
+          ],
+          "text": ""
+        },
+        {
+          "id": "section-b35fdfab-5524-4735-a44a-1bbee16a5878",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "title": "USB Drive Case",
+      "slug": "usb-drive-case",
+      "gallerySection": "future",
+      "showInGallery": true,
+      "featuredOnHomepage": false,
+      "photos": [],
+      "thumbnail": "/media/muw3a55c-03q74-usb-drive.jpg",
+      "thumbnailAlt": "USB Drive Case",
+      "thumbnailStyle": {
+        "fit": "cover",
+        "aspect": "square",
+        "enabled": true,
+        "focalX": 46,
+        "focalY": 96,
+        "caption": "USB Drive Case",
+        "showCaption": true
+      },
+      "previewVideo": "",
+      "thumbnailMotion": "hover",
+      "previewStyle": {},
+      "useSections": true,
+      "sections": [
+        {
+          "id": "section-bcc4d489-ed38-48d0-91b2-14d890bc0fef",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "section-2cd3a4a1-c326-413e-8ff9-3bc9c44ff7a6",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/muw3a55c-03q74-usb-drive.jpg",
+              "alt": "",
+              "imageStyle": {
+                "fit": "cover",
+                "aspect": "square",
+                "enabled": true,
+                "focalX": 46,
+                "focalY": 96,
+                "caption": "USB Drive Case",
+                "showCaption": true
+              },
+              "id": "section-a4d2a17b-58e2-4263-8e3e-1c4d4a04f3af"
+            }
+          ],
+          "text": ""
+        },
+        {
+          "id": "section-3db83fd5-57cc-444e-9cb8-72cf945f3dfa",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ]
     }
   ],
   "website": {
@@ -1927,67 +2155,7 @@
           "visible": true,
           "text": "",
           "elements": [],
-          "type": "mediaPair",
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/muw3a55c-03q74-usb-drive.jpg",
-              "alt": "",
-              "imageStyle": {
-                "fit": "cover",
-                "aspect": "square",
-                "enabled": true,
-                "focalX": 46,
-                "focalY": 96,
-                "caption": "USB Drive Case",
-                "showCaption": true
-              },
-              "id": "section-a4d2a17b-58e2-4263-8e3e-1c4d4a04f3af"
-            },
-            {
-              "type": "image",
-              "src": "/media/muw9t7j9-ez0bl-strutn-bar-on-wall.jpg",
-              "alt": "",
-              "imageStyle": {
-                "fit": "cover",
-                "aspect": "square",
-                "enabled": true,
-                "caption": "Custom Strut Bar",
-                "showCaption": true
-              },
-              "id": "section-a53d5f39-64b4-40ae-97a0-d768249750a0"
-            },
-            {
-              "id": "section-4f7a8302-10ff-4154-9b98-6f3b7c28de01",
-              "type": "image",
-              "src": "",
-              "alt": "",
-              "imageStyle": {
-                "fit": "cover",
-                "aspect": "square",
-                "enabled": true,
-                "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
-                "previewBehavior": "controls",
-                "caption": "Fiberglass Panel Infusion",
-                "showCaption": true
-              }
-            },
-            {
-              "id": "section-e7b2ef45-b2ad-4175-a17c-43ba01589e67",
-              "type": "image",
-              "src": "",
-              "alt": "",
-              "imageStyle": {
-                "fit": "cover",
-                "aspect": "square",
-                "enabled": true,
-                "previewVideo": "/media/mvcmjj80-x9yzm-3-piece-assembly.mp4",
-                "previewBehavior": "loop",
-                "caption": "3-Piece Compression Mold\n",
-                "showCaption": true
-              }
-            }
-          ],
+          "type": "text",
           "autoBalance": true
         }
       ],
