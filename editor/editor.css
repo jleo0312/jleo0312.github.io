@@ -9,7 +9,7 @@
 .is-project-sorting{user-select:none;overscroll-behavior:contain}
 .is-project-dragging{opacity:.3}
 .project-drag-ghost{position:fixed;z-index:10;pointer-events:none;opacity:.95;box-shadow:0 12px 28px #243b5529;border-color:#80addb;margin:0}
-.project-drop-before::before,.project-drop-after::after{content:"";position:absolute;left:0;right:0;height:3px;border-radius:3px;background:var(--blue);pointer-events:none}
+.project-drop-before::before,.project-drop-after::after{content:"";position:absolute;z-index:11;left:0;right:0;height:3px;border-radius:3px;background:var(--blue);pointer-events:none}
 .project-drop-before::before{top:-8px}.project-drop-after::after{bottom:-8px}
 .project-order-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .project-list-thumbnail{width:64px;height:64px;object-fit:cover;border-radius:7px;background:#f0f1f4}
