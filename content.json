@@ -1661,10 +1661,9 @@
         "enabled": true,
         "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
         "previewBehavior": "loop",
-        "caption": "Fiberglass panel resin infusion\n",
-        "showCaption": true
+        "showCaption": false
       },
-      "previewVideo": "",
+      "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
       "thumbnailMotion": "still",
       "previewStyle": {},
       "useSections": true,
@@ -1719,47 +1718,6 @@
           "visible": true
         },
         {
-          "id": "original-projectVideo",
-          "type": "projectVideo",
-          "visible": true
-        },
-        {
-          "id": "original-projectEnd",
-          "type": "projectEnd",
-          "visible": true
-        }
-      ],
-      "useSections": true
-    },
-    {
-      "title": "3-Piece Compression Mold",
-      "slug": "3-piece-compression-mold-2",
-      "gallerySection": "future",
-      "showInGallery": true,
-      "featuredOnHomepage": false,
-      "photos": [],
-      "thumbnail": "",
-      "thumbnailAlt": "3-Piece Compression Mold",
-      "thumbnailStyle": {
-        "fit": "cover",
-        "aspect": "square",
-        "enabled": true,
-        "previewVideo": "/media/mvcmjj80-x9yzm-3-piece-assembly.mp4",
-        "previewBehavior": "loop",
-        "caption": "3-Piece Compression Mold\n",
-        "showCaption": true
-      },
-      "previewVideo": "/media/mvcmjj80-x9yzm-3-piece-assembly.mp4",
-      "thumbnailMotion": "loop",
-      "previewStyle": {},
-      "useSections": true,
-      "sections": [
-        {
-          "id": "section-347af204-6d99-4250-b707-9af16b84e773",
-          "type": "projectIntro",
-          "visible": true
-        },
-        {
           "id": "section-7c431339-5ae8-4577-97f4-907bc23c3d6d",
           "type": "mediaPair",
           "visible": true,
@@ -1783,69 +1741,15 @@
           "text": ""
         },
         {
-          "id": "section-e1c080b4-d78c-4fe9-857a-130c7c3376e9",
+          "id": "original-projectEnd",
           "type": "projectEnd",
           "visible": true
         }
-      ]
-    },
-    {
-      "title": "Fiberglass Panel Infusion",
-      "slug": "fiberglass-panel-infusion",
-      "gallerySection": "future",
-      "showInGallery": true,
-      "featuredOnHomepage": false,
-      "photos": [],
-      "thumbnail": "",
-      "thumbnailAlt": "Fiberglass Panel Infusion",
-      "thumbnailStyle": {
-        "fit": "cover",
-        "aspect": "square",
-        "enabled": true,
-        "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
-        "previewBehavior": "controls",
-        "caption": "Fiberglass Panel Infusion",
-        "showCaption": true
-      },
-      "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
-      "thumbnailMotion": "controls",
-      "previewStyle": {},
+      ],
       "useSections": true,
-      "sections": [
-        {
-          "id": "section-cdfd7a40-17c4-4823-9464-16860877bd25",
-          "type": "projectIntro",
-          "visible": true
-        },
-        {
-          "id": "section-26c54007-7773-482c-a8da-d576d1b9285b",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "id": "section-4f7a8302-10ff-4154-9b98-6f3b7c28de01",
-              "type": "image",
-              "src": "",
-              "alt": "",
-              "imageStyle": {
-                "fit": "cover",
-                "aspect": "square",
-                "enabled": true,
-                "previewVideo": "/media/muwvtnuy-rw9a4-infusion.mov",
-                "previewBehavior": "controls",
-                "caption": "Fiberglass Panel Infusion",
-                "showCaption": true
-              }
-            }
-          ],
-          "text": ""
-        },
-        {
-          "id": "section-8b236bf3-45fc-44ce-8db5-916026c5c27f",
-          "type": "projectEnd",
-          "visible": true
-        }
-      ]
+      "previewVideo": "/media/mvcmjj80-x9yzm-3-piece-assembly.mp4",
+      "thumbnailMotion": "loop",
+      "thumbnailAlt": "3-Piece Compression Mold"
     },
     {
       "title": "Custom Strut Bar",
@@ -1860,8 +1764,7 @@
         "fit": "cover",
         "aspect": "square",
         "enabled": true,
-        "caption": "Custom Strut Bar",
-        "showCaption": true
+        "showCaption": false
       },
       "previewVideo": "",
       "thumbnailMotion": "hover",
@@ -1916,8 +1819,7 @@
         "enabled": true,
         "focalX": 46,
         "focalY": 96,
-        "caption": "USB Drive Case",
-        "showCaption": true
+        "showCaption": false
       },
       "previewVideo": "",
       "thumbnailMotion": "hover",
@@ -1976,12 +1878,14 @@
       "eyebrow": "MECHANICAL ENGINEERING · WASHINGTON STATE UNIVERSITY",
       "headline": "Hi, I’m Josh.",
       "subheadline": "I like to build things.",
-      "button": "Explore my projects ↗",
+      "button": "My personal projects ↗",
       "buttonLink": "/?view=gallery",
       "aboutTitle": "A little about me.",
       "hobbiesTitle": "Hobbies",
       "highlightsTitle": "Things I’ve been working on",
-      "galleryLink": "View gallery ↗"
+      "galleryLink": "View gallery ↗",
+      "professionalButton": "My professional projects ↗",
+      "professionalButtonLink": "/?page=professional-projects"
     },
     "identity": {
       "brand": "Josh Leonard\njoshua.ray.leonard2007@gmail.com",
@@ -1991,8 +1895,9 @@
     },
     "navigation": {
       "about": "About me",
-      "gallery": "Gallery",
-      "skip": "Skip to content"
+      "gallery": "Gallery\n",
+      "skip": "Skip to content",
+      "professional": "Professional"
     },
     "project": {
       "back": "← All projects",
@@ -2020,6 +1925,9 @@
       "backToProjects": "Back to projects ↗",
       "loadError": "Couldn’t load the portfolio.",
       "retry": "Please refresh to try again."
+    },
+    "professional": {
+      "show": false
     }
   },
   "heroPhoto": "/media/2026-06-08_16-31-42_173.jpeg",
@@ -2151,12 +2059,10 @@
           "elements": []
         },
         {
-          "id": "section-1de4cbd6-e65e-4daf-850d-f9a0fa15a2d4",
-          "visible": true,
-          "text": "",
-          "elements": [],
-          "type": "text",
-          "autoBalance": true
+          "id": "section-b811691d-62f3-43cb-aa4a-3d52750a657f",
+          "type": "galleryGrid",
+          "projectSection": "future",
+          "visible": true
         }
       ],
       "useSections": true,
@@ -2174,8 +2080,7 @@
           "name": "3 piece assembly.mp4",
           "type": "video"
         }
-      ],
-      "futureGalleryRemoved": true
+      ]
     },
     "about": {
       "sections": [
@@ -2229,5 +2134,81 @@
     "/media/muwx0p3o-tsyj9-furnace-1080p60-under25mb.mp4": "/media/muwx0p3o-tsyj9-furnace-1080p60-under25mb.mp4-first-frame.jpg",
     "/media/mvcmjd1u-6g0cv-3-piece-assembly.mp4": "/media/mvcmjd1u-6g0cv-3-piece-assembly.mp4-first-frame.jpg",
     "/media/mvcmjj80-x9yzm-3-piece-assembly.mp4": "/media/mvcmjj80-x9yzm-3-piece-assembly.mp4-first-frame.jpg"
-  }
+  },
+  "projectAliases": {
+    "3-piece-compression-mold-2": "3-piece-compression-mold",
+    "fiberglass-panel-infusion": "fiberglass-panel-resin-infusion"
+  },
+  "futureProjectsRepairVersion": 1,
+  "pages": [
+    {
+      "title": "Professional projects",
+      "slug": "professional-projects",
+      "projectGallery": "professional",
+      "showInNavigation": false,
+      "useSections": true,
+      "sections": [
+        {
+          "id": "professional-original-galleryIntro",
+          "type": "galleryIntro",
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false,
+          "elements": []
+        },
+        {
+          "id": "professional-section-5a952903-341a-4188-bb5a-8278b5313e6d",
+          "type": "spacer",
+          "visible": true,
+          "elements": []
+        },
+        {
+          "id": "professional-original-galleryGrid",
+          "type": "galleryGrid",
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false,
+          "elements": []
+        },
+        {
+          "id": "professional-more-projects",
+          "type": "text",
+          "visible": true,
+          "heading": "More Projects",
+          "text": "Write-ups coming soon.\n",
+          "contentWidth": "default",
+          "spacingTop": 72,
+          "spacingBottom": 24,
+          "textAlign": "center",
+          "textSize": "normal",
+          "elements": [],
+          "projectSection": "future"
+        },
+        {
+          "id": "professional-section-b811691d-62f3-43cb-aa4a-3d52750a657f",
+          "type": "galleryGrid",
+          "projectSection": "future",
+          "visible": true,
+          "elements": []
+        }
+      ],
+      "gallerySettings": {
+        "eyebrow": "PROFESSIONAL PROJECTS",
+        "headline": "My professional projects.",
+        "subtitle": "",
+        "allProjects": "All projects",
+        "showCount": true
+      }
+    }
+  ],
+  "professionalGalleryVersion": 1,
+  "navigationBubblesVersion": 1
 }
