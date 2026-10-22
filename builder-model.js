@@ -205,6 +205,23 @@
   function projectEntries(data) {
     return [...data.projects.map(project=>({id:'project:'+project.slug,kind:'project',title:project.title,slug:project.slug,placement:projectPlacement(project),publication:isProjectPublic(project)?'public':'draft',visible:project.showInGallery!==false,thumbnail:project.thumbnail||'',project})),...legacyProjectEntries(data).map(entry=>({...entry,publication:'public'}))];
   }
+  function reorderProjects(data,entryId,beforeId=null) {
+    const entries=projectEntries(data),order=entries.map(entry=>entry.id),from=order.indexOf(entryId);
+    if(from<0||beforeId===entryId||beforeId!==null&&!order.includes(beforeId))return null;
+    order.splice(from,1);order.splice(beforeId===null?order.length:order.indexOf(beforeId),0,entryId);
+    if(order.every((value,index)=>value===entries[index].id))return null;
+    const projects=new Map(entries.filter(entry=>entry.project).map(entry=>[entry.id,entry.project]));
+    const legacy=entries.filter(entry=>!entry.project);
+    if(legacy.every((entry,index)=>order[data.projects.length+index]===entry.id)){
+      data.projects=order.slice(0,data.projects.length).map(value=>projects.get(value));
+      return entryId;
+    }
+    // Older gallery-only cards need project records to share the gallery's order.
+    // Convert from the end so repeated media identifiers retain their occurrence IDs.
+    for(const entry of entries.slice().reverse())if(!entry.project)projects.set(entry.id,setProjectPlacement(data,entry.id,entry.placement));
+    data.projects=order.map(value=>projects.get(value));
+    return 'project:'+projects.get(entryId).slug;
+  }
   function ensureFutureGallery(data) {
     if(data.pageLayouts?.gallery?.futureGalleryRemoved)return;
     if(!data.projects.some(project=>isProjectPublic(project)&&projectPlacement(project)==='future'))return;
@@ -284,5 +301,5 @@
     for(const info of pages(data)){const used=new Set();for(const section of sections(data,info.key)){if(!types[section.type])throw new Error('Unknown section type on '+info.title);if(used.has(section.id))throw new Error('Duplicate section on '+info.title);used.add(section.id);}}
     return true;
   }
-  root.PortfolioModel={clone,id,types,makeCarouselItem,balancedRows,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,projectPlacement,isProjectPublic,publishSnapshot,galleryProjects,projectEntries,futureMediaSections,addMediaCards,removeMediaCard,ensureFutureGallery,setProjectPlacement,setProjectPublication,mediaPaths,deleteSection,duplicateSection,reorder,validate};
+  root.PortfolioModel={clone,id,types,makeCarouselItem,balancedRows,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,projectPlacement,isProjectPublic,publishSnapshot,galleryProjects,projectEntries,reorderProjects,futureMediaSections,addMediaCards,removeMediaCard,ensureFutureGallery,setProjectPlacement,setProjectPublication,mediaPaths,deleteSection,duplicateSection,reorder,validate};
 })(typeof window==='undefined'?globalThis:window);
