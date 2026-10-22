@@ -35,6 +35,206 @@
   "homepageGalleryDemo": true,
   "projects": [
     {
+      "title": "Waste Vegetable Oil Powered Furnace",
+      "showInGallery": true,
+      "featuredOnHomepage": true,
+      "homepageOrder": "auto",
+      "slug": "waste-oil-powered-furnace",
+      "thumbnail": "/media/muu64qqx-iq069-furnace-thumbnail.jpeg",
+      "thumbnailAlt": "Waste oil powered furnace",
+      "description": "",
+      "video": "/media/testing flame.mp4",
+      "previewVideo": "/media/furnace-1080p60-under25mb.mp4",
+      "thumbnailMotion": "hover",
+      "thumbnailStyle": {
+        "enabled": true,
+        "showCaption": true,
+        "fit": "cover",
+        "focalX": 50,
+        "focalY": 53
+      },
+      "videoStyle": {
+        "enabled": true,
+        "width": 60,
+        "align": "center",
+        "fit": "contain",
+        "showCaption": true
+      },
+      "useSections": true,
+      "sections": [
+        {
+          "id": "intro-waste-oil-furnace",
+          "type": "projectIntro",
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
+        },
+        {
+          "id": "furnace-first-design-photo-text",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/oil-burner-aluminum-ingots.webp",
+          "alt": "Aluminum ingots cast from recycled cans.",
+          "imagePosition": "left",
+          "text": "My goal was to recycle aluminum cans into ingots that I could later remelt and cast into machining stock for future projects. My first wood-powered design used a propane tank with a tangential air inlet, an air mattress inflator for airflow, and a cut fire extinguisher as the crucible. I later upgraded it into a foundry capable of melting dozens of cans per minute."
+        },
+        {
+          "id": "furnace-siphon-transition",
+          "type": "text",
+          "visible": true,
+          "text": "Unfortunately, I don't have any pictures or videos of my first prototype. That design ultimately failed when the blower melted, which pushed me to redesign the furnace around a compressed-air, siphon fed atomizer commonly used in waste oil heaters.",
+          "textAlign": "left",
+          "textSize": "normal"
+        },
+        {
+          "id": "furnace-first-design-videos",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "blank",
+              "alt": "Video placeholder for the first furnace design.",
+              "src": "",
+              "imageStyle": {
+                "enabled": true,
+                "previewVideo": "/media/muuihhmk-hxuht-gravity-fed.mov",
+                "previewBehavior": "controls",
+                "aspect": "portrait",
+                "height": 0,
+                "fit": "cover"
+              }
+            },
+            {
+              "type": "blank",
+              "alt": "Video placeholder for the first furnace design.",
+              "imageStyle": {
+                "enabled": true,
+                "previewVideo": "/media/muug38qm-f3wfn-square-nozzle.mp4",
+                "previewBehavior": "controls",
+                "fit": "cover",
+                "aspect": "portrait",
+                "height": 0
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "image:projects/waste-oil-powered-furnace/sections/furnace-first-design-videos/items/0/imageStyle",
+              "x": 0,
+              "y": 2.203856749311295,
+              "width": 48.98989898989899
+            }
+          ],
+          "text": "The initial fuel system was extremely simple, with no real plumbing. A container gravity-fed oil through a tube directly into the atomizer inlet. The original furnace used a square inlet tube because it had been built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. However, after switching to the liquid-fuel torch, atomized oil began collecting on the walls of the square tube, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation. The furnace also required a large amount of burning wood to generate enough heat for the atomized oil to ignite reliably, and the pooled oil made that transition to sustained oil combustion even more difficult."
+        },
+        {
+          "id": "section-4f21a1d2-e261-432e-8cff-87ae69583e41",
+          "type": "video",
+          "visible": true,
+          "video": "/media/muug7cjd-rano9-torch-test.mp4",
+          "caption": "",
+          "showCaption": true,
+          "elements": [
+            {
+              "id": "image:projects/waste-oil-powered-furnace/sections/section-4f21a1d2-e261-432e-8cff-87ae69583e41/imageStyle",
+              "x": 8.539944903581267,
+              "y": 10.05940082644628,
+              "width": 35.53719008264463,
+              "height": 726.390625
+            },
+            {
+              "id": "text:projects/waste-oil-powered-furnace/sections/section-4f21a1d2-e261-432e-8cff-87ae69583e41/text",
+              "x": 55.25898964012854,
+              "y": 19.39988180693305,
+              "width": 38.01628123930142,
+              "height": 111.1875
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          },
+          "text": "I fixed this by building a new torch assembly, with a circular outlet tube.\n\nAlso, as the oil level dropped, reduced head pressure weakened the gravity-fed flow until it could no longer reliably reach the atomizer inlet. I would have to readjust the container every 10 mintues or so. My second version used both the new torch assembly and copper plumbing for the oil."
+        },
+        {
+          "id": "section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5",
+          "type": "video",
+          "visible": true,
+          "video": "/media/muwx0p3o-tsyj9-furnace-1080p60-under25mb.mp4",
+          "caption": "",
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": true,
+            "poster": "",
+            "fit": "cover",
+            "previewBehavior": "controls"
+          },
+          "elements": [
+            {
+              "id": "image:projects/waste-oil-powered-furnace/sections/section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5/imageStyle",
+              "x": 2.8018767705382435,
+              "y": 5.333746458923513,
+              "width": 47.19812322946176,
+              "height": 715.6527260638297
+            },
+            {
+              "id": "text:projects/waste-oil-powered-furnace/sections/section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5/text",
+              "x": 54.04769856436832,
+              "y": 26.802050517055786,
+              "width": 41.87227708861263,
+              "height": 94.59375
+            }
+          ],
+          "text": "This is the best run I’ve had with the furnace so far. It can be a little finicky to start, since the furnace needs to be preheated with wood before switching to full oil. Once the chamber is hot enough, the oil ignites consistently and the furnace can sustain the burn on its own."
+        },
+        {
+          "id": "section-fbf70361-d5ee-414e-97d5-bd95ffdc8f8e",
+          "type": "spacer",
+          "visible": true
+        },
+        {
+          "id": "section-a2481c76-20fa-4867-b180-4a3debcc4ee7",
+          "type": "text",
+          "visible": true,
+          "text": "- Waste-oil burner assemblies\n- Optimizing combustion of oil\n- Iterative prototyping and design improvement",
+          "heading": "What did I learn?"
+        },
+        {
+          "id": "section-5b348502-f7aa-4217-a2fa-1a819c500411",
+          "type": "spacer",
+          "visible": true
+        },
+        {
+          "id": "section-d64225ea-6929-48ed-9960-330fe9de7542",
+          "type": "text",
+          "visible": true,
+          "text": "I plan to further upgrade the furnace by adding ceramic wool insulation to reduce heat loss and improve efficiency. I also want to add a dedicated oil preheating system to lower the fuel’s viscosity and improve flow and atomization. With these upgrades, I’m hoping to reach temperatures high enough to melt copper.",
+          "heading": "What's next?"
+        },
+        {
+          "id": "end-waste-oil-furnace",
+          "type": "projectEnd",
+          "visible": true,
+          "showCaption": true,
+          "imageStyle": {
+            "enabled": false
+          },
+          "loop": false,
+          "muted": false
+        }
+      ],
+      "previewStyle": {
+        "enabled": true,
+        "focalX": 50,
+        "focalY": 59,
+        "fit": "cover"
+      }
+    },
+    {
       "title": "1989 Toyota Pickup",
       "showInGallery": true,
       "featuredOnHomepage": true,
@@ -656,568 +856,6 @@
       ]
     },
     {
-      "title": "Camera Mount",
-      "showInGallery": true,
-      "featuredOnHomepage": true,
-      "homepageOrder": "auto",
-      "slug": "camera-mount",
-      "thumbnail": "/media/muu8ai1b-9u43b-camera-mount-outside.jpg",
-      "description": "I record the work I do on my truck to upload to YouTube. Before making this mount, my best option was stacking containers to get the camera to the right height. I designed a custom camera mount that attaches directly to my floodlight stand, giving me a much more stable and adjustable setup.",
-      "previewVideo": "/media/muu9f707-cm9mr-camera-mount.mov",
-      "thumbnailMotion": "hover",
-      "thumbnailFit": "contain",
-      "coverText": "Camera mount",
-      "theme": "silver",
-      "thumbnailStyle": {
-        "enabled": true,
-        "showCaption": true,
-        "fit": "cover",
-        "focalX": 42,
-        "focalY": 40
-      },
-      "videoStyle": {
-        "enabled": false,
-        "showCaption": true
-      },
-      "useSections": true,
-      "sections": [
-        {
-          "id": "camera-mount-intro",
-          "type": "projectIntro",
-          "visible": true
-        },
-        {
-          "id": "camera-mount-sketch",
-          "type": "photoText",
-          "visible": true,
-          "image": "/media/camera-mount-design-sketch.jpg",
-          "alt": "Original hand-drawn design sketch for the camera mount.",
-          "imagePosition": "left",
-          "imageStyle": {
-            "fit": "contain"
-          },
-          "text": "This was my original design drawing for the camera mount."
-        },
-        {
-          "id": "camera-mount-pla",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/camera-mount-pla-assembled.jpg",
-              "alt": "First red PLA camera mount prototype.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            },
-            {
-              "type": "image",
-              "src": "/media/camera-mount-pla-failed-part.jpg",
-              "alt": "Failed red PLA camera mount component.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            }
-          ],
-          "text": "My first prototype quickly failed because it was printed from PLA, a brittle material, and the layer lines weren't oriented properly.",
-          "elements": [
-            {
-              "id": "text:projects/camera-mount/sections/camera-mount-pla/text",
-              "x": 5.555555555555555,
-              "y": 72.70144628099173,
-              "width": 86.86868686868688,
-              "height": 125.1875
-            }
-          ]
-        },
-        {
-          "id": "camera-mount-petg",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/camera-mount-petg-failure.jpg",
-              "alt": "PETG camera mount parts after failure.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            },
-            {
-              "type": "image",
-              "src": "/media/camera-mount-petg-reoriented.jpg",
-              "alt": "PETG parts reprinted with a stronger layer orientation.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            }
-          ],
-          "text": "I bought PETG and reprinted everything. However, the new version failed in the same way because the load was acting across the layer lines, so I reprinted it with the layers aligned with the load path."
-        },
-        {
-          "id": "section-f1b6276c-a14c-4441-8978-259985ffb3a8",
-          "type": "video",
-          "visible": true,
-          "video": "/media/muuh6owh-rq03e-camera-assembly.mp4",
-          "caption": "",
-          "showCaption": true,
-          "elements": [
-            {
-              "id": "image:projects/camera-mount/sections/section-f1b6276c-a14c-4441-8978-259985ffb3a8/imageStyle",
-              "x": 5.601469237832874,
-              "y": 6.290174471992654,
-              "width": 35.62901744719926,
-              "height": 734.390625
-            },
-            {
-              "id": "text:projects/camera-mount/sections/section-f1b6276c-a14c-4441-8978-259985ffb3a8/text",
-              "x": 42.42424242424242,
-              "y": 39.06752180899908,
-              "width": 56.93296602387512,
-              "height": 94.59375
-            }
-          ],
-          "imageStyle": {
-            "enabled": true,
-            "fit": "cover",
-            "previewBehavior": "loop"
-          },
-          "text": "I learned how to make SolidWorks assemblies, and made my first one.\n"
-        },
-        {
-          "id": "camera-mount-final",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/camera-mount-flywheel-test.jpg",
-              "alt": "Newest camera mount prototype holding a flywheel.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            },
-            {
-              "type": "image",
-              "src": "/media/camera-mount-final-camera.jpg",
-              "alt": "Newest camera mount prototype attached to a camera with GoPro-style knobs.",
-              "imageStyle": {
-                "fit": "contain"
-              }
-            }
-          ],
-          "text": "The newest prototype is capable of holding a flywheel. I also added GoPro-style knobs for easier tightening and adjustment."
-        },
-        {
-          "id": "section-545e9a08-443c-4ca6-b1fc-ddacfb8df0c9",
-          "type": "photoText",
-          "visible": true,
-          "image": "/media/muuh8xz8-ki2kf-camera-mount-outside.jpg",
-          "heading": "",
-          "text": "Here's my finished camera mount. It works exactly how I intended, and I enjoy using it knowing that I turned an idea into a real thing.",
-          "caption": "",
-          "showCaption": true,
-          "imagePosition": "left",
-          "imageWidth": 56,
-          "textWidth": 44,
-          "elements": [
-            {
-              "id": "image:projects/camera-mount/sections/section-545e9a08-443c-4ca6-b1fc-ddacfb8df0c9/imageStyle",
-              "x": 8.677685950413224,
-              "y": 0,
-              "width": 42.33241505968779,
-              "height": 654.390625
-            }
-          ],
-          "imageStyle": {
-            "enabled": true,
-            "fit": "cover"
-          }
-        },
-        {
-          "id": "section-ee7f7348-8fa3-4332-95fc-29911267360c",
-          "type": "text",
-          "visible": true,
-          "text": "-CAD design & prototyping\n-3D printing capabilities & weaknesses\n-How to create assemblies\n-Different filament properties\n",
-          "heading": "What did I learn?"
-        },
-        {
-          "id": "section-0935715f-afbc-4908-ab36-06d740e99530",
-          "type": "photoText",
-          "visible": true,
-          "image": "/media/muuhcwg1-y6h15-camera-mount-and-light.jpg",
-          "heading": "What's next?",
-          "text": "I want to improve my camera mount by modifying it to integrate it with the original floodlight, allowing both the camera and floodlight to be used at the same time.",
-          "caption": "",
-          "showCaption": true,
-          "imagePosition": "left",
-          "imageWidth": 56,
-          "textWidth": 44,
-          "imageStyle": {
-            "enabled": true,
-            "fit": "cover",
-            "aspect": "portrait",
-            "height": 0,
-            "focalX": 49,
-            "focalY": 74
-          }
-        },
-        {
-          "id": "camera-mount-end",
-          "type": "projectEnd",
-          "visible": true
-        }
-      ],
-      "previewStyle": {
-        "enabled": true,
-        "focalX": 39,
-        "focalY": 67,
-        "fit": "cover"
-      }
-    },
-    {
-      "title": "Forged Carbon Fiber Coaster",
-      "showInGallery": true,
-      "featuredOnHomepage": true,
-      "homepageOrder": "auto",
-      "slug": "carbon-fiber-coaster",
-      "description": "In the composites studio, we make coasters using chopped carbon fiber and 3D-printed molds. This compression molding process is commonly known as “forged carbon.”",
-      "thumbnailMotion": "hover",
-      "coverText": "Forged carbon.\nWSU Cougar coaster.",
-      "theme": "blue",
-      "thumbnailStyle": {
-        "enabled": true,
-        "showCaption": true,
-        "focalX": 47,
-        "focalY": 70,
-        "fit": "cover"
-      },
-      "videoStyle": {
-        "enabled": false,
-        "showCaption": true
-      },
-      "useSections": true,
-      "thumbnail": "/media/coaster-thumbnail.svg?v=2",
-      "photos": [],
-      "sections": [
-        {
-          "id": "coaster-intro",
-          "type": "projectIntro",
-          "visible": true
-        },
-        {
-          "id": "coaster-row-1",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/coaster-molds.svg?v=2",
-              "alt": "Prepared coaster molds."
-            },
-            {
-              "type": "image",
-              "src": "/media/coaster-resin.svg?v=2",
-              "alt": "Resin applied to the coaster mold."
-            },
-            {
-              "type": "image",
-              "src": "/media/coaster-fibers-added.svg?v=2",
-              "alt": "Chopped carbon fiber added to the mold."
-            }
-          ],
-          "text": "First, you prepare the molds by cleaning them and applying mold release to the surfaces. Then you wet the surface with resin and add a small layer of chopped carbon fiber."
-        },
-        {
-          "id": "coaster-row-2",
-          "visible": true,
-          "text": "Then, with a paintbrush, you wet the fibers by stippling until they are saturated. Repeat until all of the measured carbon fiber is used. Then you compress the mold using bolts and clamps.",
-          "elements": [],
-          "type": "mediaPair",
-          "items": [
-            {
-              "type": "video",
-              "src": "/media/coaster-stippling-loop.mp4?v=1",
-              "alt": "Stippling resin into the chopped carbon fiber.",
-              "gifLike": true,
-              "imageStyle": {
-                "enabled": true,
-                "fit": "cover",
-                "aspect": "portrait",
-                "height": 0
-              }
-            },
-            {
-              "type": "image",
-              "src": "/media/coaster-saturated.svg?v=2",
-              "alt": "Carbon fiber saturated with resin in the mold.",
-              "imageStyle": {
-                "enabled": true,
-                "aspect": "portrait",
-                "height": 0
-              }
-            }
-          ]
-        },
-        {
-          "id": "coaster-row-3",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "image",
-              "src": "/media/coaster-cured-parts.svg?v=2",
-              "alt": "Cured forged-carbon coasters after demolding."
-            },
-            {
-              "type": "image",
-              "src": "/media/coaster-closeup.svg?v=2",
-              "alt": "Close-up of a cured WSU Cougar coaster."
-            },
-            {
-              "type": "image",
-              "src": "/media/coaster-uv-light.svg?v=2",
-              "alt": "Finished coaster under inspection light."
-            }
-          ],
-          "text": "This was my second prototype using this process. After curing according to the resin manufacturer’s instructions, I demolded the coasters and evaluated the results. The part showed visible voids and resin-rich areas around the logo where the fibers bridged the gap."
-        },
-        {
-          "id": "section-1e793d2a-dc3c-4745-8f21-ac1b46f0f6f6",
-          "type": "text",
-          "visible": true,
-          "text": "- Tooling design using SolidWorks\n- Design constraints\n- The process of compression molding composite parts\n- Composites are awesome",
-          "heading": "What did I learn?",
-          "elements": [
-            {
-              "id": "text:projects/carbon-fiber-coaster/sections/section-1e793d2a-dc3c-4745-8f21-ac1b46f0f6f6/text",
-              "x": 3.554291012525161,
-              "y": 8.931505597025934,
-              "width": 92.89141797494968
-            }
-          ]
-        },
-        {
-          "id": "section-31c8a468-623e-494a-bc2f-f264ea025100",
-          "type": "spacer",
-          "visible": true
-        },
-        {
-          "id": "section-1e7fd514-9c12-4a44-ae15-7179b231d4fb",
-          "type": "text",
-          "visible": true,
-          "text": " I’m currently refining the process, focusing on tool design and fiber placement, with the goal of producing a clean, consistent part.",
-          "heading": "What now?"
-        },
-        {
-          "id": "coaster-end",
-          "type": "projectEnd",
-          "visible": true
-        }
-      ]
-    },
-    {
-      "title": "Waste Vegetable Oil Powered Furnace",
-      "showInGallery": true,
-      "featuredOnHomepage": true,
-      "homepageOrder": "auto",
-      "slug": "waste-oil-powered-furnace",
-      "thumbnail": "/media/muu64qqx-iq069-furnace-thumbnail.jpeg",
-      "thumbnailAlt": "Waste oil powered furnace",
-      "description": "",
-      "video": "/media/testing flame.mp4",
-      "previewVideo": "/media/furnace-1080p60-under25mb.mp4",
-      "thumbnailMotion": "hover",
-      "thumbnailStyle": {
-        "enabled": true,
-        "showCaption": true,
-        "fit": "cover",
-        "focalX": 50,
-        "focalY": 53
-      },
-      "videoStyle": {
-        "enabled": true,
-        "width": 60,
-        "align": "center",
-        "fit": "contain",
-        "showCaption": true
-      },
-      "useSections": true,
-      "sections": [
-        {
-          "id": "intro-waste-oil-furnace",
-          "type": "projectIntro",
-          "visible": true,
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          },
-          "loop": false,
-          "muted": false
-        },
-        {
-          "id": "furnace-first-design-photo-text",
-          "type": "photoText",
-          "visible": true,
-          "image": "/media/oil-burner-aluminum-ingots.webp",
-          "alt": "Aluminum ingots cast from recycled cans.",
-          "imagePosition": "left",
-          "text": "My goal was to recycle aluminum cans into ingots that I could later remelt and cast into machining stock for future projects. My first wood-powered design used a propane tank with a tangential air inlet, an air mattress inflator for airflow, and a cut fire extinguisher as the crucible. I later upgraded it into a foundry capable of melting dozens of cans per minute."
-        },
-        {
-          "id": "furnace-siphon-transition",
-          "type": "text",
-          "visible": true,
-          "text": "Unfortunately, I don't have any pictures or videos of my first prototype. That design ultimately failed when the blower melted, which pushed me to redesign the furnace around a compressed-air, siphon fed atomizer commonly used in waste oil heaters.",
-          "textAlign": "left",
-          "textSize": "normal"
-        },
-        {
-          "id": "furnace-first-design-videos",
-          "type": "mediaPair",
-          "visible": true,
-          "items": [
-            {
-              "type": "blank",
-              "alt": "Video placeholder for the first furnace design.",
-              "src": "",
-              "imageStyle": {
-                "enabled": true,
-                "previewVideo": "/media/muuihhmk-hxuht-gravity-fed.mov",
-                "previewBehavior": "controls",
-                "aspect": "portrait",
-                "height": 0,
-                "fit": "cover"
-              }
-            },
-            {
-              "type": "blank",
-              "alt": "Video placeholder for the first furnace design.",
-              "imageStyle": {
-                "enabled": true,
-                "previewVideo": "/media/muug38qm-f3wfn-square-nozzle.mp4",
-                "previewBehavior": "controls",
-                "fit": "cover",
-                "aspect": "portrait",
-                "height": 0
-              }
-            }
-          ],
-          "elements": [
-            {
-              "id": "image:projects/waste-oil-powered-furnace/sections/furnace-first-design-videos/items/0/imageStyle",
-              "x": 0,
-              "y": 2.203856749311295,
-              "width": 48.98989898989899
-            }
-          ],
-          "text": "The initial fuel system was extremely simple, with no real plumbing. A container gravity-fed oil through a tube directly into the atomizer inlet. The original furnace used a square inlet tube because it had been built around the air-mattress inflator, and I didn’t expect the tube geometry to significantly affect airflow. However, after switching to the liquid-fuel torch, atomized oil began collecting on the walls of the square tube, causing uneven fuel delivery and an inconsistent, inefficient flame that was both visible and audible during operation. The furnace also required a large amount of burning wood to generate enough heat for the atomized oil to ignite reliably, and the pooled oil made that transition to sustained oil combustion even more difficult."
-        },
-        {
-          "id": "section-4f21a1d2-e261-432e-8cff-87ae69583e41",
-          "type": "video",
-          "visible": true,
-          "video": "/media/muug7cjd-rano9-torch-test.mp4",
-          "caption": "",
-          "showCaption": true,
-          "elements": [
-            {
-              "id": "image:projects/waste-oil-powered-furnace/sections/section-4f21a1d2-e261-432e-8cff-87ae69583e41/imageStyle",
-              "x": 8.539944903581267,
-              "y": 10.05940082644628,
-              "width": 35.53719008264463,
-              "height": 726.390625
-            },
-            {
-              "id": "text:projects/waste-oil-powered-furnace/sections/section-4f21a1d2-e261-432e-8cff-87ae69583e41/text",
-              "x": 55.25898964012854,
-              "y": 19.39988180693305,
-              "width": 38.01628123930142,
-              "height": 111.1875
-            }
-          ],
-          "imageStyle": {
-            "enabled": true,
-            "fit": "cover"
-          },
-          "text": "I fixed this by building a new torch assembly, with a circular outlet tube.\n\nAlso, as the oil level dropped, reduced head pressure weakened the gravity-fed flow until it could no longer reliably reach the atomizer inlet. I would have to readjust the container every 10 mintues or so. My second version used both the new torch assembly and copper plumbing for the oil."
-        },
-        {
-          "id": "section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5",
-          "type": "video",
-          "visible": true,
-          "video": "/media/muwx0p3o-tsyj9-furnace-1080p60-under25mb.mp4",
-          "caption": "",
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": true,
-            "poster": "",
-            "fit": "cover",
-            "previewBehavior": "controls"
-          },
-          "elements": [
-            {
-              "id": "image:projects/waste-oil-powered-furnace/sections/section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5/imageStyle",
-              "x": 2.8018767705382435,
-              "y": 5.333746458923513,
-              "width": 47.19812322946176,
-              "height": 715.6527260638297
-            },
-            {
-              "id": "text:projects/waste-oil-powered-furnace/sections/section-2c4bd9c5-240e-4d7e-ba41-fca3ab80e4e5/text",
-              "x": 54.04769856436832,
-              "y": 26.802050517055786,
-              "width": 41.87227708861263,
-              "height": 94.59375
-            }
-          ],
-          "text": "This is the best run I’ve had with the furnace so far. It can be a little finicky to start, since the furnace needs to be preheated with wood before switching to full oil. Once the chamber is hot enough, the oil ignites consistently and the furnace can sustain the burn on its own."
-        },
-        {
-          "id": "section-fbf70361-d5ee-414e-97d5-bd95ffdc8f8e",
-          "type": "spacer",
-          "visible": true
-        },
-        {
-          "id": "section-a2481c76-20fa-4867-b180-4a3debcc4ee7",
-          "type": "text",
-          "visible": true,
-          "text": "- Waste-oil burner assemblies\n- Optimizing combustion of oil\n- Iterative prototyping and design improvement",
-          "heading": "What did I learn?"
-        },
-        {
-          "id": "section-5b348502-f7aa-4217-a2fa-1a819c500411",
-          "type": "spacer",
-          "visible": true
-        },
-        {
-          "id": "section-d64225ea-6929-48ed-9960-330fe9de7542",
-          "type": "text",
-          "visible": true,
-          "text": "I plan to further upgrade the furnace by adding ceramic wool insulation to reduce heat loss and improve efficiency. I also want to add a dedicated oil preheating system to lower the fuel’s viscosity and improve flow and atomization. With these upgrades, I’m hoping to reach temperatures high enough to melt copper.",
-          "heading": "What's next?"
-        },
-        {
-          "id": "end-waste-oil-furnace",
-          "type": "projectEnd",
-          "visible": true,
-          "showCaption": true,
-          "imageStyle": {
-            "enabled": false
-          },
-          "loop": false,
-          "muted": false
-        }
-      ],
-      "previewStyle": {
-        "enabled": true,
-        "focalX": 50,
-        "focalY": 59,
-        "fit": "cover"
-      }
-    },
-    {
       "title": "Mini-Drone",
       "showInGallery": true,
       "featuredOnHomepage": true,
@@ -1555,6 +1193,368 @@
           "visible": true
         }
       ]
+    },
+    {
+      "title": "Forged Carbon Fiber Coaster",
+      "showInGallery": true,
+      "featuredOnHomepage": true,
+      "homepageOrder": "auto",
+      "slug": "carbon-fiber-coaster",
+      "description": "In the composites studio, we make coasters using chopped carbon fiber and 3D-printed molds. This compression molding process is commonly known as “forged carbon.”",
+      "thumbnailMotion": "hover",
+      "coverText": "Forged carbon.\nWSU Cougar coaster.",
+      "theme": "blue",
+      "thumbnailStyle": {
+        "enabled": true,
+        "showCaption": true,
+        "focalX": 47,
+        "focalY": 70,
+        "fit": "cover"
+      },
+      "videoStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "useSections": true,
+      "thumbnail": "/media/coaster-thumbnail.svg?v=2",
+      "photos": [],
+      "sections": [
+        {
+          "id": "coaster-intro",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "coaster-row-1",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/coaster-molds.svg?v=2",
+              "alt": "Prepared coaster molds."
+            },
+            {
+              "type": "image",
+              "src": "/media/coaster-resin.svg?v=2",
+              "alt": "Resin applied to the coaster mold."
+            },
+            {
+              "type": "image",
+              "src": "/media/coaster-fibers-added.svg?v=2",
+              "alt": "Chopped carbon fiber added to the mold."
+            }
+          ],
+          "text": "First, you prepare the molds by cleaning them and applying mold release to the surfaces. Then you wet the surface with resin and add a small layer of chopped carbon fiber."
+        },
+        {
+          "id": "coaster-row-2",
+          "visible": true,
+          "text": "Then, with a paintbrush, you wet the fibers by stippling until they are saturated. Repeat until all of the measured carbon fiber is used. Then you compress the mold using bolts and clamps.",
+          "elements": [],
+          "type": "mediaPair",
+          "items": [
+            {
+              "type": "video",
+              "src": "/media/coaster-stippling-loop.mp4?v=1",
+              "alt": "Stippling resin into the chopped carbon fiber.",
+              "gifLike": true,
+              "imageStyle": {
+                "enabled": true,
+                "fit": "cover",
+                "aspect": "portrait",
+                "height": 0
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/coaster-saturated.svg?v=2",
+              "alt": "Carbon fiber saturated with resin in the mold.",
+              "imageStyle": {
+                "enabled": true,
+                "aspect": "portrait",
+                "height": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": "coaster-row-3",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/coaster-cured-parts.svg?v=2",
+              "alt": "Cured forged-carbon coasters after demolding."
+            },
+            {
+              "type": "image",
+              "src": "/media/coaster-closeup.svg?v=2",
+              "alt": "Close-up of a cured WSU Cougar coaster."
+            },
+            {
+              "type": "image",
+              "src": "/media/coaster-uv-light.svg?v=2",
+              "alt": "Finished coaster under inspection light."
+            }
+          ],
+          "text": "This was my second prototype using this process. After curing according to the resin manufacturer’s instructions, I demolded the coasters and evaluated the results. The part showed visible voids and resin-rich areas around the logo where the fibers bridged the gap."
+        },
+        {
+          "id": "section-1e793d2a-dc3c-4745-8f21-ac1b46f0f6f6",
+          "type": "text",
+          "visible": true,
+          "text": "- Tooling design using SolidWorks\n- Design constraints\n- The process of compression molding composite parts\n- Composites are awesome",
+          "heading": "What did I learn?",
+          "elements": [
+            {
+              "id": "text:projects/carbon-fiber-coaster/sections/section-1e793d2a-dc3c-4745-8f21-ac1b46f0f6f6/text",
+              "x": 3.554291012525161,
+              "y": 8.931505597025934,
+              "width": 92.89141797494968
+            }
+          ]
+        },
+        {
+          "id": "section-31c8a468-623e-494a-bc2f-f264ea025100",
+          "type": "spacer",
+          "visible": true
+        },
+        {
+          "id": "section-1e7fd514-9c12-4a44-ae15-7179b231d4fb",
+          "type": "text",
+          "visible": true,
+          "text": " I’m currently refining the process, focusing on tool design and fiber placement, with the goal of producing a clean, consistent part.",
+          "heading": "What now?"
+        },
+        {
+          "id": "coaster-end",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "title": "Camera Mount",
+      "showInGallery": true,
+      "featuredOnHomepage": true,
+      "homepageOrder": "auto",
+      "slug": "camera-mount",
+      "thumbnail": "/media/muu8ai1b-9u43b-camera-mount-outside.jpg",
+      "description": "I record the work I do on my truck to upload to YouTube. Before making this mount, my best option was stacking containers to get the camera to the right height. I designed a custom camera mount that attaches directly to my floodlight stand, giving me a much more stable and adjustable setup.",
+      "previewVideo": "/media/muu9f707-cm9mr-camera-mount.mov",
+      "thumbnailMotion": "hover",
+      "thumbnailFit": "contain",
+      "coverText": "Camera mount",
+      "theme": "silver",
+      "thumbnailStyle": {
+        "enabled": true,
+        "showCaption": true,
+        "fit": "cover",
+        "focalX": 42,
+        "focalY": 40
+      },
+      "videoStyle": {
+        "enabled": false,
+        "showCaption": true
+      },
+      "useSections": true,
+      "sections": [
+        {
+          "id": "camera-mount-intro",
+          "type": "projectIntro",
+          "visible": true
+        },
+        {
+          "id": "camera-mount-sketch",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/camera-mount-design-sketch.jpg",
+          "alt": "Original hand-drawn design sketch for the camera mount.",
+          "imagePosition": "left",
+          "imageStyle": {
+            "fit": "contain"
+          },
+          "text": "This was my original design drawing for the camera mount."
+        },
+        {
+          "id": "camera-mount-pla",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/camera-mount-pla-assembled.jpg",
+              "alt": "First red PLA camera mount prototype.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/camera-mount-pla-failed-part.jpg",
+              "alt": "Failed red PLA camera mount component.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            }
+          ],
+          "text": "My first prototype quickly failed because it was printed from PLA, a brittle material, and the layer lines weren't oriented properly.",
+          "elements": [
+            {
+              "id": "text:projects/camera-mount/sections/camera-mount-pla/text",
+              "x": 5.555555555555555,
+              "y": 72.70144628099173,
+              "width": 86.86868686868688,
+              "height": 125.1875
+            }
+          ]
+        },
+        {
+          "id": "camera-mount-petg",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/camera-mount-petg-failure.jpg",
+              "alt": "PETG camera mount parts after failure.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/camera-mount-petg-reoriented.jpg",
+              "alt": "PETG parts reprinted with a stronger layer orientation.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            }
+          ],
+          "text": "I bought PETG and reprinted everything. However, the new version failed in the same way because the load was acting across the layer lines, so I reprinted it with the layers aligned with the load path."
+        },
+        {
+          "id": "section-f1b6276c-a14c-4441-8978-259985ffb3a8",
+          "type": "video",
+          "visible": true,
+          "video": "/media/muuh6owh-rq03e-camera-assembly.mp4",
+          "caption": "",
+          "showCaption": true,
+          "elements": [
+            {
+              "id": "image:projects/camera-mount/sections/section-f1b6276c-a14c-4441-8978-259985ffb3a8/imageStyle",
+              "x": 5.601469237832874,
+              "y": 6.290174471992654,
+              "width": 35.62901744719926,
+              "height": 734.390625
+            },
+            {
+              "id": "text:projects/camera-mount/sections/section-f1b6276c-a14c-4441-8978-259985ffb3a8/text",
+              "x": 42.42424242424242,
+              "y": 39.06752180899908,
+              "width": 56.93296602387512,
+              "height": 94.59375
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover",
+            "previewBehavior": "loop"
+          },
+          "text": "I learned how to make SolidWorks assemblies, and made my first one.\n"
+        },
+        {
+          "id": "camera-mount-final",
+          "type": "mediaPair",
+          "visible": true,
+          "items": [
+            {
+              "type": "image",
+              "src": "/media/camera-mount-flywheel-test.jpg",
+              "alt": "Newest camera mount prototype holding a flywheel.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            },
+            {
+              "type": "image",
+              "src": "/media/camera-mount-final-camera.jpg",
+              "alt": "Newest camera mount prototype attached to a camera with GoPro-style knobs.",
+              "imageStyle": {
+                "fit": "contain"
+              }
+            }
+          ],
+          "text": "The newest prototype is capable of holding a flywheel. I also added GoPro-style knobs for easier tightening and adjustment."
+        },
+        {
+          "id": "section-545e9a08-443c-4ca6-b1fc-ddacfb8df0c9",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/muuh8xz8-ki2kf-camera-mount-outside.jpg",
+          "heading": "",
+          "text": "Here's my finished camera mount. It works exactly how I intended, and I enjoy using it knowing that I turned an idea into a real thing.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "elements": [
+            {
+              "id": "image:projects/camera-mount/sections/section-545e9a08-443c-4ca6-b1fc-ddacfb8df0c9/imageStyle",
+              "x": 8.677685950413224,
+              "y": 0,
+              "width": 42.33241505968779,
+              "height": 654.390625
+            }
+          ],
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover"
+          }
+        },
+        {
+          "id": "section-ee7f7348-8fa3-4332-95fc-29911267360c",
+          "type": "text",
+          "visible": true,
+          "text": "-CAD design & prototyping\n-3D printing capabilities & weaknesses\n-How to create assemblies\n-Different filament properties\n",
+          "heading": "What did I learn?"
+        },
+        {
+          "id": "section-0935715f-afbc-4908-ab36-06d740e99530",
+          "type": "photoText",
+          "visible": true,
+          "image": "/media/muuhcwg1-y6h15-camera-mount-and-light.jpg",
+          "heading": "What's next?",
+          "text": "I want to improve my camera mount by modifying it to integrate it with the original floodlight, allowing both the camera and floodlight to be used at the same time.",
+          "caption": "",
+          "showCaption": true,
+          "imagePosition": "left",
+          "imageWidth": 56,
+          "textWidth": 44,
+          "imageStyle": {
+            "enabled": true,
+            "fit": "cover",
+            "aspect": "portrait",
+            "height": 0,
+            "focalX": 49,
+            "focalY": 74
+          }
+        },
+        {
+          "id": "camera-mount-end",
+          "type": "projectEnd",
+          "visible": true
+        }
+      ],
+      "previewStyle": {
+        "enabled": true,
+        "focalX": 39,
+        "focalY": 67,
+        "fit": "cover"
+      }
     },
     {
       "title": "Pencil Case",
