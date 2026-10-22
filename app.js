@@ -10,8 +10,12 @@ const DEFAULT_SETTINGS = {
   },
   "navigation": {
     "about": "About me",
-    "gallery": "Gallery",
+    "gallery": "Personal",
+    "professional": "Professional",
     "skip": "Skip to content"
+  },
+  "professional": {
+    "show": false
   },
   "home": {
     "eyebrow": "MECHANICAL ENGINEERING · WASHINGTON STATE UNIVERSITY",
@@ -158,6 +162,10 @@ function renderShell() {
   document.querySelector('.site-header')?.classList.toggle('has-contact-link',!!(profile&&label));
   setText('[data-nav="about"]', settings.navigation.about);
   setText('[data-nav="gallery"]', settings.navigation.gallery);
+  const nav=document.querySelector('.nav-links');
+  let professional=nav?.querySelector('[data-nav="professional"]');
+  if(nav&&!professional){professional=document.createElement('a');professional.dataset.nav='professional';nav.append(professional);}
+  if(professional){professional.href=currentData?Model.professionalURL(currentData):'/?page=professional-projects';professional.textContent=settings.navigation.professional;professional.hidden=!currentData||!Model.professionalVisible(currentData)||!settings.navigation.professional;}
   setText('.skip', settings.navigation.skip);
   setText('.footer-inner > :first-child', settings.footer.left);
   setText('.footer-inner > :last-child', settings.footer.right);
@@ -215,6 +223,7 @@ function highlightProjects(data) {
   if (settings.carousel.source === 'demo') return Array.from({ length: 9 }, () => ({ demo: true }));
   const legacySelection = data.projects.some(project => project.homepageHighlight != null && project.homepageHighlight !== '');
   return galleryProjects(data,'main','all')
+    .filter(project=>Model.professionalVisible(data)||Model.projectGallery(project)!=='professional')
     .filter(project => {
       if (typeof project.featuredOnHomepage === 'boolean') return project.featuredOnHomepage;
       // Preserve choices made with the earlier position dropdown until switches are saved.
@@ -239,7 +248,7 @@ function futureHighlights(data) {
   const seen = new Set();
   // Older future projects are gallery media cards, while newer ones have project pages.
   return Model.projectEntries(data)
-    .filter(entry => entry.placement === 'future' && entry.visible && entry.publication === 'public')
+    .filter(entry => entry.placement === 'future' && entry.visible && entry.publication === 'public' && (Model.professionalVisible(data)||entry.gallery!=='professional'))
     .sort((a, b) => Number(a.kind === 'project') - Number(b.kind === 'project'))
     .filter(entry => {
       const source = mediaURL(entry.item?.type === 'video' ? entry.item.src : entry.item?.imageStyle?.previewVideo || entry.project?.previewVideo || entry.project?.thumbnailStyle?.previewVideo || entry.thumbnail);
@@ -497,7 +506,8 @@ function photoFrame(src,alt,style={},options={}) {
 }
 function renderHero(data) {
   const headline=[settings.home.headline?paragraphs(settings.home.headline):'',settings.home.subheadline?`<span>${paragraphs(settings.home.subheadline)}</span>`:''].filter(Boolean).join('<br>');
-  return `<section class="intro wrap hero-with-photo"><div class="hero-copy">${textElement('p','eyebrow',settings.home.eyebrow)}${headline?`<h1>${headline}</h1>`:''}${settings.home.button||settings.home.professionalButton?`<div class="intro-bottom hero-actions">${settings.home.button?`<a class="pill home-personal-button" href="${safe(settings.home.buttonLink)||galleryURL}">${esc(settings.home.button)}</a>`:''}${settings.home.professionalButton?`<a class="pill home-professional-button" href="${safe(settings.home.professionalButtonLink)||Model.professionalURL(data)}">${esc(settings.home.professionalButton)}</a>`:''}</div>`:''}</div>${photoFrame(data.heroPhoto,data.heroPhotoAlt||`Portrait of ${data.name}`,data.heroImage||{},{frameClass:'hero-frame',boxClass:'hero-photo'+(media(data.heroPhoto)?' has-photo':''),path:'heroImage',eager:true})}</section>`;
+  const showProfessional=Model.professionalVisible(data)&&settings.home.professionalButton;
+  return `<section class="intro wrap hero-with-photo"><div class="hero-copy">${textElement('p','eyebrow',settings.home.eyebrow)}${headline?`<h1>${headline}</h1>`:''}${settings.home.button||showProfessional?`<div class="intro-bottom hero-actions">${settings.home.button?`<a class="pill home-personal-button" href="${safe(settings.home.buttonLink)||galleryURL}">${esc(settings.home.button)}</a>`:''}${showProfessional?`<a class="pill home-professional-button" href="${safe(settings.home.professionalButtonLink)||Model.professionalURL(data)}">${esc(settings.home.professionalButton)}</a>`:''}</div>`:''}</div>${photoFrame(data.heroPhoto,data.heroPhotoAlt||`Portrait of ${data.name}`,data.heroImage||{},{frameClass:'hero-frame',boxClass:'hero-photo'+(media(data.heroPhoto)?' has-photo':''),path:'heroImage',eager:true})}</section>`;
 }
 function renderAbout(data) {
   return `<section class="about-section"><div class="wrap about-grid"><div class="about-portrait-column">${textElement('h2','',settings.home.aboutTitle)}${photoFrame(data.portrait,data.portraitAlt||`Portrait of ${data.name}`,data.portraitImage||{},{frameClass:'portrait-figure',boxClass:'portrait-box',caption:data.personal??data.portraitCaption??'',captionClass:'portrait-caption',path:'portraitImage'})}</div><div class="about-copy">${textElement('p','',data.bio)}</div></div></section>`;
@@ -774,22 +784,25 @@ function displayPortfolio(input,key) {
   document.documentElement.style.setProperty('--viewport-width', document.documentElement.clientWidth+'px');
   currentData=Model.upgrade(input);currentPageKey=key;
   const data=currentData;
-  data.projects=list(data.projects).filter(p=>p&&p.slug&&(editorPreview||Model.isProjectPublic(p))).map(normalizeProject);
+  data.projects=list(data.projects).filter(p=>p&&p.slug&&(editorPreview||Model.isProjectPublic(p)&&(Model.professionalVisible(data)||Model.projectGallery(p)!=='professional'))).map(normalizeProject);
   settings=mergeSettings(window.legacyPortfolioSettings||{},data.website);
   if(Object.hasOwn(data,'siteIcon'))settings.identity.siteIcon=data.siteIcon;
   data.name ||= settings.identity.brand;
   renderShell();
-  const info=Model.pageInfo(data,key);
+  let info=Model.pageInfo(data,key);
+  if(!editorPreview&&!Model.professionalVisible(data)&&info?.page?.projectGallery==='professional')info=null;
+  if(!info)document.title=settings.identity.homeTitle;
   if(info) {
     document.title=info.kind==='home'?settings.identity.homeTitle:info.kind==='gallery'?settings.identity.galleryTitle:`${info.title} — ${data.name}`;
     app.innerHTML=renderStructured(data,key);
     if(info.project)document.querySelector('meta[name="description"]').content=info.project.description||'';
   } else app.innerHTML=`<section class="wrap intro">${textElement('h1','',settings.messages.notFound)}<a class="pill" href="${galleryURL}">${esc(settings.messages.backToProjects)}</a></section>`;
   document.querySelector('[data-nav="about"]')?.setAttribute('aria-current',['home','about'].includes(key)?'page':'false');
-  document.querySelector('[data-nav="gallery"]')?.setAttribute('aria-current',key==='gallery'||key.startsWith('project:')?'page':'false');
+  document.querySelector('[data-nav="gallery"]')?.setAttribute('aria-current',key==='gallery'||info?.project&&Model.projectGallery(info.project)==='personal'?'page':'false');
+  document.querySelector('[data-nav="professional"]')?.setAttribute('aria-current',info?.page?.projectGallery==='professional'||info?.project&&Model.projectGallery(info.project)==='professional'?'page':'false');
   document.querySelectorAll('[data-custom-nav]').forEach(n=>n.remove());
   const nav=document.querySelector('.nav-links');
-  for(const page of data.pages||[])if(page.showInNavigation){const link=document.createElement('a');link.dataset.customNav=page.slug;link.href='/?page='+encodeURIComponent(page.slug);link.textContent=page.title;nav.append(link);}
+  for(const page of data.pages||[])if(page.showInNavigation&&page.projectGallery!=='professional'){const link=document.createElement('a');link.dataset.customNav=page.slug;link.href='/?page='+encodeURIComponent(page.slug);link.textContent=page.title;nav.append(link);}
   app.removeAttribute('aria-busy');applyThumbnailControls(data);
   bindPhotoRotations();
   if(info&&window.PortfolioObjects){const objects=window.PortfolioObjects.mount({data,key,settings,model:Model,editing:editorPreview});activeCleanups.push(()=>objects.destroy());}

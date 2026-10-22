@@ -23,7 +23,7 @@ function collect({data,key,settings,model,editing=false}){
   if(node){if(optional&&!node.textContent.trim())node.classList.add('canvas-optional');bind(node,path,label,{single});}
   return node;
  }
- const shell=[['.brand','website.identity.brand','Website name'],['[data-nav="about"]','website.navigation.about','About navigation'],['[data-nav="gallery"]','website.navigation.gallery','Gallery navigation'],['.footer-inner > :first-child','website.footer.left','Left footer text'],['.footer-inner > :last-child','website.footer.right','Right footer text']];
+ const shell=[['.brand','website.identity.brand','Website name'],['[data-nav="about"]','website.navigation.about','About navigation'],['[data-nav="gallery"]','website.navigation.gallery','Personal navigation'],['[data-nav="professional"]','website.navigation.professional','Professional navigation'],['.footer-inner > :first-child','website.footer.left','Left footer text'],['.footer-inner > :last-child','website.footer.right','Right footer text']];
  for(const [selector,path,label]of shell){const node=document.querySelector(selector);if(node){bind(node,path,label,{single:path.includes('navigation')});}}
  document.querySelectorAll('[data-custom-nav]').forEach(node=>{const i=(data.pages||[]).findIndex(page=>page.slug===node.dataset.customNav);if(i>=0)bind(node,`pages.${i}.title`,'Page navigation title',{single:true});});
  for(const [index,section]of values.entries()){
@@ -34,7 +34,7 @@ function collect({data,key,settings,model,editing=false}){
     const copy=root.querySelector('.hero-copy');field(root,'.eyebrow','website.home.eyebrow','Small heading',{parent:copy,className:'eyebrow',prepend:true,optional:true});
     let heading=copy.querySelector('h1');if(!heading){heading=document.createElement('h1');copy.append(heading);}
     heading.replaceChildren();const first=document.createElement('span'),second=document.createElement('span');first.className='canvas-hero-first';first.textContent=settings.home.headline;second.textContent=settings.home.subheadline;heading.append(first,document.createElement('br'),second);bind(first,'website.home.headline','Main heading');bind(second,'website.home.subheadline','Second heading line');
-    const actions=root.querySelector('.hero-actions');field(root,'.home-personal-button','website.home.button','Personal projects button text',{parent:actions,tag:'a',className:'pill home-personal-button',optional:true,single:true});field(root,'.home-professional-button','website.home.professionalButton','Professional projects button text',{parent:actions,tag:'a',className:'pill home-professional-button',optional:true,single:true});break;
+    const actions=root.querySelector('.hero-actions');field(root,'.home-personal-button','website.home.button','Personal projects button text',{parent:actions,tag:'a',className:'pill home-personal-button',optional:true,single:true});if(model.professionalVisible(data))field(root,'.home-professional-button','website.home.professionalButton','Professional projects button text',{parent:actions,tag:'a',className:'pill home-professional-button',optional:true,single:true});break;
    }
    case 'about':field(root,'h2','website.home.aboutTitle','About section heading',{parent:root.querySelector('.about-portrait-column'),tag:'h2',prepend:true});field(root,'.about-copy p','bio','About me',{parent:root.querySelector('.about-copy')});break;
    case 'hobbies':{

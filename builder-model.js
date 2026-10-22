@@ -33,8 +33,14 @@
     }
     ensureFutureGallery(data);
     ensureProfessionalGallery(data);
+    data.website||={};data.website.professional||={};
+    if(typeof data.website.professional.show!=='boolean')data.website.professional.show=false;
+    if(data.navigationBubblesVersion!==1){
+      data.website.navigation||={};data.website.navigation.gallery='Personal';data.website.navigation.professional='Professional';data.navigationBubblesVersion=1;
+    }
     return data;
   }
+  function professionalVisible(data){return data.website?.professional?.show===true;}
   function projectGallery(project){return project.projectGallery==='professional'?'professional':'personal';}
   function professionalPage(data){return (data.pages||[]).find(page=>page.projectGallery==='professional');}
   function professionalURL(data){return '/?page='+encodeURIComponent(professionalPage(data)?.slug||'professional-projects');}
@@ -392,5 +398,5 @@
     for(const info of pages(data)){const used=new Set();for(const section of sections(data,info.key)){if(!types[section.type])throw new Error('Unknown section type on '+info.title);if(used.has(section.id))throw new Error('Duplicate section on '+info.title);used.add(section.id);}}
     return true;
   }
-  root.PortfolioModel={clone,id,types,makeCarouselItem,balancedRows,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,projectPlacement,projectGallery,professionalPage,professionalURL,isProjectPublic,publishSnapshot,galleryProjects,projectEntries,reorderProjects,futureMediaSections,addMediaCards,removeMediaCard,ensureFutureGallery,setProjectPlacement,setProjectPublication,mediaPaths,deleteSection,duplicateSection,reorder,validate};
+  root.PortfolioModel={clone,id,types,makeCarouselItem,balancedRows,numeric,upgrade,pageInfo,pages,container,defaults,sections,makeSection,photoSource,layoutOptions,layoutType,layoutPlan,changeLayout,projectPlacement,projectGallery,professionalPage,professionalURL,professionalVisible,isProjectPublic,publishSnapshot,galleryProjects,projectEntries,reorderProjects,futureMediaSections,addMediaCards,removeMediaCard,ensureFutureGallery,setProjectPlacement,setProjectPublication,mediaPaths,deleteSection,duplicateSection,reorder,validate};
 })(typeof window==='undefined'?globalThis:window);
