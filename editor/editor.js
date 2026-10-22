@@ -14,7 +14,7 @@ function captureEdit(label=''){
  return {data:clone(data),key,selected,mode,imagePath,textPath,time:Date.now(),label:label||'Before editing '+(M.pageInfo(data,key)?.title||'your portfolio')};
 }
 function restoreEdit(record){
- data=clone(record.data||record);key=M.pageInfo(data,record.key||key)?record.key||key:'home';selected=record.selected||'';mode=['section','page','site'].includes(record.mode)?record.mode:'section';imagePath=record.imagePath||'';textPath=record.textPath||'';fieldEditing=inlineEditing=objectEditing=resizeEditing=false;
+ const source=record.data||record;data=M.upgrade(source);key=M.pageInfo(data,record.key||key)?.key||'home';selected=record.selected||'';mode=['section','page','site'].includes(record.mode)?record.mode:'section';imagePath=source.futureProjectsRepairVersion===1?record.imagePath||'':'';textPath=source.futureProjectsRepairVersion===1?record.textPath||'':'';fieldEditing=inlineEditing=objectEditing=resizeEditing=false;
 }
 function remember(label=''){history.push(captureEdit(label));if(history.length>HISTORY_LIMIT)history.shift();future=[];updateUndo();}
 function updateUndo(){$('#undo').disabled=!history.length;$('#redo').disabled=!future.length;}
@@ -283,11 +283,10 @@ function normalizeHistory(entries){
  return (Array.isArray(entries)?entries:[]).filter(record=>Array.isArray((record.data||record)?.projects)).slice(-HISTORY_LIMIT).map(record=>record.data?record:{data:record,key:'home',time:0,label:'Earlier saved edit'});
 }
 function restoreSaved(record){
- const saved=clone(record.data),gallery=saved.pageLayouts?.gallery,wasPresent=record.baseData?.pageLayouts?.gallery?.sections?.some(section=>section.type==='galleryGrid'&&section.projectSection==='future');
- // Honor a deletion saved by older editors before the automatic repair ran.
- if(wasPresent&&gallery?.useSections&&Array.isArray(gallery.sections)&&!gallery.sections.some(section=>section.type==='galleryGrid'&&section.projectSection==='future'))gallery.futureGalleryRemoved=true;
- restoreEdit({...record,data:M.upgrade(saved)});
+ const saved=clone(record.data);
+ restoreEdit({...record,data:saved});
  history=normalizeHistory(record.history);future=normalizeHistory(record.future);
+ if(saved.futureProjectsRepairVersion!==1){history.push({data:saved,key:record.key||'gallery',time:Date.now(),label:'Before repairing future projects'});history=history.slice(-HISTORY_LIMIT);}
  baseData=clone(record.baseData||record.data);dirty=!!record.dirty;device=[390,768,1200].includes(record.device)?record.device:1200;
  for(const item of record.assets||[]){if(typeof item.path==='string'&&item.blob instanceof Blob){const previous=assets.get(item.path);if(previous)URL.revokeObjectURL(previous.url);assets.set(item.path,{blob:item.blob,url:URL.createObjectURL(item.blob)});}}
  draftSavedTime=Number(record.time)||0;updateUndo();updateDraftStatus();
@@ -382,6 +381,11 @@ const projectSorter=window.PortfolioProjectOrder.mount({list:$('#project-list'),
  $('#project-order-status').textContent='Project moved to position '+(order.indexOf(id)+1)+' of '+order.length+'. Draft updated.';
 }});
 $('#manage-projects').onclick=()=>{if(!data)return;renderProjects();$('#projects-dialog').showModal();};
+let projectsBackdropDown=false;
+function outsideProjects(event){const rect=$('#projects-dialog').getBoundingClientRect();return event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom;}
+$('#projects-dialog').addEventListener('pointerdown',event=>{projectsBackdropDown=event.target===$('#projects-dialog')&&outsideProjects(event);});
+$('#projects-dialog').addEventListener('pointerup',event=>{const close=projectsBackdropDown&&event.target===$('#projects-dialog')&&outsideProjects(event);projectsBackdropDown=false;if(close)$('#projects-dialog').close();});
+$('#projects-dialog').addEventListener('pointercancel',()=>{projectsBackdropDown=false;});
 $('#catalog-new-project').onclick=()=>{$('#projects-dialog').close();newDialog('project');};
 $('#project-list').addEventListener('change',e=>{
  const publicationId=e.target.dataset.projectPublication;
@@ -549,13 +553,14 @@ loadPreview();
    try{const response=await fetch('/content.json?editor='+Date.now(),{cache:'no-store'});if(!response.ok)throw new Error();latestRemote={data:await response.json(),sha:''};}catch{if(!draftRecord?.data)throw new Error('Could not load portfolio content.');}
   }
   const hasDraft=Array.isArray(draftRecord?.data?.projects);
+  let continuedDraft=false;
   if(!latestRemote){
-   restoreSaved(draftRecord);draftReady=true;status('Offline · continuing your saved draft');
+   restoreSaved(draftRecord);continuedDraft=true;draftReady=true;status('Offline · continuing your saved draft');
   }else{
    baseData=clone(latestRemote.data);baseSha=latestRemote.sha;data=M.upgrade(latestRemote.data);
    const matches=hasDraft&&(same(latestRemote.data,draftRecord.baseData)||same(latestRemote.data,draftRecord.data));
    if(hasDraft&&matches){
-    restoreSaved(draftRecord);baseData=clone(latestRemote.data);dirty=!!draftRecord.dirty&&!same(draftRecord.data,latestRemote.data);draftReady=true;status(dirty?'Saved draft reopened · publish when you’re ready':'Ready · previous edits restored');
+    restoreSaved(draftRecord);continuedDraft=true;baseData=clone(latestRemote.data);dirty=!!draftRecord.dirty&&!same(draftRecord.data,latestRemote.data);draftReady=true;status(dirty?'Saved draft reopened · publish when you’re ready':'Ready · previous edits restored');
    }else if(hasDraft&&(draftRecord.dirty||draftRecord.data.projects.some(project=>!M.isProjectPublic(project)))){
     renderAll();$('#draft-dialog').showModal();status('Your saved draft is safe · choose which version to continue');
    }else{
@@ -565,6 +570,11 @@ loadPreview();
     }
     draftReady=true;status('Ready · drafts save automatically; Publish updates the website');
    }
+  }
+  const previous=continuedDraft?draftRecord.data:latestRemote?.data;
+  if(draftReady&&previous&&previous.futureProjectsRepairVersion!==1){
+   if(!continuedDraft){history.push({data:clone(previous),key:'gallery',time:Date.now(),label:'Before repairing future projects'});history=history.slice(-HISTORY_LIMIT);}
+   dirty=true;queueDraft();status('Future projects repaired · Publish updates the website');
   }
   renderAll();fitPreview();document.querySelectorAll('[data-device]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.device)===device)));
   $('#preview').contentWindow.postMessage({portfolioEditor:true,action:'ping'},location.origin);updateDraftStatus();

@@ -27,12 +27,16 @@
     for(const target of [...Object.values(data.pageLayouts||{}),...data.projects,...(data.pages||[])]) {
       if(Array.isArray(target.sections))target.sections.forEach((section,i)=>{section.id ||= 'saved-section-'+i+'-'+hash(JSON.stringify(section));section.type ||= 'photoText';if(Array.isArray(section.textBoxes))section.textBoxes.forEach((box,j)=>{box.id ||= 'text-'+j+'-'+hash(box.text||'');});});
     }
+    if(data.futureProjectsRepairVersion!==1){
+      repairFutureProjects(data);
+      data.futureProjectsRepairVersion=1;
+    }
     ensureFutureGallery(data);
     return data;
   }
   function pageInfo(data,key) {
     if (['home','about','gallery'].includes(key)) return {key,kind:key,title:{home:'Homepage',about:'About page',gallery:'Gallery'}[key],url:key==='home'?'/' : key==='gallery'?'/?view=gallery':'/?page=about'};
-    if (key.startsWith('project:')) { const project=data.projects.find(p=>p.slug===key.slice(8)); if(project)return {key,kind:'project',title:project.title,project,url:'/?project='+encodeURIComponent(project.slug)}; }
+    if (key.startsWith('project:')) { let slug=key.slice(8);for(let i=0;i<8&&data.projectAliases?.[slug];i++)slug=data.projectAliases[slug];const project=data.projects.find(p=>p.slug===slug); if(project)return {key:'project:'+project.slug,kind:'project',title:project.title,project,url:'/?project='+encodeURIComponent(project.slug)}; }
     if (key.startsWith('page:')) { const page=(data.pages||[]).find(p=>p.slug===key.slice(5));if(page)return {key,kind:'page',title:page.title,page,url:'/?page='+encodeURIComponent(page.slug)}; }
     return null;
   }
@@ -203,7 +207,69 @@
     return result;
   }
   function projectEntries(data) {
-    return [...data.projects.map(project=>({id:'project:'+project.slug,kind:'project',title:project.title,slug:project.slug,placement:projectPlacement(project),publication:isProjectPublic(project)?'public':'draft',visible:project.showInGallery!==false,thumbnail:project.thumbnail||'',project})),...legacyProjectEntries(data).map(entry=>({...entry,publication:'public'}))];
+    return [...data.projects.map(project=>({id:'project:'+project.slug,kind:'project',title:project.title,slug:project.slug,placement:projectPlacement(project),publication:isProjectPublic(project)?'public':'draft',visible:project.showInGallery!==false,thumbnail:project.thumbnail||data.videoPosters?.[project.previewVideo]||data.videoPosters?.[project.thumbnailStyle?.previewVideo]||'',project})),...legacyProjectEntries(data).map(entry=>({...entry,publication:'public'}))];
+  }
+  const mediaIdentity=value=>String(value||'').replace(/^https?:\/\/jleo0312\.github\.io/i,'').split(/[?#]/)[0];
+  const projectTitle=value=>String(value||'').trim().toLowerCase().replace(/[^a-z0-9]/g,'');
+  function projectSources(project){
+    const result=new Set();
+    const visit=value=>{if(!value||typeof value!=='object')return;for(const [key,item] of Object.entries(value)){if(['mediaLibrary','mediaLibraryHidden','videoPosters'].includes(key))continue;if(['src','image','video','previewVideo','thumbnail'].includes(key)&&typeof item==='string'&&item)result.add(mediaIdentity(item));else if(item&&typeof item==='object')visit(item);}};
+    visit(project);return result;
+  }
+  function simpleProject(project){
+    if(project.description||(project.photos||[]).length)return false;
+    const content=(project.sections||[]).filter(section=>!['projectIntro','projectEnd','spacer'].includes(section.type));
+    return content.every(section=>!section.text&&!section.heading&&!(section.textBoxes||[]).some(box=>box.text))&&(content.length===0||content.length===1&&(content[0].type==='projectVideo'||content[0].type==='mediaPair'&&content[0].items?.length===1));
+  }
+  function matchingProject(projects,candidate){
+    const sources=projectSources(candidate),empty=!sources.size;
+    return projects.find(project=>{
+      if(projectPlacement(project)!=='future'||!simpleProject(candidate)&&!simpleProject(project))return false;
+      const existing=projectSources(project);
+      return (convertedGalleryProject(candidate)||convertedGalleryProject(project))&&[...sources].some(source=>existing.has(source))||projectTitle(project.title)===projectTitle(candidate.title)&&(empty||!existing.size);
+    });
+  }
+  function convertedGalleryProject(project){return !!project.galleryMediaSource||simpleProject(project)&&(project.sections||[]).some(section=>section.type==='mediaPair'&&section.items?.length===1&&section.items[0].id);}
+  function mergeProjectMedia(target,source){
+    const known=projectSources(target),content=(source.sections||[]).filter(section=>['mediaPair','mediaCarousel','photoText','video','videoText','projectVideo','projectPhoto'].includes(section.type));
+    for(const section of content){
+      const sources=projectSources(section);if(!sources.size||[...sources].every(value=>known.has(value)))continue;
+      target.sections||=[];target.useSections=true;
+      const emptyVideo=target.sections.findIndex(value=>value.type==='projectVideo'&&!target.video);
+      if(emptyVideo>=0)target.sections.splice(emptyVideo,1,clone(section));else{const end=target.sections.findIndex(value=>value.type==='projectEnd');target.sections.splice(end<0?target.sections.length:end,0,clone(section));}
+      for(const value of sources)known.add(value);
+    }
+    if(!target.thumbnail&&source.thumbnail){target.thumbnail=source.thumbnail;target.thumbnailStyle=clone(source.thumbnailStyle||{});}
+    const video=source.previewVideo||source.thumbnailStyle?.previewVideo||source.video;
+    if(!target.previewVideo&&video){target.previewVideo=video;if(!target.thumbnailMotion)target.thumbnailMotion=source.thumbnailMotion||source.thumbnailStyle?.previewBehavior||'hover';}
+    if(!target.thumbnailAlt)target.thumbnailAlt=source.thumbnailAlt||target.title;
+  }
+  function repairFutureProjects(data){
+    const projects=[];
+    for(const project of data.projects){
+      const match=projectPlacement(project)==='future'?matchingProject(projects,project):null;
+      if(match){
+        const keep=convertedGalleryProject(match)&&!convertedGalleryProject(project)?project:match,duplicate=keep===match?project:match;
+        mergeProjectMedia(keep,duplicate);projects[projects.indexOf(match)]=keep;
+        data.projectAliases||={};data.projectAliases[duplicate.slug]=keep.slug;
+      }else projects.push(project);
+    }
+    data.projects=projects;
+    // Consolidate the old gallery cards into their existing page, or create one
+    // when there is no page. This also keeps their media available for ordering.
+    const existing=data.projects.slice(),legacy=legacyProjectEntries(data),converted=new Map();
+    for(const entry of legacy.slice().reverse())converted.set(entry.id,setProjectPlacement(data,entry.id,entry.placement));
+    data.projects=[...new Set([...existing,...legacy.map(entry=>converted.get(entry.id))])];
+    const gallery=container(data,'gallery');
+    if(gallery){
+      delete gallery.futureGalleryRemoved;
+      if(Array.isArray(gallery.sections))gallery.sections=gallery.sections.filter(section=>!(section.type==='text'&&section.autoBalance&&!section.heading&&!section.text&&!(section.textBoxes||[]).some(box=>box.text)&&!(section.elements||[]).length));
+      const grid=gallery.sections?.find(section=>section.type==='galleryGrid'&&section.projectSection==='future');if(grid)grid.visible=true;
+    }
+    for(const project of data.projects)if(projectPlacement(project)==='future'){
+      if(!project.thumbnail&&!project.previewVideo&&project.thumbnailStyle?.previewVideo)project.previewVideo=project.thumbnailStyle.previewVideo;
+      if(project.thumbnailStyle?.caption&&projectTitle(project.thumbnailStyle.caption)===projectTitle(project.title)){delete project.thumbnailStyle.caption;project.thumbnailStyle.showCaption=false;}
+    }
   }
   function reorderProjects(data,entryId,beforeId=null) {
     const entries=projectEntries(data),order=entries.map(entry=>entry.id),from=order.indexOf(entryId);
@@ -219,7 +285,7 @@
     // Older gallery-only cards need project records to share the gallery's order.
     // Convert from the end so repeated media identifiers retain their occurrence IDs.
     for(const entry of entries.slice().reverse())if(!entry.project)projects.set(entry.id,setProjectPlacement(data,entry.id,entry.placement));
-    data.projects=order.map(value=>projects.get(value));
+    data.projects=[...new Set(order.map(value=>projects.get(value)))];
     return 'project:'+projects.get(entryId).slug;
   }
   function ensureFutureGallery(data) {
@@ -244,21 +310,22 @@
       const item=clone(entry.item),stem=entry.title.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'project';
       let slug=stem,suffix=2;while(data.projects.some(value=>value.slug===slug))slug=stem+'-'+suffix++;
       const style=clone(item.imageStyle||{}),video=item.type==='video';
-      project={title:entry.title,slug,gallerySection:placement,showInGallery:entry.visible,featuredOnHomepage:false,photos:[],thumbnail:entry.thumbnail,thumbnailAlt:item.alt||entry.title,thumbnailStyle:style,previewVideo:video?item.src||'':style.previewVideo||'',thumbnailMotion:video?(item.gifLike?'loop':'controls'):style.previewBehavior||'hover',previewStyle:clone(style.previewStyle||{}),useSections:true,sections:[{id:id(),type:'projectIntro',visible:true},{id:id(),type:'mediaPair',visible:true,items:[item],text:''},{id:id(),type:'projectEnd',visible:true}]};
-      data.projects.push(project);
+      const converted={title:entry.title,slug,gallerySection:placement,galleryMediaSource:{sectionId:entry.sectionId,itemId:item.id||''},showInGallery:entry.visible,featuredOnHomepage:false,photos:[],thumbnail:entry.thumbnail,thumbnailAlt:item.alt||entry.title,thumbnailStyle:style,previewVideo:video?item.src||'':style.previewVideo||'',thumbnailMotion:video?(item.gifLike?'loop':'controls'):style.previewBehavior||'hover',previewStyle:clone(style.previewStyle||{}),useSections:true,sections:[{id:id(),type:'projectIntro',visible:true},{id:id(),type:'mediaPair',visible:true,items:[item],text:''},{id:id(),type:'projectEnd',visible:true}]};
+      project=matchingProject(data.projects,converted);
+      if(project)mergeProjectMedia(project,converted);else{project=converted;data.projects.push(project);}
       const values=sections(data,'gallery',true),section=values.find(value=>value.id===entry.sectionId);
       if(Array.isArray(section.items)){
         section.items.splice(entry.itemIndex,1);
         // Re-indexed cards get the preset layout; retain free text-box placement.
         section.elements=(section.elements||[]).filter(element=>element.id.includes('/textBoxes/'));
-        if(!section.items.length){section.type='text';delete section.items;}
+        if(!section.items.length){section.type='text';delete section.items;section.autoBalance=true;}
       }else{
         for(const name of ['image','video','poster','alt','imageStyle','caption','showCaption','gifLike','loop','muted'])delete section[name];
         section.type='text';
         section.elements=(section.elements||[]).filter(element=>element.id.includes('/textBoxes/'));
       }
     }
-    project.gallerySection=placement;ensureFutureGallery(data);
+    project.gallerySection=placement;if(placement==='future'){delete container(data,'gallery',true).futureGalleryRemoved;const grid=sections(data,'gallery').find(section=>section.type==='galleryGrid'&&section.projectSection==='future');if(grid)grid.visible=true;}ensureFutureGallery(data);
     return project;
   }
   function setProjectPublication(data,entryId,publication) {
@@ -266,7 +333,7 @@
     const entry=projectEntries(data).find(value=>value.id===entryId);
     if(!entry)throw new Error('This project is no longer available.');
     const project=entry.project||setProjectPlacement(data,entryId,entry.placement);
-    project.publicationStatus=publication;ensureFutureGallery(data);
+    project.publicationStatus=publication;if(publication==='public'&&projectPlacement(project)==='future')delete container(data,'gallery',true).futureGalleryRemoved;ensureFutureGallery(data);
     return project;
   }
   // Every media slot keeps its original source field; optional previews live with its image style.
